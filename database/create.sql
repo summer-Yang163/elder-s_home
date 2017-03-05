@@ -16,17 +16,20 @@ CREATE  TABLE owner(
   user_id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255),
   gender INT DEFAULT NOT NULL , -- 性别，1表示男，2表示女
-  phone VARCHAR(255) -- 业主的联系电话
-
+  phone VARCHAR(255), -- 业主的联系电话
+  community_id int,
+  home_num VARCHAR(255)
 );
 -- 老人表，关联表：业主表
 CREATE TABLE old_man(
   old_id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255),
   user_id INT,-- 老人所在房子的业主
-  gender INT,
+  gender INT, -- 性别
   relationship VARCHAR(255), -- 和业主的关系
-  phone VARCHAR(255) -- 老人的联系方式
+  phone VARCHAR(255), -- 老人的联系方式
+  em_contact VARCHAR(255), -- 紧急联系人
+  em_phone VARCHAR(255) -- 紧急联系电话
 );
 -- 服务人员表
 CREATE TABLE admin(
