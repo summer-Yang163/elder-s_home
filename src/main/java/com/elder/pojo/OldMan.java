@@ -1,12 +1,12 @@
 package com.elder.pojo;
 
-public class Old_man {
+public class OldMan {
 
-	private Integer old_id;
+	private Integer oldId;
 
 	private String name;
 
-	private Integer user_id;
+	private Integer userId;
 
 	private Integer gender;
 
@@ -14,16 +14,16 @@ public class Old_man {
 
 	private String phone;
 
-	private String em_contact;
+	private String emContact;
 
-	private String em_phone;
+	private String emPhone;
 
-	public void setOld_id(Integer old_id){
-		this.old_id = old_id;
+	public void setOldId(Integer oldId){
+		this.oldId = oldId;
 	}
 
-	public Integer getOld_id(){
-		return old_id;
+	public Integer getOldId(){
+		return oldId;
 	}
 
 	public void setName(String name){
@@ -34,12 +34,12 @@ public class Old_man {
 		return name;
 	}
 
-	public void setUser_id(Integer user_id){
-		this.user_id = user_id;
+	public void setUserId(Integer userId){
+		this.userId = userId;
 	}
 
-	public Integer getUser_id(){
-		return user_id;
+	public Integer getUserId(){
+		return userId;
 	}
 
 	public void setGender(Integer gender){
@@ -66,20 +66,20 @@ public class Old_man {
 		return phone;
 	}
 
-	public void setEm_contact(String em_contact){
-		this.em_contact = em_contact;
+	public void setEmContact(String emContact){
+		this.emContact = emContact;
 	}
 
-	public String getEm_contact(){
-		return em_contact;
+	public String getEmContact(){
+		return emContact;
 	}
 
-	public void setEm_phone(String em_phone){
-		this.em_phone = em_phone;
+	public void setEmPhone(String emPhone){
+		this.emPhone = emPhone;
 	}
 
-	public String getEm_phone(){
-		return em_phone;
+	public String getEmPhone(){
+		return emPhone;
 	}
 
 }

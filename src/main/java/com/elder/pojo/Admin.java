@@ -2,7 +2,7 @@ package com.elder.pojo;
 
 public class Admin {
 
-	private Integer user_id;
+	private Integer userId;
 
 	private String name;
 
@@ -10,16 +10,16 @@ public class Admin {
 
 	private String phone;
 
-	private String job_num;
+	private String jobNum;
 
-	private Integer community_id;
+	private Integer communityId;
 
-	public void setUser_id(Integer user_id){
-		this.user_id = user_id;
+	public void setUserId(Integer userId){
+		this.userId = userId;
 	}
 
-	public Integer getUser_id(){
-		return user_id;
+	public Integer getUserId(){
+		return userId;
 	}
 
 	public void setName(String name){
@@ -46,20 +46,20 @@ public class Admin {
 		return phone;
 	}
 
-	public void setJob_num(String job_num){
-		this.job_num = job_num;
+	public void setJobNum(String jobNum){
+		this.jobNum = jobNum;
 	}
 
-	public String getJob_num(){
-		return job_num;
+	public String getJobNum(){
+		return jobNum;
 	}
 
-	public void setCommunity_id(Integer community_id){
-		this.community_id = community_id;
+	public void setCommunityId(Integer communityId){
+		this.communityId = communityId;
 	}
 
-	public Integer getCommunity_id(){
-		return community_id;
+	public Integer getCommunityId(){
+		return communityId;
 	}
 
 }

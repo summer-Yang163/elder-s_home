@@ -2,11 +2,11 @@ package com.elder.pojo;
 
 public class Tip {
 
-	private Integer ti_id;
+	private Integer tiId;
 
-	private Integer user_id;
+	private Integer userId;
 
-	private Integer service_person;
+	private Integer servicePerson;
 
 	private String content;
 
@@ -14,28 +14,28 @@ public class Tip {
 
 	private String comment;
 
-	public void setTi_id(Integer ti_id){
-		this.ti_id = ti_id;
+	public void setTiId(Integer tiId){
+		this.tiId = tiId;
 	}
 
-	public Integer getTi_id(){
-		return ti_id;
+	public Integer getTiId(){
+		return tiId;
 	}
 
-	public void setUser_id(Integer user_id){
-		this.user_id = user_id;
+	public void setUserId(Integer userId){
+		this.userId = userId;
 	}
 
-	public Integer getUser_id(){
-		return user_id;
+	public Integer getUserId(){
+		return userId;
 	}
 
-	public void setService_person(Integer service_person){
-		this.service_person = service_person;
+	public void setServicePerson(Integer servicePerson){
+		this.servicePerson = servicePerson;
 	}
 
-	public Integer getService_person(){
-		return service_person;
+	public Integer getServicePerson(){
+		return servicePerson;
 	}
 
 	public void setContent(String content){

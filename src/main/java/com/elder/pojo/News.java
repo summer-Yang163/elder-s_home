@@ -2,38 +2,38 @@ package com.elder.pojo;
 
 public class News {
 
-	private Integer news_id;
+	private Integer newsId;
 
-	private String news_title;
+	private String newsTitle;
 
-	private String news_content;
+	private String newsContent;
 
 	private Integer importent;
 
-	private Integer user_id;
+	private Integer userId;
 
-	public void setNews_id(Integer news_id){
-		this.news_id = news_id;
+	public void setNewsId(Integer newsId){
+		this.newsId = newsId;
 	}
 
-	public Integer getNews_id(){
-		return news_id;
+	public Integer getNewsId(){
+		return newsId;
 	}
 
-	public void setNews_title(String news_title){
-		this.news_title = news_title;
+	public void setNewsTitle(String newsTitle){
+		this.newsTitle = newsTitle;
 	}
 
-	public String getNews_title(){
-		return news_title;
+	public String getNewsTitle(){
+		return newsTitle;
 	}
 
-	public void setNews_content(String news_content){
-		this.news_content = news_content;
+	public void setNewsContent(String newsContent){
+		this.newsContent = newsContent;
 	}
 
-	public String getNews_content(){
-		return news_content;
+	public String getNewsContent(){
+		return newsContent;
 	}
 
 	public void setImportent(Integer importent){
@@ -44,12 +44,12 @@ public class News {
 		return importent;
 	}
 
-	public void setUser_id(Integer user_id){
-		this.user_id = user_id;
+	public void setUserId(Integer userId){
+		this.userId = userId;
 	}
 
-	public Integer getUser_id(){
-		return user_id;
+	public Integer getUserId(){
+		return userId;
 	}
 
 }

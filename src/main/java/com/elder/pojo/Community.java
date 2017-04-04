@@ -2,7 +2,7 @@ package com.elder.pojo;
 
 public class Community {
 
-	private Integer community_id;
+	private Integer communityId;
 
 	private String name;
 
@@ -12,12 +12,12 @@ public class Community {
 
 	private String photo;
 
-	public void setCommunity_id(Integer community_id){
-		this.community_id = community_id;
+	public void setCommunityId(Integer communityId){
+		this.communityId = communityId;
 	}
 
-	public Integer getCommunity_id(){
-		return community_id;
+	public Integer getCommunityId(){
+		return communityId;
 	}
 
 	public void setName(String name){

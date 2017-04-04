@@ -2,22 +2,22 @@ package com.elder.pojo;
 
 public class Service {
 
-	private Integer service_id;
+	private Integer serviceId;
 
 	private String name;
 
 	private String content;
 
-	private Integer user_id;
+	private Integer userId;
 
 	private Integer num;
 
-	public void setService_id(Integer service_id){
-		this.service_id = service_id;
+	public void setServiceId(Integer serviceId){
+		this.serviceId = serviceId;
 	}
 
-	public Integer getService_id(){
-		return service_id;
+	public Integer getServiceId(){
+		return serviceId;
 	}
 
 	public void setName(String name){
@@ -36,12 +36,12 @@ public class Service {
 		return content;
 	}
 
-	public void setUser_id(Integer user_id){
-		this.user_id = user_id;
+	public void setUserId(Integer userId){
+		this.userId = userId;
 	}
 
-	public Integer getUser_id(){
-		return user_id;
+	public Integer getUserId(){
+		return userId;
 	}
 
 	public void setNum(Integer num){
