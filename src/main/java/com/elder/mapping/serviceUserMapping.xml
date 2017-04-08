@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.ServiceUserMapper">
+
+    <select id="select" resultType="com.elder.pojo.ServiceUser">
+        select * from serviceUser where 1=1
+               <if test="su_id != null"> and su_id=#{su_id}</if>
+
+               <if test="service_id != null"> and service_id=#{service_id}</if>
+
+               <if test="old_id != null"> and old_id=#{old_id}</if>
+
+               <if test="real_price != null"> and real_price=#{real_price}</if>
+
+               <if test="user_id != null"> and user_id=#{user_id}</if>
+
+               <if test="begin_time != null"> and begin_time=#{begin_time}</if>
+
+               <if test="end_time != null"> and end_time=#{end_time}</if>
+
+               <if test="comment_rank != null"> and comment_rank=#{comment_rank}</if>
+
+               <if test="comment != null"> and comment=#{comment}</if>
+
+               <if test="isPay != null"> and isPay=#{isPay}</if>
+
+            </select>
+
+    <insert id="add">
+        intsert into serviceUser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                  <if test="su_id != null"> su_id,</if>
+
+                  <if test="service_id != null"> service_id,</if>
+
+                  <if test="old_id != null"> old_id,</if>
+
+                  <if test="real_price != null"> real_price,</if>
+
+                  <if test="user_id != null"> user_id,</if>
+
+                  <if test="begin_time != null"> begin_time,</if>
+
+                  <if test="end_time != null"> end_time,</if>
+
+                  <if test="comment_rank != null"> comment_rank,</if>
+
+                  <if test="comment != null"> comment,</if>
+
+                  <if test="isPay != null"> isPay,</if>
+
+                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
+
+    </insert>
+
+    <update id="update">
+        update serviceUser set
+        <trim prefix=" " suffix=" " suffixOverrides=",">
+                                                               <if test="service_id != null"> service_id=#{service_id},</if>
+
+                                                   <if test="old_id != null"> old_id=#{old_id},</if>
+
+                                                   <if test="real_price != null"> real_price=#{real_price},</if>
+
+                                                   <if test="user_id != null"> user_id=#{user_id},</if>
+
+                                                   <if test="begin_time != null"> begin_time=#{begin_time},</if>
+
+                                                   <if test="end_time != null"> end_time=#{end_time},</if>
+
+                                                   <if test="comment_rank != null"> comment_rank=#{comment_rank},</if>
+
+                                                   <if test="comment != null"> comment=#{comment},</if>
+
+                                                   <if test="isPay != null"> isPay=#{isPay},</if>
+
+                                    </trim>
+        where su_id=#{su_id}
+    </update>
+
+    <update id="delete">
+        delete from serviceUser where su_id=#{su_id}
+    </update>
+</mapper>

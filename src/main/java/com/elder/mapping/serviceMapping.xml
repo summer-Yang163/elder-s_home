@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.ServiceMapper">
+
+    <select id="select" resultType="com.elder.pojo.Service">
+        select * from service where 1=1
+               <if test="service_id != null"> and service_id=#{service_id}</if>
+
+               <if test="name != null"> and name=#{name}</if>
+
+               <if test="content != null"> and content=#{content}</if>
+
+               <if test="user_id != null"> and user_id=#{user_id}</if>
+
+               <if test="price != null"> and price=#{price}</if>
+
+               <if test="sale_price != null"> and sale_price=#{sale_price}</if>
+
+               <if test="begin_time != null"> and begin_time=#{begin_time}</if>
+
+               <if test="end_time != null"> and end_time=#{end_time}</if>
+
+               <if test="num != null"> and num=#{num}</if>
+
+            </select>
+
+    <insert id="add">
+        intsert into service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                  <if test="service_id != null"> service_id,</if>
+
+                  <if test="name != null"> name,</if>
+
+                  <if test="content != null"> content,</if>
+
+                  <if test="user_id != null"> user_id,</if>
+
+                  <if test="price != null"> price,</if>
+
+                  <if test="sale_price != null"> sale_price,</if>
+
+                  <if test="begin_time != null"> begin_time,</if>
+
+                  <if test="end_time != null"> end_time,</if>
+
+                  <if test="num != null"> num,</if>
+
+                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
+
+    </insert>
+
+    <update id="update">
+        update service set
+        <trim prefix=" " suffix=" " suffixOverrides=",">
+                                                               <if test="name != null"> name=#{name},</if>
+
+                                                   <if test="content != null"> content=#{content},</if>
+
+                                                   <if test="user_id != null"> user_id=#{user_id},</if>
+
+                                                   <if test="price != null"> price=#{price},</if>
+
+                                                   <if test="sale_price != null"> sale_price=#{sale_price},</if>
+
+                                                   <if test="begin_time != null"> begin_time=#{begin_time},</if>
+
+                                                   <if test="end_time != null"> end_time=#{end_time},</if>
+
+                                                   <if test="num != null"> num=#{num},</if>
+
+                                    </trim>
+        where service_id=#{service_id}
+    </update>
+
+    <update id="delete">
+        delete from service where service_id=#{service_id}
+    </update>
+</mapper>

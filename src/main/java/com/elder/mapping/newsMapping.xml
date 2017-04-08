@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.NewsMapper">
+
+    <select id="select" resultType="com.elder.pojo.News">
+        select * from news where 1=1
+               <if test="news_id != null"> and news_id=#{news_id}</if>
+
+               <if test="news_title != null"> and news_title=#{news_title}</if>
+
+               <if test="news_content != null"> and news_content=#{news_content}</if>
+
+               <if test="time != null"> and time=#{time}</if>
+
+               <if test="importent != null"> and importent=#{importent}</if>
+
+               <if test="user_id != null"> and user_id=#{user_id}</if>
+
+            </select>
+
+    <insert id="add">
+        intsert into news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                  <if test="news_id != null"> news_id,</if>
+
+                  <if test="news_title != null"> news_title,</if>
+
+                  <if test="news_content != null"> news_content,</if>
+
+                  <if test="time != null"> time,</if>
+
+                  <if test="importent != null"> importent,</if>
+
+                  <if test="user_id != null"> user_id,</if>
+
+                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
+
+    </insert>
+
+    <update id="update">
+        update news set
+        <trim prefix=" " suffix=" " suffixOverrides=",">
+                                                               <if test="news_title != null"> news_title=#{news_title},</if>
+
+                                                   <if test="news_content != null"> news_content=#{news_content},</if>
+
+                                                   <if test="time != null"> time=#{time},</if>
+
+                                                   <if test="importent != null"> importent=#{importent},</if>
+
+                                                   <if test="user_id != null"> user_id=#{user_id},</if>
+
+                                    </trim>
+        where news_id=#{news_id}
+    </update>
+
+    <update id="delete">
+        delete from news where news_id=#{news_id}
+    </update>
+</mapper>

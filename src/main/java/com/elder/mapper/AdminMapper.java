@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface AdminMapper {
 
-	public void add(Admin admin);
+    void add(Admin admin);
 
-	public void delete(Admin admin);
+    void update(Admin admin);
 
-	public List<Admin> query(Admin admin);
+    void delete(Admin admin);
 
-	public void update(Admin admin);
-
-
+    List<Admin> query(Admin admin);
 }

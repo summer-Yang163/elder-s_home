@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.UserMapper">
+
+    <select id="select" resultType="com.elder.pojo.User">
+        select * from user where 1=1
+               <if test="user_id != null"> and user_id=#{user_id}</if>
+
+               <if test="username != null"> and username=#{username}</if>
+
+               <if test="password != null"> and password=#{password}</if>
+
+               <if test="type != null"> and type=#{type}</if>
+
+            </select>
+
+    <insert id="add">
+        intsert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                  <if test="user_id != null"> user_id,</if>
+
+                  <if test="username != null"> username,</if>
+
+                  <if test="password != null"> password,</if>
+
+                  <if test="type != null"> type,</if>
+
+                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
+
+    </insert>
+
+    <update id="update">
+        update user set
+        <trim prefix=" " suffix=" " suffixOverrides=",">
+                                                               <if test="username != null"> username=#{username},</if>
+
+                                                   <if test="password != null"> password=#{password},</if>
+
+                                                   <if test="type != null"> type=#{type},</if>
+
+                                    </trim>
+        where user_id=#{user_id}
+    </update>
+
+    <update id="delete">
+        delete from user where user_id=#{user_id}
+    </update>
+</mapper>

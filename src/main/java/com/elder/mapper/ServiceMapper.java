@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface ServiceMapper {
 
-	public void add(Service service);
+    void add(Service service);
 
-	public void delete(Service service);
+    void update(Service service);
 
-	public List<Service> query(Service service);
+    void delete(Service service);
 
-	public void update(Service service);
-
-
+    List<Service> query(Service service);
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.TipMapper">
+
+    <select id="select" resultType="com.elder.pojo.Tip">
+        select * from tip where 1=1
+               <if test="ti_id != null"> and ti_id=#{ti_id}</if>
+
+               <if test="user_id != null"> and user_id=#{user_id}</if>
+
+               <if test="service_person != null"> and service_person=#{service_person}</if>
+
+               <if test="content != null"> and content=#{content}</if>
+
+               <if test="time != null"> and time=#{time}</if>
+
+               <if test="isComplete != null"> and isComplete=#{isComplete}</if>
+
+               <if test="comment != null"> and comment=#{comment}</if>
+
+            </select>
+
+    <insert id="add">
+        intsert into tip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                  <if test="ti_id != null"> ti_id,</if>
+
+                  <if test="user_id != null"> user_id,</if>
+
+                  <if test="service_person != null"> service_person,</if>
+
+                  <if test="content != null"> content,</if>
+
+                  <if test="time != null"> time,</if>
+
+                  <if test="isComplete != null"> isComplete,</if>
+
+                  <if test="comment != null"> comment,</if>
+
+                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
+
+    </insert>
+
+    <update id="update">
+        update tip set
+        <trim prefix=" " suffix=" " suffixOverrides=",">
+                                                               <if test="user_id != null"> user_id=#{user_id},</if>
+
+                                                   <if test="service_person != null"> service_person=#{service_person},</if>
+
+                                                   <if test="content != null"> content=#{content},</if>
+
+                                                   <if test="time != null"> time=#{time},</if>
+
+                                                   <if test="isComplete != null"> isComplete=#{isComplete},</if>
+
+                                                   <if test="comment != null"> comment=#{comment},</if>
+
+                                    </trim>
+        where ti_id=#{ti_id}
+    </update>
+
+    <update id="delete">
+        delete from tip where ti_id=#{ti_id}
+    </update>
+</mapper>

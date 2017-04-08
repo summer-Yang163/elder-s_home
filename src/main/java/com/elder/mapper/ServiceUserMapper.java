@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface ServiceUserMapper {
 
-	public void add(ServiceUser serviceUser);
+    void add(ServiceUser serviceUser);
 
-	public void delete(ServiceUser serviceUser);
+    void update(ServiceUser serviceUser);
 
-	public List<ServiceUser> query(ServiceUser serviceUser);
+    void delete(ServiceUser serviceUser);
 
-	public void update(ServiceUser serviceUser);
-
-
+    List<ServiceUser> query(ServiceUser serviceUser);
 }

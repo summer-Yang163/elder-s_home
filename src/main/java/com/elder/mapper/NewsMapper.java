@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface NewsMapper {
 
-	public void add(News news);
+    void add(News news);
 
-	public void delete(News news);
+    void update(News news);
 
-	public List<News> query(News news);
+    void delete(News news);
 
-	public void update(News news);
-
-
+    List<News> query(News news);
 }

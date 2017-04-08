@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface OldManMapper {
 
-	public void add(OldMan oldMan);
+    void add(OldMan oldMan);
 
-	public void delete(OldMan oldMan);
+    void update(OldMan oldMan);
 
-	public List<OldMan> query(OldMan oldMan);
+    void delete(OldMan oldMan);
 
-	public void update(OldMan oldMan);
-
-
+    List<OldMan> query(OldMan oldMan);
 }

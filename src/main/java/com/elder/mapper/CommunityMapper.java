@@ -5,16 +5,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @version 1.0
+* @apiNote 自动生成
+*/
 @Component
 public interface CommunityMapper {
 
-	public void add(Community community);
+    void add(Community community);
 
-	public void delete(Community community);
+    void update(Community community);
 
-	public List<Community> query(Community community);
+    void delete(Community community);
 
-	public void update(Community community);
-
-
+    List<Community> query(Community community);
 }
