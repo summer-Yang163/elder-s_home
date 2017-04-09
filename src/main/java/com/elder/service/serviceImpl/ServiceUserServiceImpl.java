@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import com.elder.mapper.ServiceUserMapper;
 import com.elder.service.ServiceUserService;
 /**
-* @author 令照辉 [lingzh21080@hundsun.com,zeekling@163.com]
+* @author 杨新梅 [2448415727@qq.com]
 * @version 1.0
-* @apiNote 自动生成
+* @apiNote
 */
 @Component
 public class ServiceUserServiceImpl implements ServiceUserService{
