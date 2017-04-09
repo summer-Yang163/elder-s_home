@@ -4,36 +4,36 @@
 
     <select id="select" resultType="com.elder.pojo.Admin">
         select * from admin where 1=1
-               <if test="user_id != null"> and user_id=#{user_id}</if>
+        <if test="user_id != null">and user_id=#{user_id}</if>
 
-               <if test="name != null"> and name=#{name}</if>
+        <if test="name != null">and name=#{name}</if>
 
-               <if test="gender != null"> and gender=#{gender}</if>
+        <if test="gender != null">and gender=#{gender}</if>
 
-               <if test="phone != null"> and phone=#{phone}</if>
+        <if test="phone != null">and phone=#{phone}</if>
 
-               <if test="job_num != null"> and job_num=#{job_num}</if>
+        <if test="job_num != null">and job_num=#{job_num}</if>
 
-               <if test="community_id != null"> and community_id=#{community_id}</if>
+        <if test="community_id != null">and community_id=#{community_id}</if>
 
-            </select>
+    </select>
 
     <insert id="add">
         intsert into admin
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                  <if test="user_id != null"> user_id,</if>
+            <if test="user_id != null">user_id,</if>
 
-                  <if test="name != null"> name,</if>
+            <if test="name != null">name,</if>
 
-                  <if test="gender != null"> gender,</if>
+            <if test="gender != null">gender,</if>
 
-                  <if test="phone != null"> phone,</if>
+            <if test="phone != null">phone,</if>
 
-                  <if test="job_num != null"> job_num,</if>
+            <if test="job_num != null">job_num,</if>
 
-                  <if test="community_id != null"> community_id,</if>
+            <if test="community_id != null">community_id,</if>
 
-                    </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">#{$column.name}</trim>
 
     </insert>
@@ -41,17 +41,17 @@
     <update id="update">
         update admin set
         <trim prefix=" " suffix=" " suffixOverrides=",">
-                                                               <if test="name != null"> name=#{name},</if>
+            <if test="name != null">name=#{name},</if>
 
-                                                   <if test="gender != null"> gender=#{gender},</if>
+            <if test="gender != null">gender=#{gender},</if>
 
-                                                   <if test="phone != null"> phone=#{phone},</if>
+            <if test="phone != null">phone=#{phone},</if>
 
-                                                   <if test="job_num != null"> job_num=#{job_num},</if>
+            <if test="job_num != null">job_num=#{job_num},</if>
 
-                                                   <if test="community_id != null"> community_id=#{community_id},</if>
+            <if test="community_id != null">community_id=#{community_id},</if>
 
-                                    </trim>
+        </trim>
         where user_id=#{user_id}
     </update>
 

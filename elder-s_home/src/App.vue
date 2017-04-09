@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view></router-view>
   </div>
 </template>
@@ -12,6 +11,13 @@ export default {
 </script>
 
 <style>
+body{
+  background-image: url(./assets/login-bg.png);
+  background-size: 100 100;
+  display:block;
+  height:100%;
+  width:100%;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
