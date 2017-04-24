@@ -8,9 +8,6 @@ width:150px;
         <Form-item label="姓名" prop="name">
             <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
         </Form-item>
-        <Form-item label="邮箱" prop="mail">
-            <Input v-model="formValidate.mail" placeholder="请输入邮箱"></Input>
-        </Form-item>
         <Form-item label="手机号" prop="phone">
             <Input v-model="formValidate.phone" placeholder="请输入手机号"></Input>
         </Form-item>
@@ -31,7 +28,6 @@ width:150px;
             return {
                 formValidate: {
                     name: '',
-                    mail: '',
                     phone:'',
                     city: '',
                     password1: '',
