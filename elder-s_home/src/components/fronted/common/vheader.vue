@@ -30,23 +30,23 @@
 
       </div>
       <div class="layout-nav">
-        <Menu-item name = "5">
+        <Menu-item name = "1">
           <Icon type="ios-navigate"></Icon>
           首页
       </Menu-item>
-        <Menu-item name="1">
+        <Menu-item name="2">
           <Icon type="ios-keypad"></Icon>
           社区展示
       </Menu-item>
-        <Menu-item name="2">
+        <Menu-item name="3">
           <Icon type="ios-analytics"></Icon>
           服务概览
       </Menu-item>
-        <Menu-item name="3">
+        <Menu-item name="4">
           <Icon type="ios-paper"></Icon>
           新闻公告
       </Menu-item>
-        <Menu-item name="4">
+        <Menu-item name="5">
           <Icon type="ios-paper"></Icon>
           养老小贴士
       </Menu-item>

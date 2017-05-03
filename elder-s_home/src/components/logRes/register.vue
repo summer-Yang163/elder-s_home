@@ -17,9 +17,7 @@ width:150px;
         <Form-item label="确认密码" prop="password2">
             <Input type="password" v-model="formValidate.password2" placeholder="请再次输入密码"></Input>
         </Form-item>
-
             <Button type="primary" @click="handleSubmit('formValidate')" class="bregister">注册</Button>
-
     </Form>
 </template>
 <script>
@@ -29,7 +27,6 @@ width:150px;
                 formValidate: {
                     name: '',
                     phone:'',
-                    city: '',
                     password1: '',
                     password2: ''
 
@@ -38,21 +35,17 @@ width:150px;
                     name: [
                         { required: true, message: '姓名不能为空', trigger: 'blur' }
                     ],
-                    mail: [
-                        { required: true, message: '邮箱不能为空', trigger: 'blur' },
-                        { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-                    ],
                     phone:[
                         { required: true, message: '手机号码不能为空', trigger: 'blur' }
                     ],
                     password1: [
-                        { required: true, message: '登陆密码不能为空', trigger: 'change' }
+                        { required: true, message: '登陆密码不能为空', trigger: 'blur' }
                     ],
                     password2: [
-                        { required: true, message: '请填写确认密码', trigger: 'change' }
+                        { required: true, message: '请填写确认密码', trigger: 'blur' }
                     ]
-
-                }
+                },
+              resUrl:''
             }
         },
         methods: {
