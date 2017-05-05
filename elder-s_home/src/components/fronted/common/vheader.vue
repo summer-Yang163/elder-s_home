@@ -42,8 +42,8 @@
             首页
           </Menu-item>
         </router-link>
-        <router-link to="/home">
-          <Menu-item name="2">
+        <router-link to="/community">
+          <Menu-item name="community">
             <Icon type="ios-keypad"></Icon>
             社区展示
           </Menu-item>
