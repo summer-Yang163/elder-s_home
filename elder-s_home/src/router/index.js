@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 // import Login from '@/components/login'
 import LogRes from '@/components/logRes/logRes'
+import Home from '@/components/fronted/home'
 // import
 
 Vue.use(Router)
@@ -13,6 +14,12 @@ export default new Router({
       path: '/',
       name: 'LogRes',
       component: LogRes
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
     }
+
   ]
 })

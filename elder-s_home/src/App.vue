@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <router-view></router-view>
   </div>
 </template>
@@ -11,13 +10,7 @@
 }
 </script>
 <style>
-body{
-  background-image: url(./assets/login-bg.png);
-  background-size: 100 100;
-  display:block;
-  height:100%;
-  width:100%;
-}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,10 +1,11 @@
 <style scoped>
-  body {
+  .background{
     background-image: url(../../assets/login-bg.png);
     background-size: 100 100;
     display: block;
     height: 100%;
     width: 100%;
+    position:absolute; top:0; left:0;
   }
   .logRes {
     display: block;
@@ -26,11 +27,11 @@
   }
 </style>
 <template>
-  <div>
+  <div class="background">
     <Vhead></Vhead>
     <div style="background:#eee;padding: 20px" class="logRes">
       <Modal v-model="modal1" title="请重置密码"
-             @on-ok="ok" @on-cancel="cancel" width="350">
+             @on-ok="ok('formTop')" @on-cancel="cancel" width="350">
         <Form ref="formTop" :model="formTop" :rules="ruleValidate" label-position="top">
           <Form-item class="input" prop="phone">
             <Input v-model="formTop.phone" icon="ios-information-outline"
@@ -84,17 +85,19 @@
           password: [
             {required: true, message: '请填写新密码', trigger: 'blur'}
           ]
-        }
-      }
-    },
-    watch: {
-      phone: function (newdata, old) {
-        console.log(newdata + old);
+        },
+        resetUrl:'http://rapapi.org/mockjs/18342/register'
       }
     },
     methods: {
-      ok () {
-        this.$Message.info('重置密码成功');
+      ok (data) {
+          this.$http.post(this.resetUrl,data).then((json)=>{
+              console.log(json.data);
+            this.$Message.info('重置密码成功');
+          },(json)=>{
+
+          })
+
       },
       cancel () {
         this.$Message.info('取消重置密码');

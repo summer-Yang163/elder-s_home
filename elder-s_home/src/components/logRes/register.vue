@@ -5,8 +5,8 @@ width:150px;
 </style>
 <template>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <Form-item label="姓名" prop="name">
-            <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
+        <Form-item label="用户名" prop="name">
+            <Input v-model="formValidate.name" placeholder="请输入用户名"></Input>
         </Form-item>
         <Form-item label="手机号" prop="phone">
             <Input v-model="formValidate.phone" placeholder="请输入手机号"></Input>
@@ -33,7 +33,7 @@ width:150px;
                 },
                 ruleValidate: {
                     name: [
-                        { required: true, message: '姓名不能为空', trigger: 'blur' }
+                        { required: true, message: '用户名不能为空', trigger: 'blur' }
                     ],
                     phone:[
                         { required: true, message: '手机号码不能为空', trigger: 'blur' }
@@ -45,18 +45,25 @@ width:150px;
                         { required: true, message: '请填写确认密码', trigger: 'blur' }
                     ]
                 },
-              resUrl:''
+              resUrl:'http://rapapi.org/mockjs/18342/register'
             }
         },
         methods: {
             handleSubmit (name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.$Message.success('提交成功!');
-                    } else {
-                        this.$Message.error('表单验证失败!');
-                    }
+                this.$http.post(this.resUrl,name).then((json)=>{
+                    console.log(json.data);
+//                  this.$Message.success('提交成功!');
+                },(json)=>{
+                  this.$Message.error('表单验证失败!');
                 })
+              console.log(this.$refs[name].validate);
+//                this.$refs[name].validate((valid) => {
+//                    if (valid) {
+//                        this.$Message.success('提交成功!');
+//                    } else {
+//                        this.$Message.error('表单验证失败!');
+//                    }
+//                })
             },
             handleReset (name) {
                 this.$refs[name].resetFields();
