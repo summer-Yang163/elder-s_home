@@ -12,7 +12,7 @@
 </style>
 <template>
     <ul>
-      <li v-for="item in newsList">
+      <li v-for="item in newsList" :key="item.id">
         <a :href="item.url">>&nbsp;&nbsp;<span>[{{item.classify}}]</span>&nbsp;&nbsp;{{item.title}}
         <p class="time">{{item.time}}</p></a>
       </li>

@@ -142,12 +142,12 @@
 </template>
 <script>
   import Vhead from './common/vheader'
-  import Carousel from './common/carousel'
+  import Carousel from './home/carousel'
   import DetailCard from './home/detailCard'
   import VFooter from './common/footer'
-  import Service from './home/service'
-  import News from './home/news'
-  import Tips from './home/tips'
+  import Service from './home/sservice'
+  import News from './home/snews'
+  import Tips from './home/stips'
 
   export default {
     components: {Vhead, Carousel,DetailCard,VFooter,Service,News,Tips},

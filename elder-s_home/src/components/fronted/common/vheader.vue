@@ -2,6 +2,7 @@
   .layout {
     /*border: 1px solid #d7dde4;*/
     background: #f5f7f9;
+    margin-bottom: 5px;
   }
 
   .layout-logo {
@@ -48,20 +49,20 @@
             社区展示
           </Menu-item>
         </router-link>
-        <router-link to="/home">
-          <Menu-item name="3">
+        <router-link to="/service">
+          <Menu-item name="service">
             <Icon type="ios-analytics"></Icon>
             服务概览
           </Menu-item>
         </router-link>
-        <router-link to="/home">
-          <Menu-item name="4">
+        <router-link to="/news">
+          <Menu-item name="news">
             <Icon type="ios-paper"></Icon>
             新闻公告
           </Menu-item>
         </router-link>
-        <router-link to="/home">
-          <Menu-item name="5">
+        <router-link to="/tips">
+          <Menu-item name="tips">
             <Icon type="ios-paper"></Icon>
             养老小贴士
           </Menu-item>

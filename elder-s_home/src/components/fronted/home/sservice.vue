@@ -1,6 +1,6 @@
 <template>
-  <Collapse v-model="value2" accordion="1">
-    <Panel  v-for="item in service">
+  <Collapse v-model="value2" accordion>
+    <Panel  v-for="item in service" :key="item.id">
       {{item.classify}}
       <p slot="content">{{item.introduction}}</p>
     </Panel>

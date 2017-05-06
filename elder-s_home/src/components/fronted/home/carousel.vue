@@ -7,7 +7,7 @@
   }
 </style>
 <template>
-  <Carousel autoplay  autoplaySpeed="3000" v-model="value1">
+  <Carousel autoplay   v-model="value2">
     <Carousel-item>
       <div class="demo-carousel"><img src="../../../assets/home11.jpg"></div>
     </Carousel-item>
@@ -26,7 +26,7 @@
   export default {
     data () {
       return {
-        value1: 0
+        value2: 0
       }
     }
   }

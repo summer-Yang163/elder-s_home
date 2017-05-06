@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-// import Login from '@/components/login'
+
 import LogRes from '@/components/logRes/logRes'
 import Home from '@/components/fronted/home'
 import Community from '@/components/fronted/community'
+import Service from '@/components/fronted/service'
+import News from '@/components/fronted/news'
+import Tips from '@/components/fronted/tips'
+import Detail_community from '@/components/fronted/community/detail_community'
+import DetailTips from '@/components/fronted/tips/detailTips'
+
+
 
 // import
 
@@ -26,6 +32,31 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: Community
+    },
+    {
+      path: '/service',
+      name: 'service',
+      component: Service
+    },
+    {
+      path: '/news',
+      name: 'news',
+      component: News
+    },
+    {
+      path: '/tips',
+      name: 'tips',
+      component: Tips
+    },
+    {
+      path: '/comDeatail',
+      name: 'comDeatail',
+      component: Detail_community
+    },
+    {
+      path: '/detailTips',
+      name: 'detailTips',
+      component: DetailTips
     }
 
   ]
