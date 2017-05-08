@@ -9,6 +9,8 @@ import News from '@/components/fronted/news'
 import Tips from '@/components/fronted/tips'
 import Detail_community from '@/components/fronted/community/detail_community'
 import DetailTips from '@/components/fronted/tips/detailTips'
+import DetailNews from '@/components/fronted/news/detailNew'
+
 
 
 
@@ -26,6 +28,7 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
+      children:[],
       component: Home
     },
     {
@@ -57,6 +60,10 @@ export default new Router({
       path: '/detailTips',
       name: 'detailTips',
       component: DetailTips
+    },{
+      path:'/detailNews',
+      name:'detailNews',
+      component:DetailNews
     }
 
   ]

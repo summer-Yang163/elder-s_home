@@ -10,7 +10,7 @@
     /*opacity: 0.7;*/
     background: #aaa799;
   }
-  .main .content{
+  .main .content h1{
     text-align: center;
   }
   .main .content p{
