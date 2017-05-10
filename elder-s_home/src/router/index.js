@@ -10,7 +10,7 @@ import Tips from '@/components/fronted/tips'
 import Detail_community from '@/components/fronted/community/detail_community'
 import DetailTips from '@/components/fronted/tips/detailTips'
 import DetailNews from '@/components/fronted/news/detailNew'
-
+import BackEnd from '@/components/backEnd/admin/userManage'
 
 
 
@@ -64,6 +64,10 @@ export default new Router({
       path:'/detailNews',
       name:'detailNews',
       component:DetailNews
+    },{
+      path:'/backEnd',
+      name:'backEnd',
+      component:BackEnd
     }
 
   ]

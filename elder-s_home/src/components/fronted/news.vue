@@ -55,9 +55,6 @@
     z-index:100;
   }
   .card .page{
-    /*position:absolute;*/
-    /*right:0;*/
-    /*bottom:0;*/
     float:right;
     padding: 10px 0;
   }

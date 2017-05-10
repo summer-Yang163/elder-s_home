@@ -92,7 +92,7 @@
       <div class="community">
         <div class="head">
           <div class="head_left">今日推荐社区:<span style="color:orange"> {{community.name}}</span></div>
-          <router-link class="head_right" to="">更多>></router-link>
+          <router-link class="head_right" to="/community">更多>></router-link>
         </div>
         <div class="container">
           <div class="community_photo">
@@ -108,7 +108,7 @@
       <div class="service">
         <div class="head">
           <div class="head_left">养老服务简介</div>
-          <router-link class="head_right" to="">详情>></router-link>
+          <router-link class="head_right" to="/service">详情>></router-link>
         </div>
         <div class="container">
          <Service></Service>
@@ -119,7 +119,7 @@
       <div class="news">
         <div class="head">
           <div class="head_left">最新通知</div>
-          <router-link class="head_right" to="">更多>></router-link>
+          <router-link class="head_right" to="/news">更多>></router-link>
         </div>
         <div class="container">
           <News></News>
@@ -128,7 +128,7 @@
       <div class="tips">
         <div class="head">
           <div class="head_left">养老小贴士</div>
-          <router-link class="head_right" to="">更多>></router-link>
+          <router-link class="head_right" to="/tips">更多>></router-link>
         </div>
         <div class="container">
           <Tips></Tips>
