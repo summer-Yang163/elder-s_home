@@ -2,17 +2,17 @@
 
 </style>
 <template>
-<Vhead></Vhead>
+  <Vhead></Vhead>
 </template>
 <script>
   import Vhead from '../common/vhead'
 
   export default {
-      data(){
-          return {
+    data(){
+      return {
 
-          }
-      },
+      }
+    },
     components:{Vhead}
 
   }

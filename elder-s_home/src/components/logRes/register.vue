@@ -17,7 +17,7 @@ width:150px;
         <Form-item label="确认密码" prop="password2">
             <Input type="password" v-model="formValidate.password2" placeholder="请再次输入密码"></Input>
         </Form-item>
-            <Button type="primary" @click="handleSubmit('formValidate')" class="bregister">注册</Button>
+            <Button type="primary" @click="handleSubmit(formValidate)" class="bregister">注册</Button>
     </Form>
 </template>
 <script>
@@ -49,14 +49,24 @@ width:150px;
             }
         },
         methods: {
-            handleSubmit (name) {
-                this.$http.post(this.resUrl,name).then((json)=>{
-                    console.log(json.data);
-//                  this.$Message.success('提交成功!');
-                },(json)=>{
-                  this.$Message.error('表单验证失败!');
-                })
-              console.log(this.$refs[name].validate);
+            handleSubmit (data) {
+                console.log(data)
+                if(data.name){
+                    console.log(data);
+                    if(data.password2 ==data.password1 ){
+                      this.$http.post(this.resUrl,name).then((json)=>{
+                        console.log(json.data);
+                        this.$Message.success('提交成功!');
+      //                if(json.data){
+      //                  this.$router.go(0);
+      //                }
+                      },(json)=>{
+                        this.$Message.error('表单验证失败!');
+                      })
+                    }
+                }
+
+//              console.log(this.$refs[name].validate);
 //                this.$refs[name].validate((valid) => {
 //                    if (valid) {
 //                        this.$Message.success('提交成功!');

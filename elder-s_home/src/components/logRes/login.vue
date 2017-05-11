@@ -50,6 +50,7 @@
       handleSubmit(name) {
           this.$http.post(this.loginUrl,name).then((response) =>{
             this.$Message.success('提交成功!');
+            this.$router.push({path:'/Home'})
               console.log(response);
         },(response)=>{
             this.$Message.error('表单验证失败!');

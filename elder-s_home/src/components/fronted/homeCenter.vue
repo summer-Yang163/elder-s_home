@@ -11,20 +11,16 @@
 </style>
 <template>
   <div>
-    <!--<Vhead></Vhead>-->
     <div class="main ">
 
     </div>
-    <!--<VFooter></VFooter>-->
   </div>
 
 </template>
 <script>
-  import Vhead from './common/vheader'
-  import VFooter from './common/footer'
 
   export default {
-    components: {Vhead,VFooter},
+    components: {},
     data () {
       return {
 

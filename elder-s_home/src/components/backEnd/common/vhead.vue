@@ -19,7 +19,15 @@
     background: #fff;
     border-radius: 4px;
   }
-
+  .layout-content .page{
+    float:right;
+    padding: 10px 0;
+  }
+  .layout-breadcrumb .addDelete{
+    /*border-top:1px solid #c1c3c5;*/
+    float:right;
+    /*padding:10px;*/
+  }
   .layout-content-main {
     padding: 10px;
   }
@@ -69,9 +77,9 @@
               <Icon type="ios-navigate"></Icon>
               用户管理
             </template>
-            <Menu-item name="1-1">选项 1</Menu-item>
-            <Menu-item name="1-2">选项 2</Menu-item>
-            <Menu-item name="1-3">选项 3</Menu-item>
+            <Menu-item name="1-1">账号管理</Menu-item>
+            <Menu-item name="1-2">社区老人管理</Menu-item>
+            <Menu-item name="1-3">普通用户管理</Menu-item>
           </Submenu>
           <Submenu name="2">
             <template slot="title">
@@ -79,17 +87,15 @@
               社区管理
 
             </template>
-            <Menu-item name="2-1">选项 1</Menu-item>
-            <Menu-item name="2-2">选项 2</Menu-item>
+            <!--<Menu-item name="2-1">选项 1</Menu-item>-->
+            <!--<Menu-item name="2-2">选项 2</Menu-item>-->
           </Submenu>
           <Submenu name="3">
             <template slot="title">
               <Icon type="ios-analytics"></Icon>
               社区服务人员管理
-
             </template>
-            <Menu-item name="3-1">选项 1</Menu-item>
-            <Menu-item name="3-2">选项 2</Menu-item>
+
           </Submenu>
           <Submenu name="4">
             <template slot="title">
@@ -115,31 +121,132 @@
               服务项目管理
 
             </template>
-            <Menu-item name="6-1">选项 1</Menu-item>
+            <Menu-item name="6-1">项目分类</Menu-item>
             <Menu-item name="6-2">选项 2</Menu-item>
           </Submenu>
         </Menu>
       </i-col>
       <i-col span="19">
         <div class="layout-header"></div>
-        <div class="layout-breadcrumb">
-          <Breadcrumb>
+        <div class="layout-breadcrumb" style="overflow: hidden;">
+          <Breadcrumb style="float:left;line-height: 32px;">
             <Breadcrumb-item href="#">后台管理</Breadcrumb-item>
             <Breadcrumb-item href="#">用户管理</Breadcrumb-item>
-            <Breadcrumb-item>某应用</Breadcrumb-item>
+            <Breadcrumb-item>用户管理</Breadcrumb-item>
           </Breadcrumb>
+          <div class="addDelete">
+            <Button >新增</Button>
+            <Button >批量删除</Button>
+          </div>
         </div>
         <div class="layout-content">
-          <div class="layout-content-main">内容区域</div>
-        </div>
-        <div class="layout-copy">
-          2011-2016 &copy; TalkingData
+          <div class="layout-content-main">
+            <Table border :columns="columns4" :data="data1"></Table>
+          </div>
+          <Page class="page" :total="40" size="small" show-elevator show-sizer></Page>
 
         </div>
+
+        <div class="layout-copy">
+          2017-05 &copy; TalkingData
+        </div>
+
       </i-col>
+
     </Row>
   </div>
 </template>
 <script>
-  export default {}
+//  import Table from '../common/table'
+  export default {
+//    components:{Table}
+data(){
+    return {
+      columns4: [
+        {
+          type: 'selection',
+          width: 60,
+          align: 'center',
+          title:'序号'
+        },
+        {
+          title: '姓名',
+          key: 'name'
+        },
+        {
+          title: '性别',
+          key: ''
+        },
+        {
+          title: '年龄',
+          key: 'age'
+        },
+        {
+          title: '电话',
+          key: ''
+        },
+        {
+          title: '入住地址',
+          key: ''
+        },
+        {
+          title: '地址',
+          key: 'address'
+        },
+        {
+          title: '入住老人',
+          key: ''
+        },
+        {
+          title: '关系',
+          key: ''
+        },
+        {
+          title: '用户等级',
+          key: ''
+        },
+        {
+          title: '编辑',
+          key: ''
+        },
+        {
+          title: '删除',
+          key: ''
+        }
+      ],
+      data1: [
+        {
+          name: '王小明',
+          age: 18,
+          address: '北京市朝阳区芍药居'
+        },
+        {
+          name: '张小刚',
+          age: 25,
+          address: '北京市海淀区西二旗'
+        },
+        {
+          name: '李小红',
+          age: 30,
+          address: '上海市浦东新区世纪大道'
+        },
+        {
+          name: '周小伟',
+          age: 26,
+          address: '深圳市南山区深南大道'
+        },
+        {
+          name: '王小明',
+          age: 18,
+          address: '北京市朝阳区芍药居'
+        },
+        {
+          name: '张小刚',
+          age: 25,
+          address: '北京市海淀区西二旗'
+        }
+      ]
+    }
+}
+  }
 </script>

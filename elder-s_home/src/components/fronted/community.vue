@@ -27,7 +27,7 @@
 </style>
 <template>
   <div>
-    <Vhead></Vhead>
+    <!--<Vhead></Vhead>-->
     <div class="main  ">
       <div class="today_recommended">
         <div class="head">今日推荐：<span>{{today_recommended.title}}</span></div>
@@ -36,7 +36,7 @@
       <Cascader></Cascader>
    <VDetails></VDetails>
     </div>
-    <VFooter></VFooter>
+    <!--<VFooter></VFooter>-->
   </div>
 
 </template>

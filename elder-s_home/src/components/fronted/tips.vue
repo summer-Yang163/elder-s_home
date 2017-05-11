@@ -61,7 +61,7 @@
 </style>
 <template>
   <div>
-    <Vhead></Vhead>
+    <!--<Vhead></Vhead>-->
     <div class="main ">
       <div class="newest">
         <div class="main_left">
@@ -141,7 +141,7 @@
         </Card>
       </div>
     </div>
-    <VFooter></VFooter>
+    <!--<VFooter></VFooter>-->
   </div>
 
 </template>

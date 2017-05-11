@@ -86,7 +86,7 @@
 </style>
 <template>
   <div>
-    <Vhead></Vhead>
+    <!--<Vhead></Vhead>-->
     <Carousel class="main"></Carousel>
     <div class="main community_service">
       <div class="community">
@@ -134,9 +134,8 @@
           <Tips></Tips>
         </div>
       </div>
-
     </div>
-    <VFooter></VFooter>
+    <!--<VFooter></VFooter>-->
   </div>
 
 </template>
