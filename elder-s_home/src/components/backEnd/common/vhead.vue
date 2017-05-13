@@ -1,56 +1,5 @@
 <style>html{width:100%;height:100%;} body{width:100%;height:100%;}#app{width:100%;height:100%;} </style>
 <style scoped>
-
-  .layout {
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-    position: relative;
-    height:100%;
-  }
-
-  .layout-breadcrumb {
-    padding: 10px 15px 0;
-  }
-
-  .layout-content {
-    min-height: 200px;
-    margin: 15px;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
-  }
-  .layout-content .page{
-    float:right;
-    padding: 10px 0;
-  }
-  .layout-breadcrumb .addDelete{
-    /*border-top:1px solid #c1c3c5;*/
-    float:right;
-    /*padding:10px;*/
-  }
-  .layout-content-main {
-    padding: 10px;
-  }
-
-.layout-copy {
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
-  }
-
-  .layout-menu-left {
-    background: #464c5b;
-    height:100%;
-  }
-  .ivu-row-flex{
-    height:100%;
-  }
-  .layout-header {
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-  }
-
   .layout-logo-left {
     width: 90%;
     height: 30px;
@@ -63,190 +12,169 @@
   }
 </style>
 <template>
-  <div class="layout">
-    <Row type="flex">
-      <i-col span="5" class="layout-menu-left" style="min-width:200px;">
-        <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']" >
-          <div class="layout-logo-left">
-            时光驿站后台管理系统
-            <!--时光驿站社区服务工作系统-->
+  <Menu :active-name='data.menuName' theme="dark" width="auto" :open-names=data.openMenu accordion @on-select="handleSelect">
+    <div class="layout-logo-left">
+      <span v-if=" data.userAuthority==1">
+        时光驿站后台管理系统</span>
+      <span v-else>时光驿站社区服务工作系统</span>
+    </div>
+    <div v-if="  data.userAuthority==1">
+    <Submenu name="user">
+      <template slot="title">
+        <Icon type="ios-navigate"></Icon>
+        用户管理
+      </template>
+      <Menu-item name="systemNum">系统账号管理</Menu-item>
+      <Menu-item name="oldManage">社区老人管理</Menu-item>
+      <Menu-item name="userManage">普通用户管理</Menu-item>
+    </Submenu>
+    <Submenu name="community">
+      <template slot="title">
+        <Icon type="ios-keypad"></Icon>
+        社区管理
+      </template>
+      <Menu-item name="communityMan">社区基本情况</Menu-item>
+    </Submenu>
+    <Submenu name="serPerMan">
+      <template slot="title">
+        <Icon type="ios-analytics"></Icon>
+        社区服务人员管理
+      </template>
+      <Menu-item name="serPerson">服务人员基本信息</Menu-item>
+    </Submenu>
+    <Submenu name="news">
+      <template slot="title">
+        <Icon type="ios-analytics"></Icon>
+        新闻管理
 
-          </div>
-          <Submenu name="1">
-            <template slot="title">
-              <Icon type="ios-navigate"></Icon>
-              用户管理
-            </template>
-            <Menu-item name="1-1">账号管理</Menu-item>
-            <Menu-item name="1-2">社区老人管理</Menu-item>
-            <Menu-item name="1-3">普通用户管理</Menu-item>
-          </Submenu>
-          <Submenu name="2">
-            <template slot="title">
-              <Icon type="ios-keypad"></Icon>
-              社区管理
+      </template>
+      <Menu-item name="newsList">已有新闻管理</Menu-item>
+      <Menu-item name="addNews">新增新闻</Menu-item>
+    </Submenu>
+    <Submenu name="tips">
+      <template slot="title">
+        <Icon type="ios-analytics"></Icon>
+        养老贴士管理
 
-            </template>
-            <!--<Menu-item name="2-1">选项 1</Menu-item>-->
-            <!--<Menu-item name="2-2">选项 2</Menu-item>-->
-          </Submenu>
-          <Submenu name="3">
-            <template slot="title">
-              <Icon type="ios-analytics"></Icon>
-              社区服务人员管理
-            </template>
+      </template>
+      <Menu-item name="tipsList">已有养老贴士</Menu-item>
+      <Menu-item name="addTips">新增养老贴士</Menu-item>
+    </Submenu>
+    <Submenu name="serProMan">
+      <template slot="title">
+        <Icon type="ios-analytics"></Icon>
+        服务项目管理
+      </template>
+      <Menu-item name="basicPro">基本项目管理</Menu-item>
+      <Menu-item name="featurePro">特色项目管理</Menu-item>
+      <Menu-item name="personOrder">服务订单管理</Menu-item>
+      <Menu-item name="serOrder">个性化订单管理</Menu-item>
 
-          </Submenu>
-          <Submenu name="4">
-            <template slot="title">
-              <Icon type="ios-analytics"></Icon>
-              新闻管理
+    </Submenu>
+    </div>
+    <div v-else>
+      <Submenu name="handlePro" v-if="  data.userAuthority==3">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          社区服务项目处理
+        </template>
+        <Menu-item name="processProj">服务项目处理进度</Menu-item>
+        <Menu-item name="serviceOld">服务老人信息</Menu-item>
+        <Menu-item name="personTips">个性化提醒</Menu-item>
+        <Menu-item name="feedBack">服务评价查看</Menu-item>
+      </Submenu>
+      <Submenu name="addOld">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          社区老人信息添加
+        </template>
+        <Menu-item name="addOld">已有老人信息</Menu-item>
+        <Menu-item name="addOld">添加老人信息</Menu-item>
+      </Submenu>
+      <Submenu name="checkOldInf">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          老人信息审核
+        </template>
+        <Menu-item name="accountCheck">已审核账号</Menu-item>
+        <Menu-item name="accountCheck">待审核账号</Menu-item>
+      </Submenu>
+      <Submenu name="checkOrder">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          服务订单审核
+        </template>
+        <Menu-item name="checkOrder">已审核订单</Menu-item>
+        <Menu-item name="checkOrder">待审核订单</Menu-item>
+      </Submenu>
+      <Submenu name="addNews">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          发布新闻
+        </template>
+        <Menu-item name="addNews">新闻列表查看</Menu-item>
+        <Menu-item name="addNews">新增新闻</Menu-item>
+      </Submenu>
+      <Submenu name="addTips">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          发布养老贴士
+        </template>
+        <Menu-item name="addTips">养老贴士查看</Menu-item>
+        <Menu-item name="addTips">新增养老贴士</Menu-item>
+      </Submenu>
+      <Submenu name="addProject">
+        <template slot="title">
+          <Icon type="ios-navigate"></Icon>
+          发布服务项目
+        </template>
+        <Menu-item name="addProject">服务项目查看</Menu-item>
+        <Menu-item name="addProject">新增服务项目</Menu-item>
+      </Submenu>
 
-            </template>
-            <Menu-item name="4-1">选项 1</Menu-item>
-            <Menu-item name="4-2">选项 2</Menu-item>
-          </Submenu>
-          <Submenu name="5">
-            <template slot="title">
-              <Icon type="ios-analytics"></Icon>
-              养老贴士管理
+    </div>
+  </Menu>
 
-            </template>
-            <Menu-item name="5-1">选项 1</Menu-item>
-            <Menu-item name="5-2">选项 2</Menu-item>
-          </Submenu>
-          <Submenu name="6">
-            <template slot="title">
-              <Icon type="ios-analytics"></Icon>
-              服务项目管理
-
-            </template>
-            <Menu-item name="6-1">项目分类</Menu-item>
-            <Menu-item name="6-2">选项 2</Menu-item>
-          </Submenu>
-        </Menu>
-      </i-col>
-      <i-col span="19">
-        <div class="layout-header"></div>
-        <div class="layout-breadcrumb" style="overflow: hidden;">
-          <Breadcrumb style="float:left;line-height: 32px;">
-            <Breadcrumb-item href="#">后台管理</Breadcrumb-item>
-            <Breadcrumb-item href="#">用户管理</Breadcrumb-item>
-            <Breadcrumb-item>用户管理</Breadcrumb-item>
-          </Breadcrumb>
-          <div class="addDelete">
-            <Button >新增</Button>
-            <Button >批量删除</Button>
-          </div>
-        </div>
-        <div class="layout-content">
-          <div class="layout-content-main">
-            <Table border :columns="columns4" :data="data1"></Table>
-          </div>
-          <Page class="page" :total="40" size="small" show-elevator show-sizer></Page>
-
-        </div>
-
-        <div class="layout-copy">
-          2017-05 &copy; TalkingData
-        </div>
-
-      </i-col>
-
-    </Row>
-  </div>
 </template>
 <script>
 //  import Table from '../common/table'
   export default {
 //    components:{Table}
-data(){
-    return {
-      columns4: [
-        {
-          type: 'selection',
-          width: 60,
-          align: 'center',
-          title:'序号'
-        },
-        {
-          title: '姓名',
-          key: 'name'
-        },
-        {
-          title: '性别',
-          key: ''
-        },
-        {
-          title: '年龄',
-          key: 'age'
-        },
-        {
-          title: '电话',
-          key: ''
-        },
-        {
-          title: '入住地址',
-          key: ''
-        },
-        {
-          title: '地址',
-          key: 'address'
-        },
-        {
-          title: '入住老人',
-          key: ''
-        },
-        {
-          title: '关系',
-          key: ''
-        },
-        {
-          title: '用户等级',
-          key: ''
-        },
-        {
-          title: '编辑',
-          key: ''
-        },
-        {
-          title: '删除',
-          key: ''
-        }
-      ],
-      data1: [
-        {
-          name: '王小明',
-          age: 18,
-          address: '北京市朝阳区芍药居'
-        },
-        {
-          name: '张小刚',
-          age: 25,
-          address: '北京市海淀区西二旗'
-        },
-        {
-          name: '李小红',
-          age: 30,
-          address: '上海市浦东新区世纪大道'
-        },
-        {
-          name: '周小伟',
-          age: 26,
-          address: '深圳市南山区深南大道'
-        },
-        {
-          name: '王小明',
-          age: 18,
-          address: '北京市朝阳区芍药居'
-        },
-        {
-          name: '张小刚',
-          age: 25,
-          address: '北京市海淀区西二旗'
-        }
-      ]
+    props:[ 'data'],
+    data(){
+      return {
+      }
+},
+    watch:{
+      BreadName:{
+
+      }
+    },
+    methods:{
+      handleSelect (name) {
+        this.$router.push(name)
+      },
+     update(route){
+          console.log(this.$refs)
+     }
+//      update (route) {
+//        const path = route ? route.path : this.$route.path
+//        const openName = path.split('/')[2]
+//        const activeName = '/' + openName
+//        alert(path)
+//        console.log(openName)
+//
+//        this.$set(this, 'activeName', activeName)
+//        this.$set(this, 'openNames', [openName])
+//
+//        this.$nextTick(() => {
+//          this.$refs.menu.updateActiveName()
+//          this.$refs.menu.$children.forEach((item) => {
+//            item.opened = false
+//          })
+//          this.$refs.menu.updateOpened()
+//        })
+//      }
     }
-}
   }
 </script>

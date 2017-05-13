@@ -50,30 +50,24 @@ width:150px;
         },
         methods: {
             handleSubmit (data) {
-                console.log(data)
-                if(data.name){
-                    console.log(data);
-                    if(data.password2 ==data.password1 ){
-                      this.$http.post(this.resUrl,name).then((json)=>{
-                        console.log(json.data);
-                        this.$Message.success('提交成功!');
-      //                if(json.data){
-      //                  this.$router.go(0);
-      //                }
-                      },(json)=>{
-                        this.$Message.error('表单验证失败!');
-                      })
-                    }
+              if(data.name&&data.phone&&data.password1&&data.password2){
+                if(data.password2 ==data.password1 ){
+                  this.$http.post(this.resUrl,name).then((json)=>{
+                    console.log(json.data);
+                    this.$Message.success('提交成功!');
+//                        if(json.data){
+                    //        this.$router.go(0);
+                    //         }
+                  },(json)=>{
+                    this.$Message.error('表单验证失败!');
+                  })
+                }else{
+                  this.$Message.warning('登陆密码与确认密码不一致!');
                 }
-
-//              console.log(this.$refs[name].validate);
-//                this.$refs[name].validate((valid) => {
-//                    if (valid) {
-//                        this.$Message.success('提交成功!');
-//                    } else {
-//                        this.$Message.error('表单验证失败!');
-//                    }
-//                })
+              }else{
+                this.$Message.warning('请将注册信息填写完整!');
+              }
+//
             },
             handleReset (name) {
                 this.$refs[name].resetFields();
