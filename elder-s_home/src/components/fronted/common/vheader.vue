@@ -27,9 +27,9 @@
     opacity: 0.7;
     /*background: #aaa799;*/
   }
-.logButton{
-  position:absolute; top:0; right:20px;
-}
+/*.logButton{*/
+  /*position:absolute; top:0; right:20px;*/
+/*}*/
 </style>
 <template>
   <div class="layout">
@@ -63,32 +63,45 @@
         </router-link>
         <router-link to="/tips">
           <Menu-item name="tips">
-            <Icon type="ios-paper"></Icon>
+            <Icon type="clipboard"></Icon>
             养老小贴士
           </Menu-item>
         </router-link>
+        <router-link to="/homeCenter" v-if="user">
+          <!-- v-if -->
+          <Menu-item name="homeCenter">
+            <Icon type="ios-home"></Icon>
+            家人中心
+          </Menu-item>
+        </router-link>
       </div>
-      <div class="layout-ceiling logButton">
-        <div class="layout-ceiling-main">
-          <a href="#">注册登录</a>
-        </div>
+        <Menu-item name="login" style="float:right"  v-if="activeDis && !user">
+          <router-link to="/login">注册登录</router-link>
+      </Menu-item>
+        <Menu-item name="user" style="float:right" v-else>
+          <Icon type="ios-people"></Icon>
+          欢迎你：{{ userName}}
+      </Menu-item>
 
-      </div>
     </Menu>
-
   </div>
 </template>
 <script>
-  import Vue from 'vue'
-  import Router from 'vue-router'
+  const localStorage = window.localStorage
   export default {
     data(){
       return {
+        userName:'小八',
+        user:false
       }
     },
     computed:{
       headdata:function(){
           return this.$route.name
+      },
+      activeDis:function(){
+          console.log(localStorage);
+          return  this.$route.name != 'login'
       }
     },
     methods:{

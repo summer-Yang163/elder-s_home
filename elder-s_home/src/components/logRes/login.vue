@@ -21,7 +21,7 @@
       </Input>
     </Form-item>
     <Form-item id='blogin'>
-      <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
+      <Button type="primary" @click="handleSubmit(formInline)">登录</Button>
     </Form-item>
   </Form>
 </template>
@@ -47,22 +47,18 @@
 
     },
     methods: {
-      handleSubmit(name) {
-          this.$http.post(this.loginUrl,name).then((response) =>{
+      handleSubmit(data) {
+          console.log(data)
+        if(data.user&&data.password){
+          this.$http.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');
-              console.log(response);
-        },(response)=>{
-            this.$Message.error('表单验证失败!');
-            console.log('this is error');
-        });
-          console.log(this.$refs);
-//        this.$refs[name].validate((valid) => {
-//          if (valid) {
-//            this.$Message.success('提交成功!');
-//          } else {
-//            this.$Message.error('表单验证失败!');
-//          }
-//        })
+            this.$router.push({path:'/Home'})
+          },(response)=>{
+            this.$Message.error('登陆失败!');
+          });
+        }else{
+          this.$Message.warning('请将登陆信息填写完整!');
+        }
       }
     }
   }

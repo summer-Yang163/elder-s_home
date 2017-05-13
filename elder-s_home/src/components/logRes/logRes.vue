@@ -31,7 +31,7 @@
     <Vhead></Vhead>
     <div style="background:#eee;padding: 20px" class="logRes">
       <Modal v-model="modal1" title="请重置密码"
-             @on-ok="ok('formTop')" @on-cancel="cancel" width="350">
+             @on-ok="ok(formTop)" @on-cancel="cancel" width="350">
         <Form ref="formTop" :model="formTop" :rules="ruleValidate" label-position="top">
           <Form-item class="input" prop="phone">
             <Input v-model="formTop.phone" icon="ios-information-outline"
@@ -39,7 +39,7 @@
           </Form-item>
           <Form-item class="input" prop="verification">
             <Input v-model="formTop.verification" placeholder="请输入验证码" style="width: 180px"></Input>
-            <Button type="primary" @click="">点击获取验证码</Button>
+            <Button type="primary" @click="verifiCode(formTop.phone)">点击获取验证码</Button>
           </Form-item>
           <Form-item prop="password">
             <Input v-model="formTop.password" icon="locked" placeholder="请输入密码" style="width: 300px"></Input>
@@ -65,6 +65,7 @@
   import Login from './login'
   import Register from './register'
 
+
   export default {
     components: {Register, Login, Vhead},
     data () {
@@ -75,9 +76,11 @@
           verification: '',
           password: ''
         },
+//        phongVerification: RegExp('/^1(3|4|5|7|8)\d{9}$/'),
         ruleValidate: {
           phone: [
-            {required: true, message: '手机号码不能为空', trigger: 'blur'}
+            {required: true, message: '手机号码不能为空', trigger: 'blur'},
+            {  type: "number", required: true, pattern: /^1(3|4|5|7|8)d{9}$/, message: '手机号码格式不正确', trigger: 'blur'}
           ],
           verification: [
             {required: true, message: '验证码不能为空', trigger: 'blur'}
@@ -86,24 +89,37 @@
             {required: true, message: '请填写新密码', trigger: 'blur'}
           ]
         },
-        resetUrl:'http://rapapi.org/mockjs/18342/register'
+        resetUrl:'http://rapapi.org/mockjs/18342/register',
+        verifiCodeUrl:'http://rapapi.org/mockjs/18342/register'
       }
     },
     methods: {
       ok (data) {
-          this.$http.post(this.resetUrl,data).then((json)=>{
+        if(data.phone&&data.verification&&data.password){
+            this.$http.post(this.resetUrl,data).then((json)=>{
               console.log(json.data);
-            this.$Message.info('重置密码成功');
-          },(json)=>{
-
-          })
-
+              this.$Message.info('重置密码成功');
+            },(json)=>{
+              this.$Message.info('重置密码失败');
+            })
+        }else{
+          this.$Message.warning('请将重置密码信息填写完整!');
+        }
       },
       cancel () {
         this.$Message.info('取消重置密码');
       },
-      verifiCode(){
-
+      verifiCode(phone){
+          if(!phone){
+            this.$Message.warning('请填写手机号');
+          }else{
+            this.$http.post(this.verifiCodeUrl,phone).then((json)=>{
+              console.log(json.data);
+              this.$Message.info('获取验证码成功');
+            },(json)=>{
+              this.$Message.error('获取验证码失败');
+            })
+          }
       }
 
     }

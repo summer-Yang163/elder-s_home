@@ -17,7 +17,7 @@ width:150px;
         <Form-item label="确认密码" prop="password2">
             <Input type="password" v-model="formValidate.password2" placeholder="请再次输入密码"></Input>
         </Form-item>
-            <Button type="primary" @click="handleSubmit('formValidate')" class="bregister">注册</Button>
+            <Button type="primary" @click="handleSubmit(formValidate)" class="bregister">注册</Button>
     </Form>
 </template>
 <script>
@@ -49,21 +49,25 @@ width:150px;
             }
         },
         methods: {
-            handleSubmit (name) {
-                this.$http.post(this.resUrl,name).then((json)=>{
+            handleSubmit (data) {
+              if(data.name&&data.phone&&data.password1&&data.password2){
+                if(data.password2 ==data.password1 ){
+                  this.$http.post(this.resUrl,name).then((json)=>{
                     console.log(json.data);
-//                  this.$Message.success('提交成功!');
-                },(json)=>{
-                  this.$Message.error('表单验证失败!');
-                })
-              console.log(this.$refs[name].validate);
-//                this.$refs[name].validate((valid) => {
-//                    if (valid) {
-//                        this.$Message.success('提交成功!');
-//                    } else {
-//                        this.$Message.error('表单验证失败!');
-//                    }
-//                })
+                    this.$Message.success('提交成功!');
+//                        if(json.data){
+                    //        this.$router.go(0);
+                    //         }
+                  },(json)=>{
+                    this.$Message.error('表单验证失败!');
+                  })
+                }else{
+                  this.$Message.warning('登陆密码与确认密码不一致!');
+                }
+              }else{
+                this.$Message.warning('请将注册信息填写完整!');
+              }
+//
             },
             handleReset (name) {
                 this.$refs[name].resetFields();

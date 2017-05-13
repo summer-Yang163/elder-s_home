@@ -54,10 +54,14 @@
     padding-top:8px;
     z-index:100;
   }
+  .card .page{
+    float:right;
+    padding: 10px 0;
+  }
 </style>
 <template>
   <div>
-    <Vhead></Vhead>
+    <!--<Vhead></Vhead>-->
     <div class="main ">
       <div class="newest">
         <div class="main_left">
@@ -78,6 +82,7 @@
                 </router-link>
               </li>
             </ul>
+            <Page class="page" :total="40" size="small" show-elevator show-sizer ></Page>
           </Card>
         </div>
       </div>
@@ -96,6 +101,7 @@
               </router-link>
             </li>
           </ul>
+          <Page class="page" :total="40" size="small" show-elevator show-sizer ></Page>
         </Card>
       </div>
       <div class="classification">
@@ -113,6 +119,7 @@
               </router-link>
             </li>
           </ul>
+          <Page class="page" :total="40" size="small" show-elevator show-sizer ></Page>
         </Card>
       </div>
       <div class="classification">
@@ -130,10 +137,11 @@
               </router-link>
             </li>
           </ul>
+          <Page class="page" :total="40" size="small" show-elevator show-sizer ></Page>
         </Card>
       </div>
     </div>
-    <VFooter></VFooter>
+    <!--<VFooter></VFooter>-->
   </div>
 
 </template>
