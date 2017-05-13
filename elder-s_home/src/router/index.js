@@ -41,8 +41,6 @@ import PersonTips from '@/components/backEnd/service/handlePro/personTips'
 import ProcessProj from '@/components/backEnd/service/handlePro/processProj'
 import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
 
-
-
 Vue.use(Router)
 
 export default new Router({
