@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.Company" >
+    <id column="Company_Id" property="companyId" jdbcType="INTEGER" />
+    <result column="Company_Name" property="companyName" jdbcType="VARCHAR" />
+    <result column="Company_Qualified" property="companyQualified" jdbcType="VARCHAR" />
+    <result column="Company_Address" property="companyAddress" jdbcType="VARCHAR" />
+    <result column="Company_Phone" property="companyPhone" jdbcType="VARCHAR" />
+    <result column="Company_Legal_Person" property="companyLegalPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Company_Id, Company_Name, Company_Qualified, Company_Address, Company_Phone, Company_Legal_Person
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where Company_Id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company
+    where Company_Id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.Company" >
+    insert into company (Company_Id, Company_Name, Company_Qualified, 
+      Company_Address, Company_Phone, Company_Legal_Person
+      )
+    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyQualified,jdbcType=VARCHAR}, 
+      #{companyAddress,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyLegalPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.Company" >
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        Company_Id,
+      </if>
+      <if test="companyName != null" >
+        Company_Name,
+      </if>
+      <if test="companyQualified != null" >
+        Company_Qualified,
+      </if>
+      <if test="companyAddress != null" >
+        Company_Address,
+      </if>
+      <if test="companyPhone != null" >
+        Company_Phone,
+      </if>
+      <if test="companyLegalPerson != null" >
+        Company_Legal_Person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyQualified != null" >
+        #{companyQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null" >
+        #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Company" >
+    update company
+    <set >
+      <if test="companyName != null" >
+        Company_Name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyQualified != null" >
+        Company_Qualified = #{companyQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        Company_Address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        Company_Phone = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null" >
+        Company_Legal_Person = #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Company_Id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Company" >
+    update company
+    set Company_Name = #{companyName,jdbcType=VARCHAR},
+      Company_Qualified = #{companyQualified,jdbcType=VARCHAR},
+      Company_Address = #{companyAddress,jdbcType=VARCHAR},
+      Company_Phone = #{companyPhone,jdbcType=VARCHAR},
+      Company_Legal_Person = #{companyLegalPerson,jdbcType=VARCHAR}
+    where Company_Id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

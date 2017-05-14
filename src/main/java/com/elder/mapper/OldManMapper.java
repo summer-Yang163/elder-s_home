@@ -1,23 +1,17 @@
 package com.elder.mapper;
 
-import com.elder.pojo.OldMan;
-import org.springframework.stereotype.Component;
-import java.util.List;
+import com.elder.domain.OldMan;
 
-
-/**
-* @author 杨新梅 [2448415727@qq.com]
-* @version 1.0
-* @apiNote
-*/
-@Component
 public interface OldManMapper {
+    int deleteByPrimaryKey(Integer oldId);
 
-    void add(OldMan oldMan);
+    int insert(OldMan record);
 
-    void update(OldMan oldMan);
+    int insertSelective(OldMan record);
 
-    void delete(OldMan oldMan);
+    OldMan selectByPrimaryKey(Integer oldId);
 
-    List<OldMan> query(OldMan oldMan);
+    int updateByPrimaryKeySelective(OldMan record);
+
+    int updateByPrimaryKey(OldMan record);
 }

@@ -1,23 +1,17 @@
 package com.elder.mapper;
 
-import com.elder.pojo.Community;
-import org.springframework.stereotype.Component;
-import java.util.List;
+import com.elder.domain.Community;
 
-
-/**
-* @author 杨新梅 [2448415727@qq.com]
-* @version 1.0
-* @apiNote
-*/
-@Component
 public interface CommunityMapper {
+    int deleteByPrimaryKey(Integer communityId);
 
-    void add(Community community);
+    int insert(Community record);
 
-    void update(Community community);
+    int insertSelective(Community record);
 
-    void delete(Community community);
+    Community selectByPrimaryKey(Integer communityId);
 
-    List<Community> query(Community community);
+    int updateByPrimaryKeySelective(Community record);
+
+    int updateByPrimaryKey(Community record);
 }

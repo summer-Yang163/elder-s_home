@@ -1,23 +1,17 @@
 package com.elder.mapper;
 
-import com.elder.pojo.User;
-import org.springframework.stereotype.Component;
-import java.util.List;
+import com.elder.domain.User;
 
-
-/**
-* @author 杨新梅 [2448415727@qq.com]
-* @version 1.0
-* @apiNote
-*/
-@Component
 public interface UserMapper {
+    int deleteByPrimaryKey(Integer userId);
 
-    void add(User user);
+    int insert(User record);
 
-    void update(User user);
+    int insertSelective(User record);
 
-    void delete(User user);
+    User selectByPrimaryKey(Integer userId);
 
-    List<User> query(User user);
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

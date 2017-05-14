@@ -1,23 +1,17 @@
 package com.elder.mapper;
 
-import com.elder.pojo.Tip;
-import org.springframework.stereotype.Component;
-import java.util.List;
+import com.elder.domain.Tip;
 
-
-/**
-* @author 杨新梅 [2448415727@qq.com]
-* @version 1.0
-* @apiNote
-*/
-@Component
 public interface TipMapper {
+    int deleteByPrimaryKey(Integer tipId);
 
-    void add(Tip tip);
+    int insert(Tip record);
 
-    void update(Tip tip);
+    int insertSelective(Tip record);
 
-    void delete(Tip tip);
+    Tip selectByPrimaryKey(Integer tipId);
 
-    List<Tip> query(Tip tip);
+    int updateByPrimaryKeySelective(Tip record);
+
+    int updateByPrimaryKey(Tip record);
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.UserTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.UserType" >
+    <id column="Type_Id" property="typeId" jdbcType="INTEGER" />
+    <result column="Type_Name" property="typeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Type_Id, Type_Name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_type
+    where Type_Id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_type
+    where Type_Id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.UserType" >
+    insert into user_type (Type_Id, Type_Name)
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.UserType" >
+    insert into user_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        Type_Id,
+      </if>
+      <if test="typeName != null" >
+        Type_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.UserType" >
+    update user_type
+    <set >
+      <if test="typeName != null" >
+        Type_Name = #{typeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Type_Id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.UserType" >
+    update user_type
+    set Type_Name = #{typeName,jdbcType=VARCHAR}
+    where Type_Id = #{typeId,jdbcType=INTEGER}
+  </update>
+</mapper>

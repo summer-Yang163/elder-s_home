@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.OldAdviceMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.OldAdvice" >
+    <id column="Old_Advice _Id" property="oldAdviceId" jdbcType="INTEGER" />
+    <result column="Old_Advice_Title" property="oldAdviceTitle" jdbcType="VARCHAR" />
+    <result column="Old_Advice_Content" property="oldAdviceContent" jdbcType="VARCHAR" />
+    <result column="Publish_Time" property="publishTime" jdbcType="BIGINT" />
+    <result column="Service_Person_Id" property="servicePersonId" jdbcType="INTEGER" />
+    <result column="Advice_Classify_Id" property="adviceClassifyId" jdbcType="INTEGER" />
+    <result column="Old_Advice_Brief" property="oldAdviceBrief" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    "Old_Advice _Id", Old_Advice_Title, Old_Advice_Content, Publish_Time, Service_Person_Id, 
+    Advice_Classify_Id, Old_Advice_Brief
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from old_advice
+    where "Old_Advice _Id" = #{oldAdviceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from old_advice
+    where "Old_Advice _Id" = #{oldAdviceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.OldAdvice" >
+    insert into old_advice ("Old_Advice _Id", Old_Advice_Title, Old_Advice_Content, 
+      Publish_Time, Service_Person_Id, Advice_Classify_Id, 
+      Old_Advice_Brief)
+    values (#{oldAdviceId,jdbcType=INTEGER}, #{oldAdviceTitle,jdbcType=VARCHAR}, #{oldAdviceContent,jdbcType=VARCHAR}, 
+      #{publishTime,jdbcType=BIGINT}, #{servicePersonId,jdbcType=INTEGER}, #{adviceClassifyId,jdbcType=INTEGER}, 
+      #{oldAdviceBrief,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.OldAdvice" >
+    insert into old_advice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oldAdviceId != null" >
+        "Old_Advice _Id",
+      </if>
+      <if test="oldAdviceTitle != null" >
+        Old_Advice_Title,
+      </if>
+      <if test="oldAdviceContent != null" >
+        Old_Advice_Content,
+      </if>
+      <if test="publishTime != null" >
+        Publish_Time,
+      </if>
+      <if test="servicePersonId != null" >
+        Service_Person_Id,
+      </if>
+      <if test="adviceClassifyId != null" >
+        Advice_Classify_Id,
+      </if>
+      <if test="oldAdviceBrief != null" >
+        Old_Advice_Brief,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oldAdviceId != null" >
+        #{oldAdviceId,jdbcType=INTEGER},
+      </if>
+      <if test="oldAdviceTitle != null" >
+        #{oldAdviceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAdviceContent != null" >
+        #{oldAdviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="servicePersonId != null" >
+        #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="adviceClassifyId != null" >
+        #{adviceClassifyId,jdbcType=INTEGER},
+      </if>
+      <if test="oldAdviceBrief != null" >
+        #{oldAdviceBrief,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.OldAdvice" >
+    update old_advice
+    <set >
+      <if test="oldAdviceTitle != null" >
+        Old_Advice_Title = #{oldAdviceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAdviceContent != null" >
+        Old_Advice_Content = #{oldAdviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        Publish_Time = #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="servicePersonId != null" >
+        Service_Person_Id = #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="adviceClassifyId != null" >
+        Advice_Classify_Id = #{adviceClassifyId,jdbcType=INTEGER},
+      </if>
+      <if test="oldAdviceBrief != null" >
+        Old_Advice_Brief = #{oldAdviceBrief,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "Old_Advice _Id" = #{oldAdviceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.OldAdvice" >
+    update old_advice
+    set Old_Advice_Title = #{oldAdviceTitle,jdbcType=VARCHAR},
+      Old_Advice_Content = #{oldAdviceContent,jdbcType=VARCHAR},
+      Publish_Time = #{publishTime,jdbcType=BIGINT},
+      Service_Person_Id = #{servicePersonId,jdbcType=INTEGER},
+      Advice_Classify_Id = #{adviceClassifyId,jdbcType=INTEGER},
+      Old_Advice_Brief = #{oldAdviceBrief,jdbcType=VARCHAR}
+    where "Old_Advice _Id" = #{oldAdviceId,jdbcType=INTEGER}
+  </update>
+</mapper>
