@@ -45,15 +45,15 @@
         <Breadcrumb-item>社区老人管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button >新增</Button>
-        <Button >批量删除</Button>
+        <Button  style="margin-right:25px;">新增</Button>
+        <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
         <Table border :columns="columns4" :data="data1"></Table>
         <!--<Page class="page" :total=data1.length size="small" show-elevator show-sizer></Page>-->
-        <Page  class="page" :total=data1.length show-total page-size="8"></Page>
+        <Page  class="page" :total=data1.length show-total page-size=8 ></Page>
       </div>
     </div>
     <div class="layout-copy">
@@ -68,22 +68,82 @@
       return {
         columns4: [
           {
-            type: 'selection',
+            type: 'index',
             width: 60,
             align: 'center',
-            title:'序号'
+            title:'#'
           },
           {
-            title: '用户名',
+            title: '姓名',
             key: 'name'
           },
           {
-            title: '用户密码',
+            title: '性别',
             key: 'password'
           },
           {
-            title: '用户类别',
+            title: '电话',
             key: 'classify'
+          }, {
+            title: '年龄',
+            key: 'name'
+          },
+          {
+            title: '老人图片',
+            key: 'password'
+          },
+          {
+            title: '紧急联系人',
+            key: 'classify'
+          }, {
+            title: '紧急联系电话',
+            key: 'name'
+          },
+          {
+            title: '入住社区',
+            key: 'password'
+          },
+          {
+            title: '备注',
+            key: 'classify'
+          },
+          {
+            title: '修改',
+            width: 70,
+            key: 'Type_Name',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'edit'
+                  },
+                  on: {
+                    click: () => {
+                      this.modify(params.index)
+                    }
+                  }
+                },'修改')]
+              )
+            }
+          },
+          {
+            title: '删除',
+            width: 70,
+            key: 'action',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'close-round'
+                  },
+                  on: {
+                    click: () => {
+                      this.remove(params.index)
+                    }
+                  }
+                },'删除')
+              ])
+            }
           }
         ],
         data1: [

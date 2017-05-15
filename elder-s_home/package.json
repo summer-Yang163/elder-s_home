@@ -9,7 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "iview": "^2.0.0-rc.9",
+    "iview": "^2.0.0-rc.13",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
     "vuex": "^2.3.1"

@@ -45,15 +45,14 @@
         <Breadcrumb-item>普通用户管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button >新增</Button>
-        <Button >批量删除</Button>
+        <Button style="margin-right:25px;" >新增</Button>
+        <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
         <Table border :columns="columns4" :data="data1"></Table>
-        <!--<Page class="page" :total=data1.length size="small" show-elevator show-sizer></Page>-->
-        <Page  class="page" :total=data1.length show-total page-size="8"></Page>
+        <Page  class="page" :total=data1.length show-total page-size=8></Page>
       </div>
     </div>
     <div class="layout-copy">
@@ -68,10 +67,10 @@
           return {
             columns4: [
               {
-                type: 'selection',
+                type: 'index',
                 width: 60,
                 align: 'center',
-                title:'序号'
+                title:'#'
               },
               {
                 title: '姓名',
@@ -98,7 +97,7 @@
                 key: 'address'
               },
               {
-                title: '入住老人',
+                title: '关联老人',
                 key: ''
               },
               {
@@ -110,12 +109,42 @@
                 key: ''
               },
               {
-                title: '编辑',
-                key: ''
+                title: '修改',
+                width: 70,
+                key: 'Type_Name',
+                render: (h,params) => {
+                  return h('div',[
+                    h('span', {
+                      props: {
+                        type: 'edit'
+                      },
+                      on: {
+                        click: () => {
+                          this.modify(params.index)
+                        }
+                      }
+                    },'修改')]
+                  )
+                }
               },
               {
                 title: '删除',
-                key: ''
+                width: 70,
+                key: 'action',
+                render: (h,params) => {
+                  return h('div',[
+                    h('span', {
+                      props: {
+                        type: 'close-round'
+                      },
+                      on: {
+                        click: () => {
+                          this.remove(params.index)
+                        }
+                      }
+                    },'删除')
+                  ])
+                }
               }
             ],
             data1: [

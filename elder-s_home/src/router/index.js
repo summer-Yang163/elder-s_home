@@ -125,10 +125,6 @@ export default new Router({
           name:'community/communityMan',
           component:CommunityMan
         },{
-          path:'/backEnd/communityMan',
-          name:'community/communityMan',
-          component:CommunityMan
-        },{
           path:'/backEnd/serPerson',
           name:'serPerMan/serPerson',
           component:SerPerson

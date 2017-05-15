@@ -36,6 +36,7 @@
 </style>
 <template>
   <div >
+    <AddModal :ModalType="ModalType" @changeMod ='onResChange'></AddModal>
     <div class="layout-header">
     </div>
     <div class="layout-breadcrumb" style="overflow: hidden;">
@@ -45,15 +46,14 @@
         <Breadcrumb-item>系统账号管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button >新增</Button>
-        <Button >批量删除</Button>
+        <Button  @click="ModalType = true" style="margin-right:25px;">新增</Button>
+        <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
         <Table border :columns="columns4" :data="data1"></Table>
-        <!--<Page class="page" :total=data1.length size="small" show-elevator show-sizer></Page>-->
-        <Page  class="page" :total=data1.length show-total page-size="8"></Page>
+        <Page  class="page" :total=data1.length show-total :page-size=pagelength @on-change="change"></Page>
       </div>
     </div>
     <div class="layout-copy">
@@ -63,64 +63,160 @@
 
 </template>
 <script>
+  import AddModal from './systemModal'
   export default {
+      components:{AddModal},
     data(){
       return {
+        pagelength:8,
+        ModalType:false,
         columns4: [
           {
-            type: 'selection',
+            type: 'index',
             width: 60,
             align: 'center',
-            title:'序号'
+            title:'#'
           },
           {
             title: '用户名',
-            key: 'name'
+            key: 'User_Name'
           },
           {
             title: '用户密码',
-            key: 'password'
+            key: 'Password'
           },
           {
-            title: '用户类别',
-            key: 'classify'
+            title: '用户类型',
+            key: 'Type_Name'
+          },
+          {
+            title: '修改',
+            width: 70,
+            key: 'Type_Name',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                    props: {
+                      type: 'edit'
+                    },
+                    on: {
+                      click: () => {
+                        this.modify(params.index)
+                      }
+                    }
+                  },'修改')]
+              )
+            }
+          },
+          {
+            title: '删除',
+            width: 70,
+            key: 'action',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'close-round'
+                  },
+                  on: {
+                    click: () => {
+                      this.remove(params.index)
+                    }
+                  }
+                },'删除')
+              ])
+            }
           }
         ],
         data1: [
           {
-            name: '王小明',
-            password: '123456',
-            classify: '普通用户'
+            User_Name: '王小明',
+            Password: '123456',
+            Type_Name: '普通用户'
           },
           {
-            name: '张小刚',
-            password: '123456',
-            classify: '网站工作人员'
+            User_Name: '张小刚',
+            Password: '123456',
+            Type_Name: '网站工作人员'
           },
           {
-            name: '李小红',
-            password: '123456',
-            classify: '超级管理员'
+            User_Name: '王小明',
+            Password: '123456',
+            Type_Name: '普通用户'
           },
           {
-            name: '周小伟',
-            age: 26,
-            address: '深圳市南山区深南大道'
+            User_Name: '王小明',
+            Password: '123456',
+            Type_Name: '普通用户'
           },
           {
-            name: '王小明',
-            age: 18,
-            address: '北京市朝阳区芍药居'
+            User_Name: '张小刚',
+            Password: '123456',
+            Type_Name: '网站工作人员'
           },
           {
-            name: '张小刚',
-            age: 25,
-            address: '北京市海淀区西二旗'
+            User_Name: '王小明',
+            Password: '123456',
+            Type_Name: '普通用户'
           }
-        ]
+        ],
+        getUrl:'/api/18342/register'
+      }
+    },
+    created:function() {
+      // 组件创建完后获取数据，
+      // 此时 data 已经被 observed 了
+      this.fetchData()
+    },
+    computed:{
 
+    },
+    watch:{
+      '$route': 'fetchData'
+    },
+    methods:{
+      onResChange(val){
+          this.ModalType = val //外部改变ModalType的值
+      },
+      modify (index) {
+          console.log(index)
+        this.$Modal.info({
+          title: '用户信息',
+          content: `用户名：${this.data1[index].User_Name}<br>用户密码：${this.data1[index].Password}<br>用户类型：${this.data1[index].Type_Name}`
+        })
+      },
+      remove (index) {
+          console.log(index)
+//        this.data6.splice(index, 1);
+      },
+      fetchData () {
+          console.log('enter')
+        this.error = this.post = null
+        this.loading = true
+        this.getPost(this.$route, (err, post) => {
+          this.loading = false
+          if (err) {
+            this.error = err.toString()
+          } else {
+            this.post = post
+          }
+        })
+      },
+      getPost(data){
+          console.log(data)
+        this.$http.post(this.getUrl,data).then((json)=>{
+        console.log(json.data);
+      },(json)=>{
+        this.$Message.info('获取信息成功');
+      })
+      },
+      change(page){
+        console.log(page)
       }
     }
-//    components:{Vhead}
+
   }
 </script>
+<!--
+增加方法、删除方法、修改方法、整体删除方法、获取json数据
+-->
