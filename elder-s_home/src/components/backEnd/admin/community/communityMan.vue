@@ -68,22 +68,84 @@
       return {
         columns4: [
           {
-            type: 'selection',
+            type: 'index',
             width: 60,
             align: 'center',
-            title:'序号'
+            title:'#'
           },
           {
-            title: '用户名',
+            title: '用户名称',
             key: 'name'
           },
           {
-            title: '用户密码',
+            title: '服务电话',
             key: 'password'
           },
           {
-            title: '用户类别',
+            title: '负责员工',
             key: 'classify'
+          },
+          {
+            title: '社区图片',
+            key: 'password'
+          },
+          {
+            title: '社区描述',
+            key: 'classify'
+          },
+          {
+            title: '平均房价',
+            key: 'password'
+          },
+          {
+            title: '租房价格',
+            key: 'classify'
+          },
+          {
+            title: '社区地址',
+            key: 'classify'
+          },
+          {
+            title: '相关服务',
+            key: 'classify'
+          },
+          {
+            title: '修改',
+            width: 70,
+            key: 'Type_Name',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'edit'
+                  },
+                  on: {
+                    click: () => {
+                      this.modify(params.index)
+                    }
+                  }
+                },'修改')]
+              )
+            }
+          },
+          {
+            title: '删除',
+            width: 70,
+            key: 'action',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'close-round'
+                  },
+                  on: {
+                    click: () => {
+                      this.remove(params.index)
+                    }
+                  }
+                },'删除')
+              ])
+            }
           }
         ],
         data1: [

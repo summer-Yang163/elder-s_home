@@ -96,7 +96,7 @@
     methods: {
       ok (data) {
         if(data.phone&&data.verification&&data.password){
-            this.$http.post(this.resetUrl,data).then((json)=>{
+          axios.post(this.resetUrl,data).then((json)=>{
               console.log(json.data);
               this.$Message.info('重置密码成功');
             },(json)=>{
@@ -113,7 +113,7 @@
           if(!phone){
             this.$Message.warning('请填写手机号');
           }else{
-            this.$http.post(this.verifiCodeUrl,phone).then((json)=>{
+            axios.post(this.verifiCodeUrl,phone).then((json)=>{
               console.log(json.data);
               this.$Message.info('获取验证码成功');
             },(json)=>{

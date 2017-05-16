@@ -52,7 +52,7 @@ width:150px;
             handleSubmit (data) {
               if(data.name&&data.phone&&data.password1&&data.password2){
                 if(data.password2 ==data.password1 ){
-                  this.$http.post(this.resUrl,name).then((json)=>{
+                  axios.post(this.resUrl,name).then((json)=>{
                     console.log(json.data);
                     this.$Message.success('提交成功!');
 //                        if(json.data){

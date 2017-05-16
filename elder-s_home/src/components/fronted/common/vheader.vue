@@ -101,6 +101,8 @@
       },
       activeDis:function(){
           console.log(localStorage);
+//        localStorage.setItem('ms_username','dh')
+        localStorage.removeItem('ms_username','')
           return  this.$route.name != 'login'
       }
     },

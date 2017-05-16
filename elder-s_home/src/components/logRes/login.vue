@@ -26,6 +26,8 @@
   </Form>
 </template>
 <script>
+  import axios from 'axios' //引入axios
+
   export default {
     data () {
       return {
@@ -50,7 +52,7 @@
       handleSubmit(data) {
           console.log(data)
         if(data.user&&data.password){
-          this.$http.post(this.loginUrl,data).then((response) =>{
+          axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');
             this.$router.push({path:'/Home'})
           },(response)=>{
