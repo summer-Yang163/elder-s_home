@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.TipMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.Tip" >
-    <id column="Tip_Id" property="tipId" jdbcType="INTEGER" />
-    <result column="User_Id" property="userId" jdbcType="INTEGER" />
-    <result column="Service _Person_Id" property="servicePersonId" jdbcType="INTEGER" />
-    <result column="Tip_Content" property="tipContent" jdbcType="VARCHAR" />
-    <result column="Tip_Time" property="tipTime" jdbcType="BIGINT" />
-    <result column="Is_Complete" property="isComplete" jdbcType="INTEGER" />
-    <result column="Evaluation_Id" property="evaluationId" jdbcType="INTEGER" />
-    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.TipMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.Tip">
+    <id column="Tip_Id" jdbcType="INTEGER" property="tipId" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Tip_Content" jdbcType="VARCHAR" property="tipContent" />
+    <result column="Tip_Time" jdbcType="BIGINT" property="tipTime" />
+    <result column="Is_Complete" jdbcType="INTEGER" property="isComplete" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Tip_Id, User_Id, "Service _Person_Id", Tip_Content, Tip_Time, Is_Complete, Evaluation_Id, 
     Remarks
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tip
     where Tip_Id = #{tipId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tip
     where Tip_Id = #{tipId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Tip" >
+  <insert id="insert" parameterType="com.elder.domain.Tip">
     insert into tip (Tip_Id, User_Id, "Service _Person_Id", 
       Tip_Content, Tip_Time, Is_Complete, 
       Evaluation_Id, Remarks)
@@ -33,89 +33,214 @@
       #{tipContent,jdbcType=VARCHAR}, #{tipTime,jdbcType=BIGINT}, #{isComplete,jdbcType=INTEGER}, 
       #{evaluationId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Tip" >
+  <insert id="insertSelective" parameterType="com.elder.domain.Tip">
     insert into tip
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tipId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tipId != null">
         Tip_Id,
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         User_Id,
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         "Service _Person_Id",
       </if>
-      <if test="tipContent != null" >
+      <if test="tipContent != null">
         Tip_Content,
       </if>
-      <if test="tipTime != null" >
+      <if test="tipTime != null">
         Tip_Time,
       </if>
-      <if test="isComplete != null" >
+      <if test="isComplete != null">
         Is_Complete,
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tipId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tipId != null">
         #{tipId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="tipContent != null" >
+      <if test="tipContent != null">
         #{tipContent,jdbcType=VARCHAR},
       </if>
-      <if test="tipTime != null" >
+      <if test="tipTime != null">
         #{tipTime,jdbcType=BIGINT},
       </if>
-      <if test="isComplete != null" >
+      <if test="isComplete != null">
         #{isComplete,jdbcType=INTEGER},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         #{evaluationId,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Tip" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Tip">
     update tip
-    <set >
-      <if test="userId != null" >
+    <set>
+      <if test="userId != null">
         User_Id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="tipContent != null" >
+      <if test="tipContent != null">
         Tip_Content = #{tipContent,jdbcType=VARCHAR},
       </if>
-      <if test="tipTime != null" >
+      <if test="tipTime != null">
         Tip_Time = #{tipTime,jdbcType=BIGINT},
       </if>
-      <if test="isComplete != null" >
+      <if test="isComplete != null">
         Is_Complete = #{isComplete,jdbcType=INTEGER},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where Tip_Id = #{tipId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Tip" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Tip">
+    update tip
+    set User_Id = #{userId,jdbcType=INTEGER},
+      "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
+      Tip_Content = #{tipContent,jdbcType=VARCHAR},
+      Tip_Time = #{tipTime,jdbcType=BIGINT},
+      Is_Complete = #{isComplete,jdbcType=INTEGER},
+      Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Tip_Id = #{tipId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.Tip">
+    <id column="Tip_Id" jdbcType="INTEGER" property="tipId" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Tip_Content" jdbcType="VARCHAR" property="tipContent" />
+    <result column="Tip_Time" jdbcType="BIGINT" property="tipTime" />
+    <result column="Is_Complete" jdbcType="INTEGER" property="isComplete" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Tip_Id, User_Id, "Service _Person_Id", Tip_Content, Tip_Time, Is_Complete, Evaluation_Id, 
+    Remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tip
+    where Tip_Id = #{tipId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tip
+    where Tip_Id = #{tipId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.Tip">
+    insert into tip (Tip_Id, User_Id, "Service _Person_Id", 
+      Tip_Content, Tip_Time, Is_Complete, 
+      Evaluation_Id, Remarks)
+    values (#{tipId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{servicePersonId,jdbcType=INTEGER}, 
+      #{tipContent,jdbcType=VARCHAR}, #{tipTime,jdbcType=BIGINT}, #{isComplete,jdbcType=INTEGER}, 
+      #{evaluationId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.Tip">
+    insert into tip
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tipId != null">
+        Tip_Id,
+      </if>
+      <if test="userId != null">
+        User_Id,
+      </if>
+      <if test="servicePersonId != null">
+        "Service _Person_Id",
+      </if>
+      <if test="tipContent != null">
+        Tip_Content,
+      </if>
+      <if test="tipTime != null">
+        Tip_Time,
+      </if>
+      <if test="isComplete != null">
+        Is_Complete,
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tipId != null">
+        #{tipId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePersonId != null">
+        #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="tipContent != null">
+        #{tipContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tipTime != null">
+        #{tipTime,jdbcType=BIGINT},
+      </if>
+      <if test="isComplete != null">
+        #{isComplete,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationId != null">
+        #{evaluationId,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Tip">
+    update tip
+    <set>
+      <if test="userId != null">
+        User_Id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePersonId != null">
+        "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="tipContent != null">
+        Tip_Content = #{tipContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tipTime != null">
+        Tip_Time = #{tipTime,jdbcType=BIGINT},
+      </if>
+      <if test="isComplete != null">
+        Is_Complete = #{isComplete,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Tip_Id = #{tipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Tip">
     update tip
     set User_Id = #{userId,jdbcType=INTEGER},
       "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},

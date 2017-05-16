@@ -1,35 +1,219 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.OldManMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.OldMan" >
-    <id column="Old_Id" property="oldId" jdbcType="INTEGER" />
-    <result column="Old_Name" property="oldName" jdbcType="VARCHAR" />
-    <result column="Old_Gender" property="oldGender" jdbcType="INTEGER" />
-    <result column="Old_Phone" property="oldPhone" jdbcType="VARCHAR" />
-    <result column="Old_Age" property="oldAge" jdbcType="INTEGER" />
-    <result column="Old_Photo" property="oldPhoto" jdbcType="VARCHAR" />
-    <result column="User_Id" property="userId" jdbcType="INTEGER" />
-    <result column="Old_Relationship" property="oldRelationship" jdbcType="VARCHAR" />
-    <result column="Old_Em_Contact" property="oldEmContact" jdbcType="VARCHAR" />
-    <result column="Old_Em_Phone" property="oldEmPhone" jdbcType="VARCHAR" />
-    <result column="Old_Community_Id" property="oldCommunityId" jdbcType="INTEGER" />
-    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.OldManMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.OldMan">
+    <id column="Old_Id" jdbcType="INTEGER" property="oldId" />
+    <result column="Old_Name" jdbcType="VARCHAR" property="oldName" />
+    <result column="Old_Gender" jdbcType="INTEGER" property="oldGender" />
+    <result column="Old_Phone" jdbcType="VARCHAR" property="oldPhone" />
+    <result column="Old_Age" jdbcType="INTEGER" property="oldAge" />
+    <result column="Old_Photo" jdbcType="VARCHAR" property="oldPhoto" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Old_Relationship" jdbcType="VARCHAR" property="oldRelationship" />
+    <result column="Old_Em_Contact" jdbcType="VARCHAR" property="oldEmContact" />
+    <result column="Old_Em_Phone" jdbcType="VARCHAR" property="oldEmPhone" />
+    <result column="Old_Community_Id" jdbcType="INTEGER" property="oldCommunityId" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="Id_Card" jdbcType="INTEGER" property="idCard" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Old_Id, Old_Name, Old_Gender, Old_Phone, Old_Age, Old_Photo, User_Id, Old_Relationship, 
-    Old_Em_Contact, Old_Em_Phone, Old_Community_Id, Remarks
+    Old_Em_Contact, Old_Em_Phone, Old_Community_Id, Remarks, Id_Card
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from old_man
     where Old_Id = #{oldId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from old_man
     where Old_Id = #{oldId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.OldMan" >
+  <insert id="insert" parameterType="com.elder.domain.OldMan">
+    insert into old_man (Old_Id, Old_Name, Old_Gender, 
+      Old_Phone, Old_Age, Old_Photo, 
+      User_Id, Old_Relationship, Old_Em_Contact, 
+      Old_Em_Phone, Old_Community_Id, Remarks, 
+      Id_Card)
+    values (#{oldId,jdbcType=INTEGER}, #{oldName,jdbcType=VARCHAR}, #{oldGender,jdbcType=INTEGER}, 
+      #{oldPhone,jdbcType=VARCHAR}, #{oldAge,jdbcType=INTEGER}, #{oldPhoto,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{oldRelationship,jdbcType=VARCHAR}, #{oldEmContact,jdbcType=VARCHAR}, 
+      #{oldEmPhone,jdbcType=VARCHAR}, #{oldCommunityId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.OldMan">
+    insert into old_man
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldId != null">
+        Old_Id,
+      </if>
+      <if test="oldName != null">
+        Old_Name,
+      </if>
+      <if test="oldGender != null">
+        Old_Gender,
+      </if>
+      <if test="oldPhone != null">
+        Old_Phone,
+      </if>
+      <if test="oldAge != null">
+        Old_Age,
+      </if>
+      <if test="oldPhoto != null">
+        Old_Photo,
+      </if>
+      <if test="userId != null">
+        User_Id,
+      </if>
+      <if test="oldRelationship != null">
+        Old_Relationship,
+      </if>
+      <if test="oldEmContact != null">
+        Old_Em_Contact,
+      </if>
+      <if test="oldEmPhone != null">
+        Old_Em_Phone,
+      </if>
+      <if test="oldCommunityId != null">
+        Old_Community_Id,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+      <if test="idCard != null">
+        Id_Card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldId != null">
+        #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="oldName != null">
+        #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldGender != null">
+        #{oldGender,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhone != null">
+        #{oldPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAge != null">
+        #{oldAge,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhoto != null">
+        #{oldPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="oldRelationship != null">
+        #{oldRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="oldEmContact != null">
+        #{oldEmContact,jdbcType=VARCHAR},
+      </if>
+      <if test="oldEmPhone != null">
+        #{oldEmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldCommunityId != null">
+        #{oldCommunityId,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.OldMan">
+    update old_man
+    <set>
+      <if test="oldName != null">
+        Old_Name = #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldGender != null">
+        Old_Gender = #{oldGender,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhone != null">
+        Old_Phone = #{oldPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAge != null">
+        Old_Age = #{oldAge,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhoto != null">
+        Old_Photo = #{oldPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_Id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="oldRelationship != null">
+        Old_Relationship = #{oldRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="oldEmContact != null">
+        Old_Em_Contact = #{oldEmContact,jdbcType=VARCHAR},
+      </if>
+      <if test="oldEmPhone != null">
+        Old_Em_Phone = #{oldEmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldCommunityId != null">
+        Old_Community_Id = #{oldCommunityId,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        Id_Card = #{idCard,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Old_Id = #{oldId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.OldMan">
+    update old_man
+    set Old_Name = #{oldName,jdbcType=VARCHAR},
+      Old_Gender = #{oldGender,jdbcType=INTEGER},
+      Old_Phone = #{oldPhone,jdbcType=VARCHAR},
+      Old_Age = #{oldAge,jdbcType=INTEGER},
+      Old_Photo = #{oldPhoto,jdbcType=VARCHAR},
+      User_Id = #{userId,jdbcType=INTEGER},
+      Old_Relationship = #{oldRelationship,jdbcType=VARCHAR},
+      Old_Em_Contact = #{oldEmContact,jdbcType=VARCHAR},
+      Old_Em_Phone = #{oldEmPhone,jdbcType=VARCHAR},
+      Old_Community_Id = #{oldCommunityId,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      Id_Card = #{idCard,jdbcType=INTEGER}
+    where Old_Id = #{oldId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.OldMan">
+    <id column="Old_Id" jdbcType="INTEGER" property="oldId" />
+    <result column="Old_Name" jdbcType="VARCHAR" property="oldName" />
+    <result column="Old_Gender" jdbcType="INTEGER" property="oldGender" />
+    <result column="Old_Phone" jdbcType="VARCHAR" property="oldPhone" />
+    <result column="Old_Age" jdbcType="INTEGER" property="oldAge" />
+    <result column="Old_Photo" jdbcType="VARCHAR" property="oldPhoto" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Old_Relationship" jdbcType="VARCHAR" property="oldRelationship" />
+    <result column="Old_Em_Contact" jdbcType="VARCHAR" property="oldEmContact" />
+    <result column="Old_Em_Phone" jdbcType="VARCHAR" property="oldEmPhone" />
+    <result column="Old_Community_Id" jdbcType="INTEGER" property="oldCommunityId" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Old_Id, Old_Name, Old_Gender, Old_Phone, Old_Age, Old_Photo, User_Id, Old_Relationship, 
+    Old_Em_Contact, Old_Em_Phone, Old_Community_Id, Remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from old_man
+    where Old_Id = #{oldId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from old_man
+    where Old_Id = #{oldId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.OldMan">
     insert into old_man (Old_Id, Old_Name, Old_Gender, 
       Old_Phone, Old_Age, Old_Photo, 
       User_Id, Old_Relationship, Old_Em_Contact, 
@@ -41,125 +225,125 @@
       #{oldEmPhone,jdbcType=VARCHAR}, #{oldCommunityId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.OldMan" >
+  <insert id="insertSelective" parameterType="com.elder.domain.OldMan">
     insert into old_man
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="oldId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldId != null">
         Old_Id,
       </if>
-      <if test="oldName != null" >
+      <if test="oldName != null">
         Old_Name,
       </if>
-      <if test="oldGender != null" >
+      <if test="oldGender != null">
         Old_Gender,
       </if>
-      <if test="oldPhone != null" >
+      <if test="oldPhone != null">
         Old_Phone,
       </if>
-      <if test="oldAge != null" >
+      <if test="oldAge != null">
         Old_Age,
       </if>
-      <if test="oldPhoto != null" >
+      <if test="oldPhoto != null">
         Old_Photo,
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         User_Id,
       </if>
-      <if test="oldRelationship != null" >
+      <if test="oldRelationship != null">
         Old_Relationship,
       </if>
-      <if test="oldEmContact != null" >
+      <if test="oldEmContact != null">
         Old_Em_Contact,
       </if>
-      <if test="oldEmPhone != null" >
+      <if test="oldEmPhone != null">
         Old_Em_Phone,
       </if>
-      <if test="oldCommunityId != null" >
+      <if test="oldCommunityId != null">
         Old_Community_Id,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="oldId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldId != null">
         #{oldId,jdbcType=INTEGER},
       </if>
-      <if test="oldName != null" >
+      <if test="oldName != null">
         #{oldName,jdbcType=VARCHAR},
       </if>
-      <if test="oldGender != null" >
+      <if test="oldGender != null">
         #{oldGender,jdbcType=INTEGER},
       </if>
-      <if test="oldPhone != null" >
+      <if test="oldPhone != null">
         #{oldPhone,jdbcType=VARCHAR},
       </if>
-      <if test="oldAge != null" >
+      <if test="oldAge != null">
         #{oldAge,jdbcType=INTEGER},
       </if>
-      <if test="oldPhoto != null" >
+      <if test="oldPhoto != null">
         #{oldPhoto,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="oldRelationship != null" >
+      <if test="oldRelationship != null">
         #{oldRelationship,jdbcType=VARCHAR},
       </if>
-      <if test="oldEmContact != null" >
+      <if test="oldEmContact != null">
         #{oldEmContact,jdbcType=VARCHAR},
       </if>
-      <if test="oldEmPhone != null" >
+      <if test="oldEmPhone != null">
         #{oldEmPhone,jdbcType=VARCHAR},
       </if>
-      <if test="oldCommunityId != null" >
+      <if test="oldCommunityId != null">
         #{oldCommunityId,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.OldMan" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.OldMan">
     update old_man
-    <set >
-      <if test="oldName != null" >
+    <set>
+      <if test="oldName != null">
         Old_Name = #{oldName,jdbcType=VARCHAR},
       </if>
-      <if test="oldGender != null" >
+      <if test="oldGender != null">
         Old_Gender = #{oldGender,jdbcType=INTEGER},
       </if>
-      <if test="oldPhone != null" >
+      <if test="oldPhone != null">
         Old_Phone = #{oldPhone,jdbcType=VARCHAR},
       </if>
-      <if test="oldAge != null" >
+      <if test="oldAge != null">
         Old_Age = #{oldAge,jdbcType=INTEGER},
       </if>
-      <if test="oldPhoto != null" >
+      <if test="oldPhoto != null">
         Old_Photo = #{oldPhoto,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         User_Id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="oldRelationship != null" >
+      <if test="oldRelationship != null">
         Old_Relationship = #{oldRelationship,jdbcType=VARCHAR},
       </if>
-      <if test="oldEmContact != null" >
+      <if test="oldEmContact != null">
         Old_Em_Contact = #{oldEmContact,jdbcType=VARCHAR},
       </if>
-      <if test="oldEmPhone != null" >
+      <if test="oldEmPhone != null">
         Old_Em_Phone = #{oldEmPhone,jdbcType=VARCHAR},
       </if>
-      <if test="oldCommunityId != null" >
+      <if test="oldCommunityId != null">
         Old_Community_Id = #{oldCommunityId,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where Old_Id = #{oldId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.OldMan" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.OldMan">
     update old_man
     set Old_Name = #{oldName,jdbcType=VARCHAR},
       Old_Gender = #{oldGender,jdbcType=INTEGER},

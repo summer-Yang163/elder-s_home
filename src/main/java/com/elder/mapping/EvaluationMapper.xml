@@ -1,88 +1,177 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.EvaluationMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.Evaluation" >
-    <id column="Evaluation_Id" property="evaluationId" jdbcType="INTEGER" />
-    <result column="Service_Order_Id" property="serviceOrderId" jdbcType="INTEGER" />
-    <result column="Evaluation_Content" property="evaluationContent" jdbcType="VARCHAR" />
-    <result column="Is_Satisfaction" property="isSatisfaction" jdbcType="INTEGER" />
-    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.EvaluationMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.Evaluation">
+    <id column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Service_Order_Id" jdbcType="INTEGER" property="serviceOrderId" />
+    <result column="Evaluation_Content" jdbcType="VARCHAR" property="evaluationContent" />
+    <result column="Is_Satisfaction" jdbcType="INTEGER" property="isSatisfaction" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Evaluation_Id, Service_Order_Id, Evaluation_Content, Is_Satisfaction, Remarks
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from evaluation
     where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from evaluation
     where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Evaluation" >
+  <insert id="insert" parameterType="com.elder.domain.Evaluation">
     insert into evaluation (Evaluation_Id, Service_Order_Id, Evaluation_Content, 
       Is_Satisfaction, Remarks)
     values (#{evaluationId,jdbcType=INTEGER}, #{serviceOrderId,jdbcType=INTEGER}, #{evaluationContent,jdbcType=VARCHAR}, 
       #{isSatisfaction,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Evaluation" >
+  <insert id="insertSelective" parameterType="com.elder.domain.Evaluation">
     insert into evaluation
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="evaluationId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
         Evaluation_Id,
       </if>
-      <if test="serviceOrderId != null" >
+      <if test="serviceOrderId != null">
         Service_Order_Id,
       </if>
-      <if test="evaluationContent != null" >
+      <if test="evaluationContent != null">
         Evaluation_Content,
       </if>
-      <if test="isSatisfaction != null" >
+      <if test="isSatisfaction != null">
         Is_Satisfaction,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="evaluationId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
         #{evaluationId,jdbcType=INTEGER},
       </if>
-      <if test="serviceOrderId != null" >
+      <if test="serviceOrderId != null">
         #{serviceOrderId,jdbcType=INTEGER},
       </if>
-      <if test="evaluationContent != null" >
+      <if test="evaluationContent != null">
         #{evaluationContent,jdbcType=VARCHAR},
       </if>
-      <if test="isSatisfaction != null" >
+      <if test="isSatisfaction != null">
         #{isSatisfaction,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Evaluation" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Evaluation">
     update evaluation
-    <set >
-      <if test="serviceOrderId != null" >
+    <set>
+      <if test="serviceOrderId != null">
         Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER},
       </if>
-      <if test="evaluationContent != null" >
+      <if test="evaluationContent != null">
         Evaluation_Content = #{evaluationContent,jdbcType=VARCHAR},
       </if>
-      <if test="isSatisfaction != null" >
+      <if test="isSatisfaction != null">
         Is_Satisfaction = #{isSatisfaction,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Evaluation" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Evaluation">
+    update evaluation
+    set Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER},
+      Evaluation_Content = #{evaluationContent,jdbcType=VARCHAR},
+      Is_Satisfaction = #{isSatisfaction,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.Evaluation">
+    <id column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Service_Order_Id" jdbcType="INTEGER" property="serviceOrderId" />
+    <result column="Evaluation_Content" jdbcType="VARCHAR" property="evaluationContent" />
+    <result column="Is_Satisfaction" jdbcType="INTEGER" property="isSatisfaction" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Evaluation_Id, Service_Order_Id, Evaluation_Content, Is_Satisfaction, Remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluation
+    where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from evaluation
+    where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.Evaluation">
+    insert into evaluation (Evaluation_Id, Service_Order_Id, Evaluation_Content, 
+      Is_Satisfaction, Remarks)
+    values (#{evaluationId,jdbcType=INTEGER}, #{serviceOrderId,jdbcType=INTEGER}, #{evaluationContent,jdbcType=VARCHAR}, 
+      #{isSatisfaction,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.Evaluation">
+    insert into evaluation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
+        Evaluation_Id,
+      </if>
+      <if test="serviceOrderId != null">
+        Service_Order_Id,
+      </if>
+      <if test="evaluationContent != null">
+        Evaluation_Content,
+      </if>
+      <if test="isSatisfaction != null">
+        Is_Satisfaction,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
+        #{evaluationId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceOrderId != null">
+        #{serviceOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationContent != null">
+        #{evaluationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isSatisfaction != null">
+        #{isSatisfaction,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Evaluation">
+    update evaluation
+    <set>
+      <if test="serviceOrderId != null">
+        Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationContent != null">
+        Evaluation_Content = #{evaluationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isSatisfaction != null">
+        Is_Satisfaction = #{isSatisfaction,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Evaluation">
     update evaluation
     set Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER},
       Evaluation_Content = #{evaluationContent,jdbcType=VARCHAR},

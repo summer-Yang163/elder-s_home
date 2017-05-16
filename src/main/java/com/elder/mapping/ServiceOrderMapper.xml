@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.ServiceOrderMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.ServiceOrder" >
-    <id column="Service_Order_Id" property="serviceOrderId" jdbcType="INTEGER" />
-    <result column="Old_Id" property="oldId" jdbcType="INTEGER" />
-    <result column="User_Id" property="userId" jdbcType="INTEGER" />
-    <result column="Service_Person_Id" property="servicePersonId" jdbcType="INTEGER" />
-    <result column="Project_Id" property="projectId" jdbcType="INTEGER" />
-    <result column="Service_Num" property="serviceNum" jdbcType="INTEGER" />
-    <result column="Service_Price" property="servicePrice" jdbcType="DOUBLE" />
-    <result column="Begin_Time" property="beginTime" jdbcType="BIGINT" />
-    <result column="End_Time" property="endTime" jdbcType="BIGINT" />
-    <result column="Service_Address" property="serviceAddress" jdbcType="VARCHAR" />
-    <result column="Evaluation_Id" property="evaluationId" jdbcType="INTEGER" />
-    <result column="Pay_Status" property="payStatus" jdbcType="INTEGER" />
-    <result column="Order_Status" property="orderStatus" jdbcType="INTEGER" />
-    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.ServiceOrderMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.ServiceOrder">
+    <id column="Service_Order_Id" jdbcType="INTEGER" property="serviceOrderId" />
+    <result column="Old_Id" jdbcType="INTEGER" property="oldId" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Service_Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Service_Num" jdbcType="INTEGER" property="serviceNum" />
+    <result column="Service_Price" jdbcType="DOUBLE" property="servicePrice" />
+    <result column="Begin_Time" jdbcType="BIGINT" property="beginTime" />
+    <result column="End_Time" jdbcType="BIGINT" property="endTime" />
+    <result column="Service_Address" jdbcType="VARCHAR" property="serviceAddress" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Pay_Status" jdbcType="INTEGER" property="payStatus" />
+    <result column="Order_Status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Service_Order_Id, Old_Id, User_Id, Service_Person_Id, Project_Id, Service_Num, Service_Price, 
     Begin_Time, End_Time, Service_Address, Evaluation_Id, Pay_Status, Order_Status, Remarks
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from service_order
     where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service_order
     where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.ServiceOrder" >
+  <insert id="insert" parameterType="com.elder.domain.ServiceOrder">
     insert into service_order (Service_Order_Id, Old_Id, User_Id, 
       Service_Person_Id, Project_Id, Service_Num, 
       Service_Price, Begin_Time, End_Time, 
@@ -43,143 +43,338 @@
       #{serviceAddress,jdbcType=VARCHAR}, #{evaluationId,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, 
       #{orderStatus,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.ServiceOrder" >
+  <insert id="insertSelective" parameterType="com.elder.domain.ServiceOrder">
     insert into service_order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="serviceOrderId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceOrderId != null">
         Service_Order_Id,
       </if>
-      <if test="oldId != null" >
+      <if test="oldId != null">
         Old_Id,
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         User_Id,
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         Service_Person_Id,
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         Project_Id,
       </if>
-      <if test="serviceNum != null" >
+      <if test="serviceNum != null">
         Service_Num,
       </if>
-      <if test="servicePrice != null" >
+      <if test="servicePrice != null">
         Service_Price,
       </if>
-      <if test="beginTime != null" >
+      <if test="beginTime != null">
         Begin_Time,
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         End_Time,
       </if>
-      <if test="serviceAddress != null" >
+      <if test="serviceAddress != null">
         Service_Address,
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id,
       </if>
-      <if test="payStatus != null" >
+      <if test="payStatus != null">
         Pay_Status,
       </if>
-      <if test="orderStatus != null" >
+      <if test="orderStatus != null">
         Order_Status,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="serviceOrderId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceOrderId != null">
         #{serviceOrderId,jdbcType=INTEGER},
       </if>
-      <if test="oldId != null" >
+      <if test="oldId != null">
         #{oldId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="serviceNum != null" >
+      <if test="serviceNum != null">
         #{serviceNum,jdbcType=INTEGER},
       </if>
-      <if test="servicePrice != null" >
+      <if test="servicePrice != null">
         #{servicePrice,jdbcType=DOUBLE},
       </if>
-      <if test="beginTime != null" >
+      <if test="beginTime != null">
         #{beginTime,jdbcType=BIGINT},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="serviceAddress != null" >
+      <if test="serviceAddress != null">
         #{serviceAddress,jdbcType=VARCHAR},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         #{evaluationId,jdbcType=INTEGER},
       </if>
-      <if test="payStatus != null" >
+      <if test="payStatus != null">
         #{payStatus,jdbcType=INTEGER},
       </if>
-      <if test="orderStatus != null" >
+      <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.ServiceOrder" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.ServiceOrder">
     update service_order
-    <set >
-      <if test="oldId != null" >
+    <set>
+      <if test="oldId != null">
         Old_Id = #{oldId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         User_Id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         Service_Person_Id = #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         Project_Id = #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="serviceNum != null" >
+      <if test="serviceNum != null">
         Service_Num = #{serviceNum,jdbcType=INTEGER},
       </if>
-      <if test="servicePrice != null" >
+      <if test="servicePrice != null">
         Service_Price = #{servicePrice,jdbcType=DOUBLE},
       </if>
-      <if test="beginTime != null" >
+      <if test="beginTime != null">
         Begin_Time = #{beginTime,jdbcType=BIGINT},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         End_Time = #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="serviceAddress != null" >
+      <if test="serviceAddress != null">
         Service_Address = #{serviceAddress,jdbcType=VARCHAR},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
       </if>
-      <if test="payStatus != null" >
+      <if test="payStatus != null">
         Pay_Status = #{payStatus,jdbcType=INTEGER},
       </if>
-      <if test="orderStatus != null" >
+      <if test="orderStatus != null">
         Order_Status = #{orderStatus,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.ServiceOrder" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.ServiceOrder">
+    update service_order
+    set Old_Id = #{oldId,jdbcType=INTEGER},
+      User_Id = #{userId,jdbcType=INTEGER},
+      Service_Person_Id = #{servicePersonId,jdbcType=INTEGER},
+      Project_Id = #{projectId,jdbcType=INTEGER},
+      Service_Num = #{serviceNum,jdbcType=INTEGER},
+      Service_Price = #{servicePrice,jdbcType=DOUBLE},
+      Begin_Time = #{beginTime,jdbcType=BIGINT},
+      End_Time = #{endTime,jdbcType=BIGINT},
+      Service_Address = #{serviceAddress,jdbcType=VARCHAR},
+      Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
+      Pay_Status = #{payStatus,jdbcType=INTEGER},
+      Order_Status = #{orderStatus,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.ServiceOrder">
+    <id column="Service_Order_Id" jdbcType="INTEGER" property="serviceOrderId" />
+    <result column="Old_Id" jdbcType="INTEGER" property="oldId" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Service_Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Service_Num" jdbcType="INTEGER" property="serviceNum" />
+    <result column="Service_Price" jdbcType="DOUBLE" property="servicePrice" />
+    <result column="Begin_Time" jdbcType="BIGINT" property="beginTime" />
+    <result column="End_Time" jdbcType="BIGINT" property="endTime" />
+    <result column="Service_Address" jdbcType="VARCHAR" property="serviceAddress" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+    <result column="Pay_Status" jdbcType="INTEGER" property="payStatus" />
+    <result column="Order_Status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Service_Order_Id, Old_Id, User_Id, Service_Person_Id, Project_Id, Service_Num, Service_Price, 
+    Begin_Time, End_Time, Service_Address, Evaluation_Id, Pay_Status, Order_Status, Remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from service_order
+    where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from service_order
+    where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.ServiceOrder">
+    insert into service_order (Service_Order_Id, Old_Id, User_Id, 
+      Service_Person_Id, Project_Id, Service_Num, 
+      Service_Price, Begin_Time, End_Time, 
+      Service_Address, Evaluation_Id, Pay_Status, 
+      Order_Status, Remarks)
+    values (#{serviceOrderId,jdbcType=INTEGER}, #{oldId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{servicePersonId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{serviceNum,jdbcType=INTEGER}, 
+      #{servicePrice,jdbcType=DOUBLE}, #{beginTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{serviceAddress,jdbcType=VARCHAR}, #{evaluationId,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.ServiceOrder">
+    insert into service_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceOrderId != null">
+        Service_Order_Id,
+      </if>
+      <if test="oldId != null">
+        Old_Id,
+      </if>
+      <if test="userId != null">
+        User_Id,
+      </if>
+      <if test="servicePersonId != null">
+        Service_Person_Id,
+      </if>
+      <if test="projectId != null">
+        Project_Id,
+      </if>
+      <if test="serviceNum != null">
+        Service_Num,
+      </if>
+      <if test="servicePrice != null">
+        Service_Price,
+      </if>
+      <if test="beginTime != null">
+        Begin_Time,
+      </if>
+      <if test="endTime != null">
+        End_Time,
+      </if>
+      <if test="serviceAddress != null">
+        Service_Address,
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id,
+      </if>
+      <if test="payStatus != null">
+        Pay_Status,
+      </if>
+      <if test="orderStatus != null">
+        Order_Status,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceOrderId != null">
+        #{serviceOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="oldId != null">
+        #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePersonId != null">
+        #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceNum != null">
+        #{serviceNum,jdbcType=INTEGER},
+      </if>
+      <if test="servicePrice != null">
+        #{servicePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="serviceAddress != null">
+        #{serviceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationId != null">
+        #{evaluationId,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.ServiceOrder">
+    update service_order
+    <set>
+      <if test="oldId != null">
+        Old_Id = #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        User_Id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePersonId != null">
+        Service_Person_Id = #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        Project_Id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceNum != null">
+        Service_Num = #{serviceNum,jdbcType=INTEGER},
+      </if>
+      <if test="servicePrice != null">
+        Service_Price = #{servicePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="beginTime != null">
+        Begin_Time = #{beginTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        End_Time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="serviceAddress != null">
+        Service_Address = #{serviceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null">
+        Pay_Status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        Order_Status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Service_Order_Id = #{serviceOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.ServiceOrder">
     update service_order
     set Old_Id = #{oldId,jdbcType=INTEGER},
       User_Id = #{userId,jdbcType=INTEGER},

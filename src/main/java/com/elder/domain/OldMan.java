@@ -25,6 +25,8 @@ public class OldMan {
 
     private String remarks;
 
+    private Integer idCard;
+
     public Integer getOldId() {
         return oldId;
     }
@@ -119,5 +121,13 @@ public class OldMan {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public Integer getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(Integer idCard) {
+        this.idCard = idCard;
     }
 }

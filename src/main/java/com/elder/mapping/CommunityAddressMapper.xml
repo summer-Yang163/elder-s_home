@@ -1,68 +1,135 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.CommunityAddressMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityAddress" >
-    <id column="Community_Address _Id" property="communityAddressId" jdbcType="INTEGER" />
-    <result column="Area_Id" property="areaId" jdbcType="INTEGER" />
-    <result column="Community_Id" property="communityId" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.CommunityAddressMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityAddress">
+    <id column="Community_Address _Id" jdbcType="INTEGER" property="communityAddressId" />
+    <result column="Area_Id" jdbcType="INTEGER" property="areaId" />
+    <result column="Community_Id" jdbcType="INTEGER" property="communityId" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     "Community_Address _Id", Area_Id, Community_Id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from community_address
     where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from community_address
     where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.CommunityAddress" >
+  <insert id="insert" parameterType="com.elder.domain.CommunityAddress">
     insert into community_address ("Community_Address _Id", Area_Id, Community_Id
       )
     values (#{communityAddressId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.CommunityAddress" >
+  <insert id="insertSelective" parameterType="com.elder.domain.CommunityAddress">
     insert into community_address
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="communityAddressId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="communityAddressId != null">
         "Community_Address _Id",
       </if>
-      <if test="areaId != null" >
+      <if test="areaId != null">
         Area_Id,
       </if>
-      <if test="communityId != null" >
+      <if test="communityId != null">
         Community_Id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="communityAddressId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="communityAddressId != null">
         #{communityAddressId,jdbcType=INTEGER},
       </if>
-      <if test="areaId != null" >
+      <if test="areaId != null">
         #{areaId,jdbcType=INTEGER},
       </if>
-      <if test="communityId != null" >
+      <if test="communityId != null">
         #{communityId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityAddress" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityAddress">
     update community_address
-    <set >
-      <if test="areaId != null" >
+    <set>
+      <if test="areaId != null">
         Area_Id = #{areaId,jdbcType=INTEGER},
       </if>
-      <if test="communityId != null" >
+      <if test="communityId != null">
         Community_Id = #{communityId,jdbcType=INTEGER},
       </if>
     </set>
     where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityAddress" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityAddress">
+    update community_address
+    set Area_Id = #{areaId,jdbcType=INTEGER},
+      Community_Id = #{communityId,jdbcType=INTEGER}
+    where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityAddress">
+    <id column="Community_Address _Id" jdbcType="INTEGER" property="communityAddressId" />
+    <result column="Area_Id" jdbcType="INTEGER" property="areaId" />
+    <result column="Community_Id" jdbcType="INTEGER" property="communityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    "Community_Address _Id", Area_Id, Community_Id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from community_address
+    where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community_address
+    where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.CommunityAddress">
+    insert into community_address ("Community_Address _Id", Area_Id, Community_Id
+      )
+    values (#{communityAddressId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.CommunityAddress">
+    insert into community_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="communityAddressId != null">
+        "Community_Address _Id",
+      </if>
+      <if test="areaId != null">
+        Area_Id,
+      </if>
+      <if test="communityId != null">
+        Community_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="communityAddressId != null">
+        #{communityAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="communityId != null">
+        #{communityId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityAddress">
+    update community_address
+    <set>
+      <if test="areaId != null">
+        Area_Id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="communityId != null">
+        Community_Id = #{communityId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where "Community_Address _Id" = #{communityAddressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityAddress">
     update community_address
     set Area_Id = #{areaId,jdbcType=INTEGER},
       Community_Id = #{communityId,jdbcType=INTEGER}

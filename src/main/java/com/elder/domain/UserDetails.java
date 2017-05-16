@@ -1,7 +1,7 @@
 package com.elder.domain;
 
 public class UserDetails {
-    private Integer userId;
+    private Integer userDetailsId;
 
     private String trueName;
 
@@ -17,12 +17,14 @@ public class UserDetails {
 
     private String userAddress;
 
-    public Integer getUserId() {
-        return userId;
+    private Integer userId;
+
+    public Integer getUserDetailsId() {
+        return userDetailsId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserDetailsId(Integer userDetailsId) {
+        this.userDetailsId = userDetailsId;
     }
 
     public String getTrueName() {
@@ -79,5 +81,13 @@ public class UserDetails {
 
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress == null ? null : userAddress.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

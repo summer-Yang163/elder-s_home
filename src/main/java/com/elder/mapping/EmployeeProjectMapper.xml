@@ -1,78 +1,156 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.EmployeeProjectMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.EmployeeProject" >
-    <id column="Employ_Project_Id" property="employProjectId" jdbcType="INTEGER" />
-    <result column="Service _Person_Id" property="servicePersonId" jdbcType="INTEGER" />
-    <result column="Project_Id" property="projectId" jdbcType="INTEGER" />
-    <result column="Evaluation_Id" property="evaluationId" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.EmployeeProjectMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.EmployeeProject">
+    <id column="Employ_Project_Id" jdbcType="INTEGER" property="employProjectId" />
+    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Employ_Project_Id, "Service _Person_Id", Project_Id, Evaluation_Id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from employee_project
     where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee_project
     where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.EmployeeProject" >
+  <insert id="insert" parameterType="com.elder.domain.EmployeeProject">
     insert into employee_project (Employ_Project_Id, "Service _Person_Id", 
       Project_Id, Evaluation_Id)
     values (#{employProjectId,jdbcType=INTEGER}, #{servicePersonId,jdbcType=INTEGER}, 
       #{projectId,jdbcType=INTEGER}, #{evaluationId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.EmployeeProject" >
+  <insert id="insertSelective" parameterType="com.elder.domain.EmployeeProject">
     insert into employee_project
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="employProjectId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employProjectId != null">
         Employ_Project_Id,
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         "Service _Person_Id",
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         Project_Id,
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="employProjectId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employProjectId != null">
         #{employProjectId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null" >
+      <if test="servicePersonId != null">
         #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         #{evaluationId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.EmployeeProject" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.EmployeeProject">
     update employee_project
-    <set >
-      <if test="servicePersonId != null" >
+    <set>
+      <if test="servicePersonId != null">
         "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null" >
+      <if test="projectId != null">
         Project_Id = #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="evaluationId != null" >
+      <if test="evaluationId != null">
         Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
       </if>
     </set>
     where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.EmployeeProject" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.EmployeeProject">
+    update employee_project
+    set "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
+      Project_Id = #{projectId,jdbcType=INTEGER},
+      Evaluation_Id = #{evaluationId,jdbcType=INTEGER}
+    where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.EmployeeProject">
+    <id column="Employ_Project_Id" jdbcType="INTEGER" property="employProjectId" />
+    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Evaluation_Id" jdbcType="INTEGER" property="evaluationId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Employ_Project_Id, "Service _Person_Id", Project_Id, Evaluation_Id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee_project
+    where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee_project
+    where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.EmployeeProject">
+    insert into employee_project (Employ_Project_Id, "Service _Person_Id", 
+      Project_Id, Evaluation_Id)
+    values (#{employProjectId,jdbcType=INTEGER}, #{servicePersonId,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=INTEGER}, #{evaluationId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.EmployeeProject">
+    insert into employee_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employProjectId != null">
+        Employ_Project_Id,
+      </if>
+      <if test="servicePersonId != null">
+        "Service _Person_Id",
+      </if>
+      <if test="projectId != null">
+        Project_Id,
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employProjectId != null">
+        #{employProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePersonId != null">
+        #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationId != null">
+        #{evaluationId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.EmployeeProject">
+    update employee_project
+    <set>
+      <if test="servicePersonId != null">
+        "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        Project_Id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationId != null">
+        Evaluation_Id = #{evaluationId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Employ_Project_Id = #{employProjectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.EmployeeProject">
     update employee_project
     set "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
       Project_Id = #{projectId,jdbcType=INTEGER},

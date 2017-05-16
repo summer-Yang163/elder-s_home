@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elder.mapper.ProjectMapper" >
-  <resultMap id="BaseResultMap" type="com.elder.domain.Project" >
-    <id column="Project_Id" property="projectId" jdbcType="INTEGER" />
-    <result column="Project_Name" property="projectName" jdbcType="VARCHAR" />
-    <result column="Project_Content_Describle" property="projectContentDescrible" jdbcType="VARCHAR" />
-    <result column="Project_Price" property="projectPrice" jdbcType="DOUBLE" />
-    <result column="Project_Limited_Number" property="projectLimitedNumber" jdbcType="INTEGER" />
-    <result column="Project_Service_Conditions" property="projectServiceConditions" jdbcType="VARCHAR" />
-    <result column="Project_Sale_Price" property="projectSalePrice" jdbcType="DOUBLE" />
-    <result column="Project_Service_Time" property="projectServiceTime" jdbcType="BIGINT" />
-    <result column="Project_Service_Picture" property="projectServicePicture" jdbcType="VARCHAR" />
-    <result column="Is_Features" property="isFeatures" jdbcType="INTEGER" />
-    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elder.mapper.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.elder.domain.Project">
+    <id column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Project_Name" jdbcType="VARCHAR" property="projectName" />
+    <result column="Project_Content_Describle" jdbcType="VARCHAR" property="projectContentDescrible" />
+    <result column="Project_Price" jdbcType="DOUBLE" property="projectPrice" />
+    <result column="Project_Limited_Number" jdbcType="INTEGER" property="projectLimitedNumber" />
+    <result column="Project_Service_Conditions" jdbcType="VARCHAR" property="projectServiceConditions" />
+    <result column="Project_Sale_Price" jdbcType="DOUBLE" property="projectSalePrice" />
+    <result column="Project_Service_Time" jdbcType="BIGINT" property="projectServiceTime" />
+    <result column="Project_Service_Picture" jdbcType="VARCHAR" property="projectServicePicture" />
+    <result column="Is_Features" jdbcType="INTEGER" property="isFeatures" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Project_Id, Project_Name, Project_Content_Describle, Project_Price, Project_Limited_Number, 
     Project_Service_Conditions, Project_Sale_Price, Project_Service_Time, Project_Service_Picture, 
     Is_Features, Remarks
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from project
     where Project_Id = #{projectId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project
     where Project_Id = #{projectId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Project" >
+  <insert id="insert" parameterType="com.elder.domain.Project">
     insert into project (Project_Id, Project_Name, Project_Content_Describle, 
       Project_Price, Project_Limited_Number, Project_Service_Conditions, 
       Project_Sale_Price, Project_Service_Time, Project_Service_Picture, 
@@ -39,116 +39,277 @@
       #{projectSalePrice,jdbcType=DOUBLE}, #{projectServiceTime,jdbcType=BIGINT}, #{projectServicePicture,jdbcType=VARCHAR}, 
       #{isFeatures,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Project" >
+  <insert id="insertSelective" parameterType="com.elder.domain.Project">
     insert into project
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="projectId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
         Project_Id,
       </if>
-      <if test="projectName != null" >
+      <if test="projectName != null">
         Project_Name,
       </if>
-      <if test="projectContentDescrible != null" >
+      <if test="projectContentDescrible != null">
         Project_Content_Describle,
       </if>
-      <if test="projectPrice != null" >
+      <if test="projectPrice != null">
         Project_Price,
       </if>
-      <if test="projectLimitedNumber != null" >
+      <if test="projectLimitedNumber != null">
         Project_Limited_Number,
       </if>
-      <if test="projectServiceConditions != null" >
+      <if test="projectServiceConditions != null">
         Project_Service_Conditions,
       </if>
-      <if test="projectSalePrice != null" >
+      <if test="projectSalePrice != null">
         Project_Sale_Price,
       </if>
-      <if test="projectServiceTime != null" >
+      <if test="projectServiceTime != null">
         Project_Service_Time,
       </if>
-      <if test="projectServicePicture != null" >
+      <if test="projectServicePicture != null">
         Project_Service_Picture,
       </if>
-      <if test="isFeatures != null" >
+      <if test="isFeatures != null">
         Is_Features,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="projectId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
         #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="projectName != null" >
+      <if test="projectName != null">
         #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="projectContentDescrible != null" >
+      <if test="projectContentDescrible != null">
         #{projectContentDescrible,jdbcType=VARCHAR},
       </if>
-      <if test="projectPrice != null" >
+      <if test="projectPrice != null">
         #{projectPrice,jdbcType=DOUBLE},
       </if>
-      <if test="projectLimitedNumber != null" >
+      <if test="projectLimitedNumber != null">
         #{projectLimitedNumber,jdbcType=INTEGER},
       </if>
-      <if test="projectServiceConditions != null" >
+      <if test="projectServiceConditions != null">
         #{projectServiceConditions,jdbcType=VARCHAR},
       </if>
-      <if test="projectSalePrice != null" >
+      <if test="projectSalePrice != null">
         #{projectSalePrice,jdbcType=DOUBLE},
       </if>
-      <if test="projectServiceTime != null" >
+      <if test="projectServiceTime != null">
         #{projectServiceTime,jdbcType=BIGINT},
       </if>
-      <if test="projectServicePicture != null" >
+      <if test="projectServicePicture != null">
         #{projectServicePicture,jdbcType=VARCHAR},
       </if>
-      <if test="isFeatures != null" >
+      <if test="isFeatures != null">
         #{isFeatures,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Project" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Project">
     update project
-    <set >
-      <if test="projectName != null" >
+    <set>
+      <if test="projectName != null">
         Project_Name = #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="projectContentDescrible != null" >
+      <if test="projectContentDescrible != null">
         Project_Content_Describle = #{projectContentDescrible,jdbcType=VARCHAR},
       </if>
-      <if test="projectPrice != null" >
+      <if test="projectPrice != null">
         Project_Price = #{projectPrice,jdbcType=DOUBLE},
       </if>
-      <if test="projectLimitedNumber != null" >
+      <if test="projectLimitedNumber != null">
         Project_Limited_Number = #{projectLimitedNumber,jdbcType=INTEGER},
       </if>
-      <if test="projectServiceConditions != null" >
+      <if test="projectServiceConditions != null">
         Project_Service_Conditions = #{projectServiceConditions,jdbcType=VARCHAR},
       </if>
-      <if test="projectSalePrice != null" >
+      <if test="projectSalePrice != null">
         Project_Sale_Price = #{projectSalePrice,jdbcType=DOUBLE},
       </if>
-      <if test="projectServiceTime != null" >
+      <if test="projectServiceTime != null">
         Project_Service_Time = #{projectServiceTime,jdbcType=BIGINT},
       </if>
-      <if test="projectServicePicture != null" >
+      <if test="projectServicePicture != null">
         Project_Service_Picture = #{projectServicePicture,jdbcType=VARCHAR},
       </if>
-      <if test="isFeatures != null" >
+      <if test="isFeatures != null">
         Is_Features = #{isFeatures,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where Project_Id = #{projectId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Project" >
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Project">
+    update project
+    set Project_Name = #{projectName,jdbcType=VARCHAR},
+      Project_Content_Describle = #{projectContentDescrible,jdbcType=VARCHAR},
+      Project_Price = #{projectPrice,jdbcType=DOUBLE},
+      Project_Limited_Number = #{projectLimitedNumber,jdbcType=INTEGER},
+      Project_Service_Conditions = #{projectServiceConditions,jdbcType=VARCHAR},
+      Project_Sale_Price = #{projectSalePrice,jdbcType=DOUBLE},
+      Project_Service_Time = #{projectServiceTime,jdbcType=BIGINT},
+      Project_Service_Picture = #{projectServicePicture,jdbcType=VARCHAR},
+      Is_Features = #{isFeatures,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Project_Id = #{projectId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.elder.domain.Project">
+    <id column="Project_Id" jdbcType="INTEGER" property="projectId" />
+    <result column="Project_Name" jdbcType="VARCHAR" property="projectName" />
+    <result column="Project_Content_Describle" jdbcType="VARCHAR" property="projectContentDescrible" />
+    <result column="Project_Price" jdbcType="DOUBLE" property="projectPrice" />
+    <result column="Project_Limited_Number" jdbcType="INTEGER" property="projectLimitedNumber" />
+    <result column="Project_Service_Conditions" jdbcType="VARCHAR" property="projectServiceConditions" />
+    <result column="Project_Sale_Price" jdbcType="DOUBLE" property="projectSalePrice" />
+    <result column="Project_Service_Time" jdbcType="BIGINT" property="projectServiceTime" />
+    <result column="Project_Service_Picture" jdbcType="VARCHAR" property="projectServicePicture" />
+    <result column="Is_Features" jdbcType="INTEGER" property="isFeatures" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Project_Id, Project_Name, Project_Content_Describle, Project_Price, Project_Limited_Number, 
+    Project_Service_Conditions, Project_Sale_Price, Project_Service_Time, Project_Service_Picture, 
+    Is_Features, Remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where Project_Id = #{projectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project
+    where Project_Id = #{projectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elder.domain.Project">
+    insert into project (Project_Id, Project_Name, Project_Content_Describle, 
+      Project_Price, Project_Limited_Number, Project_Service_Conditions, 
+      Project_Sale_Price, Project_Service_Time, Project_Service_Picture, 
+      Is_Features, Remarks)
+    values (#{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectContentDescrible,jdbcType=VARCHAR}, 
+      #{projectPrice,jdbcType=DOUBLE}, #{projectLimitedNumber,jdbcType=INTEGER}, #{projectServiceConditions,jdbcType=VARCHAR}, 
+      #{projectSalePrice,jdbcType=DOUBLE}, #{projectServiceTime,jdbcType=BIGINT}, #{projectServicePicture,jdbcType=VARCHAR}, 
+      #{isFeatures,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elder.domain.Project">
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        Project_Id,
+      </if>
+      <if test="projectName != null">
+        Project_Name,
+      </if>
+      <if test="projectContentDescrible != null">
+        Project_Content_Describle,
+      </if>
+      <if test="projectPrice != null">
+        Project_Price,
+      </if>
+      <if test="projectLimitedNumber != null">
+        Project_Limited_Number,
+      </if>
+      <if test="projectServiceConditions != null">
+        Project_Service_Conditions,
+      </if>
+      <if test="projectSalePrice != null">
+        Project_Sale_Price,
+      </if>
+      <if test="projectServiceTime != null">
+        Project_Service_Time,
+      </if>
+      <if test="projectServicePicture != null">
+        Project_Service_Picture,
+      </if>
+      <if test="isFeatures != null">
+        Is_Features,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectContentDescrible != null">
+        #{projectContentDescrible,jdbcType=VARCHAR},
+      </if>
+      <if test="projectPrice != null">
+        #{projectPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="projectLimitedNumber != null">
+        #{projectLimitedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="projectServiceConditions != null">
+        #{projectServiceConditions,jdbcType=VARCHAR},
+      </if>
+      <if test="projectSalePrice != null">
+        #{projectSalePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="projectServiceTime != null">
+        #{projectServiceTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectServicePicture != null">
+        #{projectServicePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeatures != null">
+        #{isFeatures,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Project">
+    update project
+    <set>
+      <if test="projectName != null">
+        Project_Name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectContentDescrible != null">
+        Project_Content_Describle = #{projectContentDescrible,jdbcType=VARCHAR},
+      </if>
+      <if test="projectPrice != null">
+        Project_Price = #{projectPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="projectLimitedNumber != null">
+        Project_Limited_Number = #{projectLimitedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="projectServiceConditions != null">
+        Project_Service_Conditions = #{projectServiceConditions,jdbcType=VARCHAR},
+      </if>
+      <if test="projectSalePrice != null">
+        Project_Sale_Price = #{projectSalePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="projectServiceTime != null">
+        Project_Service_Time = #{projectServiceTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectServicePicture != null">
+        Project_Service_Picture = #{projectServicePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeatures != null">
+        Is_Features = #{isFeatures,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Project_Id = #{projectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Project">
     update project
     set Project_Name = #{projectName,jdbcType=VARCHAR},
       Project_Content_Describle = #{projectContentDescrible,jdbcType=VARCHAR},
