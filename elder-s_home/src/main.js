@@ -3,12 +3,11 @@
 import Vue from 'vue' //引入vue
 import App from './App' //引入app.vue
 import router from './router'
-import resource from 'vue-resource' //引入vue-resource
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 Vue.config.productionTip = false
 Vue.use(iView);
-Vue.use(resource);
+// Vue.use(axios);
 new Vue({
     el: '#app',
     // router: router,

@@ -10,24 +10,19 @@
 
 </style>
 <template>
-  <div>
-    <!--<Vhead></Vhead>-->
-    <div class="main ">
-
-    </div>
-    <!--<VFooter></VFooter>-->
+  <div class="main ">
+  <router-view></router-view>
   </div>
-
 </template>
 <script>
-  import Vhead from './common/vheader'
-  import VFooter from './common/footer'
+  import Carousel from './service/carousel'
+//  import Carousel from './service/carousel'
 
+  //  import VFooter from './service/footer'
   export default {
-    components: {Vhead,VFooter},
+    components: {Carousel},
     data () {
       return {
-
       }
     }
   }

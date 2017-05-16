@@ -27,7 +27,6 @@
 </style>
 <template>
   <div>
-    <!--<Vhead></Vhead>-->
     <div class="main  ">
       <div class="today_recommended">
         <div class="head">今日推荐：<span>{{today_recommended.title}}</span></div>
@@ -36,19 +35,16 @@
       <Cascader></Cascader>
    <VDetails></VDetails>
     </div>
-    <!--<VFooter></VFooter>-->
   </div>
 
 </template>
 <script>
-  import Vhead from './common/vheader'
   import Carousel from './community/carousel'
-  import VFooter from './common/footer'
   import Cascader from './community/cascader'
   import VDetails from './community/vdetails'
 
   export default {
-    components: {Vhead, Carousel,VFooter,Cascader,VDetails},
+    components: { Carousel,Cascader,VDetails},
     data () {
       return {
         today_recommended:{
