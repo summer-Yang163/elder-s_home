@@ -1,135 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.elder.mapper.AreaMapper">
-  <resultMap id="BaseResultMap" type="com.elder.domain.Area">
-    <id column="Area_Id" jdbcType="INTEGER" property="areaId" />
-    <result column="Area_Name" jdbcType="VARCHAR" property="areaName" />
-    <result column="Parent_Id" jdbcType="INTEGER" property="parentId" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.Area" >
+    <id column="Area_Id" property="areaId" jdbcType="INTEGER" />
+    <result column="Area_Name" property="areaName" jdbcType="VARCHAR" />
+    <result column="Parent_Id" property="parentId" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     Area_Id, Area_Name, Parent_Id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from area
     where Area_Id = #{areaId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from area
     where Area_Id = #{areaId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Area">
+  <insert id="insert" parameterType="com.elder.domain.Area" >
     insert into area (Area_Id, Area_Name, Parent_Id
       )
     values (#{areaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Area">
+  <insert id="insertSelective" parameterType="com.elder.domain.Area" >
     insert into area
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="areaId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
         Area_Id,
       </if>
-      <if test="areaName != null">
+      <if test="areaName != null" >
         Area_Name,
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         Parent_Id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="areaId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
         #{areaId,jdbcType=INTEGER},
       </if>
-      <if test="areaName != null">
+      <if test="areaName != null" >
         #{areaName,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Area">
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Area" >
     update area
-    <set>
-      <if test="areaName != null">
+    <set >
+      <if test="areaName != null" >
         Area_Name = #{areaName,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         Parent_Id = #{parentId,jdbcType=INTEGER},
       </if>
     </set>
     where Area_Id = #{areaId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Area">
-    update area
-    set Area_Name = #{areaName,jdbcType=VARCHAR},
-      Parent_Id = #{parentId,jdbcType=INTEGER}
-    where Area_Id = #{areaId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.elder.domain.Area">
-    <id column="Area_Id" jdbcType="INTEGER" property="areaId" />
-    <result column="Area_Name" jdbcType="VARCHAR" property="areaName" />
-    <result column="Parent_Id" jdbcType="INTEGER" property="parentId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Area_Id, Area_Name, Parent_Id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from area
-    where Area_Id = #{areaId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from area
-    where Area_Id = #{areaId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.elder.domain.Area">
-    insert into area (Area_Id, Area_Name, Parent_Id
-      )
-    values (#{areaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Area">
-    insert into area
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="areaId != null">
-        Area_Id,
-      </if>
-      <if test="areaName != null">
-        Area_Name,
-      </if>
-      <if test="parentId != null">
-        Parent_Id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="areaId != null">
-        #{areaId,jdbcType=INTEGER},
-      </if>
-      <if test="areaName != null">
-        #{areaName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Area">
-    update area
-    <set>
-      <if test="areaName != null">
-        Area_Name = #{areaName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
-        Parent_Id = #{parentId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where Area_Id = #{areaId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Area">
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Area" >
     update area
     set Area_Name = #{areaName,jdbcType=VARCHAR},
       Parent_Id = #{parentId,jdbcType=INTEGER}

@@ -1,135 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.elder.mapper.UserAuthorityMapper">
-  <resultMap id="BaseResultMap" type="com.elder.domain.UserAuthority">
-    <id column="User_Authority_Id" jdbcType="INTEGER" property="userAuthorityId" />
-    <result column="User_Id" jdbcType="INTEGER" property="userId" />
-    <result column="Authority_Bitmap" jdbcType="VARCHAR" property="authorityBitmap" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.UserAuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.UserAuthority" >
+    <id column="User_Authority_Id" property="userAuthorityId" jdbcType="INTEGER" />
+    <result column="User_Id" property="userId" jdbcType="INTEGER" />
+    <result column="Authority_Bitmap" property="authorityBitmap" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     User_Authority_Id, User_Id, Authority_Bitmap
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user_authority
     where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_authority
     where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.UserAuthority">
+  <insert id="insert" parameterType="com.elder.domain.UserAuthority" >
     insert into user_authority (User_Authority_Id, User_Id, Authority_Bitmap
       )
     values (#{userAuthorityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{authorityBitmap,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.UserAuthority">
+  <insert id="insertSelective" parameterType="com.elder.domain.UserAuthority" >
     insert into user_authority
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userAuthorityId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userAuthorityId != null" >
         User_Authority_Id,
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         User_Id,
       </if>
-      <if test="authorityBitmap != null">
+      <if test="authorityBitmap != null" >
         Authority_Bitmap,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userAuthorityId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userAuthorityId != null" >
         #{userAuthorityId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="authorityBitmap != null">
+      <if test="authorityBitmap != null" >
         #{authorityBitmap,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.UserAuthority">
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.UserAuthority" >
     update user_authority
-    <set>
-      <if test="userId != null">
+    <set >
+      <if test="userId != null" >
         User_Id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="authorityBitmap != null">
+      <if test="authorityBitmap != null" >
         Authority_Bitmap = #{authorityBitmap,jdbcType=VARCHAR},
       </if>
     </set>
     where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.UserAuthority">
-    update user_authority
-    set User_Id = #{userId,jdbcType=INTEGER},
-      Authority_Bitmap = #{authorityBitmap,jdbcType=VARCHAR}
-    where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.elder.domain.UserAuthority">
-    <id column="User_Authority_Id" jdbcType="INTEGER" property="userAuthorityId" />
-    <result column="User_Id" jdbcType="INTEGER" property="userId" />
-    <result column="Authority_Bitmap" jdbcType="VARCHAR" property="authorityBitmap" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    User_Authority_Id, User_Id, Authority_Bitmap
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_authority
-    where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_authority
-    where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.elder.domain.UserAuthority">
-    insert into user_authority (User_Authority_Id, User_Id, Authority_Bitmap
-      )
-    values (#{userAuthorityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{authorityBitmap,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.UserAuthority">
-    insert into user_authority
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userAuthorityId != null">
-        User_Authority_Id,
-      </if>
-      <if test="userId != null">
-        User_Id,
-      </if>
-      <if test="authorityBitmap != null">
-        Authority_Bitmap,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userAuthorityId != null">
-        #{userAuthorityId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="authorityBitmap != null">
-        #{authorityBitmap,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.UserAuthority">
-    update user_authority
-    <set>
-      <if test="userId != null">
-        User_Id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="authorityBitmap != null">
-        Authority_Bitmap = #{authorityBitmap,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where User_Authority_Id = #{userAuthorityId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.UserAuthority">
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.UserAuthority" >
     update user_authority
     set User_Id = #{userId,jdbcType=INTEGER},
       Authority_Bitmap = #{authorityBitmap,jdbcType=VARCHAR}

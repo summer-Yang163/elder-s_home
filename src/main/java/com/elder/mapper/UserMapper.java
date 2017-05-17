@@ -20,8 +20,7 @@ public interface UserMapper {
 
     User validateUserName(String userName);
 
-    int registerUser(@Param("userName") String userName,@Param("password") String password,@Param("typeId") int typeId);
+    int registerUser(@Param("userName") String userName, @Param("password") String password, @Param("typeId") int typeId);
 
     User userLogin(@Param("userName")String userName,@Param("password") String password);
-
 }

@@ -1,110 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.elder.mapper.AuthorityMapper">
-  <resultMap id="BaseResultMap" type="com.elder.domain.Authority">
-    <id column="Authority_Id" jdbcType="INTEGER" property="authorityId" />
-    <result column="Authority_Name" jdbcType="VARCHAR" property="authorityName" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.AuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.Authority" >
+    <id column="Authority_Id" property="authorityId" jdbcType="INTEGER" />
+    <result column="Authority_Name" property="authorityName" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     Authority_Id, Authority_Name
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from authority
     where Authority_Id = #{authorityId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from authority
     where Authority_Id = #{authorityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Authority">
+  <insert id="insert" parameterType="com.elder.domain.Authority" >
     insert into authority (Authority_Id, Authority_Name)
     values (#{authorityId,jdbcType=INTEGER}, #{authorityName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Authority">
+  <insert id="insertSelective" parameterType="com.elder.domain.Authority" >
     insert into authority
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="authorityId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authorityId != null" >
         Authority_Id,
       </if>
-      <if test="authorityName != null">
+      <if test="authorityName != null" >
         Authority_Name,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="authorityId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authorityId != null" >
         #{authorityId,jdbcType=INTEGER},
       </if>
-      <if test="authorityName != null">
+      <if test="authorityName != null" >
         #{authorityName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Authority">
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Authority" >
     update authority
-    <set>
-      <if test="authorityName != null">
+    <set >
+      <if test="authorityName != null" >
         Authority_Name = #{authorityName,jdbcType=VARCHAR},
       </if>
     </set>
     where Authority_Id = #{authorityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Authority">
-    update authority
-    set Authority_Name = #{authorityName,jdbcType=VARCHAR}
-    where Authority_Id = #{authorityId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.elder.domain.Authority">
-    <id column="Authority_Id" jdbcType="INTEGER" property="authorityId" />
-    <result column="Authority_Name" jdbcType="VARCHAR" property="authorityName" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Authority_Id, Authority_Name
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from authority
-    where Authority_Id = #{authorityId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from authority
-    where Authority_Id = #{authorityId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.elder.domain.Authority">
-    insert into authority (Authority_Id, Authority_Name)
-    values (#{authorityId,jdbcType=INTEGER}, #{authorityName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Authority">
-    insert into authority
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="authorityId != null">
-        Authority_Id,
-      </if>
-      <if test="authorityName != null">
-        Authority_Name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="authorityId != null">
-        #{authorityId,jdbcType=INTEGER},
-      </if>
-      <if test="authorityName != null">
-        #{authorityName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Authority">
-    update authority
-    <set>
-      <if test="authorityName != null">
-        Authority_Name = #{authorityName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where Authority_Id = #{authorityId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Authority">
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Authority" >
     update authority
     set Authority_Name = #{authorityName,jdbcType=VARCHAR}
     where Authority_Id = #{authorityId,jdbcType=INTEGER}

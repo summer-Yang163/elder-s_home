@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.elder.mapper.CommunityMapper">
-  <resultMap id="BaseResultMap" type="com.elder.domain.Community">
-    <id column="Community_Id" jdbcType="INTEGER" property="communityId" />
-    <result column="Community_Name" jdbcType="VARCHAR" property="communityName" />
-    <result column="Community_Phone" jdbcType="VARCHAR" property="communityPhone" />
-    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
-    <result column="Community_Photo" jdbcType="VARCHAR" property="communityPhoto" />
-    <result column="Community_Describe" jdbcType="VARCHAR" property="communityDescribe" />
-    <result column="Community_House_Price" jdbcType="DOUBLE" property="communityHousePrice" />
-    <result column="Community_Rent_Price" jdbcType="DOUBLE" property="communityRentPrice" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.CommunityMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.Community" >
+    <id column="Community_Id" property="communityId" jdbcType="INTEGER" />
+    <result column="Community_Name" property="communityName" jdbcType="VARCHAR" />
+    <result column="Community_Phone" property="communityPhone" jdbcType="VARCHAR" />
+    <result column="Service _Person_Id" property="servicePersonId" jdbcType="INTEGER" />
+    <result column="Community_Photo" property="communityPhoto" jdbcType="VARCHAR" />
+    <result column="Community_Describe" property="communityDescribe" jdbcType="VARCHAR" />
+    <result column="Community_House_Price" property="communityHousePrice" jdbcType="DOUBLE" />
+    <result column="Community_Rent_Price" property="communityRentPrice" jdbcType="DOUBLE" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     Community_Id, Community_Name, Community_Phone, "Service _Person_Id", Community_Photo, 
     Community_Describe, Community_House_Price, Community_Rent_Price
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from community
     where Community_Id = #{communityId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from community
     where Community_Id = #{communityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.Community">
+  <insert id="insert" parameterType="com.elder.domain.Community" >
     insert into community (Community_Id, Community_Name, Community_Phone, 
       "Service _Person_Id", Community_Photo, Community_Describe, 
       Community_House_Price, Community_Rent_Price)
@@ -33,214 +33,89 @@
       #{servicePersonId,jdbcType=INTEGER}, #{communityPhoto,jdbcType=VARCHAR}, #{communityDescribe,jdbcType=VARCHAR}, 
       #{communityHousePrice,jdbcType=DOUBLE}, #{communityRentPrice,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Community">
+  <insert id="insertSelective" parameterType="com.elder.domain.Community" >
     insert into community
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="communityId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="communityId != null" >
         Community_Id,
       </if>
-      <if test="communityName != null">
+      <if test="communityName != null" >
         Community_Name,
       </if>
-      <if test="communityPhone != null">
+      <if test="communityPhone != null" >
         Community_Phone,
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         "Service _Person_Id",
       </if>
-      <if test="communityPhoto != null">
+      <if test="communityPhoto != null" >
         Community_Photo,
       </if>
-      <if test="communityDescribe != null">
+      <if test="communityDescribe != null" >
         Community_Describe,
       </if>
-      <if test="communityHousePrice != null">
+      <if test="communityHousePrice != null" >
         Community_House_Price,
       </if>
-      <if test="communityRentPrice != null">
+      <if test="communityRentPrice != null" >
         Community_Rent_Price,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="communityId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="communityId != null" >
         #{communityId,jdbcType=INTEGER},
       </if>
-      <if test="communityName != null">
+      <if test="communityName != null" >
         #{communityName,jdbcType=VARCHAR},
       </if>
-      <if test="communityPhone != null">
+      <if test="communityPhone != null" >
         #{communityPhone,jdbcType=VARCHAR},
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="communityPhoto != null">
+      <if test="communityPhoto != null" >
         #{communityPhoto,jdbcType=VARCHAR},
       </if>
-      <if test="communityDescribe != null">
+      <if test="communityDescribe != null" >
         #{communityDescribe,jdbcType=VARCHAR},
       </if>
-      <if test="communityHousePrice != null">
+      <if test="communityHousePrice != null" >
         #{communityHousePrice,jdbcType=DOUBLE},
       </if>
-      <if test="communityRentPrice != null">
+      <if test="communityRentPrice != null" >
         #{communityRentPrice,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Community">
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Community" >
     update community
-    <set>
-      <if test="communityName != null">
+    <set >
+      <if test="communityName != null" >
         Community_Name = #{communityName,jdbcType=VARCHAR},
       </if>
-      <if test="communityPhone != null">
+      <if test="communityPhone != null" >
         Community_Phone = #{communityPhone,jdbcType=VARCHAR},
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="communityPhoto != null">
+      <if test="communityPhoto != null" >
         Community_Photo = #{communityPhoto,jdbcType=VARCHAR},
       </if>
-      <if test="communityDescribe != null">
+      <if test="communityDescribe != null" >
         Community_Describe = #{communityDescribe,jdbcType=VARCHAR},
       </if>
-      <if test="communityHousePrice != null">
+      <if test="communityHousePrice != null" >
         Community_House_Price = #{communityHousePrice,jdbcType=DOUBLE},
       </if>
-      <if test="communityRentPrice != null">
+      <if test="communityRentPrice != null" >
         Community_Rent_Price = #{communityRentPrice,jdbcType=DOUBLE},
       </if>
     </set>
     where Community_Id = #{communityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Community">
-    update community
-    set Community_Name = #{communityName,jdbcType=VARCHAR},
-      Community_Phone = #{communityPhone,jdbcType=VARCHAR},
-      "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
-      Community_Photo = #{communityPhoto,jdbcType=VARCHAR},
-      Community_Describe = #{communityDescribe,jdbcType=VARCHAR},
-      Community_House_Price = #{communityHousePrice,jdbcType=DOUBLE},
-      Community_Rent_Price = #{communityRentPrice,jdbcType=DOUBLE}
-    where Community_Id = #{communityId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.elder.domain.Community">
-    <id column="Community_Id" jdbcType="INTEGER" property="communityId" />
-    <result column="Community_Name" jdbcType="VARCHAR" property="communityName" />
-    <result column="Community_Phone" jdbcType="VARCHAR" property="communityPhone" />
-    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
-    <result column="Community_Photo" jdbcType="VARCHAR" property="communityPhoto" />
-    <result column="Community_Describe" jdbcType="VARCHAR" property="communityDescribe" />
-    <result column="Community_House_Price" jdbcType="DOUBLE" property="communityHousePrice" />
-    <result column="Community_Rent_Price" jdbcType="DOUBLE" property="communityRentPrice" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Community_Id, Community_Name, Community_Phone, "Service _Person_Id", Community_Photo, 
-    Community_Describe, Community_House_Price, Community_Rent_Price
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from community
-    where Community_Id = #{communityId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from community
-    where Community_Id = #{communityId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.elder.domain.Community">
-    insert into community (Community_Id, Community_Name, Community_Phone, 
-      "Service _Person_Id", Community_Photo, Community_Describe, 
-      Community_House_Price, Community_Rent_Price)
-    values (#{communityId,jdbcType=INTEGER}, #{communityName,jdbcType=VARCHAR}, #{communityPhone,jdbcType=VARCHAR}, 
-      #{servicePersonId,jdbcType=INTEGER}, #{communityPhoto,jdbcType=VARCHAR}, #{communityDescribe,jdbcType=VARCHAR}, 
-      #{communityHousePrice,jdbcType=DOUBLE}, #{communityRentPrice,jdbcType=DOUBLE})
-  </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.Community">
-    insert into community
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="communityId != null">
-        Community_Id,
-      </if>
-      <if test="communityName != null">
-        Community_Name,
-      </if>
-      <if test="communityPhone != null">
-        Community_Phone,
-      </if>
-      <if test="servicePersonId != null">
-        "Service _Person_Id",
-      </if>
-      <if test="communityPhoto != null">
-        Community_Photo,
-      </if>
-      <if test="communityDescribe != null">
-        Community_Describe,
-      </if>
-      <if test="communityHousePrice != null">
-        Community_House_Price,
-      </if>
-      <if test="communityRentPrice != null">
-        Community_Rent_Price,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="communityId != null">
-        #{communityId,jdbcType=INTEGER},
-      </if>
-      <if test="communityName != null">
-        #{communityName,jdbcType=VARCHAR},
-      </if>
-      <if test="communityPhone != null">
-        #{communityPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePersonId != null">
-        #{servicePersonId,jdbcType=INTEGER},
-      </if>
-      <if test="communityPhoto != null">
-        #{communityPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="communityDescribe != null">
-        #{communityDescribe,jdbcType=VARCHAR},
-      </if>
-      <if test="communityHousePrice != null">
-        #{communityHousePrice,jdbcType=DOUBLE},
-      </if>
-      <if test="communityRentPrice != null">
-        #{communityRentPrice,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.Community">
-    update community
-    <set>
-      <if test="communityName != null">
-        Community_Name = #{communityName,jdbcType=VARCHAR},
-      </if>
-      <if test="communityPhone != null">
-        Community_Phone = #{communityPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePersonId != null">
-        "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
-      </if>
-      <if test="communityPhoto != null">
-        Community_Photo = #{communityPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="communityDescribe != null">
-        Community_Describe = #{communityDescribe,jdbcType=VARCHAR},
-      </if>
-      <if test="communityHousePrice != null">
-        Community_House_Price = #{communityHousePrice,jdbcType=DOUBLE},
-      </if>
-      <if test="communityRentPrice != null">
-        Community_Rent_Price = #{communityRentPrice,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where Community_Id = #{communityId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Community">
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.Community" >
     update community
     set Community_Name = #{communityName,jdbcType=VARCHAR},
       Community_Phone = #{communityPhone,jdbcType=VARCHAR},

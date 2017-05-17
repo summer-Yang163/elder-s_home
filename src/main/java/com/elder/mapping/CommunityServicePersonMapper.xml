@@ -1,160 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.elder.mapper.CommunityServicePersonMapper">
-  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityServicePerson">
-    <id column="Service_Person_Id" jdbcType="INTEGER" property="servicePersonId" />
-    <result column="Community_Id" jdbcType="INTEGER" property="communityId" />
-    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
-    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elder.mapper.CommunityServicePersonMapper" >
+  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityServicePerson" >
+    <id column="Community_Service_Person_Id" property="communityServicePersonId" jdbcType="INTEGER" />
+    <result column="Community_Id" property="communityId" jdbcType="INTEGER" />
+    <result column="Project_Id" property="projectId" jdbcType="INTEGER" />
+    <result column="Service _Person_Id" property="servicePersonId" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
-    Service_Person_Id, Community_Id, Project_Id, "Service _Person_Id"
+  <sql id="Base_Column_List" >
+    Community_Service_Person_Id, Community_Id, Project_Id, "Service _Person_Id"
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from community_service_person
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
+    where Community_Service_Person_Id = #{communityServicePersonId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from community_service_person
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
+    where Community_Service_Person_Id = #{communityServicePersonId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.CommunityServicePerson">
-    insert into community_service_person (Service_Person_Id, Community_Id, Project_Id, 
-      "Service _Person_Id")
-    values (#{servicePersonId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
-      #{servicePersonId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.elder.domain.CommunityServicePerson" >
+    insert into community_service_person (Community_Service_Person_Id, Community_Id, 
+      Project_Id, "Service _Person_Id")
+    values (#{communityServicePersonId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=INTEGER}, #{servicePersonId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.CommunityServicePerson">
+  <insert id="insertSelective" parameterType="com.elder.domain.CommunityServicePerson" >
     insert into community_service_person
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="servicePersonId != null">
-        Service_Person_Id,
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="communityServicePersonId != null" >
+        Community_Service_Person_Id,
       </if>
-      <if test="communityId != null">
+      <if test="communityId != null" >
         Community_Id,
       </if>
-      <if test="projectId != null">
+      <if test="projectId != null" >
         Project_Id,
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         "Service _Person_Id",
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="servicePersonId != null">
-        #{servicePersonId,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="communityServicePersonId != null" >
+        #{communityServicePersonId,jdbcType=INTEGER},
       </if>
-      <if test="communityId != null">
+      <if test="communityId != null" >
         #{communityId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null">
+      <if test="projectId != null" >
         #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         #{servicePersonId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityServicePerson">
+  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityServicePerson" >
     update community_service_person
-    <set>
-      <if test="communityId != null">
+    <set >
+      <if test="communityId != null" >
         Community_Id = #{communityId,jdbcType=INTEGER},
       </if>
-      <if test="projectId != null">
+      <if test="projectId != null" >
         Project_Id = #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="servicePersonId != null">
+      <if test="servicePersonId != null" >
         "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
       </if>
     </set>
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
+    where Community_Service_Person_Id = #{communityServicePersonId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityServicePerson">
+  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityServicePerson" >
     update community_service_person
     set Community_Id = #{communityId,jdbcType=INTEGER},
       Project_Id = #{projectId,jdbcType=INTEGER},
       "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER}
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.elder.domain.CommunityServicePerson">
-    <id column="Service_Person_Id" jdbcType="INTEGER" property="servicePersonId" />
-    <result column="Community_Id" jdbcType="INTEGER" property="communityId" />
-    <result column="Project_Id" jdbcType="INTEGER" property="projectId" />
-    <result column="Service _Person_Id" jdbcType="INTEGER" property="servicePersonId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Service_Person_Id, Community_Id, Project_Id, "Service _Person_Id"
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from community_service_person
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from community_service_person
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.elder.domain.CommunityServicePerson">
-    insert into community_service_person (Service_Person_Id, Community_Id, Project_Id, 
-      "Service _Person_Id")
-    values (#{servicePersonId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
-      #{servicePersonId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.elder.domain.CommunityServicePerson">
-    insert into community_service_person
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="servicePersonId != null">
-        Service_Person_Id,
-      </if>
-      <if test="communityId != null">
-        Community_Id,
-      </if>
-      <if test="projectId != null">
-        Project_Id,
-      </if>
-      <if test="servicePersonId != null">
-        "Service _Person_Id",
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="servicePersonId != null">
-        #{servicePersonId,jdbcType=INTEGER},
-      </if>
-      <if test="communityId != null">
-        #{communityId,jdbcType=INTEGER},
-      </if>
-      <if test="projectId != null">
-        #{projectId,jdbcType=INTEGER},
-      </if>
-      <if test="servicePersonId != null">
-        #{servicePersonId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elder.domain.CommunityServicePerson">
-    update community_service_person
-    <set>
-      <if test="communityId != null">
-        Community_Id = #{communityId,jdbcType=INTEGER},
-      </if>
-      <if test="projectId != null">
-        Project_Id = #{projectId,jdbcType=INTEGER},
-      </if>
-      <if test="servicePersonId != null">
-        "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elder.domain.CommunityServicePerson">
-    update community_service_person
-    set Community_Id = #{communityId,jdbcType=INTEGER},
-      Project_Id = #{projectId,jdbcType=INTEGER},
-      "Service _Person_Id" = #{servicePersonId,jdbcType=INTEGER}
-    where Service_Person_Id = #{servicePersonId,jdbcType=INTEGER}
+    where Community_Service_Person_Id = #{communityServicePersonId,jdbcType=INTEGER}
   </update>
 </mapper>
