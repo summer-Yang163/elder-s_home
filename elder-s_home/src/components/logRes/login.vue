@@ -48,9 +48,12 @@
       }
 
     },
+    computed:{
+
+    },
     methods: {
       handleSubmit(data) {
-          console.log(data)
+          console.log(this.$store)
         if(data.user&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');

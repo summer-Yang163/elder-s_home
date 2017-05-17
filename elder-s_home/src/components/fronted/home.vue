@@ -107,7 +107,7 @@
       </div>
       <div class="service">
         <div class="head">
-          <div class="head_left">养老服务简介</div>
+          <div class="head_left">养老服务基本类型简介</div>
           <router-link class="head_right" to="/service">详情>></router-link>
         </div>
         <div class="container">

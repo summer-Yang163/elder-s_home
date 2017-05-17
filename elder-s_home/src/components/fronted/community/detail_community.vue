@@ -69,9 +69,9 @@
 </style>
 <template>
   <div>
-    <!--<Vhead></Vhead>-->
     <div class="main ">
      <BreadCrumb></BreadCrumb>
+      <div style="overflow: hidden">
       <div class="main_left">
         <img :src="bigSrc" class="bigSrc"> <div  class="text">{{Text}} </div>
         <ul>
@@ -96,10 +96,11 @@
           </div>
         </Card>
       </div>
+      </div>
+      <h2>基本服务：</h2>
+      <h2>特色服务：</h2>
     </div>
-    <!--<VFooter></VFooter>-->
   </div>
-
 </template>
 <script>
   import Vhead from '../common/vheader'
