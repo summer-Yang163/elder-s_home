@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.elder.mapper.UserDetailsMapper" >
   <resultMap id="BaseResultMap" type="com.elder.domain.UserDetails" >
-    <id column="User_Id" property="userId" jdbcType="INTEGER" />
+    <id column="User_Details_Id" property="userDetailsId" jdbcType="INTEGER" />
     <result column="True_Name" property="trueName" jdbcType="VARCHAR" />
     <result column="User_Gender" property="userGender" jdbcType="INTEGER" />
     <result column="User_Phone" property="userPhone" jdbcType="INTEGER" />
@@ -10,34 +10,37 @@
     <result column="User_Email" property="userEmail" jdbcType="VARCHAR" />
     <result column="Community_Id" property="communityId" jdbcType="INTEGER" />
     <result column="User_Address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="User_Id" property="userId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    User_Id, True_Name, User_Gender, User_Phone, User_Age, User_Email, Community_Id, 
-    User_Address
+    User_Details_Id, True_Name, User_Gender, User_Phone, User_Age, User_Email, Community_Id, 
+    User_Address, User_Id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user_details
-    where User_Id = #{userId,jdbcType=INTEGER}
+    where User_Details_Id = #{userDetailsId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_details
-    where User_Id = #{userId,jdbcType=INTEGER}
+    where User_Details_Id = #{userDetailsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.elder.domain.UserDetails" >
-    insert into user_details (User_Id, True_Name, User_Gender, 
+    insert into user_details (User_Details_Id, True_Name, User_Gender, 
       User_Phone, User_Age, User_Email, 
-      Community_Id, User_Address)
-    values (#{userId,jdbcType=INTEGER}, #{trueName,jdbcType=VARCHAR}, #{userGender,jdbcType=INTEGER}, 
+      Community_Id, User_Address, User_Id
+      )
+    values (#{userDetailsId,jdbcType=INTEGER}, #{trueName,jdbcType=VARCHAR}, #{userGender,jdbcType=INTEGER}, 
       #{userPhone,jdbcType=INTEGER}, #{userAge,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, 
-      #{communityId,jdbcType=INTEGER}, #{userAddress,jdbcType=VARCHAR})
+      #{communityId,jdbcType=INTEGER}, #{userAddress,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.elder.domain.UserDetails" >
     insert into user_details
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        User_Id,
+      <if test="userDetailsId != null" >
+        User_Details_Id,
       </if>
       <if test="trueName != null" >
         True_Name,
@@ -60,10 +63,13 @@
       <if test="userAddress != null" >
         User_Address,
       </if>
+      <if test="userId != null" >
+        User_Id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="userDetailsId != null" >
+        #{userDetailsId,jdbcType=INTEGER},
       </if>
       <if test="trueName != null" >
         #{trueName,jdbcType=VARCHAR},
@@ -85,6 +91,9 @@
       </if>
       <if test="userAddress != null" >
         #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -112,8 +121,11 @@
       <if test="userAddress != null" >
         User_Address = #{userAddress,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null" >
+        User_Id = #{userId,jdbcType=INTEGER},
+      </if>
     </set>
-    where User_Id = #{userId,jdbcType=INTEGER}
+    where User_Details_Id = #{userDetailsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.elder.domain.UserDetails" >
     update user_details
@@ -123,7 +135,8 @@
       User_Age = #{userAge,jdbcType=INTEGER},
       User_Email = #{userEmail,jdbcType=VARCHAR},
       Community_Id = #{communityId,jdbcType=INTEGER},
-      User_Address = #{userAddress,jdbcType=VARCHAR}
-    where User_Id = #{userId,jdbcType=INTEGER}
+      User_Address = #{userAddress,jdbcType=VARCHAR},
+      User_Id = #{userId,jdbcType=INTEGER}
+    where User_Details_Id = #{userDetailsId,jdbcType=INTEGER}
   </update>
 </mapper>

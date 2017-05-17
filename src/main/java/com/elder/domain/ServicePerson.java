@@ -19,6 +19,8 @@ public class ServicePerson {
 
     private String serviceWorkPosition;
 
+    private Integer userId;
+
     public Integer getServicePersonId() {
         return servicePersonId;
     }
@@ -89,5 +91,13 @@ public class ServicePerson {
 
     public void setServiceWorkPosition(String serviceWorkPosition) {
         this.serviceWorkPosition = serviceWorkPosition == null ? null : serviceWorkPosition.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

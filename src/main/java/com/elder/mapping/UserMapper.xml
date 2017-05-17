@@ -79,4 +79,14 @@
       Password = #{password,jdbcType=VARCHAR}
     where User_Id = #{userId,jdbcType=INTEGER}
   </update>
+  <!--增加的业务逻辑语句-->
+  <select id="validateUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from user where User_Name=#{userName,jdbcType=VARCHAR }
+  </select>
+  <insert id="registerUser">
+    insert into user (User_Name,Password,Type_Id) VALUES (#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{typeId,jdbcType=INTEGER})
+  </insert>
+  <select id="userLogin" resultMap="BaseResultMap">
+    select * from user  where User_Name=#{userName,jdbcType=VARCHAR} and Password=#{password,jdbcType=VARCHAR}
+  </select>
 </mapper>

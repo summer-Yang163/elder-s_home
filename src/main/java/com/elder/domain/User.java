@@ -9,6 +9,15 @@ public class User {
 
     private String password;
 
+    public User() {
+    }
+
+    public User(Integer typeId, String userName, String password) {
+        this.typeId = typeId;
+        this.userName = userName;
+        this.password = password;
+    }
+
     public Integer getUserId() {
         return userId;
     }

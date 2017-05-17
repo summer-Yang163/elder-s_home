@@ -3,13 +3,13 @@ package com.elder.mapper;
 import com.elder.domain.UserDetails;
 
 public interface UserDetailsMapper {
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Integer userDetailsId);
 
     int insert(UserDetails record);
 
     int insertSelective(UserDetails record);
 
-    UserDetails selectByPrimaryKey(Integer userId);
+    UserDetails selectByPrimaryKey(Integer userDetailsId);
 
     int updateByPrimaryKeySelective(UserDetails record);
 

@@ -1,7 +1,7 @@
 package com.elder.domain;
 
 public class CommunityServicePerson {
-    private Integer servicePersonId;
+    private Integer communityServicePersonId;
 
     private Integer communityId;
 
@@ -9,12 +9,12 @@ public class CommunityServicePerson {
 
     private Integer servicePersonId;
 
-    public Integer getServicePersonId() {
-        return servicePersonId;
+    public Integer getCommunityServicePersonId() {
+        return communityServicePersonId;
     }
 
-    public void setServicePersonId(Integer servicePersonId) {
-        this.servicePersonId = servicePersonId;
+    public void setCommunityServicePersonId(Integer communityServicePersonId) {
+        this.communityServicePersonId = communityServicePersonId;
     }
 
     public Integer getCommunityId() {
