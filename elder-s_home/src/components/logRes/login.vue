@@ -27,7 +27,7 @@
 </template>
 <script>
   import axios from 'axios' //引入axios
-
+  import * as types from '../../store/types'
   export default {
     data () {
       return {
@@ -44,16 +44,20 @@
             {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
           ]
         },
-        loginUrl:'http://rapapi.org/mockjs/18342/login'
+        loginUrl:'/api/mockjs/18342/login'
       }
 
     },
+    computed:{
+//      this.$store.commit(types.TITLE, 'Login')
+    },
     methods: {
       handleSubmit(data) {
-          console.log(data)
+          console.log(this.$store.state.token)
         if(data.user&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');
+
             this.$router.push({path:'/Home'})
           },(response)=>{
             this.$Message.error('登陆失败!');

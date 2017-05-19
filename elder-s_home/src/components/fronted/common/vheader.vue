@@ -75,24 +75,30 @@
           </Menu-item>
         </router-link>
       </div>
-        <Menu-item name="login" style="float:right"  v-if="activeDis && !user">
+<div v-if="activeDis">
+        <Menu-item name="login" style="float:right"  v-if="!user">
           <router-link to="/login">注册登录</router-link>
       </Menu-item>
-        <Menu-item name="user" style="float:right" v-else>
+      <div v-else>
+      <Menu-item name="user" style="float:right" >
+        退出
+      </Menu-item>
+        <Menu-item name="user" style="float:right" >
           <Icon type="ios-people"></Icon>
           欢迎你：{{ userName}}
       </Menu-item>
-
+      </div>
+</div>
     </Menu>
   </div>
 </template>
 <script>
-  const localStorage = window.localStorage
+//  const localStorage = window.localStorage
   export default {
     data(){
       return {
         userName:'小八',
-        user:false
+        user:true
       }
     },
     computed:{
@@ -100,9 +106,9 @@
           return this.$route.name
       },
       activeDis:function(){
-          console.log(localStorage);
+//          console.log(localStorage);
 //        localStorage.setItem('ms_username','dh')
-        localStorage.removeItem('ms_username','')
+//        localStorage.removeItem('ms_username','')
           return  this.$route.name != 'login'
       }
     },

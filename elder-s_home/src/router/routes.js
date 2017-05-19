@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import Router from 'vue-router'
 
 import Layout from '@/components/layout'
 import Login from '@/components/logRes/logRes'
@@ -7,7 +7,7 @@ import Home from '@/components/fronted/home'
 import Community from '@/components/fronted/community'
 import Service from '@/components/fronted/service'
 import AllService from '@/components/fronted/service/allService'
-import SingleComSer from '@/components/fronted/service/singleComSer'
+import SingleService from '@/components/fronted/service/singleService'
 
 import News from '@/components/fronted/news'
 import Tips from '@/components/fronted/tips'
@@ -44,10 +44,9 @@ import PersonTips from '@/components/backEnd/service/handlePro/personTips'
 import ProcessProj from '@/components/backEnd/service/handlePro/processProj'
 import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
 
-Vue.use(Router)
 
-export default new Router({
-  routes: [
+
+  export default  [
     {
       path: '/',
       redirect: '/home',
@@ -75,8 +74,8 @@ export default new Router({
             component:AllService
           },{
             path:'/service/:id',
-            name:'singleComSer',
-            component:SingleComSer
+            name:'singleService',
+            component:SingleService
           }]
         },
         {
@@ -122,7 +121,8 @@ export default new Router({
         {
           path:'/backEnd/userManage',
           name:'user/userManage',
-          component:UserManage
+          component:UserManage,
+          meta:{requiresAuth:true}
         },
         {
           path:'/backEnd/systemNum',
@@ -232,6 +232,4 @@ export default new Router({
           component:AccountCheck
         }]
     }
-
   ]
-})
