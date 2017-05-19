@@ -5,12 +5,11 @@ import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,7 +46,7 @@ public class UserController extends BaseController {
         }
         return map;
     }
-
+    @CrossOrigin(origins="http://localhost:8087")
     @RequestMapping(value = "/userLogin/{userName}/{password}", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> userLogin(@PathVariable String userName, @PathVariable String password) {
@@ -70,6 +69,11 @@ public class UserController extends BaseController {
         map = generateSuccessMsg("您已经成功退出该系统");
         return map;
     }
-
+    @RequestMapping("/user/queryUserByPage/{userPageNow}/{userPageSize}")
+    @ResponseBody
+    public List<User> queryUserByPage(@PathVariable int userPageNow,@PathVariable int userPageSize){
+        List<User> userList=new ArrayList<User>();
+        return userList;
+    }
 
 }
