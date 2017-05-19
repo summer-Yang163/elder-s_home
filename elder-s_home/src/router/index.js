@@ -36,10 +36,9 @@ router.beforeEach((to, from, next) => {
       next();
     }
     else {
-      console.log('heh')
       next({
-        path: '/login',
-        query: {redirect: to.fullPath}
+        // path: '/login',
+        // query: {redirect: to.fullPath}
       })
     }
   }
@@ -48,10 +47,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
-function a(to,from,next){
-  "use strict";
 
-}
 // router.beforeEach((to, from, next) => {
 //   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
 //     console.log('dee')

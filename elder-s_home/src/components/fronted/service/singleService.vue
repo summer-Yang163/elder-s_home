@@ -97,6 +97,8 @@
               <li><span class="li_left">服务适用条件：</span><span class="li_right"  >{{community.Reservation_phone}}</span></li>
               <li><span class="li_left">服务促销价：</span><span class="li_right"  >{{community.House_price}}</span></li>
               <li><span class="li_left">服务时间：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
+              <li><span class="li_left">选择老人：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
+              <li><span class="li_left">选择服务人员：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
               <li><span class="li_left">提交订单：</span><span class="li_right"  >{{community.introduction}}</span></li>
             </ul>
           </div>
@@ -107,9 +109,6 @@
 
 </template>
 <script>
-  import Vhead from '../common/vheader'
-  import VFooter from '../common/footer'
-  import BreadCrumb from '../common/breadCrumb'
   import src1 from '../../../assets/community/1.jpg'
   import src2 from '../../../assets/community/beiyuan1.jpg'
   import src3 from '../../../assets/community/beiyuan2.jpg'
@@ -117,7 +116,7 @@
   import src5 from '../../../assets/community/beiyuan4.jpg'
 
   export default {
-    components: {Vhead, BreadCrumb,VFooter},
+    components: {},
     data () {
       return {
         bigSrc:src1,
@@ -125,9 +124,9 @@
         community:{
           imgSrcs:[src1,src2,src3,src4,src5],
           imgText:['小区全景图','小区住房一览','小区住房一览','小区路况图','小区户型图'],
-          name:'北苑家园',
-          address:'湖北省荆州市沙市区',
-          phone:'0551--63831525',
+          name:'生活照料',
+          address:'陪护老人',
+          phone:'50元/次',
           employee:'里斯',
           introduction:'北苑家园占地13.25公顷，紧邻荆州市商业繁华区，交通便利，周边学校、医院等公共服务设施齐备，且分布均匀，地理位置优越。北苑家园定位高端，项目规划、设计、施工、后期的服务与管理等各个方面不断完善和学习先进的理念，项目一经推出即受到广大消费者的厚爱与追捧。',
           Reservation_phone:'12222222222',

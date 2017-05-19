@@ -44,7 +44,9 @@
             {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
           ]
         },
-        loginUrl:'/api/mockjs/18342/login'
+//        loginUrl:'http://localhost:8087/elder_home/user/userLogin',
+        loginUrl:'api/user/userLogin'
+
       }
 
     },
@@ -53,7 +55,7 @@
     },
     methods: {
       handleSubmit(data) {
-          console.log(this.$store.state.token)
+//          console.log(this.$store.state.token)
         if(data.user&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');
