@@ -22,15 +22,15 @@
     <Button type="ghost" style="float:right;" >修改</Button>
   </Breadcrumb>
   <Card class='fromCard'>
-    
+
     <Form :model="formLeft" label-position="left" :label-width="100">
       <Form-item label="姓名" >
         <Input v-model="formLeft.input1" disabled="true"></Input>
       </Form-item>
       <Form-item label="性别" prop="gender">
         <Radio-group v-model="formLeft.gender" >
-          <Radio label="male" disabled="true">男</Radio>
-          <Radio label="female" disabled="true">女</Radio>
+          <Radio label="male" >男</Radio>
+          <Radio label="female" >女</Radio>
         </Radio-group>
       </Form-item>
 

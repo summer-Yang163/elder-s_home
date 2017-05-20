@@ -61,7 +61,7 @@
           axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');
 
-            this.$router.push({path:'/Home'})
+//            this.$router.push({path:'/Home'})
           },(response)=>{
             this.$Message.error('登陆失败!');
           });

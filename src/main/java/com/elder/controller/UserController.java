@@ -49,7 +49,7 @@ public class UserController extends BaseController {
     }
     //支持跨域请求
     @CrossOrigin
-    @RequestMapping(value = "/userLogin/", method = RequestMethod.GET)
+    @RequestMapping(value = "/userLogin")
     @ResponseBody
     public Map<String, Object> userLogin(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
