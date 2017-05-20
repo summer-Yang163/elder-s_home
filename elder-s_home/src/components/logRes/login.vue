@@ -45,7 +45,7 @@
           ]
         },
 //        loginUrl:'http://localhost:8087/elder_home/user/userLogin',
-        loginUrl:'api/user/userLogin'
+        loginUrl:this.HOST+'/user/userLogin'
 
       }
 
@@ -56,6 +56,7 @@
     methods: {
       handleSubmit(data) {
 //          console.log(this.$store.state.token)
+        console.log(this.loginUrl)
         if(data.user&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             this.$Message.success('提交成功!');

@@ -15,6 +15,11 @@ import Detail_community from '@/components/fronted/community/detail_community'
 import DetailTips from '@/components/fronted/tips/detailTips'
 import DetailNews from '@/components/fronted/news/detailNew'
 import HomeCenter from '@/components/fronted/homecenter'
+import SerFeedBack from '@/components/fronted/homecenter/feedBack'
+import PersonInf from '@/components/fronted/homecenter/personInf'
+import PersonTipsHome from '@/components/fronted/homecenter/personTips'
+import ServiceProj from '@/components/fronted/homecenter/serviceProj'
+
 
 import BackEnd from '@/components/backEnd/admin/backEnd'
 import UserManage from '@/components/backEnd/admin/user/userManage'
@@ -105,7 +110,25 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           path:'/homeCenter',
           name:'homeCenter',
           component:HomeCenter,
-          meta:{requiresAuth:true}
+          redirect: '/homeCenter/personInf',
+          meta:{requiresAuth:true},
+          children:[{
+            path:'/homeCenter/serFeedBack',
+            name:'serFeedBack',
+            component:SerFeedBack,
+          },{
+            path:'/homeCenter/personTipsHome',
+            name:'personTipsHome',
+            component:PersonTipsHome,
+          },{
+            path:'/homeCenter/personInf',
+            name:'personInf',
+            component:PersonInf,
+          },{
+            path:'/homeCenter/serviceProj',
+            name:'serviceProj',
+            component:ServiceProj,
+          }]
         }
       ]
     }, {
