@@ -28,6 +28,7 @@
 <script>
   import axios from 'axios' //引入axios
   import * as types from '../../store/types'
+  axios.defaults.withCredentials = true
   export default {
     data () {
       return {
@@ -55,7 +56,7 @@
     },
     methods: {
       handleSubmit(data) {
-//          console.log(this.$store.state.token)
+          console.log(axios.defaults.withCredentials)
         console.log(this.loginUrl)
         if(data.user&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
