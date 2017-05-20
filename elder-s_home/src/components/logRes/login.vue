@@ -11,7 +11,7 @@
 <template>
   <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
     <Form-item prop="user">
-      <Input type="text" v-model="formInline.user" placeholder="Username">
+      <Input type="text" v-model="formInline.userName" placeholder="Username">
       <Icon type="ios-person-outline" slot="prepend"></Icon>
       </Input>
     </Form-item>
@@ -28,16 +28,16 @@
 <script>
   import axios from 'axios' //引入axios
   import * as types from '../../store/types'
-  axios.defaults.withCredentials = true
+//  axios.defaults.withCredentials = true
   export default {
     data () {
       return {
         formInline: {
-          user: '',
+          userName: '',
           password: ''
         },
         ruleInline: {
-          user: [
+          userName: [
             {required: true, message: '请填写用户名', trigger: 'blur'}
           ],
           password: [
@@ -56,10 +56,10 @@
     },
     methods: {
       handleSubmit(data) {
-          console.log(axios.defaults.withCredentials)
         console.log(this.loginUrl)
-        if(data.user&&data.password){
-          axios.post(this.loginUrl,data).then((response) =>{
+        if(data.userName&&data.password){
+          axios.post(this.loginUrl,data,{withCredentials:true}).then((response) =>{
+            console.log(response)
             this.$Message.success('提交成功!');
 
 //            this.$router.push({path:'/Home'})
