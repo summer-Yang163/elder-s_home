@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/store'
+import * as types from '../store/types'
 
 Vue.use(VueRouter)
 import routes from './routes'
@@ -32,18 +33,18 @@ router.beforeEach((to, from, next) => {
   // console.log(to.matched)
   if (to.matched.some(r => r.meta.requiresAuth)) {
     // console.log(r.meta.requireAuth)
+    //还要判断用户权限，是否允许登入其他的系统
     if (store.state.token) {
       next();
     }
     else {
       next({
-        // path: '/login',
-        // query: {redirect: to.fullPath}
+        path: '/login',
+        query: {redirect: to.fullPath}
       })
     }
   }
   else {
-    console.log('de')
     next();
   }
 })

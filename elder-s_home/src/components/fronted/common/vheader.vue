@@ -67,7 +67,7 @@
             养老小贴士
           </Menu-item>
         </router-link>
-        <router-link to="/homeCenter" v-if="user">
+        <router-link to="/homeCenter" v-if="userName">
           <!-- v-if -->
           <Menu-item name="homeCenter">
             <Icon type="ios-home"></Icon>
@@ -75,12 +75,12 @@
           </Menu-item>
         </router-link>
       </div>
-<div v-if="activeDis">
-        <Menu-item name="login" style="float:right"  v-if="!user">
+     <div v-if="activeDis">
+        <Menu-item name="login" style="float:right"  v-if="!userName">
           <router-link to="/login">注册登录</router-link>
       </Menu-item>
       <div v-else>
-      <Menu-item name="user" style="float:right" >
+      <Menu-item name="user" style="float:right" @click="loginOut()" >
         退出
       </Menu-item>
         <Menu-item name="user" style="float:right" >
@@ -93,27 +93,37 @@
   </div>
 </template>
 <script>
-//  const localStorage = window.localStorage
+  import axios from 'axios' //引入axios
+  import * as types from '../../../store/types'
+  const localStorage = window.localStorage
   export default {
     data(){
       return {
-        userName:'小八',
-        user:true
+          loginOutUrl:this.HOST+''
       }
     },
     computed:{
       headdata:function(){
-          return this.$route.name
+        const pathname = this.$route.path.split('/')
+          return pathname[1]
       },
       activeDis:function(){
-//          console.log(localStorage);
-//        localStorage.setItem('ms_username','dh')
-//        localStorage.removeItem('ms_username','')
           return  this.$route.name != 'login'
+      },
+      userName:function(){
+          return localStorage.token
       }
     },
     methods:{
-
+      loginOut(){
+        axios.post(this.loginOutUrl).then(function(response){
+          this.$Message.success('退出成功!')
+          this.$store.commit(types.LOGOUT)
+          this.$router.push({path:'/login'})
+        }).catch(function(error){
+          this.$Message.error('退出失败!');
+        })
+      }
     }
   }
 </script>
