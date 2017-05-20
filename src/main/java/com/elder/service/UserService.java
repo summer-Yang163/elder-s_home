@@ -8,6 +8,6 @@ import com.elder.domain.User;
 public interface UserService {
     User validateUserName(String userName);
     int registerUser(String userName,String password,int typeId);
-    User userLogin(String userName,String password);
+    void userLogin(User user);
     void userLogOut();
 }
