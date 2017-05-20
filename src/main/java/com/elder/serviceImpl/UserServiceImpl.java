@@ -30,10 +30,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User userLogin(String userName, String password) {
-        User user = userMapper.userLogin(userName, password);
+    public void userLogin(User user) {
+        userMapper.userLogin(user.getUserName(),user.getPassword());
         SessionUtils.bindSession("user",user);
-        return user;
     }
 
     @Override

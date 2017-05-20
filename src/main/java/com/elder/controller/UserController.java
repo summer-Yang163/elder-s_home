@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * Created by jsf on 2017/5/15.
  */
 @Controller
@@ -34,7 +35,7 @@ public class UserController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/registerUser/{userName}/{password}")
+    @RequestMapping("/registerUser")
     @ResponseBody
     public Map<String, Object> registerUser(@PathVariable String userName, @PathVariable String password) {
         Map<String, Object> map = new HashMap<>();
@@ -46,12 +47,13 @@ public class UserController extends BaseController {
         }
         return map;
     }
-    @CrossOrigin(origins="http://localhost:8087")
-    @RequestMapping(value = "/userLogin/{userName}/{password}", method = RequestMethod.GET)
+    //支持跨域请求
+    @CrossOrigin
+    @RequestMapping(value = "/userLogin/", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> userLogin(@PathVariable String userName, @PathVariable String password) {
+    public Map<String, Object> userLogin(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
-        User user = userService.userLogin(userName, password);
+        userService.userLogin(user);
         if (user != null) {
             map.put("user", user);
             map = generateSuccessMsg("登录成功");
@@ -71,7 +73,7 @@ public class UserController extends BaseController {
     }
     @RequestMapping("/user/queryUserByPage/{userPageNow}/{userPageSize}")
     @ResponseBody
-    public List<User> queryUserByPage(@PathVariable int userPageNow,@PathVariable int userPageSize){
+    public List<User> queryUserByPage0(@PathVariable int userPageNow,@PathVariable int userPageSize){
         List<User> userList=new ArrayList<User>();
         return userList;
     }
