@@ -19,13 +19,12 @@
     <Breadcrumb-item href="/homeCenter/personInf" >
       <span style="color:orange"><Icon type="pound"></Icon> 个人信息</span>
     </Breadcrumb-item>
-    <Button type="ghost" style="float:right;" >修改</Button>
+    <Button type="ghost" style="float:right;" @click="modify=true">修改</Button>
   </Breadcrumb>
-  <Card class='fromCard'>
-
+  <Card class='fromCard' v-if="modify">
     <Form :model="formLeft" label-position="left" :label-width="100">
-      <Form-item label="姓名" >
-        <Input v-model="formLeft.input1" disabled="true"></Input>
+      <Form-item label="真实姓名" >
+        <Input v-model="formLeft.trueName" ></Input>
       </Form-item>
       <Form-item label="性别" prop="gender">
         <Radio-group v-model="formLeft.gender" >
@@ -33,21 +32,20 @@
           <Radio label="female" >女</Radio>
         </Radio-group>
       </Form-item>
-
       <Form-item label="电话">
-        <Input v-model="formLeft.input3"></Input>
+        <Input v-model="formLeft.phone"></Input>
       </Form-item>
       <Form-item label="年龄">
-        <Input v-model="formLeft.input4"></Input>
+        <Input v-model="formLeft.age"></Input>
       </Form-item>
       <Form-item label="邮箱">
-        <Input v-model="formLeft.input5"></Input>
+        <Input v-model="formLeft.email"></Input>
       </Form-item>
       <Form-item label="用户住址">
-        <Input v-model="formLeft.input6"></Input>
+        <Input v-model="formLeft.address"></Input>
       </Form-item>
       <Form-item label="关联老人">
-        <Input v-model="formLeft.input7"></Input>
+        <Input v-model="formLeft.oldName"></Input>
       </Form-item>
       <Form-item>
         <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -55,23 +53,57 @@
       </Form-item>
     </Form>
   </Card>
+    <Card class='fromCard' v-if="" title="个人信息卡片">
+      <ul>
+        <li>
+          <p class="li_left">真实姓名</p>
+          <p class="li_right" >mingzi </p>
+        </li>
+        <li>
+          <p>性别</p>
+          <p></p>
+        </li>
+        <li>
+          <p>电话</p>
+          <p></p>
+        </li>
+        <li>
+          <p>年龄</p>
+          <p></p>
+        </li>
+        <li>
+          <p>邮箱</p>
+          <p></p>
+        </li>
+        <li>
+          <p>用户住址</p>
+          <p></p>
+        </li>
+        <li>
+          <p>关联老人</p>
+          <p></p>
+        </li>
+      </ul>
+    </Card>
   </div>
 </template>
 <script>
 export default{
     data(){
         return {
+          modify:'',
           formLeft: {
-            input1: '小八',
-            gender: 'female',
-            input3: '18326187811',
-            input4: '18',
-            input5: '2448415727@qq.com',
-            input6: '住址',
-            input7: '李向阳'
+            trueName: '',
+            gender: '',
+            phone: '',
+            age: '',
+            email: '',
+            address: '',
+            oldName: ''
           }
         }
     },
+
   methods:{
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {

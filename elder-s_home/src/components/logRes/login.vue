@@ -11,7 +11,7 @@
 <template>
   <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
     <Form-item prop="user">
-      <Input type="text" v-model="formInline.user" placeholder="Username">
+      <Input type="text" v-model="formInline.userName" placeholder="Username">
       <Icon type="ios-person-outline" slot="prepend"></Icon>
       </Input>
     </Form-item>
@@ -28,16 +28,15 @@
 <script>
   import axios from 'axios' //引入axios
   import * as types from '../../store/types'
-  axios.defaults.withCredentials = true
   export default {
     data () {
       return {
         formInline: {
-          user: '',
+          userName: '',
           password: ''
         },
         ruleInline: {
-          user: [
+          userName: [
             {required: true, message: '请填写用户名', trigger: 'blur'}
           ],
           password: [
@@ -45,7 +44,6 @@
             {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
           ]
         },
-//        loginUrl:'http://localhost:8087/elder_home/user/userLogin',
         loginUrl:this.HOST+'/user/userLogin'
 
       }
@@ -56,14 +54,33 @@
     },
     methods: {
       handleSubmit(data) {
-          console.log(axios.defaults.withCredentials)
-        console.log(this.loginUrl)
-        if(data.user&&data.password){
+        if(data.userName&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
-            this.$Message.success('提交成功!');
+            if(response.data.success){
+              this.$Message.success('提交成功!');
+              this.$store.commit(types.LOGIN, data.userName)
+              //判断权限:1 普通用户 2 社区服务人员 3 普通管理员 4 超级管理员
+              switch(response.data){
+                case 1:
+                  this.$router.push({path:'/Home'})
+                      break;
+                case 2:
+                  this.$router.push({path:'/serviceWork'})
+                      break;
+                case 3:
+                  this.$router.push({path:'/serviceWork'})
+                      break;
+                case 4:
+                  this.$router.push({path:'/backEnd'})
+                      break;
+              }
 
-//            this.$router.push({path:'/Home'})
+            }else{
+              this.$Message.error('登陆失败!');
+            }
           },(response)=>{
+            this.$Message.error('登陆失败!');
+          }).catch(function(error){
             this.$Message.error('登陆失败!');
           });
         }else{

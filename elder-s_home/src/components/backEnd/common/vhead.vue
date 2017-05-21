@@ -157,24 +157,6 @@
      update(route){
           console.log(this.$refs)
      }
-//      update (route) {
-//        const path = route ? route.path : this.$route.path
-//        const openName = path.split('/')[2]
-//        const activeName = '/' + openName
-//        alert(path)
-//        console.log(openName)
-//
-//        this.$set(this, 'activeName', activeName)
-//        this.$set(this, 'openNames', [openName])
-//
-//        this.$nextTick(() => {
-//          this.$refs.menu.updateActiveName()
-//          this.$refs.menu.$children.forEach((item) => {
-//            item.opened = false
-//          })
-//          this.$refs.menu.updateOpened()
-//        })
-//      }
     }
   }
 </script>
