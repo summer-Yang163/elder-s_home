@@ -21,4 +21,5 @@ new Vue({
     render: h => h(App)
     // template: '<App/>',
     // components: { App }//注册app组件
+
 });
