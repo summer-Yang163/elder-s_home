@@ -153,10 +153,7 @@
     methods:{
       handleSelect (name) {
         this.$router.push(name)
-      },
-     update(route){
-          console.log(this.$refs)
-     }
+      }
     }
   }
 </script>

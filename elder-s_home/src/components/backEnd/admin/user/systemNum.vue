@@ -38,6 +38,7 @@
   <div >
     <AddModal :ModalType="ModalType" @changeMod ='onResChange'></AddModal>
     <div class="layout-header">
+
     </div>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
