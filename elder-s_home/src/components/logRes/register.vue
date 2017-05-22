@@ -17,12 +17,32 @@ width:150px;
         <Form-item label="确认密码" prop="password2">
             <Input type="password" v-model="formValidate.password2" placeholder="请再次输入密码"></Input>
         </Form-item>
-            <Button type="primary" @click="handleSubmit(formValidate)" class="bregister">注册</Button>
+            <Button type="primary" @click="reHandleSubmit(formValidate)" class="bregister">注册</Button>
     </Form>
 </template>
 <script>
-    export default {
+  import axios from 'axios' //引入axios
+
+  export default {
         data () {
+          const validateName = (rule, value, callback)=>{
+            if(!value){
+              callback(new Error('用户名不能为空'));
+            }else{
+              const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+              axios.post(valiNameUrl).then((response) =>{
+                if(!response.data.success){
+                  callback(new Error('用户名已存在'));
+                }else{
+                  callback();
+                }
+              },(response)=>{
+                callback(new Error('用户名已存在'));
+              }).catch(function(error){
+                callback(new Error('用户名已存在'));
+              });
+            }
+          };
             return {
                 formValidate: {
                     name: '',
@@ -33,7 +53,8 @@ width:150px;
                 },
                 ruleValidate: {
                     name: [
-                        { required: true, message: '用户名不能为空', trigger: 'blur' }
+                      {required: true,validator: validateName,  trigger: 'blur'}
+//                        { required: true, message: '用户名不能为空', trigger: 'blur' }
                     ],
                     phone:[
                         { required: true, message: '手机号码不能为空', trigger: 'blur' }
@@ -45,19 +66,19 @@ width:150px;
                         { required: true, message: '请填写确认密码', trigger: 'blur' }
                     ]
                 },
-              resUrl:'http://rapapi.org/mockjs/18342/register'
+              resUrl:this.HOST+'/user/registerUser/'
             }
         },
         methods: {
-            handleSubmit (data) {
+          reHandleSubmit (data) {
+            const regDataUrl = this.resUrl+data.name +'/'+ data.password1
               if(data.name&&data.phone&&data.password1&&data.password2){
                 if(data.password2 ==data.password1 ){
-                  axios.post(this.resUrl,name).then((json)=>{
-                    console.log(json.data);
-                    this.$Message.success('提交成功!');
-//                        if(json.data){
-                    //        this.$router.go(0);
-                    //         }
+                  axios.post(regDataUrl).then((json)=>{
+                        if(json.data.success){
+                          this.$Message.success('提交成功!');
+                            this.$router.go(0);
+                          }
                   },(json)=>{
                     this.$Message.error('表单验证失败!');
                   })
@@ -67,7 +88,6 @@ width:150px;
               }else{
                 this.$Message.warning('请将注册信息填写完整!');
               }
-//
             },
             handleReset (name) {
                 this.$refs[name].resetFields();

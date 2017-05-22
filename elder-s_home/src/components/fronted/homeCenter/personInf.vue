@@ -101,8 +101,9 @@
 <script>
   import axios from 'axios' //引入axios
   import * as types from '../../../store/types'
-  const local
-export default{
+  const localStorage = window.localStorage
+
+  export default{
     data(){
         return {
           modify:'',
@@ -118,7 +119,8 @@ export default{
         }
     },
   beforeRouteEnter (to, from, next) {
-//        console.log
+        console.log(localStorage.token)
+    next()
 //    axios.get(to.params.id, (err, post) =>{
 //    if (err) {
 //      // display some global error message
