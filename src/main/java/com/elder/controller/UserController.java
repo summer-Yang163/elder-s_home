@@ -47,8 +47,6 @@ public class UserController extends BaseController {
         }
         return map;
     }
-    //支持跨域请求
-    @CrossOrigin
     @RequestMapping(value = "/userLogin")
     @ResponseBody
     public Map<String, Object> userLogin(@RequestBody User user) {
