@@ -2,6 +2,7 @@ package com.elder.controller;
 
 import com.elder.domain.User;
 import com.elder.enums.UserTypeEnums;
+import com.elder.selfDefineAnnotation.JsonArg;
 import com.elder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,21 @@ public class UserController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/registerUser")
+//    @RequestMapping("/registerUser/{userName}/{password}")
+//    @ResponseBody
+//    public Map<String, Object> registerUser(@PathVariable String userName, @PathVariable String password) {
+//        Map<String, Object> map = new HashMap<>();
+//        int i = userService.registerUser(userName, password, UserTypeEnums.ORDINARY.getTypeId());
+//        if (i != 0) {
+//            map = generateSuccessMsg("注册成功");
+//        } else {
+//            map = generateFailureMsg("注册失败");
+//        }
+//        return map;
+//    }
+    @RequestMapping("/registerUser/{userName}/{password}")
     @ResponseBody
-    public Map<String, Object> registerUser(@PathVariable String userName, @PathVariable String password) {
+    public Map<String, Object> registerUser(@JsonArg("userName") String userName, @JsonArg("password") String password) {
         Map<String, Object> map = new HashMap<>();
         int i = userService.registerUser(userName, password, UserTypeEnums.ORDINARY.getTypeId());
         if (i != 0) {
@@ -77,5 +90,6 @@ public class UserController extends BaseController {
         List<User> userList = new ArrayList<User>();
         return userList;
     }
+
 
 }
