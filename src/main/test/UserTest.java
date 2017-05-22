@@ -69,6 +69,12 @@ public class UserTest extends BaseJunitTest {
 //         assertEquals("该用户名可以使用",(String)responseMap1.get("msg"));
 
     }
+    @Test
+    public void queryAllCommonUserByPage(){
+        String url=localhost+"/user/queryAllCommonUserByPage/{pageNow}/{pageSize}";
+        Map<String,Object> responseMap=restTemplate.getForObject(url,Map.class,1,8);
+        assertEquals("查询成功",(String)responseMap.get("msg"));
+    }
 
 
 }

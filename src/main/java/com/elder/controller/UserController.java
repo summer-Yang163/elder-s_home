@@ -84,11 +84,20 @@ public class UserController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/user/queryUserByPage/{userPageNow}/{userPageSize}")
+    @RequestMapping("/queryAllCommonUserByPage/{pageNow}/{pageSize}")
     @ResponseBody
-    public List<User> queryUserByPage0(@PathVariable int userPageNow, @PathVariable int userPageSize) {
+    public Map<String, Object> queryAllCommonUserByPage(@PathVariable int pageNow, @PathVariable int pageSize) {
         List<User> userList = new ArrayList<User>();
-        return userList;
+        Map<String,Object> map=new HashMap<>();
+        try {
+            userList=userService.queryAllCommonUserByPage(UserTypeEnums.ORDINARY.getTypeId(),pageNow,pageSize);
+            map=generateSuccessMsg("查询成功");
+            map.put("userList",userList);
+        } catch (Exception e) {
+            map=generateFailureMsg("查询失败");
+            e.printStackTrace();
+        }
+        return map;
     }
 
 

@@ -89,4 +89,8 @@
   <select id="userLogin" resultMap="BaseResultMap">
     select * from user  where User_Name=#{userName,jdbcType=VARCHAR} and Password=#{password,jdbcType=VARCHAR}
   </select>
+  <select id="queryAllCommonUserByPage" resultMap="BaseResultMap" >
+     select * from user WHERE Type_Id=#{typeId} limit #{count},#{pageSize}
+  </select>
+
 </mapper>
