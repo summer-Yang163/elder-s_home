@@ -96,7 +96,6 @@
   import axios from 'axios' //引入axios
   import * as types from '../../../store/types'
   const localStorage = window.localStorage
-  const that = this;
 
   export default {
     data(){

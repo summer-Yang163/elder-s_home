@@ -24,20 +24,32 @@
     padding: 10px 0 20px;
     color: #9ea7b4;
   }
-  .layout-header {
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-  }
+
   .layout-content-main .page{
     float:right;
     padding: 10px 0;
   }
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+  .demo-spin-col{
+    height: 200px;
+    text-align: center;
+    position: relative;
+    font-size:30px;
+    /*border: 1px solid #eee;*/
+  }
+
 </style>
 <template>
   <div >
-    <div class="layout-header">
-    </div>
+  <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
@@ -45,14 +57,19 @@
         <Breadcrumb-item>普通用户管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button style="margin-right:25px;" >新增</Button>
+        <Button style="margin-right:25px;"  @click=" add()">新增</Button>
         <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
+          <Col class="demo-spin-col" v-if="spinshow">
+          <Spin fix>加载中...</Spin>
+        </Col>
+        <div v-else>
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total :page-size=pageSize></Page>
+        <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+        </div>
       </div>
     </div>
     <div class="layout-copy">
@@ -62,10 +79,15 @@
 
 </template>
 <script>
-  import axios from 'axios'
+import AddModal from './userAdd'
+import sysHead from '../../common/adminName'
+import axios from 'axios'
   export default {
-      data(){
+    components:{AddModal,sysHead},
+    data(){
           return {
+            ModalType:false,
+            userData:'',
             columns4: [
               {
                 type: 'index',
@@ -180,23 +202,28 @@
                 address: '北京市海淀区西二旗'
               }
             ],
-            pageSize:8
+            pageSize:4,
+            spinshow:false
           }
       },
-    beforeRouteEnter (to, from, next) {
-       const HOST = 'http://127.0.0.1:8087/elder_home'
-      const valiNameUrl=HOST+'/user/validateUserName/'+'zhangsan'
-      axios.post(valiNameUrl).then((response) =>{
-        if(!response.data.success){
-          data1 = response.data;
-        }else{
-          next(false)
-        }
-      },(response)=>{
-        next(false)
-      }).catch((error)=>{
-        next(false)
-      });
+      created(){
+          this.getUserData(1)
+      },
+
+//    beforeRouteEnter (to, from, next) {
+//       const HOST = 'http://127.0.0.1:8087/elder_home'
+//      const valiNameUrl=HOST+'/user/validateUserName/'+'zhangsan'
+//      axios.post(valiNameUrl).then((response) =>{
+//        if(!response.data.success){
+//          data1 = response.data;
+//        }else{
+//          next(false)
+//        }
+//      },(response)=>{
+//        next(false)
+//      }).catch((error)=>{
+//        next(false)
+//      });
 //      axios.get(to.params.id, (err, post) =>{
 //      if (err) {
 //        // display some global error message
@@ -207,9 +234,50 @@
 //        })
 //      }
 //    })
-  },
+//  },
   watch:{
 
-  }
+  },
+    methods:{
+      getUserData(current){
+//          const currentPage = this.current
+        console.log(current)
+          const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
+//        axios.get(getUserUrl).then((response) =>{
+//              this.spinShow = !this.spinShow
+//              console.log(response)
+////        if(!response.data.success){
+////          data1 = response.data;
+////        }else{
+////          next(false)
+////        }
+//      },(response)=>{
+//              console.log(2)
+////        next(false)
+//      }).catch((error)=>{
+//          console.log(3)
+////        next(false)
+//      });
+      },
+      add(){
+          this.ModalType=true;
+          this.userData = '12'
+      },
+      onResChange(val){
+        this.ModalType = val //外部改变ModalType的值
+      },
+      modify (index) {
+        console.log(index)
+        this.$Modal.info({
+          title: '用户信息',
+          content: `用户名：${this.data1[index].User_Name}<br>用户密码：${this.data1[index].Password}<br>用户类型：${this.data1[index].Type_Name}`
+        })
+      },
+      remove (index) {
+        console.log(index)
+//        this.data6.splice(index, 1);
+      },
+    }
   }
 </script>
+<!-- 增删改查-->
