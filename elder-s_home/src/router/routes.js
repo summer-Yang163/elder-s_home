@@ -140,6 +140,7 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
       name:'backEnd',
       redirect: '/backEnd/userManage',
       component:BackEnd,
+      meta:{requiresAuth:true},
       children:[
         {
           path:'/backEnd/userManage',
@@ -203,7 +204,7 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
       name:'serviceWork',
       redirect: '/serviceWork/processProj',
       component:ServiceWork,
-      meta:{},
+      meta:{requiresAuth:true},
       children:[
         {
           path:'/serviceWork/processProj',

@@ -29,15 +29,12 @@
         <mvc:argument-resolvers>
               <bean class="com.elder.resolver.JsonPathArgumentResolver"/>
         </mvc:argument-resolvers>
-        <!--处理@Controller请求与相应的转换器-->
         <mvc:message-converters register-defaults="false">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg name="defaultCharset" value="UTF-8"/>
             </bean>
             <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
-            <!--使用该转换器将@RequestBody注释的返回的对象映射到JSON-->
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <!--使用该ObjectMapper将JSON映射到JavaBean-->
                 <property name="objectMapper">
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">
                         <property name="dateFormat">

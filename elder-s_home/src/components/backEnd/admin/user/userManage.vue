@@ -52,7 +52,7 @@
     <div class="layout-content">
       <div class="layout-content-main">
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total page-size=8></Page>
+        <Page  class="page" :total=data1.length show-total :page-size=pageSize></Page>
       </div>
     </div>
     <div class="layout-copy">
@@ -62,6 +62,7 @@
 
 </template>
 <script>
+  import axios from 'axios'
   export default {
       data(){
           return {
@@ -178,10 +179,37 @@
                 age: 25,
                 address: '北京市海淀区西二旗'
               }
-            ]
+            ],
+            pageSize:8
           }
-      }
-//    components:{Vhead}
+      },
+    beforeRouteEnter (to, from, next) {
+       const HOST = 'http://127.0.0.1:8087/elder_home'
+      const valiNameUrl=HOST+'/user/validateUserName/'+'zhangsan'
+      axios.post(valiNameUrl).then((response) =>{
+        if(!response.data.success){
+          data1 = response.data;
+        }else{
+          next(false)
+        }
+      },(response)=>{
+        next(false)
+      }).catch((error)=>{
+        next(false)
+      });
+//      axios.get(to.params.id, (err, post) =>{
+//      if (err) {
+//        // display some global error message
+//        next(false)
+//      } else {
+//        next(vm => {
+//          vm.post = post
+//        })
+//      }
+//    })
+  },
+  watch:{
 
+  }
   }
 </script>

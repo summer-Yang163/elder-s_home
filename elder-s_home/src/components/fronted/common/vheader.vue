@@ -96,6 +96,8 @@
   import axios from 'axios' //引入axios
   import * as types from '../../../store/types'
   const localStorage = window.localStorage
+  const that = this;
+
   export default {
     data(){
       return {
@@ -116,24 +118,38 @@
     },
     methods:{
       loginOut(){
-        axios.post(this.loginOutUrl).then(function(response){
-            console.log(response)
-          if(!response.data.success){
-//            this.$store.commit(types.LOGOUT)
-//            this.$Message.success('退出成功!')
-//            this.$Notice.open({
-//              title: '退出成功'
-//            });
+        axios.post(this.loginOutUrl)
+          .then((response) =>{
+            if(!response.data.success){
+            this.$store.commit(types.LOGOUT)
+            this.$Message.success('退出成功!')
             this.$router.push({path:'/login'})
           }else{
-//            this.$Message.error('退出失败!');
-            console.log('de2')
-
+            this.$Message.error('退出失败!');
           }
-        }).catch(function(error){
-            console.log(error)
-//          this.$Message.error('退出失败!');
-        })
+          })
+          .catch((error) =>{
+            this.$Message.error('退出失败!');
+          });
+          //axios中直接使用function 会改变原先的this指向，所以要调用全局参数，尽量用箭头函数
+//        axios.post(this.loginOutUrl).then(function(response){
+//            console.log(that)
+//          if(!response.data.success){
+////            this.$store.commit(types.LOGOUT)
+////            this.$Message.success('退出成功!')
+////            this.$Notice.open({
+////              title: '退出成功'
+////            });
+//            that.$router.push({path:'/login'})
+//          }else{
+////            this.$Message.error('退出失败!');
+//            console.log('de2')
+//
+//          }
+//        }).catch(function(error){
+//            console.log(error)
+////          this.$Message.error('退出失败!');
+//        })
       }
 
     }
