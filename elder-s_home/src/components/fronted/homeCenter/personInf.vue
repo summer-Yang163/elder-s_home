@@ -9,6 +9,17 @@
   /*margin-left:30px;*/
   margin:0 auto;
 }
+.fromCard li{
+  overflow: auto;
+}
+.fromCard p{
+  line-height:40px;
+}
+.fromCard  .li_left{
+  float:left;
+  width:100px;
+  margin-right:20px;
+}
 </style>
 <template>
   <div>
@@ -57,38 +68,42 @@
       <ul>
         <li>
           <p class="li_left">真实姓名</p>
-          <p class="li_right" >mingzi </p>
+          <p class="li_right" >李明 </p>
         </li>
         <li>
-          <p>性别</p>
-          <p></p>
+          <p class="li_left">性别</p>
+          <p class="li_right" >男 </p>
         </li>
         <li>
-          <p>电话</p>
-          <p></p>
+          <p class="li_left">电话</p>
+          <p class="li_right" >18326111111 </p>
         </li>
         <li>
-          <p>年龄</p>
-          <p></p>
+          <p class="li_left">年龄</p>
+          <p class="li_right" >28 </p>
         </li>
         <li>
-          <p>邮箱</p>
-          <p></p>
+          <p class="li_left">邮箱</p>
+          <p class="li_right" >123456789@qq.com </p>
         </li>
         <li>
-          <p>用户住址</p>
-          <p></p>
+          <p class="li_left">用户住址</p>
+          <p class="li_right" >安徽省合肥市 </p>
         </li>
         <li>
-          <p>关联老人</p>
-          <p></p>
+          <p class="li_left">关联老人</p>
+          <p class="li_right" >李志明 </p>
         </li>
       </ul>
     </Card>
   </div>
 </template>
 <script>
-export default{
+  import axios from 'axios' //引入axios
+  import * as types from '../../../store/types'
+  const localStorage = window.localStorage
+
+  export default{
     data(){
         return {
           modify:'',
@@ -103,6 +118,20 @@ export default{
           }
         }
     },
+  beforeRouteEnter (to, from, next) {
+        console.log(localStorage.token)
+    next()
+//    axios.get(to.params.id, (err, post) =>{
+//    if (err) {
+//      // display some global error message
+//      next(false)
+//    } else {
+//      next(vm => {
+//        vm.post = post
+//      })
+//    }
+//  })
+},
 
   methods:{
     handleSubmit (name) {

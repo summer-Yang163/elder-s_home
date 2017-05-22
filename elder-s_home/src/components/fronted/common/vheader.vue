@@ -79,9 +79,9 @@
         <Menu-item name="login" style="float:right"  v-if="!userName">
           <router-link to="/login">注册登录</router-link>
       </Menu-item>
-      <div v-else>
-      <Menu-item name="user" style="float:right" @click="loginOut()" >
-        退出
+      <div v-else >
+      <Menu-item name="user" style="float:right">
+        <Button type="primary" shape="circle" @click="loginOut()">退出</Button>
       </Menu-item>
         <Menu-item name="user" style="float:right" >
           <Icon type="ios-people"></Icon>
@@ -99,7 +99,7 @@
   export default {
     data(){
       return {
-          loginOutUrl:this.HOST+''
+          loginOutUrl:this.HOST+'/user/userLogOut'
       }
     },
     computed:{
@@ -117,13 +117,25 @@
     methods:{
       loginOut(){
         axios.post(this.loginOutUrl).then(function(response){
-          this.$Message.success('退出成功!')
-          this.$store.commit(types.LOGOUT)
-          this.$router.push({path:'/login'})
+            console.log(response)
+          if(!response.data.success){
+//            this.$store.commit(types.LOGOUT)
+//            this.$Message.success('退出成功!')
+//            this.$Notice.open({
+//              title: '退出成功'
+//            });
+            this.$router.push({path:'/login'})
+          }else{
+//            this.$Message.error('退出失败!');
+            console.log('de2')
+
+          }
         }).catch(function(error){
-          this.$Message.error('退出失败!');
+            console.log(error)
+//          this.$Message.error('退出失败!');
         })
       }
+
     }
   }
 </script>

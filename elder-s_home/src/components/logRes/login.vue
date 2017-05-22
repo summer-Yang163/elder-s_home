@@ -2,16 +2,14 @@
   #login {
     margin-top: 40px;
   }
-
   #blogin Button {
     width: 100px;
   }
-
 </style>
 <template>
   <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
-    <Form-item prop="user">
-      <Input type="text" v-model="formInline.userName" placeholder="Username">
+    <Form-item prop="userName">
+      <Input   type="text" v-model="formInline.userName" placeholder="Username" >
       <Icon type="ios-person-outline" slot="prepend"></Icon>
       </Input>
     </Form-item>
@@ -30,22 +28,39 @@
   import * as types from '../../store/types'
   export default {
     data () {
-      return {
+      const validateName = (rule, value, callback)=>{
+        if(!value){
+          callback(new Error('请输入用户名'));
+        }else{
+        const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+        axios.post(valiNameUrl).then((response) =>{
+            if(!response.data.success){
+              callback();
+            }else{
+              callback(new Error('用户名不存在'));
+            }
+        },(response)=>{
+          callback(new Error('用户名不存在'));
+        }).catch(function(error){
+          callback(new Error('用户名不存在'));
+        });
+        }
+      };
+        return {
         formInline: {
           userName: '',
           password: ''
         },
         ruleInline: {
           userName: [
-            {required: true, message: '请填写用户名', trigger: 'blur'}
+            {validator: validateName,  trigger: 'blur'}
           ],
           password: [
             {required: true, message: '请填写密码', trigger: 'blur'},
             {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
           ]
         },
-        loginUrl:this.HOST+'/user/userLogin'
-
+        loginUrl:this.HOST+'/user/userLogin',
       }
 
     },
@@ -57,10 +72,11 @@
         if(data.userName&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             if(response.data.success){
+                console.log(response.data)
               this.$Message.success('提交成功!');
               this.$store.commit(types.LOGIN, data.userName)
               //判断权限:1 普通用户 2 社区服务人员 3 普通管理员 4 超级管理员
-              switch(response.data){
+              switch(response.data.Type_Id){
                 case 1:
                   this.$router.push({path:'/Home'})
                       break;
