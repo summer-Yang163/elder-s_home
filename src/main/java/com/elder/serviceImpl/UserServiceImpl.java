@@ -30,10 +30,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int userLogin(User user) {
-        int type_id=userMapper.userLogin(user.getUserName(),user.getPassword());
-        SessionUtils.bindSession("user",user);
-        return type_id;
+    public User userLogin(User user) {
+        User validateUser=userMapper.userLogin(user.getUserName(),user.getPassword());
+        if(validateUser!=null){
+            SessionUtils.bindSession("user",user);
+        }
+        return validateUser;
     }
 
     @Override

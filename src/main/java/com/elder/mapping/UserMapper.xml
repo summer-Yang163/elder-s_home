@@ -86,7 +86,7 @@
   <insert id="registerUser">
     insert into user (User_Name,Password,Type_Id) VALUES (#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{typeId,jdbcType=INTEGER})
   </insert>
-  <select id="userLogin" resultType="java.lang.Integer">
-    select Type_Id from user  where User_Name=#{userName,jdbcType=VARCHAR} and Password=#{password,jdbcType=VARCHAR}
+  <select id="userLogin" resultMap="BaseResultMap">
+    select * from user  where User_Name=#{userName,jdbcType=VARCHAR} and Password=#{password,jdbcType=VARCHAR}
   </select>
 </mapper>

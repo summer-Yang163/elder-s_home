@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * Created by jsf on 2017/5/15.
  */
 @Controller
@@ -47,18 +46,18 @@ public class UserController extends BaseController {
         }
         return map;
     }
+
     @RequestMapping(value = "/userLogin")
     @ResponseBody
     public Map<String, Object> userLogin(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
-        try {
-            int type_id=userService.userLogin(user);
-            map.put("Type_Id",type_id);
+        User validateUser = userService.userLogin(user);
+        if (validateUser != null) {
             map = generateSuccessMsg("登录成功");
-
-        } catch (Exception e) {
+            map.put("Type_Id", validateUser.getTypeId());
+        } else {
             map = generateFailureMsg("登录失败，请检查用户名密码是否正确");
-            e.printStackTrace();
+            map.put("Type_Id", 0);
         }
         return map;
     }
@@ -71,10 +70,11 @@ public class UserController extends BaseController {
         map = generateSuccessMsg("您已经成功退出该系统");
         return map;
     }
+
     @RequestMapping("/user/queryUserByPage/{userPageNow}/{userPageSize}")
     @ResponseBody
-    public List<User> queryUserByPage0(@PathVariable int userPageNow,@PathVariable int userPageSize){
-        List<User> userList=new ArrayList<User>();
+    public List<User> queryUserByPage0(@PathVariable int userPageNow, @PathVariable int userPageSize) {
+        List<User> userList = new ArrayList<User>();
         return userList;
     }
 
