@@ -2,11 +2,9 @@
   #login {
     margin-top: 40px;
   }
-
   #blogin Button {
     width: 100px;
   }
-
 </style>
 <template>
   <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
