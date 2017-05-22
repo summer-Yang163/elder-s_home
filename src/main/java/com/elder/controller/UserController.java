@@ -52,8 +52,10 @@ public class UserController extends BaseController {
     public Map<String, Object> userLogin(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         try {
-            userService.userLogin(user);
+            int type_id=userService.userLogin(user);
+            map.put("Type_Id",type_id);
             map = generateSuccessMsg("登录成功");
+
         } catch (Exception e) {
             map = generateFailureMsg("登录失败，请检查用户名密码是否正确");
             e.printStackTrace();

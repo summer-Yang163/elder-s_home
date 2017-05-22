@@ -21,6 +21,7 @@ public class UserTest extends BaseJunitTest {
         user.setPassword("666888");
         String url=localhost+"/user/userLogin";
         Map<String, Object> responseMap = restTemplate.postForObject(url,user,Map.class);
+        assertEquals(Integer.valueOf(1),(Integer) responseMap.get("Type_Id"));
         assertEquals("登录成功", (String) responseMap.get("msg"));//前面是期望值，通常是用户指定的内容，actual是被测试的代码返回的实际值
         assertEquals(true, (boolean) responseMap.get("success"));
     }

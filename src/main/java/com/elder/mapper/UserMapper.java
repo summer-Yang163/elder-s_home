@@ -22,5 +22,5 @@ public interface UserMapper {
 
     int registerUser(@Param("userName") String userName, @Param("password") String password, @Param("typeId") int typeId);
 
-    void userLogin(@Param("userName")String userName,@Param("password") String password);
+    int  userLogin(@Param("userName")String userName,@Param("password") String password);
 }
