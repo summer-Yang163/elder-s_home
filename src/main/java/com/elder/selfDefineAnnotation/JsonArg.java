@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Created by jsf on 2017/5/22.
  */
-@Target({ElementType.TYPE,ElementType.PARAMETER})
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JsonArg {
     String value() default "";

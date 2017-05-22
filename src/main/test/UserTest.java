@@ -1,6 +1,7 @@
-import com.alibaba.fastjson.JSONObject;
 import com.elder.domain.User;
 import com.elder.mapper.UserMapper;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,13 +30,35 @@ public class UserTest extends BaseJunitTest {
         assertEquals("登录成功", (String) responseMap.get("msg"));//前面是期望值，通常是用户指定的内容，actual是被测试的代码返回的实际值
         assertEquals(true, (boolean) responseMap.get("success"));
     }
-
+//    @Test
+//    public void userLoginTest1() {
+//        JSONObject jsonObject=new JSONObject();
+//        jsonObject.put("userName","zhangsan");
+//        jsonObject.put("password","666888");
+//        User user= (User)JSONObject.toBean(jsonObject,User.class);
+//        String url = localhost + "/user/userLogin";
+//        Map<String, Object> responseMap = restTemplate.postForObject(url,jsonObject.toString(), Map.class);
+//        assertEquals(Integer.valueOf(1), (Integer) responseMap.get("Type_Id"));
+//        assertEquals("登录成功", (String) responseMap.get("msg"));//前面是期望值，通常是用户指定的内容，actual是被测试的代码返回的实际值
+//        assertEquals(true, (boolean) responseMap.get("success"));
+//    }
     @Test
     public void registerUserTest() {
+        User user = new User();
         String url = localhost + "/user/registerUser/{userName}/{password}";
         Map<String, Object> responseMap = restTemplate.getForObject(url, Map.class, "gyf", "666888");
         assertEquals("注册成功", (String) responseMap.get("msg"));
     }
+
+//    @Test
+//    public void registerUserTest1(){
+//        JSONObject jsonObject=new JSONObject();
+//        jsonObject.put("str1","test one");
+//        jsonObject.put("str2","test two");
+//        String url = localhost + "/user/registerUser";
+//        Map<String, Object> responseMap = restTemplate.postForObject(url,jsonObject.toString(), Map.class);
+//        assertEquals("注册成功", (String) responseMap.get("msg"));
+//    }
 
     @Test
     public void validateUserNameTest() {
