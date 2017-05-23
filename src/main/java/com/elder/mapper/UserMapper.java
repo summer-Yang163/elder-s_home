@@ -4,6 +4,8 @@ import com.elder.domain.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -23,4 +25,6 @@ public interface UserMapper {
     int registerUser(@Param("userName") String userName, @Param("password") String password, @Param("typeId") int typeId);
 
     User  userLogin(@Param("userName")String userName,@Param("password") String password);
+
+    List<User> queryAllCommonUserByPage(@Param("typeId")int typeId,@Param("count") int count,@Param("pageSize") int pageSize);
 }

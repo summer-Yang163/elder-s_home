@@ -9,6 +9,8 @@ import com.elder.util.session.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by jsf on 2017/5/15.
  */
@@ -45,6 +47,13 @@ public class UserServiceImpl implements UserService {
         }else{
             throw new MessageException("您已经退出了该系统");
         }
+    }
+
+    @Override
+    public List<User> queryAllCommonUserByPage(int typeId,int pageNow,int pageSize) {
+        int count=(pageNow-1)*pageSize;
+        List<User> userList=userMapper.queryAllCommonUserByPage(typeId,count,pageSize);
+        return userList;
     }
 
 
