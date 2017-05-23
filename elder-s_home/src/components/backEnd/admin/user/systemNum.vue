@@ -36,10 +36,8 @@
 </style>
 <template>
   <div >
-    <AddModal :ModalType="ModalType" @changeMod ='onResChange'></AddModal>
-    <div class="layout-header">
-
-    </div>
+    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
@@ -47,14 +45,14 @@
         <Breadcrumb-item>系统账号管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button  @click="ModalType = true" style="margin-right:25px;">新增</Button>
+        <Button  @click=" add()" style="margin-right:25px;">新增</Button>
         <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total :page-size=pagelength @on-change="change"></Page>
+        <Page  class="page" :total=data1.length show-total :page-size=pagelength @on-change="getUserData"></Page>
       </div>
     </div>
     <div class="layout-copy">
@@ -65,30 +63,35 @@
 </template>
 <script>
   import AddModal from './systemModal'
+  import sysHead from '../../common/adminName'
+  import axios from 'axios'
+
   export default {
-      components:{AddModal},
+      components:{AddModal,sysHead},
     data(){
       return {
-        pagelength:8,
+        pageSize:8,
         ModalType:false,
+        userData:'',
         columns4: [
           {
             type: 'index',
             width: 60,
             align: 'center',
-            title:'#'
+            title:'#',
+            key:'userId'
           },
           {
             title: '用户名',
-            key: 'User_Name'
+            key: 'userName'
           },
           {
             title: '用户密码',
-            key: 'Password'
+            key: 'password'
           },
           {
             title: '用户类型',
-            key: 'Type_Name'
+            key: 'typeName'
           },
           {
             title: '修改',
@@ -131,34 +134,9 @@
         ],
         data1: [
           {
-            User_Name: '王小明',
-            Password: '123456',
-            Type_Name: '普通用户'
-          },
-          {
-            User_Name: '张小刚',
-            Password: '123456',
-            Type_Name: '网站工作人员'
-          },
-          {
-            User_Name: '王小明',
-            Password: '123456',
-            Type_Name: '普通用户'
-          },
-          {
-            User_Name: '王小明',
-            Password: '123456',
-            Type_Name: '普通用户'
-          },
-          {
-            User_Name: '张小刚',
-            Password: '123456',
-            Type_Name: '网站工作人员'
-          },
-          {
-            User_Name: '王小明',
-            Password: '123456',
-            Type_Name: '普通用户'
+            userName: '王小明',
+            password: '123456',
+            typeName: '普通用户'
           }
         ],
         getUrl:'/api/18342/register'
@@ -167,7 +145,7 @@
     created:function() {
       // 组件创建完后获取数据，
       // 此时 data 已经被 observed 了
-      this.fetchData()
+      this.getUserData(1)
     },
     computed:{
 
@@ -176,46 +154,42 @@
       '$route': 'fetchData'
     },
     methods:{
+      getUserData(current){
+        console.log(current)
+        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
+//        axios.get(getUserUrl).then((response) =>{
+//              this.spinShow = !this.spinShow
+//              console.log(response)
+////        if(!response.data.success){
+////          data1 = response.data;
+////        }else{
+////          next(false)
+////        }
+//      },(response)=>{
+//              console.log(2)
+////        next(false)
+//      }).catch((error)=>{
+//          console.log(3)
+////        next(false)
+//      });
+      },
+      add(){
+        this.ModalType=true;
+        this.userData =false
+      },
       onResChange(val){
           this.ModalType = val //外部改变ModalType的值
       },
       modify (index) {
           console.log(index)
-        this.$Modal.info({
-          title: '用户信息',
-          content: `用户名：${this.data1[index].User_Name}<br>用户密码：${this.data1[index].Password}<br>用户类型：${this.data1[index].Type_Name}`
-        })
+        this.ModalType=true;
+        this.userData = this.data1[index]
       },
       remove (index) {
           console.log(index)
 //        this.data6.splice(index, 1);
-      },
-      fetchData () {
-          console.log('enter')
-        this.error = this.post = null
-        this.loading = true
-        this.getPost(this.$route, (err, post) => {
-          this.loading = false
-          if (err) {
-            this.error = err.toString()
-          } else {
-            this.post = post
-          }
-        })
-      },
-      getPost(data){
-          console.log(data)
-        this.$http.post(this.getUrl,data).then((json)=>{
-        console.log(json.data);
-      },(json)=>{
-        this.$Message.info('获取信息成功');
-      })
-      },
-      change(page){
-        console.log(page)
       }
     }
-
   }
 </script>
 <!--
