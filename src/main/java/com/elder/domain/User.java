@@ -1,5 +1,8 @@
 package com.elder.domain;
 
+import com.elder.mapper.UserTypeMapper;
+import com.elder.util.bean.BeanUtil;
+
 public class User {
     private Integer userId;
 
@@ -8,6 +11,8 @@ public class User {
     private String userName;
 
     private String password;
+
+    private UserType userUserType;
 
     public User() {
     }
@@ -48,5 +53,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public UserType getUserUserType() {
+        return userUserType;
+    }
+
+    public void setUserUserType(UserType userUserType) {
+        this.userUserType = userUserType;
+    }
+
+    public UserType loadUserUserType(){
+        UserTypeMapper userTypeMapper= (UserTypeMapper) BeanUtil.load("userTypeMapper");
+        if(typeId!=0){
+            userUserType=userTypeMapper.selectByPrimaryKey(typeId);
+        }
+        return userUserType;
     }
 }

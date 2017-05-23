@@ -4,6 +4,7 @@ import com.elder.domain.User;
 import com.elder.enums.UserTypeEnums;
 import com.elder.selfDefineAnnotation.JsonArg;
 import com.elder.service.UserService;
+import com.elder.util.page.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -84,21 +85,21 @@ public class UserController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/queryAllCommonUserByPage/{pageNow}/{pageSize}")
+    @RequestMapping("/queryAllUserByPage")
     @ResponseBody
-    public Map<String, Object> queryAllCommonUserByPage(@PathVariable int pageNow, @PathVariable int pageSize) {
-        List<User> userList = new ArrayList<User>();
+    public Map<String, Object> queryAllUserByPage(@RequestBody PageModel initialPageModel) {
+        PageModel<User> finalPageModel=new PageModel<>();
         Map<String,Object> map=new HashMap<>();
         try {
-            userList=userService.queryAllCommonUserByPage(UserTypeEnums.ORDINARY.getTypeId(),pageNow,pageSize);
+            finalPageModel=userService.queryAllByPage(initialPageModel);
             map=generateSuccessMsg("查询成功");
-            map.put("userList",userList);
+            map.put("pageMode",finalPageModel);
         } catch (Exception e) {
             map=generateFailureMsg("查询失败");
             e.printStackTrace();
         }
         return map;
     }
-
+    
 
 }

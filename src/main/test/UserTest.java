@@ -1,5 +1,6 @@
 import com.elder.domain.User;
 import com.elder.mapper.UserMapper;
+import com.elder.util.page.PageModel;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.junit.Test;
@@ -70,9 +71,12 @@ public class UserTest extends BaseJunitTest {
 
     }
     @Test
-    public void queryAllCommonUserByPage(){
-        String url=localhost+"/user/queryAllCommonUserByPage/{pageNow}/{pageSize}";
-        Map<String,Object> responseMap=restTemplate.getForObject(url,Map.class,1,8);
+    public void queryAllUserByPageTest(){
+        String url=localhost+"/user/queryAllUserByPage";
+        PageModel<User> userPageModel=new PageModel<>();
+        userPageModel.setCurrentPage(2);
+        userPageModel.setPageSize(8);
+        Map<String,Object> responseMap=restTemplate.postForObject(url,userPageModel,Map.class);
         assertEquals("查询成功",(String)responseMap.get("msg"));
     }
 

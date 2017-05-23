@@ -1,5 +1,8 @@
 package com.elder.domain;
 
+import com.elder.mapper.UserMapper;
+import com.elder.util.bean.BeanUtil;
+
 public class UserDetails {
     private Integer userDetailsId;
 
@@ -18,6 +21,8 @@ public class UserDetails {
     private String userAddress;
 
     private Integer userId;
+
+    private User userDetatilsUser;
 
     public Integer getUserDetailsId() {
         return userDetailsId;
@@ -90,4 +95,22 @@ public class UserDetails {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    public User getUserDetatilsUser() {
+        return userDetatilsUser;
+    }
+
+    public void setUserDetatilsUser(User userDetatilsUser) {
+        this.userDetatilsUser = userDetatilsUser;
+    }
+
+    public User loadUserDetatilsUser(){
+        UserMapper userMapper=(UserMapper) BeanUtil.load("userMapper");
+        if(userId!=0){
+            userDetatilsUser=userMapper.selectByPrimaryKey(userId);
+        }
+        return userDetatilsUser;
+    }
+
+
 }
