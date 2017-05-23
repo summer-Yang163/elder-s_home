@@ -2,16 +2,13 @@ package com.elder.controller;
 
 import com.elder.domain.User;
 import com.elder.enums.UserTypeEnums;
-import com.elder.selfDefineAnnotation.JsonArg;
 import com.elder.service.UserService;
 import com.elder.util.page.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +19,8 @@ import java.util.Map;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+
+
 
     @RequestMapping("/validateUserName/{userName}")
     @ResponseBody
@@ -100,6 +99,41 @@ public class UserController extends BaseController {
         }
         return map;
     }
-    
+    @RequestMapping("/updateUserPower")
+    @ResponseBody
+    public Map<String,Object> updateUserPower(@RequestBody User user){
+        Map<String,Object> map=new HashMap<>();
+        int i=userService.updateUserPower(user);
+        if(i!=0){
+            map=generateSuccessMsg("更新成功");
+        }else{
+            map=generateFailureMsg("更新失败");
+        }
+        return map;
+    }
+    @RequestMapping("/deleteUserByUserId/{userId}")
+    @ResponseBody
+    public Map<String,Object> deleteUserByUserId(@PathVariable int userId){
+        Map<String,Object> map=new HashMap<>();
+        int i=userService.deleteUserByUserId(userId);
+        if(i!=0){
+            map=generateSuccessMsg("成功删除");
+        }else{
+            map=generateFailureMsg("删除失败");
+        }
+        return map;
+    }
+    @RequestMapping("/insertUser")
+    @ResponseBody
+    public Map<String,Object> insertUser(@RequestBody User user){
+        Map<String,Object> map=new HashMap<>();
+        int i=userService.insertUser(user);
+        if(i!=0){
+            map=generateSuccessMsg("成功添加");
+        }else{
+            map=generateFailureMsg("添加失败");
+        }
+        return map;
+    }
 
 }

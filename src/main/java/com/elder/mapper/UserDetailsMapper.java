@@ -1,7 +1,11 @@
 package com.elder.mapper;
 
 import com.elder.domain.UserDetails;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface UserDetailsMapper {
     int deleteByPrimaryKey(Integer userDetailsId);
 
@@ -14,4 +18,8 @@ public interface UserDetailsMapper {
     int updateByPrimaryKeySelective(UserDetails record);
 
     int updateByPrimaryKey(UserDetails record);
+
+    List<UserDetails> executeQueryAllByPage(@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
+
+    int queryTotalRows();
 }

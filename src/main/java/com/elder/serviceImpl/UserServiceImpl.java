@@ -48,11 +48,22 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             throw new MessageException("您已经退出了该系统");
         }
     }
+    @Override
+    public int updateUserPower(User user) {
+        int i=userMapper.updateByPrimaryKey(user);
+        return i;
+    }
 
     @Override
-    public PageModel<User> queryAllByPage(PageModel<User> initialPageModel) {
-        PageModel<User> userPageMode = super.queryAllByPage(initialPageModel);
-        return userPageMode;
+    public int deleteUserByUserId(int userId) {
+        int  i=userMapper.deleteByPrimaryKey(userId);
+        return i;
+    }
+
+    @Override
+    public int insertUser(User user) {
+        int i=userMapper.insert(user);
+        return i;
     }
 
     @Override

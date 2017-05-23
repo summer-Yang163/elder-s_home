@@ -1,4 +1,5 @@
 import com.elder.domain.User;
+import com.elder.domain.UserType;
 import com.elder.mapper.UserMapper;
 import com.elder.util.page.PageModel;
 import net.sf.json.JSON;
@@ -79,6 +80,26 @@ public class UserTest extends BaseJunitTest {
         Map<String,Object> responseMap=restTemplate.postForObject(url,userPageModel,Map.class);
         assertEquals("查询成功",(String)responseMap.get("msg"));
     }
-
+    @Test
+    public void updateUserPowerTest(){
+        String url=localhost+"/user/updateUserPower";
+        User user=new User();
+        user.setTypeId(2);
+        user.setUserId(2);
+        user.setUserName("zhangsan");
+        user.setPassword("99999999");
+        Map<String,Object> responseMap=restTemplate.postForObject(url,user,Map.class);
+        assertEquals("更新成功",(String)responseMap.get("msg"));
+    }
+    @Test
+    public void insertUserTest(){
+        String url=localhost+"/user/insertUser";
+        User user=new User();
+        user.setTypeId(1);
+        user.setUserName("aaa");
+        user.setPassword("456789");
+        Map<String,Object> responseMap=restTemplate.postForObject(url,user,Map.class);
+        assertEquals("成功添加",(String)responseMap.get("msg"));
+    }
 
 }
