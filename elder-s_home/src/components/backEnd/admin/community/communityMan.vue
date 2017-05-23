@@ -36,8 +36,8 @@
 </style>
 <template>
   <div >
-    <div class="layout-header">
-    </div>
+  <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
@@ -45,15 +45,19 @@
         <Breadcrumb-item>社区基本情况</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button >新增</Button>
-        <Button >批量删除</Button>
+        <Button  style="margin-right:25px;"  @click=" add()">新增</Button>
+      <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Table border :columns="columns4" :data="data1"></Table>
-        <!--<Page class="page" :total=data1.length size="small" show-elevator show-sizer></Page>-->
-        <Page  class="page" :total=data1.length show-total page-size=8></Page>
+      <Col class="demo-spin-col" v-if="spinshow">
+           <Spin fix>加载中...</Spin>
+         </Col>
+         <div v-else>
+         <Table border :columns="columns4" :data="data1"></Table>
+         <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+         </div>
       </div>
     </div>
     <div class="layout-copy">
@@ -63,51 +67,61 @@
 
 </template>
 <script>
-  export default {
+import AddModal from './addCommunity'
+import sysHead from '../../common/adminName'
+import axios from 'axios'
+
+export default {
+   components:{AddModal,sysHead},
     data(){
       return {
+           ModalType:false,
+           userData:'',
+           pageSize:6,
+          spinshow:false,
         columns4: [
           {
             type: 'index',
             width: 60,
             align: 'center',
-            title:'#'
+            title:'#',
+            key:'communityId'
           },
           {
-            title: '用户名称',
-            key: 'name'
+            title: '社区名称',
+            key: 'communityName'
           },
           {
-            title: '服务电话',
-            key: 'password'
+            title: '社区电话',
+            key: 'communityPhone'
           },
           {
             title: '负责员工',
-            key: 'classify'
+            key: 'servicePersonId'
           },
           {
             title: '社区图片',
-            key: 'password'
+            key: 'communityPhoto'
           },
           {
             title: '社区描述',
-            key: 'classify'
+            key: 'communityDescribe'
           },
           {
             title: '平均房价',
-            key: 'password'
+            key: 'communityHousePrice'
           },
           {
             title: '租房价格',
-            key: 'classify'
+            key: 'communityRentPrice'
           },
           {
             title: '社区地址',
-            key: 'classify'
+            key: 'communityAddressId'
           },
           {
             title: '相关服务',
-            key: 'classify'
+            key: 'communityServiceId'
           },
           {
             title: '修改',
@@ -180,9 +194,48 @@
             address: '北京市海淀区西二旗'
           }
         ]
-
       }
-    }
-//    components:{Vhead}
+    },
+    created(){
+        this.getUserData(1)
+    },
+    watch:{
+   },
+   methods:{
+     getUserData(current){
+       console.log(current)
+         const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
+//        axios.get(getUserUrl).then((response) =>{
+//              this.spinShow = !this.spinShow
+//              console.log(response)
+////        if(!response.data.success){
+////          data1 = response.data;
+////        }else{
+////          next(false)
+////        }
+//      },(response)=>{
+//              console.log(2)
+////        next(false)
+//      }).catch((error)=>{
+//          console.log(3)
+////        next(false)
+//      });
+     },
+     add(){
+         this.ModalType=true;
+         this.userData =false
+     },
+     onResChange(val){
+       this.ModalType = val //外部改变ModalType的值
+     },
+     modify (index) {
+       this.ModalType=true;
+       this.userData = this.data1[index]
+     },
+     remove (index) {
+       console.log(index)
+//        this.data6.splice(index, 1);
+     },
   }
+}
 </script>

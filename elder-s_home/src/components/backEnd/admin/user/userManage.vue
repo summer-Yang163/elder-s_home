@@ -93,43 +93,42 @@ import axios from 'axios'
                 type: 'index',
                 width: 60,
                 align: 'center',
-                title:'#'
+                title:'#',
+                key:'userDetailsId'
+              },{
+                title: '用户名',
+                key: 'userName'
+              },{
+                title: '登陆密码',
+                key: 'password'
               },
               {
-                title: '姓名',
-                key: 'name'
+                title: '真实姓名',
+                key: 'trueName'
               },
               {
                 title: '性别',
-                key: ''
-              },
-              {
-                title: '年龄',
-                key: 'age'
+                key: 'userGender'
               },
               {
                 title: '电话',
-                key: ''
+                key: 'userPhone'
               },
               {
-                title: '入住地址',
-                key: ''
+                title: '年龄',
+                key: 'userAge'
               },
+              {
+                title: '邮箱',
+                key: 'userEmail'
+              },
+//              {
+//                title: '入住社区',
+//                key: ''
+//              },
               {
                 title: '地址',
-                key: 'address'
-              },
-              {
-                title: '关联老人',
-                key: ''
-              },
-              {
-                title: '关系',
-                key: ''
-              },
-              {
-                title: '用户等级',
-                key: ''
+                key: 'userAddress'
               },
               {
                 title: '修改',
@@ -171,76 +170,27 @@ import axios from 'axios'
               }
             ],
             data1: [
-              {
-                name: '王小明',
-                age: 18,
-                address: '北京市朝阳区芍药居'
-              },
-              {
-                name: '张小刚',
-                age: 25,
-                address: '北京市海淀区西二旗'
-              },
-              {
-                name: '李小红',
-                age: 30,
-                address: '上海市浦东新区世纪大道'
-              },
-              {
-                name: '周小伟',
-                age: 26,
-                address: '深圳市南山区深南大道'
-              },
-              {
-                name: '王小明',
-                age: 18,
-                address: '北京市朝阳区芍药居'
-              },
-              {
-                name: '张小刚',
-                age: 25,
-                address: '北京市海淀区西二旗'
-              }
+              {userName: 'deh',
+                password: 'dee',
+                trueName: 'deee',
+                userGender:'1',
+                userPhone:'11',
+                userAge:'1',
+                userEmail:'2222',
+                userAddress:'22',
+                userDetailsId:2}
             ],
             pageSize:4,
             spinshow:false
           }
       },
-      created(){
-          this.getUserData(1)
-      },
-
-//    beforeRouteEnter (to, from, next) {
-//       const HOST = 'http://127.0.0.1:8087/elder_home'
-//      const valiNameUrl=HOST+'/user/validateUserName/'+'zhangsan'
-//      axios.post(valiNameUrl).then((response) =>{
-//        if(!response.data.success){
-//          data1 = response.data;
-//        }else{
-//          next(false)
-//        }
-//      },(response)=>{
-//        next(false)
-//      }).catch((error)=>{
-//        next(false)
-//      });
-//      axios.get(to.params.id, (err, post) =>{
-//      if (err) {
-//        // display some global error message
-//        next(false)
-//      } else {
-//        next(vm => {
-//          vm.post = post
-//        })
-//      }
-//    })
-//  },
-  watch:{
-
-  },
+    created(){
+        this.getUserData(1)
+    },
+    watch:{
+    },
     methods:{
       getUserData(current){
-//          const currentPage = this.current
         console.log(current)
           const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
 //        axios.get(getUserUrl).then((response) =>{
@@ -261,17 +211,14 @@ import axios from 'axios'
       },
       add(){
           this.ModalType=true;
-          this.userData = '12'
+          this.userData =false
       },
       onResChange(val){
         this.ModalType = val //外部改变ModalType的值
       },
       modify (index) {
-        console.log(index)
-        this.$Modal.info({
-          title: '用户信息',
-          content: `用户名：${this.data1[index].User_Name}<br>用户密码：${this.data1[index].Password}<br>用户类型：${this.data1[index].Type_Name}`
-        })
+        this.ModalType=true;
+        this.userData = this.data1[index]
       },
       remove (index) {
         console.log(index)

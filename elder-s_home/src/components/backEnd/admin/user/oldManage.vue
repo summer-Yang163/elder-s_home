@@ -36,8 +36,8 @@
 </style>
 <template>
   <div >
-    <div class="layout-header">
-    </div>
+    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
@@ -45,15 +45,19 @@
         <Breadcrumb-item>社区老人管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button  style="margin-right:25px;">新增</Button>
+        <Button  style="margin-right:25px;"@click=" add()" >新增</Button>
         <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Table border :columns="columns4" :data="data1"></Table>
-        <!--<Page class="page" :total=data1.length size="small" show-elevator show-sizer></Page>-->
-        <Page  class="page" :total=data1.length show-total page-size=8 ></Page>
+        <Col class="demo-spin-col" v-if="spinshow">
+        <Spin fix>加载中...</Spin>
+        </Col>
+        <div v-else>
+          <Table border :columns="columns4" :data="data1"></Table>
+          <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+        </div>
       </div>
     </div>
     <div class="layout-copy">
@@ -63,49 +67,61 @@
 
 </template>
 <script>
+  import sysHead from '../../common/adminName'
+  import AddModal from './addOld'
+  import axios from 'axios'
+
   export default {
     data(){
       return {
+        spinshow:false,
+        ModalType:false,
+        userData:'',
+        pageSize:8,
         columns4: [
           {
             type: 'index',
             width: 60,
             align: 'center',
-            title:'#'
+            title:'#',
+            key:'oldId'
           },
           {
             title: '姓名',
-            key: 'name'
+            key: 'oldName'
           },
           {
             title: '性别',
-            key: 'password'
+            key: 'oldGender'
           },
           {
             title: '电话',
-            key: 'classify'
+            key: 'oldPhone'
           }, {
             title: '年龄',
-            key: 'name'
+            key: 'oldAge'
+          }, {
+            title: '身份证号',
+            key: 'idCard'
           },
           {
             title: '老人图片',
-            key: 'password'
+            key: 'oldPhoto'
           },
           {
             title: '紧急联系人',
-            key: 'classify'
+            key: 'oldEmContact'
           }, {
             title: '紧急联系电话',
-            key: 'name'
+            key: 'oldEmPhone'
           },
           {
             title: '入住社区',
-            key: 'password'
+            key: 'oldCommunityId'
           },
           {
             title: '备注',
-            key: 'classify'
+            key: 'remarks'
           },
           {
             title: '修改',
@@ -180,7 +196,47 @@
         ]
 
       }
+    },
+    components:{sysHead,AddModal},
+    created(){
+      this.getUserData(1)
+    },
+    methods:{
+      getUserData(current){
+        console.log(current)
+        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
+//        axios.get(getUserUrl).then((response) =>{
+//              this.spinShow = !this.spinShow
+//              console.log(response)
+////        if(!response.data.success){
+////          data1 = response.data;
+////        }else{
+////          next(false)
+////        }
+//      },(response)=>{
+//              console.log(2)
+////        next(false)
+//      }).catch((error)=>{
+//          console.log(3)
+////        next(false)
+//      });
+      },
+      add(){
+        this.ModalType=true;
+        this.userData =false
+      },
+      onResChange(val){
+        this.ModalType = val //外部改变ModalType的值
+      },
+      modify (index) {
+        this.ModalType=true;
+        this.userData = this.data1[index]
+      },
+      remove (index) {
+        console.log(index)
+//        this.data6.splice(index, 1);
+      }
+
     }
-//    components:{Vhead}
   }
 </script>

@@ -36,8 +36,8 @@
 </style>
 <template>
   <div >
-    <div class="layout-header">
-    </div>
+    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
@@ -45,14 +45,19 @@
         <Breadcrumb-item>服务人员基本信息</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button style="margin-right:25px;" >新增</Button>
+        <Button style="margin-right:25px;" @click=" add()">新增</Button>
         <!--<Button >批量删除</Button>-->
       </div>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total page-size=8></Page>
+        <Col class="demo-spin-col" v-if="spinshow">
+        <Spin fix>加载中...</Spin>
+        </Col>
+        <div v-else>
+          <Table border :columns="columns4" :data="data1"></Table>
+          <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+        </div>
       </div>
     </div>
     <div class="layout-copy">
@@ -62,47 +67,64 @@
 
 </template>
 <script>
+  import AddModal from './addPerson'
+  import sysHead from '../../common/adminName'
+  import axios from 'axios'
   export default {
+    components:{AddModal,sysHead},
     data(){
       return {
+        ModalType:false,
+        userData:'',
+        pageSize:6,
+        spinshow:false,
         columns4: [
           {
             type: 'index',
             width: 60,
             align: 'center',
-            title:'#'
+            title:'#',
+            key:'servicePersonId'
           },
           {
             title: '工号',
-            key: 'name'
+            key: 'serviceJobNum'
           },
           {
             title: '姓名',
-            key: ''
+            key: 'serviceName'
+          },
+          {
+            title: '用户名',
+            key: 'userName'
+          },
+          {
+            title: '密码',
+            key: 'password'
           },
           {
             title: '性别',
-            key: 'age'
+            key: 'serviceGender'
           },
           {
             title: '电话',
-            key: ''
+            key: 'servicePhone'
           },
           {
             title: '年龄',
-            key: ''
+            key: 'serviceAge'
           },
           {
             title: '服务社区',
-            key: 'address'
+            key: 'communityId'
           },
           {
             title: '工作年限',
-            key: ''
+            key: 'serviceWorkTime'
           },
           {
             title: '工作职位',
-            key: ''
+            key: 'serviceWorkPosition'
           },
           {
             title: '修改',
@@ -176,8 +198,49 @@
           }
         ]
       }
+    },
+    created(){
+      this.getUserData(1)
+    },
+    watch:{
+    },
+    methods:{
+      getUserData(current){
+        console.log(current)
+        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
+//        axios.get(getUserUrl).then((response) =>{
+//              this.spinShow = !this.spinShow
+//              console.log(response)
+////        if(!response.data.success){
+////          data1 = response.data;
+////        }else{
+////          next(false)
+////        }
+//      },(response)=>{
+//              console.log(2)
+////        next(false)
+//      }).catch((error)=>{
+//          console.log(3)
+////        next(false)
+//      });
+      },
+      add(){
+        this.ModalType=true;
+        this.userData =false
+      },
+      onResChange(val){
+        this.ModalType = val //外部改变ModalType的值
+      },
+      modify (index) {
+        this.ModalType=true;
+        this.userData = this.data1[index]
+      },
+      remove (index) {
+        console.log(index)
+//        this.data6.splice(index, 1);
+      },
     }
-//    components:{Vhead}
+
 
   }
 </script>
