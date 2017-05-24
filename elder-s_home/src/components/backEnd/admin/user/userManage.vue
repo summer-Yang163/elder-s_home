@@ -63,15 +63,17 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-          <Col class="demo-spin-col" v-if="spinshow">
-          <Spin fix>加载中...</Spin>
+        <row v-bind:style = "{display:spinshow}">
+          <Col class="demo-spin-col" >
+          <Spin fix>加载中...{{spinshow}}</Spin>
         </Col>
-        <div v-else>
+        </row>
+        <div v-bind:style = "{display:'none'}">
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=100 show-total :page-size=pageSize @on-change="getUserData"></Page>
+        <Page  class="page" :total="pageTotal" show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
       </div>
-    </div>
+    </div>'
     <div class="layout-copy">
       2017-05 &copy; TalkingData
     </div>
@@ -97,7 +99,7 @@ import axios from 'axios'
                 key:'userDetailsId'
               },{
                 title: '用户名',
-                key: 'userName'
+                key: 'userDetatilsUser.userName'
               },{
                 title: '登陆密码',
                 key: 'password'
@@ -170,8 +172,11 @@ import axios from 'axios'
               }
             ],
             data1: [
-              {userName: 'deh',
-                password: 'dee',
+              {
+                userDetatilsUser:{
+                  userName: 'deh',
+                  password: 'dee',
+                },
                 trueName: 'deee',
                 userGender:'1',
                 userPhone:'11',
@@ -180,34 +185,52 @@ import axios from 'axios'
                 userAddress:'22',
                 userDetailsId:2}
             ],
-            pageSize:4,
-            spinshow:false
+            pageSize:6,
+            pageTotal:0,
+            spinshow:'block'
           }
       },
     created(){
         this.getUserData(1)
     },
+    computed:{
+
+    },
     watch:{
+      '$route': 'getUserData(1)'
     },
     methods:{
       getUserData(current){
-        console.log(current)
-          const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
-//        axios.get(getUserUrl).then((response) =>{
-//              this.spinShow = !this.spinShow
-//              console.log(response)
-////        if(!response.data.success){
-////          data1 = response.data;
-////        }else{
-////          next(false)
-////        }
-//      },(response)=>{
-//              console.log(2)
-////        next(false)
-//      }).catch((error)=>{
-//          console.log(3)
-////        next(false)
-//      });
+        this.spinshow = 'none'
+        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
+        axios.post(getUserUrl,({
+          currentPage:current,
+          pageSize:this.pageSize
+        })).then((response) =>{
+//          console.log(response.data.success)
+            if(response.data.success){
+              console.log(this.spinshow)
+              const pageMode = response.data.pageMode
+              console.log(pageMode.totalRows);
+                this.pageTotal = pageMode.totalRows
+//              const userData = response.data.dataList
+//                data1 = response.data.dataList
+
+              this.$nextTick()
+//              console.log(this.spinShow)
+            }
+        if(!response.data.success){
+          data1 = response.data;
+        }else{
+          next(false)
+        }
+      },(response)=>{
+              console.log(2)
+//        next(false)
+      }).catch((error)=>{
+          console.log(3)
+//        next(false)
+      });
       },
       add(){
           this.ModalType=true;

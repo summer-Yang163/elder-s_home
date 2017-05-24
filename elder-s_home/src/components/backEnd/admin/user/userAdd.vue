@@ -42,6 +42,8 @@
     </Modal>
 </template>
 <script>
+  import axios from 'axios'
+
   export default {
     props:[ 'ModalType','conData'],
     data(){
@@ -92,10 +94,23 @@
     computed:{
     },
     methods:{
-
       ok (data) {
+//          请将必填信息填写完整
+        if(data.userName&&data.password){
+          if(this.fromData){
+//              修改
+            const modifyUrl = this.HOST
+            axios.post(modifyUrl,data).then((json)=>{
+              this.$Message.success('修改账号成功');
+            },(json)=>{
+              this.$Message.error('修改账号失败');
 
-        if(data.name&&data.password&&data.type){
+            }).catch((error)=>{
+              this.$Message.error('修改账号失败');
+//        next(false)
+            })
+          }
+        }
 //          this.$http.post(this.addUrl,data).then((json)=>{
 ////            console.log(json.data);
 //            this.$Message.info('新增账号成功');
@@ -104,22 +119,14 @@
 //          })
 //        }else{
 //          this.$Message.warning('请将账号信息填写完整!');
-        }
+
       },
       cancel () {
-        this.$Message.info('取消新增账号');
-      },
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
+          if(this.fromData){
+            this.$Message.info('取消修改信息');
+          }else{
+            this.$Message.info('取消新增账号');
           }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
       }
     },
     computed:{
