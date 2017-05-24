@@ -27,6 +27,7 @@ public class OldMan {
 
     private Integer idCard;
 
+
     public Integer getOldId() {
         return oldId;
     }
@@ -130,4 +131,5 @@ public class OldMan {
     public void setIdCard(Integer idCard) {
         this.idCard = idCard;
     }
+
 }
