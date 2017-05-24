@@ -33,6 +33,21 @@
     float:right;
     padding: 10px 0;
   }
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+  .demo-spin-col{
+    height: 200px;
+    text-align: center;
+    position: relative;
+    font-size:30px;
+    /*border: 1px solid #eee;*/
+  }
 </style>
 <template>
   <div >
@@ -51,8 +66,15 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total :page-size=pagelength @on-change="getUserData"></Page>
+        <row v-show="!spinshow">
+          <Col class="demo-spin-col" >
+          <Spin fix>数据加载中...</Spin>
+          </Col>
+        </row>
+        <div v-show="spinshow">
+          <Table border :columns="columns4" :data="data1"></Table>
+          <Page  class="page" :total="pageTotal" show-total :page-size=pageSize @on-change="getUserData"></Page>
+        </div>
       </div>
     </div>
     <div class="layout-copy">
@@ -70,9 +92,10 @@
       components:{AddModal,sysHead},
     data(){
       return {
-        pageSize:8,
+        pageSize:7,
         ModalType:false,
         userData:'',
+        spinshow:false,
         columns4: [
           {
             type: 'index',
@@ -133,13 +156,9 @@
           }
         ],
         data1: [
-          {
-            userName: '王小明',
-            password: '123456',
-            typeName: '普通用户'
-          }
         ],
-        getUrl:'/api/18342/register'
+        getUrl:'/api/18342/register',
+        pageTotal:0,
       }
     },
     created:function() {
@@ -148,30 +167,33 @@
       this.getUserData(1)
     },
     computed:{
-
     },
     watch:{
-      '$route': 'fetchData'
+      '$route': 'getUserData(1)'
     },
     methods:{
       getUserData(current){
         console.log(current)
-        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
-//        axios.get(getUserUrl).then((response) =>{
-//              this.spinShow = !this.spinShow
-//              console.log(response)
-////        if(!response.data.success){
-////          data1 = response.data;
-////        }else{
-////          next(false)
-////        }
-//      },(response)=>{
-//              console.log(2)
-////        next(false)
-//      }).catch((error)=>{
-//          console.log(3)
-////        next(false)
-//      });
+        const getUserUrl = this.HOST+'/user/queryAllUserByPage'
+        axios.post(getUserUrl,{
+          currentPage:current,
+          pageSize:this.pageSize
+        }).then((response) =>{
+            console.log(response)
+          if(response.data.success){
+            const dataMode = response.data.pageMode.dataList
+                for(let i =0;i<dataMode.length;i++){
+                  dataMode[i].typeName =  dataMode[i].userUserType.typeName
+                }
+                this.data1 = dataMode
+            this.pageTotal = this.pageTotal = response.data.pageMode.totalRows
+          }else{
+              this.$Message.error('获取数据失败')
+          }
+          this.spinshow = true
+      }).catch((error)=>{
+          this.$Message.error('获取数据失败')
+      });
       },
       add(){
         this.ModalType=true;
@@ -181,13 +203,26 @@
           this.ModalType = val //外部改变ModalType的值
       },
       modify (index) {
-          console.log(index)
         this.ModalType=true;
         this.userData = this.data1[index]
+        this.userData.typeId = this.userData.typeId.toString()
       },
       remove (index) {
           console.log(index)
-//        this.data6.splice(index, 1);
+        console.log(this.data1[index].userId);
+          const delUrl = this.HOST+'/user/deleteUserByUserId/'+this.data1[index].userId
+        console.log(delUrl)
+        axios.post(delUrl).then((response) =>{
+          if(response.data.success){
+              this.$router.go(0)
+          }else{
+            this.$Message.error('删除数据失败')
+          }
+        },(response)=>{
+          this.$Message.error('获取数据失败')
+        }).catch((error)=>{
+          this.$Message.error('获取数据失败')
+        });
       }
     }
   }

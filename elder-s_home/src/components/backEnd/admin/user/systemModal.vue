@@ -14,18 +14,20 @@
         <Form-item label="用户密码" prop="password">
           <Input v-model="formValidate.password" placeholder="请输入用户密码"></Input>
         </Form-item>
-        <Form-item label="用户类型" prop="typeName">
-          <Select v-model="formValidate.typeName" placeholder="请选择用户类型">
-            <Option value="1">社区网站工作人员</Option>
-            <Option value="2">超级管理员</Option>
-            <Option value="3">普通用户</Option>
-            <Option value="4">社区服务人员</Option>
+        <Form-item label="用户类型" prop="typeId">
+          <Select v-model="formValidate.typeId" placeholder="请选择用户类型">
+            <Option value="1">普通用户</Option>
+            <Option value="2">社区服务人员</Option>
+            <Option value="3">普通管理员</Option>
+            <Option value="4">超级管理员</Option>
           </Select>
         </Form-item>
       </Form>
     </Modal>
 </template>
 <script>
+  import axios from 'axios'
+
   export default {
     props:[ 'ModalType','conData'],
     data(){
@@ -36,7 +38,7 @@
           formValidate: {
             userName: '',
             password: '',
-            typeName: ''
+            typeId: ''
           },
           ruleValidate: {
             userName: [
@@ -45,11 +47,10 @@
             password: [
               { required: true, message: '用户密码不能为空', trigger: 'blur' },
             ],
-            typeName: [
+            typeId: [
               { required: true, message: '请选择用户类型', trigger: 'change' }
             ]
-          },
-          addUrl:'/api/'
+          }
         }
     },
     watch:{
@@ -60,7 +61,7 @@
           this.$emit('changeMod',val)//组件内对myModal改变后向外部发送事件通知
       },
       conData(val){
-        this.fromData = val
+        this.fromData = val;
         if(this.fromData){
           this.formValidate = this.fromData
         }
@@ -70,31 +71,46 @@
     },
     methods:{
       ok (data) {
-        if(data.name&&data.password&&data.type){
-//          this.$http.post(this.addUrl,data).then((json)=>{
-////            console.log(json.data);
-//            this.$Message.info('新增账号成功');
-//          },(json)=>{
-//            this.$Message.info('新增账号失败');
-//          })
-//        }else{
-//          this.$Message.warning('请将账号信息填写完整!');
+        if(data.userName&&data.password&&data.typeId){
+          data.typeId = data.typeId-0;
+          if(this.fromData){
+//              修改
+            const modifyUrl = this.HOST+'/user/updateUserPower';
+            delete data.userName;
+            console.log(data);
+            axios.post(modifyUrl,data).then((json)=>{
+              if(json.data.success){
+                this.$Message.success('修改账号成功');
+                data.typeName = data.userUserType.typeName
+                this.$router.go(0);
+              }else{
+                this.$router.go(0);
+                this.$Message.error('修改账号失败');
+              }
+            }).catch((error)=>{
+              this.$router.go(0);
+              this.$Message.error('修改失败');
+            })
+          }else{
+            const addUrl = this.HOST+'/user/insertUser';
+
+            axios.post(addUrl,data).then((json)=>{
+              if(json.data.success){
+                this.$Message.success('新增账号成功');
+                this.$router.go(0)
+              }else{
+                this.$Message.error('新增账号失败');
+              }
+            }).catch((error)=>{
+              this.$Message.error('新增失败');
+            })
+          }
+        }else{
+          this.$Message.warning('请将必填信息填写完整!');
         }
       },
       cancel () {
         this.$Message.info('取消新增账号');
-      },
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
       }
     },
     computed:{

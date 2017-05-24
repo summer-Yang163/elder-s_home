@@ -63,12 +63,12 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <row v-bind:style = "{display:spinshow}">
+        <row v-show="!spinshow">
           <Col class="demo-spin-col" >
-          <Spin fix>加载中...{{spinshow}}</Spin>
+          <Spin fix>数据加载中...</Spin>
         </Col>
         </row>
-        <div v-bind:style = "{display:'none'}">
+        <div v-show="spinshow">
         <Table border :columns="columns4" :data="data1"></Table>
         <Page  class="page" :total="pageTotal" show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
@@ -99,7 +99,7 @@ import axios from 'axios'
                 key:'userDetailsId'
               },{
                 title: '用户名',
-                key: 'userDetatilsUser.userName'
+                key: 'userName'
               },{
                 title: '登陆密码',
                 key: 'password'
@@ -110,7 +110,8 @@ import axios from 'axios'
               },
               {
                 title: '性别',
-                key: 'userGender'
+                key: 'userGenderName'
+
               },
               {
                 title: '电话',
@@ -171,65 +172,48 @@ import axios from 'axios'
                 }
               }
             ],
-            data1: [
-              {
-                userDetatilsUser:{
-                  userName: 'deh',
-                  password: 'dee',
-                },
-                trueName: 'deee',
-                userGender:'1',
-                userPhone:'11',
-                userAge:'1',
-                userEmail:'2222',
-                userAddress:'22',
-                userDetailsId:2}
-            ],
-            pageSize:6,
+            data1: [],
+            pageSize:7,
             pageTotal:0,
-            spinshow:'block'
+            spinshow:false
           }
       },
     created(){
         this.getUserData(1)
     },
     computed:{
-
     },
     watch:{
       '$route': 'getUserData(1)'
     },
     methods:{
       getUserData(current){
-        this.spinshow = 'none'
         const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
         axios.post(getUserUrl,({
           currentPage:current,
           pageSize:this.pageSize
         })).then((response) =>{
-//          console.log(response.data.success)
             if(response.data.success){
-              console.log(this.spinshow)
-              const pageMode = response.data.pageMode
-              console.log(pageMode.totalRows);
-                this.pageTotal = pageMode.totalRows
-//              const userData = response.data.dataList
-//                data1 = response.data.dataList
-
-              this.$nextTick()
-//              console.log(this.spinShow)
+              console.log(response.data)
+              const Mode = response.data.pageMode
+              this.pageTotal = Mode.totalRows
+              this.data1 = Mode.dataList
+              for(let i =0;i<Mode.dataList.length;i++){
+                Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+                  if(Mode.dataList[i].userDetatilsUser){
+                    Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+                    Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+                  }else{
+                    Mode.dataList[i].userName= ''
+                    Mode.dataList[i].password= ''
+                  }
+              }
+              this.spinshow = true
+            }else{
+                this.$Message.error('获取数据失败！')
             }
-        if(!response.data.success){
-          data1 = response.data;
-        }else{
-          next(false)
-        }
-      },(response)=>{
-              console.log(2)
-//        next(false)
       }).catch((error)=>{
-          console.log(3)
-//        next(false)
+          this.$Message.error('请重新获取数据！')
       });
       },
       add(){
@@ -242,9 +226,21 @@ import axios from 'axios'
       modify (index) {
         this.ModalType=true;
         this.userData = this.data1[index]
+
       },
       remove (index) {
         console.log(index)
+        const deleteUrl = this.HOST+'/userDetails/deleteUserDetailsByUserDetailsId/'+this.data1[index].userDetailsId
+        axios.post(deleteUrl).then((json)=>{
+          if(json.data.success){
+            this.$Message.success('删除账号成功');
+            this.$router.go(0)
+          }else{
+            this.$Message.error('删除账号失败');
+          }
+        }).catch((error)=>{
+          this.$Message.error('删除失败');
+        })
 //        this.data6.splice(index, 1);
       },
     }
