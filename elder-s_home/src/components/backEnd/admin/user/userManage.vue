@@ -68,7 +68,7 @@
         </Col>
         <div v-else>
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+        <Page  class="page" :total=100 show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
       </div>
     </div>

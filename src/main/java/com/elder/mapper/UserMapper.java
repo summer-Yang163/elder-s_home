@@ -24,7 +24,12 @@ public interface UserMapper {
 
     int registerUser(@Param("userName") String userName, @Param("password") String password, @Param("typeId") int typeId);
 
-    User  userLogin(@Param("userName")String userName,@Param("password") String password);
+    User userLogin(@Param("userName") String userName, @Param("password") String password);
 
-    List<User> queryAllCommonUserByPage(@Param("typeId")int typeId,@Param("count") int count,@Param("pageSize") int pageSize);
+
+    List<User> executeQueryAllByPage(@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
+
+    int queryTotalRows();
+
+
 }
