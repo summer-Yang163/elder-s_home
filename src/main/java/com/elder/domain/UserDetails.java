@@ -1,8 +1,5 @@
 package com.elder.domain;
 
-import com.elder.mapper.UserMapper;
-import com.elder.util.bean.BeanUtil;
-
 public class UserDetails {
     private Integer userDetailsId;
 
@@ -10,7 +7,7 @@ public class UserDetails {
 
     private Integer userGender;
 
-    private Integer userPhone;
+    private String userPhone;
 
     private Integer userAge;
 
@@ -48,12 +45,12 @@ public class UserDetails {
         this.userGender = userGender;
     }
 
-    public Integer getUserPhone() {
+    public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(Integer userPhone) {
-        this.userPhone = userPhone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public Integer getUserAge() {
@@ -111,6 +108,4 @@ public class UserDetails {
         }
         return userDetatilsUser;
     }
-
-
 }
