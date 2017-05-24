@@ -1,5 +1,8 @@
 package com.elder.domain;
 
+import com.elder.mapper.UserMapper;
+import com.elder.util.bean.BeanUtil;
+
 public class UserDetails {
     private Integer userDetailsId;
 
