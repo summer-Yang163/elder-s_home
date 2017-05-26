@@ -88,7 +88,7 @@
           <Icon type="ios-navigate"></Icon>
           社区老人信息添加
         </template>
-        <Menu-item name="addOld">已有老人信息</Menu-item>
+        <Menu-item name="inquireOld">已有老人信息</Menu-item>
         <Menu-item name="addOld">添加老人信息</Menu-item>
       </Submenu>
       <Submenu name="checkOldInf">

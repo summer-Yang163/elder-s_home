@@ -57,7 +57,7 @@
         <Breadcrumb-item>普通用户管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
-        <Button style="margin-right:25px;"  @click=" add()">新增</Button>
+        <!--<Button style="margin-right:25px;"  @click=" add()">新增</Button>-->
         <!--<Button >批量删除</Button>-->
       </div>
     </div>
@@ -199,7 +199,11 @@ import axios from 'axios'
               this.pageTotal = Mode.totalRows
               this.data1 = Mode.dataList
               for(let i =0;i<Mode.dataList.length;i++){
-                Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+                  if(Mode.dataList[i].userGender){
+                    Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+                  }else{
+                    Mode.dataList[i].userGenderName=''
+                  }
                   if(Mode.dataList[i].userDetatilsUser){
                     Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
                     Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
@@ -226,11 +230,12 @@ import axios from 'axios'
       modify (index) {
         this.ModalType=true;
         this.userData = this.data1[index]
+        this.$Message.info('用户名与密码不可修改');
 
       },
       remove (index) {
         console.log(index)
-        const deleteUrl = this.HOST+'/userDetails/deleteUserDetailsByUserDetailsId/'+this.data1[index].userDetailsId
+        const deleteUrl = this.HOST+'/userDetails/deleteUserDetailsByUserDetailsId/'+this.data1[index].userDetailsId+'/'+this.data1[index].userDetatilsUser.userId
         axios.post(deleteUrl).then((json)=>{
           if(json.data.success){
             this.$Message.success('删除账号成功');
