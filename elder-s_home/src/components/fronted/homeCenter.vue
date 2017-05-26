@@ -1,6 +1,6 @@
 <style scoped>
   .main {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     overflow: auto;
   }
@@ -14,9 +14,9 @@
   }
   .main .main_right{
     float:left;
-    width:700px;
+    /*min-width:700px;*/
     /*margin-left:100px;*/
-    /*width:77%;*/
+    width:80%;
   }
 
   .layout{
@@ -73,21 +73,21 @@
   <div>
     <div class="main ">
       <div class="main_left">
-      <Menu :theme="theme3" active-name="1" style="min-width: 240px;">
+      <Menu :theme="theme3" :active-name="headData" style="min-width: 200px;" @on-select="handleSelect">
         <Menu-group title="家人中心">
-          <Menu-item name="1">
+          <Menu-item name="personInf">
             <Icon type="document-text"></Icon>
             个人信息
         </Menu-item>
-          <Menu-item name="2">
+          <Menu-item name="serviceProj">
             <Icon type="chatbubbles"></Icon>
-            服务项目信息
+            服务订单信息
         </Menu-item>
-          <Menu-item name="3">
+          <Menu-item name="personTipsHome">
             <Icon type="heart"></Icon>
             个性化提醒
         </Menu-item>
-          <Menu-item name="4">
+          <Menu-item name="serFeedBack">
             <Icon type="heart-broken"></Icon>
             服务反馈
         </Menu-item>
@@ -107,6 +107,19 @@
       return {
         theme3: 'light'
       }
-    }
+    },
+    computed:{
+      headData:function(){
+        const path =  this.$route.name
+        return  this.$route.name
+
+      }
+    },
+    methods:{
+        handleSelect (name) {
+          this.$router.push(name)
+        }
+      }
+
   }
 </script>

@@ -21,8 +21,136 @@
   margin-right:20px;
 }
 </style>
+<script>
+  import axios from 'axios' //引入axios
+  import * as types from '../../../store/types'
+  const localStorage = window.localStorage
+
+  export default{
+
+    data(){
+      const validateName = (rule, value, callback)=>{
+        if(!value){
+          callback(new Error('请输入老人身份证号'));
+        }else{
+          const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+          axios.post(valiNameUrl).then((response) =>{
+            if(!response.data.success){
+              callback();
+            }else{
+              callback(new Error('该老人不存在，请拨打社区服务电话或者联系居委会增加老人信息'));
+            }
+          },(response)=>{
+            callback(new Error('查询出错'));
+          }).catch(function(error){
+            callback(new Error('查询出错'));
+          });
+        }
+      };
+      return {
+        formDynamic: {
+          items: [
+            {
+              value: ''
+            }
+          ]
+        },
+        ruleDynamic:{
+
+        },
+        modify:'',
+        formLeft: {
+          trueName: '',
+          gender: '',
+          phone: '',
+          age: '',
+          email: '',
+          address: '',
+          oldName:''
+        },
+        Inf:false
+      }
+    },
+    created(){
+//      this.getUserData(1)
+    },
+    beforeRouteEnter (to, from, next) {
+      console.log(localStorage.token)
+//    const inquireUrl = this.HOST;
+//    axios.post(inquireUrl).then((json)=>{
+//
+//    }).catch((error)=>{
+//      this.$Message.error(error)
+//    })
+      next()
+//    axios.get(to.params.id, (err, post) =>{
+//    if (err) {
+//      // display some global error message
+//      next(false)
+//    } else {
+//      next(vm => {
+//        vm.post = post
+//      })
+//    }
+//  })
+    },
+
+    methods:{
+      handleAdd () {
+        this.formDynamic.items.push({
+          value: ''
+        });
+      },
+      handleRemove (index) {
+        this.formDynamic.items.splice(index, 1);
+      },
+      getUserData(current){
+        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
+        axios.post(getUserUrl,({
+          currentPage:current,
+          pageSize:this.pageSize
+        })).then((response) =>{
+          if(response.data.success){
+            console.log(response.data)
+            const Mode = response.data.pageMode
+            this.pageTotal = Mode.totalRows
+            this.data1 = Mode.dataList
+            for(let i =0;i<Mode.dataList.length;i++){
+              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+              if(Mode.dataList[i].userDetatilsUser){
+                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+              }else{
+                Mode.dataList[i].userName= ''
+                Mode.dataList[i].password= ''
+              }
+            }
+            this.spinshow = true
+          }else{
+            this.$Message.error('获取数据失败！')
+          }
+        }).catch((error)=>{
+          this.$Message.error('请重新获取数据！')
+        });
+      },
+      handleSubmit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$Message.success('提交成功!');
+          } else {
+            this.$Message.error('表单验证失败!');
+          }
+        })
+      },
+      handleReset (name) {
+        this.$refs[name].resetFields();
+      }
+    }
+  }
+</script>
+
 <template>
-  <div>
+  <div style="margin-bottom:70px;">
   <Breadcrumb class="breadCrumb">
     <Breadcrumb-item href="/homeCenter">
       <Icon type="ios-home-outline"></Icon> 家人中心
@@ -58,7 +186,7 @@
       <!--<Form-item label="查找老人">-->
         <!--<Input v-model="formLeft.oldName" placeholder="请输入老人身份证号"></Input>-->
       <!--</Form-item>-->
-      <Form ref="formDynamic" :model="formDynamic" :label-width="100">
+      <Form ref="formDynamic" :model="formDynamic"  :rules="ruleDynamic" :label-width="100">
         <Form-item
           v-for="(item, index) in formDynamic.items"
           :key="item"
@@ -119,108 +247,3 @@
     </Card>
   </div>
 </template>
-<script>
-  import axios from 'axios' //引入axios
-  import * as types from '../../../store/types'
-  const localStorage = window.localStorage
-
-  export default{
-    data(){
-        return {
-          formDynamic: {
-            items: [
-              {
-                value: ''
-              }
-            ]
-          },
-          modify:'',
-          formLeft: {
-            trueName: '',
-            gender: '',
-            phone: '',
-            age: '',
-            email: '',
-            address: '',
-            oldName:''
-          },
-          Inf:false
-        }
-    },
-    created(){
-//      this.getUserData(1)
-    },
-  beforeRouteEnter (to, from, next) {
-        console.log(localStorage.token)
-//    const inquireUrl = this.HOST;
-//    axios.post(inquireUrl).then((json)=>{
-//
-//    }).catch((error)=>{
-//      this.$Message.error(error)
-//    })
-    next()
-//    axios.get(to.params.id, (err, post) =>{
-//    if (err) {
-//      // display some global error message
-//      next(false)
-//    } else {
-//      next(vm => {
-//        vm.post = post
-//      })
-//    }
-//  })
-},
-
-  methods:{
-    handleAdd () {
-      this.formDynamic.items.push({
-        value: ''
-      });
-    },
-    handleRemove (index) {
-      this.formDynamic.items.splice(index, 1);
-    },
-    getUserData(current){
-      const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
-      axios.post(getUserUrl,({
-        currentPage:current,
-        pageSize:this.pageSize
-      })).then((response) =>{
-        if(response.data.success){
-          console.log(response.data)
-          const Mode = response.data.pageMode
-          this.pageTotal = Mode.totalRows
-          this.data1 = Mode.dataList
-          for(let i =0;i<Mode.dataList.length;i++){
-            Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
-            if(Mode.dataList[i].userDetatilsUser){
-              Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
-              Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
-            }else{
-              Mode.dataList[i].userName= ''
-              Mode.dataList[i].password= ''
-            }
-          }
-          this.spinshow = true
-        }else{
-          this.$Message.error('获取数据失败！')
-        }
-      }).catch((error)=>{
-        this.$Message.error('请重新获取数据！')
-      });
-    },
-    handleSubmit (name) {
-      this.$refs[name].validate((valid) => {
-        if (valid) {
-          this.$Message.success('提交成功!');
-        } else {
-          this.$Message.error('表单验证失败!');
-        }
-      })
-    },
-    handleReset (name) {
-      this.$refs[name].resetFields();
-    }
-  }
-}
-</script>
