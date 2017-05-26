@@ -66,7 +66,7 @@
         服务项目管理
       </template>
       <Menu-item name="basicPro">基本项目管理</Menu-item>
-      <Menu-item name="featurePro">特色项目管理</Menu-item>
+      <!--<Menu-item name="featurePro">特色项目管理</Menu-item>-->
       <Menu-item name="personOrder">服务订单管理</Menu-item>
       <Menu-item name="perTips">个性化提醒管理</Menu-item>
       <Menu-item name="serOrderEval">服务订单评价管理</Menu-item>
