@@ -2,6 +2,7 @@ package com.elder.controller;
 
 import com.elder.domain.User;
 import com.elder.domain.UserDetails;
+import com.elder.enums.IsHideUserEnums;
 import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserDetailService;
 import com.elder.service.UserService;
@@ -59,8 +60,8 @@ public class UserDetailsController extends BaseController {
     @ResponseBody
     public Map<String,Object> deleteUserDetailsByUserDetailsId(@PathVariable int userDetailsId,@PathVariable int userId){
         Map<String,Object> map=new HashMap<>();
-        int i=userDetailService.deleteUserDetailsByUserDetailsId(userDetailsId);
-        if(i!=0){
+        int i=userDetailService.deleteUserDetailsByUserDetailsId(userDetailsId,userId);
+        if(i!=IsHideUserEnums.NOHIDE.getIsHide()){
             map=generateSuccessMsg("成功删除");
         }else{
             map=generateFailureMsg("删除失败");
@@ -75,6 +76,7 @@ public class UserDetailsController extends BaseController {
         user.setUserName(userDetails.getUserDetatilsUser().getUserName());
         user.setPassword(userDetails.getUserDetatilsUser().getPassword());
         user.setTypeId(UserTypeEnums.ORDINARY.getTypeId());
+        user.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
         int j= userService.insertUser(user);
         userDetails.setUserId(user.getUserId());
         int i=userDetailService.insertUserDetails(userDetails);

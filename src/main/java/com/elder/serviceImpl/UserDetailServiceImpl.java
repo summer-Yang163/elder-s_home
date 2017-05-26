@@ -1,7 +1,10 @@
 package com.elder.serviceImpl;
 
+import com.elder.domain.User;
 import com.elder.domain.UserDetails;
+import com.elder.enums.IsHideUserEnums;
 import com.elder.mapper.UserDetailsMapper;
+import com.elder.mapper.UserMapper;
 import com.elder.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +21,16 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
 
     @Override
     public List<UserDetails> executeQueryAllByPage(int currentTotalCount, int pageSize) {
-        List<UserDetails> userDetailsList=userDetailsMapper.executeQueryAllByPage(currentTotalCount,pageSize);
+        List<UserDetails> userDetailsList=userDetailsMapper.executeQueryAllByPage(2,currentTotalCount,pageSize);
         for(UserDetails userDetails:userDetailsList){
             userDetails.setUserDetatilsUser(userDetails.loadUserDetatilsUser());
         }
         return userDetailsList;
     }
-
+    //isHide,1是，2否
     @Override
     public int queryTotalRows() {
-        int totalRows=userDetailsMapper.queryTotalRows();
+        int totalRows=userDetailsMapper.queryTotalRows(2);
         return totalRows;
     }
 
@@ -38,9 +41,12 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
     }
 
     @Override
-    public int deleteUserDetailsByUserDetailsId(int userDetailsId) {
-        int i=userDetailsMapper.deleteByPrimaryKey(userDetailsId);
-        return i;
+    public int deleteUserDetailsByUserDetailsId(int userDetailsId,int userId) {
+        UserDetails userDetails=userDetailsMapper.selectByPrimaryKey(userDetailsId);
+        userDetails.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        User user=userDetails.loadUserDetatilsUser();
+        user.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        return userDetails.getIsHide();
     }
 
     @Override
