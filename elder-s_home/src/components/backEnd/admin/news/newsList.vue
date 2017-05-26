@@ -48,7 +48,7 @@
 </style>
 <template>
   <div >
-    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <!--<AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>-->
     <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
@@ -81,11 +81,11 @@
 
 </template>
 <script>
-  import AddModal from './addNews'
+//  import AddModal from './addNews'
   import sysHead from '../../common/adminName'
   import axios from 'axios'
   export default {
-    components:{AddModal,sysHead},
+    components:{sysHead},
     data(){
       return {
         ModalType:false,
@@ -96,34 +96,33 @@
             width: 60,
             align: 'center',
             title:'#',
-            key:'userDetailsId'
+            key:'newsId'
           },{
             title: '新闻标题',
-            key: 'userName'
+            key: 'newsTitle'
           },{
             title: '新闻简介',
-            key: 'password'
+            key: 'newsBrief'
           },
           {
             title: '发布时间',
-            key: 'trueName'
+            key: 'publishTime'
           },
           {
             title: '重要程度',
-            key: 'userGenderName'
-
+            key: 'importent'
           },
           {
             title: '新闻发布人',
-            key: 'userPhone'
+            key: 'servicePersonId'
           },
           {
             title: '发布社区',
-            key: 'userAge'
+            key: 'communityName'
           },
           {
             title: '类型',
-            key: 'userEmail'
+            key: 'communityNewsType'
           },
           {
             title: '修改',
@@ -167,7 +166,7 @@
         data1: [],
         pageSize:7,
         pageTotal:0,
-        spinshow:false
+        spinshow:true
       }
     },
     created(){
@@ -181,32 +180,32 @@
     methods:{
       getUserData(current){
         const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
-        axios.post(getUserUrl,({
-          currentPage:current,
-          pageSize:this.pageSize
-        })).then((response) =>{
-          if(response.data.success){
-            console.log(response.data)
-            const Mode = response.data.pageMode
-            this.pageTotal = Mode.totalRows
-            this.data1 = Mode.dataList
-            for(let i =0;i<Mode.dataList.length;i++){
-              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
-              if(Mode.dataList[i].userDetatilsUser){
-                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
-                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
-              }else{
-                Mode.dataList[i].userName= ''
-                Mode.dataList[i].password= ''
-              }
-            }
-            this.spinshow = true
-          }else{
-            this.$Message.error('获取数据失败！')
-          }
-        }).catch((error)=>{
-          this.$Message.error('请重新获取数据！')
-        });
+//        axios.post(getUserUrl,({
+//          currentPage:current,
+//          pageSize:this.pageSize
+//        })).then((response) =>{
+//          if(response.data.success){
+//            console.log(response.data)
+//            const Mode = response.data.pageMode
+//            this.pageTotal = Mode.totalRows
+//            this.data1 = Mode.dataList
+//            for(let i =0;i<Mode.dataList.length;i++){
+//              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+//              if(Mode.dataList[i].userDetatilsUser){
+//                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+//                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+//              }else{
+//                Mode.dataList[i].userName= ''
+//                Mode.dataList[i].password= ''
+//              }
+//            }
+//            this.spinshow = true
+//          }else{
+//            this.$Message.error('获取数据失败！')
+//          }
+//        }).catch((error)=>{
+//          this.$Message.error('请重新获取数据！')
+//        });
       },
       add(){
         this.ModalType=true;

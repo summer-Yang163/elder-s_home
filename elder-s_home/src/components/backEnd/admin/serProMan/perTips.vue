@@ -54,7 +54,7 @@
       <Breadcrumb style="float:left;line-height: 32px;">
         <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
         <Breadcrumb-item href="#">服务项目管理</Breadcrumb-item>
-        <Breadcrumb-item>服务订单评价管理</Breadcrumb-item>
+        <Breadcrumb-item>个性化提醒管理</Breadcrumb-item>
       </Breadcrumb>
       <div class="addDelete">
         <Button style="margin-right:25px;"  @click=" add()">新增</Button>
@@ -96,26 +96,30 @@
             width: 60,
             align: 'center',
             title:'#',
-            key:'evaluationId'
+            key:'tipId'
           },{
-            title: '服务订单编号',
-            key: 'serviceOrderId'
+            title: '用户名',
+            key: 'userName'
           },{
-            title: '用户评价内容',
-            key: 'evaluationContent'
-          },
-          {
-            title: '服务人员',
+            title: '提醒人',
             key: 'serviceName'
           },
           {
-            title: '下单用户名',
-            key: 'userName'
+            title: '提醒内容',
+            key: 'tipContent'
+          },
+          {
+            title: '提醒时间',
+            key: 'tipTime'
 
           },
           {
-            title: '是否满意',
-            key: 'isSatisfaction'
+            title: '是否完成提醒',
+            key: 'isComplete'
+          },
+          {
+            title: '用户评价单号',
+            key: 'evaluationId'
           },
           {
             title: '备注',
