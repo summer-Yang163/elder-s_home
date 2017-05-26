@@ -1,7 +1,9 @@
 package com.elder.serviceImpl;
 
 import com.elder.domain.User;
+import com.elder.domain.UserDetails;
 import com.elder.enums.IsHideUserEnums;
+import com.elder.mapper.UserDetailsMapper;
 import com.elder.mapper.UserMapper;
 import com.elder.service.UserService;
 import com.elder.util.exception.MessageException;
@@ -18,6 +20,9 @@ import java.util.List;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserDetailsMapper userDetailsMapper;
 
     @Override
     public User validateUserName(String userName) {
@@ -57,7 +62,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public int deleteUserByUserId(int userId) {
         User user=userMapper.selectByPrimaryKey(userId);
+        if(user.getUserDetailsId()!=0){
+            UserDetails userDetails=user.loadUserUserDetails();
+            userDetails.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+            userDetailsMapper.updateByPrimaryKey(userDetails);
+        }
         user.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        userMapper.updateByPrimaryKey(user);
         return user.getIsHide();
     }
 
