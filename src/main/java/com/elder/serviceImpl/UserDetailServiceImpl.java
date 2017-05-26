@@ -1,7 +1,10 @@
 package com.elder.serviceImpl;
 
+import com.elder.domain.User;
 import com.elder.domain.UserDetails;
+import com.elder.enums.IsHideUserEnums;
 import com.elder.mapper.UserDetailsMapper;
+import com.elder.mapper.UserMapper;
 import com.elder.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,37 +18,45 @@ import java.util.List;
 public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implements UserDetailService {
     @Autowired
     private UserDetailsMapper userDetailsMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<UserDetails> executeQueryAllByPage(int currentTotalCount, int pageSize) {
-        List<UserDetails> userDetailsList=userDetailsMapper.executeQueryAllByPage(currentTotalCount,pageSize);
-        for(UserDetails userDetails:userDetailsList){
+        List<UserDetails> userDetailsList = userDetailsMapper.executeQueryAllByPage(2, currentTotalCount, pageSize);
+        for (UserDetails userDetails : userDetailsList) {
             userDetails.setUserDetatilsUser(userDetails.loadUserDetatilsUser());
         }
         return userDetailsList;
     }
 
+    //isHide,1是，2否
     @Override
     public int queryTotalRows() {
-        int totalRows=userDetailsMapper.queryTotalRows();
+        int totalRows = userDetailsMapper.queryTotalRows(2);
         return totalRows;
     }
 
     @Override
     public int updateUserDetails(UserDetails userDetails) {
-        int i=userDetailsMapper.updateByPrimaryKey(userDetails);
+        int i = userDetailsMapper.updateByPrimaryKey(userDetails);
         return i;
     }
 
     @Override
-    public int deleteUserDetailsByUserDetailsId(int userDetailsId) {
-        int i=userDetailsMapper.deleteByPrimaryKey(userDetailsId);
-        return i;
+    public int deleteUserDetailsByUserDetailsId(int userDetailsId, int userId) {
+        UserDetails userDetails = userDetailsMapper.selectByPrimaryKey(userDetailsId);
+        userDetails.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        userDetailsMapper.updateByPrimaryKey(userDetails);
+        User user = userDetails.loadUserDetatilsUser();
+        user.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        userMapper.updateByPrimaryKey(user);
+        return userDetails.getIsHide();
     }
 
     @Override
     public int insertUserDetails(UserDetails userDetails) {
-        int i=userDetailsMapper.insert(userDetails);
+        int i = userDetailsMapper.insert(userDetails);
         return i;
     }
 }

@@ -1,10 +1,12 @@
 package com.elder.serviceImpl;
 
 import com.elder.domain.User;
+import com.elder.domain.UserDetails;
+import com.elder.enums.IsHideUserEnums;
+import com.elder.mapper.UserDetailsMapper;
 import com.elder.mapper.UserMapper;
 import com.elder.service.UserService;
 import com.elder.util.exception.MessageException;
-import com.elder.util.page.PageModel;
 import com.elder.util.session.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ import java.util.List;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserDetailsMapper userDetailsMapper;
 
     @Override
     public User validateUserName(String userName) {
@@ -56,19 +61,33 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public int deleteUserByUserId(int userId) {
-        int  i=userMapper.deleteByPrimaryKey(userId);
-        return i;
+        User user=userMapper.selectByPrimaryKey(userId);
+        if(user.getUserDetailsId()!=0){
+            UserDetails userDetails=user.loadUserUserDetails();
+            userDetails.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+            userDetailsMapper.updateByPrimaryKey(userDetails);
+        }
+        user.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        userMapper.updateByPrimaryKey(user);
+        return user.getIsHide();
     }
 
     @Override
     public int insertUser(User user) {
+        user.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
         int i=userMapper.insert(user);
         return i;
     }
 
     @Override
+    public int updateUserByPrimaryKey(User user) {
+        int i=userMapper.updateByPrimaryKey(user);
+        return i;
+    }
+
+    @Override
     public List<User> executeQueryAllByPage(int currentTotalCount, int pageSize) {
-        List<User> userList = userMapper.executeQueryAllByPage(currentTotalCount, pageSize);
+        List<User> userList = userMapper.executeQueryAllByPage(IsHideUserEnums.NOHIDE.getIsHide(),currentTotalCount, pageSize);
         for(User user:userList){
             user.setUserUserType(user.loadUserUserType());
         }
@@ -77,7 +96,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public int queryTotalRows() {
-        int totalRows = userMapper.queryTotalRows();
+        int totalRows = userMapper.queryTotalRows(IsHideUserEnums.NOHIDE.getIsHide());
         return totalRows;
     }
 

@@ -24,4 +24,6 @@ public interface UserService extends BaseService<User> {
     int deleteUserByUserId(int userId);
 
     int insertUser(User user);
+
+    int updateUserByPrimaryKey(User user);
 }

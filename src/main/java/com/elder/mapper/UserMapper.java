@@ -27,9 +27,9 @@ public interface UserMapper {
     User userLogin(@Param("userName") String userName, @Param("password") String password);
 
 
-    List<User> executeQueryAllByPage(@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
+    List<User> executeQueryAllByPage(@Param("Is_Hide") int isHide,@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
 
-    int queryTotalRows();
+    int queryTotalRows(@Param("Is_Hide")int isHide);
 
 
 }

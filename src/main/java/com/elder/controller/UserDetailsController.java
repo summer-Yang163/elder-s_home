@@ -1,7 +1,11 @@
 package com.elder.controller;
 
+import com.elder.domain.User;
 import com.elder.domain.UserDetails;
+import com.elder.enums.IsHideUserEnums;
+import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserDetailService;
+import com.elder.service.UserService;
 import com.elder.util.page.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,8 @@ import java.util.Map;
 public class UserDetailsController extends BaseController {
     @Autowired
     private UserDetailService userDetailService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/queryAllUserDetailsByPage")
     @ResponseBody
@@ -37,39 +43,50 @@ public class UserDetailsController extends BaseController {
         }
         return map;
     }
+
     @RequestMapping("/updateUserDetails")
     @ResponseBody
-    public Map<String,Object> updateUserDetails(@RequestBody UserDetails userDetails){
-        Map<String,Object> map=new HashMap<>();
-        int i=userDetailService.updateUserDetails(userDetails);
-        if(i!=0){
-            map=generateSuccessMsg("更新成功");
-        }else{
-            map=generateFailureMsg("更新失败");
+    public Map<String, Object> updateUserDetails(@RequestBody UserDetails userDetails) {
+        Map<String, Object> map = new HashMap<>();
+        int i = userService.updateUserByPrimaryKey(userDetails.getUserDetatilsUser());
+        int j = userDetailService.updateUserDetails(userDetails);
+        if (i != 0 && j != 0) {
+            map = generateSuccessMsg("更新成功");
+        } else {
+            map = generateFailureMsg("更新失败");
         }
         return map;
     }
-    @RequestMapping("/deleteUserDetailsByUserDetailsId/{userDetailsId}")
+
+    @RequestMapping("/deleteUserDetailsByUserDetailsId/{userDetailsId}/{userId}")
     @ResponseBody
-    public Map<String,Object> deleteUserDetailsByUserDetailsId(@PathVariable int userDetailsId){
-        Map<String,Object> map=new HashMap<>();
-        int i=userDetailService.deleteUserDetailsByUserDetailsId(userDetailsId);
-        if(i!=0){
-            map=generateSuccessMsg("成功删除");
-        }else{
-            map=generateFailureMsg("删除失败");
+    public Map<String, Object> deleteUserDetailsByUserDetailsId(@PathVariable int userDetailsId, @PathVariable int userId) {
+        Map<String, Object> map = new HashMap<>();
+        int i = userDetailService.deleteUserDetailsByUserDetailsId(userDetailsId, userId);
+        if (i != IsHideUserEnums.NOHIDE.getIsHide()) {
+            map = generateSuccessMsg("成功删除");
+        } else {
+            map = generateFailureMsg("删除失败");
         }
         return map;
     }
+
     @RequestMapping("/insertUserDetails")
     @ResponseBody
-    public Map<String,Object> insertUserDetails(@RequestBody UserDetails userDetails){
-        Map<String,Object> map=new HashMap<>();
-        int i=userDetailService.insertUserDetails(userDetails);
-        if(i!=0){
-            map=generateSuccessMsg("成功添加");
-        }else{
-            map=generateFailureMsg("添加失败");
+    public Map<String, Object> insertUserDetails(@RequestBody UserDetails userDetails) {
+        Map<String, Object> map = new HashMap<>();
+        User user = new User();
+        user.setUserName(userDetails.getUserDetatilsUser().getUserName());
+        user.setPassword(userDetails.getUserDetatilsUser().getPassword());
+        user.setTypeId(UserTypeEnums.ORDINARY.getTypeId());
+        user.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
+        int j = userService.insertUser(user);
+        userDetails.setUserId(user.getUserId());
+        int i = userDetailService.insertUserDetails(userDetails);
+        if (i != 0 && j != 0) {
+            map = generateSuccessMsg("成功添加");
+        } else {
+            map = generateFailureMsg("添加失败");
         }
         return map;
     }

@@ -1,6 +1,7 @@
 package com.elder.controller;
 
 import com.elder.domain.User;
+import com.elder.enums.IsHideUserEnums;
 import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserService;
 import com.elder.util.page.PageModel;
@@ -19,7 +20,6 @@ import java.util.Map;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
-
 
 
     @RequestMapping("/validateUserName/{userName}")
@@ -87,51 +87,54 @@ public class UserController extends BaseController {
     @RequestMapping("/queryAllUserByPage")
     @ResponseBody
     public Map<String, Object> queryAllUserByPage(@RequestBody PageModel initialPageModel) {
-        PageModel<User> finalPageModel=new PageModel<>();
-        Map<String,Object> map=new HashMap<>();
+        PageModel<User> finalPageModel = new PageModel<>();
+        Map<String, Object> map = new HashMap<>();
         try {
-            finalPageModel=userService.queryAllByPage(initialPageModel);
-            map=generateSuccessMsg("查询成功");
-            map.put("pageMode",finalPageModel);
+            finalPageModel = userService.queryAllByPage(initialPageModel);
+            map = generateSuccessMsg("查询成功");
+            map.put("pageMode", finalPageModel);
         } catch (Exception e) {
-            map=generateFailureMsg("查询失败");
+            map = generateFailureMsg("查询失败");
             e.printStackTrace();
         }
         return map;
     }
+
     @RequestMapping("/updateUserPower")
     @ResponseBody
-    public Map<String,Object> updateUserPower(@RequestBody User user){
-        Map<String,Object> map=new HashMap<>();
-        int i=userService.updateUserPower(user);
-        if(i!=0){
-            map=generateSuccessMsg("更新成功");
-        }else{
-            map=generateFailureMsg("更新失败");
+    public Map<String, Object> updateUserPower(@RequestBody User user) {
+        Map<String, Object> map = new HashMap<>();
+        int i = userService.updateUserPower(user);
+        if (i != 0) {
+            map = generateSuccessMsg("更新成功");
+        } else {
+            map = generateFailureMsg("更新失败");
         }
         return map;
     }
+
     @RequestMapping("/deleteUserByUserId/{userId}")
     @ResponseBody
-    public Map<String,Object> deleteUserByUserId(@PathVariable int userId){
-        Map<String,Object> map=new HashMap<>();
-        int i=userService.deleteUserByUserId(userId);
-        if(i!=0){
-            map=generateSuccessMsg("成功删除");
-        }else{
-            map=generateFailureMsg("删除失败");
+    public Map<String, Object> deleteUserByUserId(@PathVariable int userId) {
+        Map<String, Object> map = new HashMap<>();
+        int i = userService.deleteUserByUserId(userId);
+        if (i != IsHideUserEnums.NOHIDE.getIsHide()) {
+            map = generateSuccessMsg("成功删除");
+        } else {
+            map = generateFailureMsg("删除失败");
         }
         return map;
     }
+
     @RequestMapping("/insertUser")
     @ResponseBody
-    public Map<String,Object> insertUser(@RequestBody User user){
-        Map<String,Object> map=new HashMap<>();
-        int i=userService.insertUser(user);
-        if(i!=0){
-            map=generateSuccessMsg("成功添加");
-        }else{
-            map=generateFailureMsg("添加失败");
+    public Map<String, Object> insertUser(@RequestBody User user) {
+        Map<String, Object> map = new HashMap<>();
+        int i = userService.insertUser(user);
+        if (i != 0) {
+            map = generateSuccessMsg("成功添加");
+        } else {
+            map = generateFailureMsg("添加失败");
         }
         return map;
     }

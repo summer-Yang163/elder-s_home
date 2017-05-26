@@ -22,6 +22,8 @@ public class UserDetails {
 
     private Integer userId;
 
+    private Integer isHide;
+
     private User userDetatilsUser;
 
     public Integer getUserDetailsId() {
@@ -100,14 +102,22 @@ public class UserDetails {
         return userDetatilsUser;
     }
 
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
+    }
+
     public void setUserDetatilsUser(User userDetatilsUser) {
         this.userDetatilsUser = userDetatilsUser;
     }
 
-    public User loadUserDetatilsUser(){
-        UserMapper userMapper=(UserMapper) BeanUtil.load("userMapper");
-        if(userId!=0){
-            userDetatilsUser=userMapper.selectByPrimaryKey(userId);
+    public User loadUserDetatilsUser() {
+        UserMapper userMapper = (UserMapper) BeanUtil.load("userMapper");
+        if (userId != 0) {
+            userDetatilsUser = userMapper.selectByPrimaryKey(userId);
         }
         return userDetatilsUser;
     }
