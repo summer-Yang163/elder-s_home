@@ -4,7 +4,6 @@ import com.elder.domain.User;
 import com.elder.mapper.UserMapper;
 import com.elder.service.UserService;
 import com.elder.util.exception.MessageException;
-import com.elder.util.page.PageModel;
 import com.elder.util.session.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +62,12 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public int insertUser(User user) {
         int i=userMapper.insert(user);
+        return i;
+    }
+
+    @Override
+    public int updateUserByPrimaryKey(User user) {
+        int i=userMapper.updateByPrimaryKey(user);
         return i;
     }
 

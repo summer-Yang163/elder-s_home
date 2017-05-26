@@ -1,7 +1,7 @@
 package com.elder.controller;
 
+import com.elder.domain.User;
 import com.elder.domain.UserDetails;
-import com.elder.domain.UserType;
 import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserDetailService;
 import com.elder.service.UserService;
@@ -46,17 +46,18 @@ public class UserDetailsController extends BaseController {
     @ResponseBody
     public Map<String,Object> updateUserDetails(@RequestBody UserDetails userDetails){
         Map<String,Object> map=new HashMap<>();
-        int i=userDetailService.updateUserDetails(userDetails);
-        if(i!=0){
+        int i=userService.updateUserByPrimaryKey(userDetails.getUserDetatilsUser());
+        int j=userDetailService.updateUserDetails(userDetails);
+        if(i!=0&&j!=0){
             map=generateSuccessMsg("更新成功");
         }else{
             map=generateFailureMsg("更新失败");
         }
         return map;
     }
-    @RequestMapping("/deleteUserDetailsByUserDetailsId/{userDetailsId}")
+    @RequestMapping("/deleteUserDetailsByUserDetailsId/{userDetailsId}/{userId}")
     @ResponseBody
-    public Map<String,Object> deleteUserDetailsByUserDetailsId(@PathVariable int userDetailsId){
+    public Map<String,Object> deleteUserDetailsByUserDetailsId(@PathVariable int userDetailsId,@PathVariable int userId){
         Map<String,Object> map=new HashMap<>();
         int i=userDetailService.deleteUserDetailsByUserDetailsId(userDetailsId);
         if(i!=0){
@@ -70,11 +71,12 @@ public class UserDetailsController extends BaseController {
     @ResponseBody
     public Map<String,Object> insertUserDetails(@RequestBody UserDetails userDetails){
         Map<String,Object> map=new HashMap<>();
-        userDetails.getUserDetatilsUser().setTypeId(UserTypeEnums.ORDINARY.getTypeId());
-        int j= userService.insertUser(userDetails.getUserDetatilsUser());
-        
-        int y=userDetails.getUserDetatilsUser().getUserId();
-        userDetails.setUserId(userDetails.getUserDetatilsUser().getUserId());
+        User user=new User();
+        user.setUserName(userDetails.getUserDetatilsUser().getUserName());
+        user.setPassword(userDetails.getUserDetatilsUser().getPassword());
+        user.setTypeId(UserTypeEnums.ORDINARY.getTypeId());
+        int j= userService.insertUser(user);
+        userDetails.setUserId(user.getUserId());
         int i=userDetailService.insertUserDetails(userDetails);
         if(i!=0&&j!=0){
             map=generateSuccessMsg("成功添加");

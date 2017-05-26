@@ -20,7 +20,7 @@
     delete from user
     where User_Id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.User" useGeneratedKeys="true" keyProperty="User_Id">
+  <insert id="insert" parameterType="com.elder.domain.User" useGeneratedKeys="true" keyProperty="userId">
     insert into user (User_Id, Type_Id, User_Name, 
       Password)
     values (#{userId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
