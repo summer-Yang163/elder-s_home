@@ -1,7 +1,10 @@
 package com.elder.controller;
 
 import com.elder.domain.UserDetails;
+import com.elder.domain.UserType;
+import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserDetailService;
+import com.elder.service.UserService;
 import com.elder.util.page.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ import java.util.Map;
 public class UserDetailsController extends BaseController {
     @Autowired
     private UserDetailService userDetailService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/queryAllUserDetailsByPage")
     @ResponseBody
@@ -65,8 +70,13 @@ public class UserDetailsController extends BaseController {
     @ResponseBody
     public Map<String,Object> insertUserDetails(@RequestBody UserDetails userDetails){
         Map<String,Object> map=new HashMap<>();
+        userDetails.getUserDetatilsUser().setTypeId(UserTypeEnums.ORDINARY.getTypeId());
+        int j= userService.insertUser(userDetails.getUserDetatilsUser());
+        
+        int y=userDetails.getUserDetatilsUser().getUserId();
+        userDetails.setUserId(userDetails.getUserDetatilsUser().getUserId());
         int i=userDetailService.insertUserDetails(userDetails);
-        if(i!=0){
+        if(i!=0&&j!=0){
             map=generateSuccessMsg("成功添加");
         }else{
             map=generateFailureMsg("添加失败");
