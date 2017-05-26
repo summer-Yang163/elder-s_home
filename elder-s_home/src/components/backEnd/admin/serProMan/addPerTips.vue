@@ -4,7 +4,7 @@
 <template>
     <Modal
       v-model="modal1=myModal"
-      :title = "this.$props.conData === false? '新增普通用户信息' : '修改普通用户信息'"
+      :title = "this.$props.conData === false? '新增个性化提醒信息' : '修改个性化提醒信息'"
       @on-ok="ok(formValidate)"
       @on-cancel="cancel" width="500"   :styles="{top: '20px'}">
       <!--<Form ref="formValidate" :model="userDetatilsUser" :rules="rule" :label-width="80">-->
@@ -16,35 +16,32 @@
         <!--</Form-item>-->
       <!--</Form>-->
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <Form-item label="用户名" prop="userDetatilsUser.userName" >
-          <Input v-model="formValidate.userDetatilsUser.userName" placeholder="请输入用户名"></Input>
+        <Form-item label="用户名" prop="userName" >
+          <Input v-model="formValidate.userName" placeholder="请输入用户名"></Input>
         </Form-item>
-        <Form-item label="登陆密码" prop="userDetatilsUser.password">
-          <Input v-model="formValidate.userDetatilsUser.password" placeholder="请输入登陆密码"></Input>
+        <Form-item label="提醒人" prop="serviceName">
+          <Input v-model="formValidate.serviceName" placeholder="请输入登陆密码"></Input>
         </Form-item>
-        <Form-item label="真实姓名" prop="trueName">
-          <Input v-model="formValidate.trueName" placeholder="请输入真实姓名"></Input>
-        </Form-item>
-        <Form-item label="性别" prop="userGender">
-          <Radio-group v-model="formValidate.userGender">
-            <Radio label="1">男</Radio>
-            <Radio label="2">女</Radio>
-          </Radio-group>
+        <Form-item label="提醒内容" prop="tipContent">
+          <Input v-model="formValidate.tipContent" placeholder="请输入真实姓名"></Input>
         </Form-item>
         <!--<Form-item label="性别" prop="userGender">-->
-          <!--<Input v-model="formValidate.userGender" placeholder="请输入用户性别"></Input>-->
+          <!--<Radio-group v-model="formValidate.userGender">-->
+            <!--<Radio label="1">男</Radio>-->
+            <!--<Radio label="2">女</Radio>-->
+          <!--</Radio-group>-->
         <!--</Form-item>-->
-        <Form-item label="电话" prop="userPhone">
-          <Input v-model="formValidate.userPhone" placeholder="请输入用户电话"></Input>
+        <Form-item label="提醒时间" prop="tipTime">
+          <Input v-model="formValidate.tipTime" placeholder="请输入用户性别"></Input>
         </Form-item>
-        <Form-item label="年龄" prop="userAge">
-          <Input v-model="formValidate.userAge" placeholder="请输入用户年龄"></Input>
+        <Form-item label="是否完成提醒" prop="isComplete">
+          <Input v-model="formValidate.isComplete" placeholder="请输入用户电话"></Input>
         </Form-item>
-        <Form-item label="邮箱" prop="userEmail">
-          <Input v-model="formValidate.userEmail" placeholder="请输入用户邮箱"></Input>
+        <Form-item label="用户评价单号" prop="evaluationId">
+          <Input v-model="formValidate.evaluationId" placeholder="请输入用户年龄"></Input>
         </Form-item>
-        <Form-item label="地址" prop="userAddress">
-          <Input v-model="formValidate.userAddress" placeholder="请输入用户地址"></Input>
+        <Form-item label="备注" prop="remarks">
+          <Input v-model="formValidate.remarks" placeholder="请输入用户邮箱"></Input>
         </Form-item>
       </Form>
     </Modal>
@@ -60,16 +57,13 @@
           myModal:this.ModalType,//首先建立一个props的副本
           fromData:this.conData,
           formValidate: {
-            userDetatilsUser: {
-              userName: '',
-              password: ''
-            },
-            trueName: '',
-            userGender:'',
-            userPhone:'',
-            userAge:'',
-            userEmail:'',
-            userAddress:''
+            userName:'',
+            serviceName:'',
+            tipContent: '',
+            tipTime:'',
+            isComplete:'',
+            evaluationId:'',
+            remarks:''
           },
           ruleValidate: {
             userDetatilsUser:{

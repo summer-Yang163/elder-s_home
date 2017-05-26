@@ -63,15 +63,17 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-          <Col class="demo-spin-col" v-if="spinshow">
-          <Spin fix>加载中...</Spin>
+        <row v-show="!spinshow">
+          <Col class="demo-spin-col" >
+          <Spin fix>数据加载中...</Spin>
         </Col>
-        <div v-else>
+        </row>
+        <div v-show="spinshow">
         <Table border :columns="columns4" :data="data1"></Table>
-        <Page  class="page" :total=100 show-total :page-size=pageSize @on-change="getUserData"></Page>
+        <Page  class="page" :total="pageTotal" show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
       </div>
-    </div>
+    </div>'
     <div class="layout-copy">
       2017-05 &copy; TalkingData
     </div>
@@ -108,7 +110,8 @@ import axios from 'axios'
               },
               {
                 title: '性别',
-                key: 'userGender'
+                key: 'userGenderName'
+
               },
               {
                 title: '电话',
@@ -169,45 +172,49 @@ import axios from 'axios'
                 }
               }
             ],
-            data1: [
-              {userName: 'deh',
-                password: 'dee',
-                trueName: 'deee',
-                userGender:'1',
-                userPhone:'11',
-                userAge:'1',
-                userEmail:'2222',
-                userAddress:'22',
-                userDetailsId:2}
-            ],
-            pageSize:4,
+            data1: [],
+            pageSize:7,
+            pageTotal:0,
             spinshow:false
           }
       },
     created(){
         this.getUserData(1)
     },
+    computed:{
+    },
     watch:{
+      '$route': 'getUserData(1)'
     },
     methods:{
       getUserData(current){
-        console.log(current)
-          const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
-//        axios.get(getUserUrl).then((response) =>{
-//              this.spinShow = !this.spinShow
-//              console.log(response)
-////        if(!response.data.success){
-////          data1 = response.data;
-////        }else{
-////          next(false)
-////        }
-//      },(response)=>{
-//              console.log(2)
-////        next(false)
-//      }).catch((error)=>{
-//          console.log(3)
-////        next(false)
-//      });
+        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
+        axios.post(getUserUrl,({
+          currentPage:current,
+          pageSize:this.pageSize
+        })).then((response) =>{
+            if(response.data.success){
+              console.log(response.data)
+              const Mode = response.data.pageMode
+              this.pageTotal = Mode.totalRows
+              this.data1 = Mode.dataList
+              for(let i =0;i<Mode.dataList.length;i++){
+                Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+                  if(Mode.dataList[i].userDetatilsUser){
+                    Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+                    Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+                  }else{
+                    Mode.dataList[i].userName= ''
+                    Mode.dataList[i].password= ''
+                  }
+              }
+              this.spinshow = true
+            }else{
+                this.$Message.error('获取数据失败！')
+            }
+      }).catch((error)=>{
+          this.$Message.error('请重新获取数据！')
+      });
       },
       add(){
           this.ModalType=true;
@@ -219,9 +226,21 @@ import axios from 'axios'
       modify (index) {
         this.ModalType=true;
         this.userData = this.data1[index]
+
       },
       remove (index) {
         console.log(index)
+        const deleteUrl = this.HOST+'/userDetails/deleteUserDetailsByUserDetailsId/'+this.data1[index].userDetailsId
+        axios.post(deleteUrl).then((json)=>{
+          if(json.data.success){
+            this.$Message.success('删除账号成功');
+            this.$router.go(0)
+          }else{
+            this.$Message.error('删除账号失败');
+          }
+        }).catch((error)=>{
+          this.$Message.error('删除失败');
+        })
 //        this.data6.splice(index, 1);
       },
     }

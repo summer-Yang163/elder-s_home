@@ -34,7 +34,8 @@ import AddTips from '@/components/backEnd/admin/tips/addTips'
 import BasicPro from '@/components/backEnd/admin/serProMan/basicPro'
 import FeaturePro from '@/components/backEnd/admin/serProMan/featurePro'
 import PersonOrder from '@/components/backEnd/admin/serProMan/personOrder'
-import SerOrder from '@/components/backEnd/admin/serProMan/serOrder'
+import SerOrderEval from '@/components/backEnd/admin/serProMan/serOrder'
+import PerTips from '@/components/backEnd/admin/serProMan/perTips'
 
 
 import ServiceWork from '@/components/backEnd/service/serviceWork'
@@ -194,9 +195,13 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           name:'serProMan/personOrder',
           component:PersonOrder
         },{
-          path:'/backEnd/serOrder',
-          name:'serProMan/serOrder',
-          component:SerOrder
+          path:'/backEnd/perTips',
+          name:'serProMan/perTips',
+          component:PerTips
+        },{
+          path:'/backEnd/serOrderEval',
+          name:'serProMan/serOrderEval',
+          component:SerOrderEval
         }
       ]
     },{

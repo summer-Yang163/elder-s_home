@@ -49,7 +49,6 @@ width:150px;
                     phone:'',
                     password1: '',
                     password2: ''
-
                 },
                 ruleValidate: {
                     name: [
@@ -60,7 +59,8 @@ width:150px;
                         { required: true, message: '手机号码不能为空', trigger: 'blur' }
                     ],
                     password1: [
-                        { required: true, message: '登陆密码不能为空', trigger: 'blur' }
+                        { required: true, message: '登陆密码不能为空', trigger: 'blur' },
+                      {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
                     ],
                     password2: [
                         { required: true, message: '请填写确认密码', trigger: 'blur' }

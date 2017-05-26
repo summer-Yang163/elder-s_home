@@ -92,7 +92,7 @@
               }
 
             }else{
-              this.$Message.error('登陆失败!');
+              this.$Message.error('用户名或密码错误!');
             }
           },(response)=>{
             this.$Message.error('登陆失败!');
