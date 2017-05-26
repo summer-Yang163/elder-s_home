@@ -19,7 +19,7 @@ public interface UserDetailsMapper {
 
     int updateByPrimaryKey(UserDetails record);
 
-    List<UserDetails> executeQueryAllByPage(@Param("Is_Hide")int isHide,@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
+    List<UserDetails> executeQueryAllByPage(@Param("isHide")int isHide,@Param("currentTotalCount") int currentTotalCount, @Param("pageSize") int pageSize);
 
-    int queryTotalRows(@Param("Is_Hide")int isHide);
+    int queryTotalRows(@Param("isHide")int isHide);
 }

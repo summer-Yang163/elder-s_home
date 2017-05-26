@@ -27,7 +27,7 @@
     delete from user_details
     where User_Details_Id = #{userDetailsId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.elder.domain.UserDetails" >
+  <insert id="insert" parameterType="com.elder.domain.UserDetails" useGeneratedKeys="true" keyProperty="userDetailsId">
     insert into user_details (User_Details_Id, True_Name, User_Gender,
       User_Phone, User_Age, User_Email,
       Community_Id, User_Address, User_Id,

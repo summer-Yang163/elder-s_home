@@ -23,7 +23,7 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
 
     @Override
     public List<UserDetails> executeQueryAllByPage(int currentTotalCount, int pageSize) {
-        List<UserDetails> userDetailsList = userDetailsMapper.executeQueryAllByPage(2, currentTotalCount, pageSize);
+        List<UserDetails> userDetailsList = userDetailsMapper.executeQueryAllByPage(IsHideUserEnums.NOHIDE.getIsHide(), currentTotalCount, pageSize);
         for (UserDetails userDetails : userDetailsList) {
             userDetails.setUserDetatilsUser(userDetails.loadUserDetatilsUser());
         }
@@ -33,7 +33,7 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
     //isHide,1是，2否
     @Override
     public int queryTotalRows() {
-        int totalRows = userDetailsMapper.queryTotalRows(2);
+        int totalRows = userDetailsMapper.queryTotalRows(IsHideUserEnums.NOHIDE.getIsHide());
         return totalRows;
     }
 
