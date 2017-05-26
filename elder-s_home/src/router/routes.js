@@ -41,6 +41,8 @@ import PerTips from '@/components/backEnd/admin/serProMan/perTips'
 import ServiceWork from '@/components/backEnd/service/serviceWork'
 import SerAddNews from '@/components/backEnd/service/addNews/addNews'
 import SerAddOld from '@/components/backEnd/service/addOld/addOld'
+import SerInquOld from '@/components/backEnd/service/addOld/inquireOld'
+
 import SerAddProject from '@/components/backEnd/service/addProject/addProject'
 import SerAddTips from '@/components/backEnd/service/addTips/addTips'
 import AccountCheck from '@/components/backEnd/service/checkOldInf/accountCheck'
@@ -235,6 +237,11 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           path:'/serviceWork/addOld',
           name:'addOld/addOld',
           component:SerAddOld
+        },
+        {
+          path:'/serviceWork/inquireOld',
+          name:'addOld/inquireOld',
+          component:SerInquOld
         },
         {
           path:'/serviceWork/addProject',

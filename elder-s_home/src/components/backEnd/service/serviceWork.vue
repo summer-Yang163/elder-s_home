@@ -70,8 +70,8 @@ body {
         <Vhead :data ='headData'></Vhead>
       </i-col>
       <i-col span="19">
-        <div class="layout-header">
-        </div>
+        <!--<div class="layout-header">-->
+        <!--</div>-->
         <router-view></router-view>
         <div class="layout-copy">
           2017-05 &copy; TalkingData
@@ -88,15 +88,29 @@ body {
     components: {Vhead, AddDelTag},
     data(){
       return {
-          headData:{
-            userAuthority:'3',
-            menuName:'1-1'
-          }
+//          headData:{
+//            userAuthority:'3',
+//            menuName:'1-1'
+//          }
+      }
+    },
+    computed:{
+      headData:function(){
+        const path =  this.$route.name
+        const openName =[path.split('/')[0]]
+        const activeName =  path.split('/')[1]
+        return {
+          userAuthority:'3',
+          menuName:activeName,
+          openMenu:openName
+        }
+
       }
     },
     props: {
       user: 2
     }
   }
+//
 </script>
 

@@ -31,6 +31,24 @@
   export default {
     props:[ 'ModalType','conData'],
     data(){
+      const validateName = (rule, value, callback)=>{
+        if(!value){
+          callback(new Error('用户名不能为空'));
+        }else{
+          const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+          axios.post(valiNameUrl).then((response) =>{
+            if(!response.data.success){
+              callback(new Error('用户名已存在'));
+            }else{
+              callback();
+            }
+          },(response)=>{
+            callback(new Error('用户名已存在'));
+          }).catch(function(error){
+            callback(new Error('用户名已存在'));
+          });
+        }
+      };
         return {
           fromData:this.conData,
           modal1:false,
@@ -42,7 +60,7 @@
           },
           ruleValidate: {
             userName: [
-              { required: true, message: '姓名不能为空', trigger: 'blur' }
+              { required: true, validator: validateName, trigger: 'blur' }
             ],
             password: [
               { required: true, message: '用户密码不能为空', trigger: 'blur' },

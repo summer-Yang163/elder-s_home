@@ -17,10 +17,10 @@
       <!--</Form>-->
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
         <Form-item label="用户名" prop="userDetatilsUser.userName" >
-          <Input v-model="formValidate.userDetatilsUser.userName" placeholder="请输入用户名"></Input>
+          <Input disabled v-model="formValidate.userDetatilsUser.userName" placeholder="请输入用户名" title="用户名与密码不能修改"></Input>
         </Form-item>
         <Form-item label="登陆密码" prop="userDetatilsUser.password">
-          <Input v-model="formValidate.userDetatilsUser.password" placeholder="请输入登陆密码"></Input>
+          <Input disabled v-model="formValidate.userDetatilsUser.password" placeholder="请输入登陆密码"></Input>
         </Form-item>
         <Form-item label="真实姓名" prop="trueName">
           <Input v-model="formValidate.trueName" placeholder="请输入真实姓名"></Input>
@@ -72,18 +72,16 @@
             userAddress:''
           },
           ruleValidate: {
-            userDetatilsUser:{
-              userName: [
-                { required: true, message: '姓名不能为空', trigger: 'blur' }
-              ],
-              password: [
-                { required: true, message: '用户密码不能为空', trigger: 'blur' },
-                {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
-              ]
-            }
-
+              userDetatilsUser: {
+                userName: [
+                  {required: true, message: '姓名不能为空', trigger: 'blur'}
+                ],
+                password: [
+                  {required: true, message: '用户密码不能为空', trigger: 'blur'},
+                  {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
+                ]
+              }
           }
-
         }
     },
     watch:{
@@ -128,7 +126,7 @@
                 console.log(json.data)
               if(json.data.success){
                 this.$Message.success('新增用户成功');
-//                this.$router.go(0)
+                this.$router.go(0)
               }else{
                 this.$Message.error('新增用户失败');
               }
