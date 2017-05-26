@@ -3,6 +3,7 @@ package com.elder.serviceImpl;
 import com.elder.domain.User;
 import com.elder.domain.UserDetails;
 import com.elder.enums.IsHideUserEnums;
+import com.elder.enums.UserTypeEnums;
 import com.elder.mapper.UserDetailsMapper;
 import com.elder.mapper.UserMapper;
 import com.elder.service.UserService;
@@ -74,8 +75,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public int insertUser(User user) {
-        user.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
+        UserDetails userDetails=new UserDetails();
         int i=userMapper.insert(user);
+        user.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
+        if(user.getTypeId()== UserTypeEnums.ORDINARY.getTypeId()){
+            userDetails.setIsHide(IsHideUserEnums.NOHIDE.getIsHide());
+            userDetails.setUserId(user.getUserId());
+            userDetailsMapper.insert(userDetails);
+            user.setUserDetailsId(userDetails.getUserDetailsId());
+            userMapper.updateByPrimaryKey(user);
+        }
         return i;
     }
 
