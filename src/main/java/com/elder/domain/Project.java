@@ -23,6 +23,12 @@ public class Project {
 
     private String remarks;
 
+    private Integer isHide;
+
+    private Integer projectTypeId;
+
+    
+
     public Integer getProjectId() {
         return projectId;
     }
@@ -109,5 +115,21 @@ public class Project {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
+    }
+
+    public Integer getProjectTypeId() {
+        return projectTypeId;
+    }
+
+    public void setProjectTypeId(Integer projectTypeId) {
+        this.projectTypeId = projectTypeId;
     }
 }
