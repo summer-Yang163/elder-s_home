@@ -2,7 +2,7 @@ package com.elder.serviceImpl;
 
 import com.elder.domain.User;
 import com.elder.domain.UserDetails;
-import com.elder.enums.IsHideUserEnums;
+import com.elder.enums.IsHideEnums;
 import com.elder.mapper.UserDetailsMapper;
 import com.elder.mapper.UserMapper;
 import com.elder.service.UserDetailService;
@@ -23,7 +23,7 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
 
     @Override
     public List<UserDetails> executeQueryAllByPage(int currentTotalCount, int pageSize) {
-        List<UserDetails> userDetailsList = userDetailsMapper.executeQueryAllByPage(IsHideUserEnums.NOHIDE.getIsHide(), currentTotalCount, pageSize);
+        List<UserDetails> userDetailsList = userDetailsMapper.executeQueryAllByPage(IsHideEnums.NOHIDE.getIsHide(), currentTotalCount, pageSize);
         for (UserDetails userDetails : userDetailsList) {
             userDetails.setUserDetatilsUser(userDetails.loadUserDetatilsUser());
         }
@@ -33,7 +33,7 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
     //isHide,1是，2否
     @Override
     public int queryTotalRows() {
-        int totalRows = userDetailsMapper.queryTotalRows(IsHideUserEnums.NOHIDE.getIsHide());
+        int totalRows = userDetailsMapper.queryTotalRows(IsHideEnums.NOHIDE.getIsHide());
         return totalRows;
     }
 
@@ -46,10 +46,10 @@ public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implemen
     @Override
     public int deleteUserDetailsByUserDetailsId(int userDetailsId, int userId) {
         UserDetails userDetails = userDetailsMapper.selectByPrimaryKey(userDetailsId);
-        userDetails.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        userDetails.setIsHide(IsHideEnums.YESHIDE.getIsHide());
         userDetailsMapper.updateByPrimaryKey(userDetails);
         User user = userDetails.loadUserDetatilsUser();
-        user.setIsHide(IsHideUserEnums.YESHIDE.getIsHide());
+        user.setIsHide(IsHideEnums.YESHIDE.getIsHide());
         userMapper.updateByPrimaryKey(user);
         return userDetails.getIsHide();
     }

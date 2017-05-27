@@ -25,7 +25,6 @@ public class UserDetails {
     private Integer isHide;
 
     private User userDetatilsUser;
-
     public Integer getUserDetailsId() {
         return userDetailsId;
     }
@@ -98,16 +97,16 @@ public class UserDetails {
         this.userId = userId;
     }
 
-    public User getUserDetatilsUser() {
-        return userDetatilsUser;
-    }
-
     public Integer getIsHide() {
         return isHide;
     }
 
     public void setIsHide(Integer isHide) {
         this.isHide = isHide;
+    }
+
+    public User getUserDetatilsUser() {
+        return userDetatilsUser;
     }
 
     public void setUserDetatilsUser(User userDetatilsUser) {

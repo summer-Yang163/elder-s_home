@@ -3,11 +3,11 @@ package com.elder.enums;
 /**
  * Created by jsf on 2017/5/26.
  */
-public enum IsHideUserEnums {
+public enum IsHideEnums {
     YESHIDE(1,"隐藏"), NOHIDE(2,"不隐藏");
     private int isHide;
     private String describe;
-    private IsHideUserEnums(int isHide, String describe){
+    private IsHideEnums(int isHide, String describe){
         this.isHide=isHide;
         this.describe=describe;
     }
