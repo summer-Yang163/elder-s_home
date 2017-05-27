@@ -14,14 +14,15 @@
     <result column="Old_Em_Phone" property="oldEmPhone" jdbcType="VARCHAR" />
     <result column="Old_Community_Id" property="oldCommunityId" jdbcType="INTEGER" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="Id_Card" property="idCard" jdbcType="INTEGER" />
+    <result column="Id_Card" property="idCard" jdbcType="VARCHAR" />
+    <result column="Is_Hide" property="isHide" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    Old_Id, Old_Name, Old_Gender, Old_Phone, Old_Age, Old_Photo, User_Id, Old_Relationship, 
-    Old_Em_Contact, Old_Em_Phone, Old_Community_Id, Remarks, Id_Card
+    Old_Id, Old_Name, Old_Gender, Old_Phone, Old_Age, Old_Photo, User_Id, Old_Relationship,
+    Old_Em_Contact, Old_Em_Phone, Old_Community_Id, Remarks, Id_Card, Is_Hide
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from old_man
     where Old_Id = #{oldId,jdbcType=INTEGER}
@@ -31,16 +32,16 @@
     where Old_Id = #{oldId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.elder.domain.OldMan" >
-    insert into old_man (Old_Id, Old_Name, Old_Gender, 
-      Old_Phone, Old_Age, Old_Photo, 
-      User_Id, Old_Relationship, Old_Em_Contact, 
-      Old_Em_Phone, Old_Community_Id, Remarks, 
-      Id_Card)
-    values (#{oldId,jdbcType=INTEGER}, #{oldName,jdbcType=VARCHAR}, #{oldGender,jdbcType=INTEGER}, 
-      #{oldPhone,jdbcType=VARCHAR}, #{oldAge,jdbcType=INTEGER}, #{oldPhoto,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{oldRelationship,jdbcType=VARCHAR}, #{oldEmContact,jdbcType=VARCHAR}, 
-      #{oldEmPhone,jdbcType=VARCHAR}, #{oldCommunityId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
-      #{idCard,jdbcType=INTEGER})
+    insert into old_man (Old_Id, Old_Name, Old_Gender,
+      Old_Phone, Old_Age, Old_Photo,
+      User_Id, Old_Relationship, Old_Em_Contact,
+      Old_Em_Phone, Old_Community_Id, Remarks,
+      Id_Card, Is_Hide)
+    values (#{oldId,jdbcType=INTEGER}, #{oldName,jdbcType=VARCHAR}, #{oldGender,jdbcType=INTEGER},
+      #{oldPhone,jdbcType=VARCHAR}, #{oldAge,jdbcType=INTEGER}, #{oldPhoto,jdbcType=VARCHAR},
+      #{userId,jdbcType=INTEGER}, #{oldRelationship,jdbcType=VARCHAR}, #{oldEmContact,jdbcType=VARCHAR},
+      #{oldEmPhone,jdbcType=VARCHAR}, #{oldCommunityId,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR},
+      #{idCard,jdbcType=VARCHAR}, #{isHide,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.elder.domain.OldMan" >
     insert into old_man
@@ -84,6 +85,9 @@
       <if test="idCard != null" >
         Id_Card,
       </if>
+      <if test="isHide != null" >
+        Is_Hide,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="oldId != null" >
@@ -123,7 +127,10 @@
         #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="idCard != null" >
-        #{idCard,jdbcType=INTEGER},
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null" >
+        #{isHide,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -164,7 +171,10 @@
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="idCard != null" >
-        Id_Card = #{idCard,jdbcType=INTEGER},
+        Id_Card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null" >
+        Is_Hide = #{isHide,jdbcType=INTEGER},
       </if>
     </set>
     where Old_Id = #{oldId,jdbcType=INTEGER}
@@ -182,7 +192,15 @@
       Old_Em_Phone = #{oldEmPhone,jdbcType=VARCHAR},
       Old_Community_Id = #{oldCommunityId,jdbcType=INTEGER},
       Remarks = #{remarks,jdbcType=VARCHAR},
-      Id_Card = #{idCard,jdbcType=INTEGER}
+      Id_Card = #{idCard,jdbcType=VARCHAR},
+      Is_Hide = #{isHide,jdbcType=INTEGER}
     where Old_Id = #{oldId,jdbcType=INTEGER}
   </update>
+  <!--增加的业务逻辑-->
+  <select id="executeQueryAllByPage" resultMap="BaseResultMap" >
+    select * from user where Is_Hide=#{isHide,jdbcType=INTEGER} limit #{currentTotalCount},#{pageSize}
+  </select>
+  <select id="queryTotalRows" resultType="java.lang.Integer">
+    select count(*) from user where Is_Hide=#{isHide,jdbcType=INTEGER};
+  </select>
 </mapper>

@@ -1,7 +1,7 @@
 package com.elder.controller;
 
 import com.elder.domain.User;
-import com.elder.enums.IsHideUserEnums;
+import com.elder.enums.IsHideEnums;
 import com.elder.enums.UserTypeEnums;
 import com.elder.service.UserService;
 import com.elder.util.page.PageModel;
@@ -118,7 +118,7 @@ public class UserController extends BaseController {
     public Map<String, Object> deleteUserByUserId(@PathVariable int userId) {
         Map<String, Object> map = new HashMap<>();
         int i = userService.deleteUserByUserId(userId);
-        if (i != IsHideUserEnums.NOHIDE.getIsHide()) {
+        if (i != IsHideEnums.NOHIDE.getIsHide()) {
             map = generateSuccessMsg("成功删除");
         } else {
             map = generateFailureMsg("删除失败");

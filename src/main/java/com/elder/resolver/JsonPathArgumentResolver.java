@@ -31,8 +31,9 @@ public class JsonPathArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
         String jsonBody = getRequestBody(nativeWebRequest);
         JsonNode rootNode = objectMapper.readTree(jsonBody);
+
         JsonNode node = rootNode.path(methodParameter.getParameterName());
-        return objectMapper.readValue(node.toString(), methodParameter.getParameterType());
+        return objectMapper.readValue(rootNode.toString(), methodParameter.getParameterType());
     }
 
     private String getRequestBody(NativeWebRequest nativeWebRequest) {

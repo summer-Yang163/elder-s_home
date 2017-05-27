@@ -25,8 +25,9 @@ public class OldMan {
 
     private String remarks;
 
-    private Integer idCard;
+    private String idCard;
 
+    private Integer isHide;
 
     public Integer getOldId() {
         return oldId;
@@ -124,12 +125,19 @@ public class OldMan {
         this.remarks = remarks == null ? null : remarks.trim();
     }
 
-    public Integer getIdCard() {
+    public String getIdCard() {
         return idCard;
     }
 
-    public void setIdCard(Integer idCard) {
-        this.idCard = idCard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
+    }
 }
