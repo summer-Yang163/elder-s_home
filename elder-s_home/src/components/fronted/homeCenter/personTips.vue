@@ -124,25 +124,25 @@
             title: '备注',
             key: 'remarks'
           },
-//          {
-//            title: '详情',
-//            width: 70,
-//            key: 'Type_Name',
-//            render: (h,params) => {
-//              return h('div',[
-//                h('span', {
-//                  props: {
-//                    type: 'edit'
-//                  },
-//                  on: {
-//                    click: () => {
-//                      this.modify(params.index)
-//                    }
-//                  }
-//                },'详情')]
-//              )
-//            }
-//          },
+          {
+            title: '添加评价',
+            width: 70,
+            key: 'Type_Name',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'edit'
+                  },
+                  on: {
+                    click: () => {
+                      this.modify(params.index)
+                    }
+                  }
+                },'添加评价')]
+              )
+            }
+          }
 //          {
 //            title: '删除',
 //            width: 70,

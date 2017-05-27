@@ -204,22 +204,22 @@
     methods:{
       getUserData(current){
         console.log(current)
-        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
-//        axios.get(getUserUrl).then((response) =>{
-//              this.spinShow = !this.spinShow
-//              console.log(response)
-////        if(!response.data.success){
-////          data1 = response.data;
-////        }else{
-////          next(false)
-////        }
-//      },(response)=>{
-//              console.log(2)
-////        next(false)
-//      }).catch((error)=>{
-//          console.log(3)
-////        next(false)
-//      });
+        const getUserUrl = this.HOST+'/oldMan/queryAllOldManByPage/'+current+'/'+this.pageSize
+        axios.get(getUserUrl).then((response) =>{
+              this.spinShow = !this.spinShow
+              console.log(response)
+//        if(!response.data.success){
+//          data1 = response.data;
+//        }else{
+//          next(false)
+//        }
+      },(response)=>{
+              console.log(2)
+//        next(false)
+      }).catch((error)=>{
+          console.log(3)
+//        next(false)
+      });
       },
       add(){
         this.ModalType=true;
