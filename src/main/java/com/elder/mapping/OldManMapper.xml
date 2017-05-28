@@ -198,9 +198,9 @@
   </update>
   <!--增加的业务逻辑-->
   <select id="executeQueryAllByPage" resultMap="BaseResultMap" >
-    select * from user where Is_Hide=#{isHide,jdbcType=INTEGER} limit #{currentTotalCount},#{pageSize}
+    select * from old_man where Is_Hide=#{isHide,jdbcType=INTEGER} limit #{currentTotalCount},#{pageSize}
   </select>
   <select id="queryTotalRows" resultType="java.lang.Integer">
-    select count(*) from user where Is_Hide=#{isHide,jdbcType=INTEGER};
+    select count(*) from old_man where Is_Hide=#{isHide,jdbcType=INTEGER};
   </select>
 </mapper>

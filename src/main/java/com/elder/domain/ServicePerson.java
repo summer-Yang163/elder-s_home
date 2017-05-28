@@ -21,6 +21,8 @@ public class ServicePerson {
 
     private Integer userId;
 
+    private Integer isHide;
+
     public Integer getServicePersonId() {
         return servicePersonId;
     }
@@ -99,5 +101,13 @@ public class ServicePerson {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
     }
 }
