@@ -63,12 +63,14 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Col class="demo-spin-col" v-if="spinshow">
-        <Spin fix>加载中...</Spin>
-        </Col>
-        <div v-else>
+        <row v-show="!spinshow">
+          <Col class="demo-spin-col" >
+          <Spin fix>数据加载中...</Spin>
+          </Col>
+        </row>
+        <div v-show="spinshow">
           <Table border :columns="columns4" :data="data1"></Table>
-          <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+          <Page  class="page" :total="pageTotal"  show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
       </div>
     </div>
@@ -86,6 +88,7 @@
     components:{AddModal,sysHead},
     data(){
       return {
+        pageTotal:0,
         ModalType:false,
         userData:'',
         columns4: [
@@ -128,7 +131,11 @@
           },
           {
             title: '是否特色服务',
-            key: 'isFeatures'
+            key: 'isFeaturesName'
+          },
+          {
+            title: '项目类型',
+            key: 'typeName'
           },
           {
             title: '备注',
@@ -174,22 +181,22 @@
           }
         ],
         data1: [
-          {
-            projectId: 'deh',
-            projectName: 'dee',
-            projectContentDescrible: 'deee',
-            projectPrice:'1',
-            projectLimitedNumber:'11',
-            projectServiceConditions:'1',
-            projectSalePrice:'2222',
-            projectServiceTime:'22',
-            projectServicePicture:2,
-            isFeatures:'22',
-            remarks:2,
-            }
+//          {
+//            projectId: 'deh',
+//            projectName: 'dee',
+//            projectContentDescrible: 'deee',
+//            projectPrice:'1',
+//            projectLimitedNumber:'11',
+//            projectServiceConditions:'1',
+//            projectSalePrice:'2222',
+//            projectServiceTime:'22',
+//            projectServicePicture:2,
+//            isFeatures:'22',
+//            remarks:2,
+//            }
         ],
-        pageSize:4,
-        spinshow:false
+        pageSize:7,
+        spinshow:true
       }
     },
     created(){
@@ -200,22 +207,34 @@
     methods:{
       getUserData(current){
         console.log(current)
-        const getUserUrl = this.HOST+'/user/queryAllCommonUserByPage/'+current+'/'+this.pageSize
-//        axios.get(getUserUrl).then((response) =>{
-//              this.spinShow = !this.spinShow
-//              console.log(response)
-////        if(!response.data.success){
-////          data1 = response.data;
-////        }else{
-////          next(false)
-////        }
-//      },(response)=>{
-//              console.log(2)
-////        next(false)
-//      }).catch((error)=>{
-//          console.log(3)
-////        next(false)
-//      });
+        const getUserUrl = this.HOST+'/project/queryAllProjectByPage';
+        axios.post(getUserUrl,{
+          currentPage:current,
+          pageSize:this.pageSize
+        }).then((response) =>{
+          console.log(response)
+          this.spinShow = !this.spinShow;
+          if(response.data.success) {
+            const Mode = response.data.pageMode;
+            console.log(Mode)
+            for (let i = 0; i < Mode.dataList.length; i++) {
+              if (Mode.dataList[i].isFeatures) {
+                Mode.dataList[i].isFeaturesName = Mode.dataList[i].isFeatures == 1 ? '是' : '否';
+              } else {
+                Mode.dataList[i].isFeaturesName = ''
+              }
+            }
+            this.pageTotal = Mode.totalRows;
+            this.data1 = Mode.dataList
+          }
+          else
+          {
+            this.$Message.error('获取数据失败！')
+          }
+
+        }).catch((error)=>{
+          this.$Message.error('请重新获取数据！')
+        });
       },
       add(){
         this.ModalType=true;
@@ -230,8 +249,22 @@
       },
       remove (index) {
         console.log(index)
+        console.log(this.data1[index].projectId);
+        const delUrl = this.HOST+'/project/deleteProjectByProjectId/'+this.data1[index].projectId
+        console.log(delUrl)
+        axios.post(delUrl).then((response) =>{
+          if(response.data.success){
+            this.$router.go(0)
+          }else{
+            this.$Message.error('删除数据失败')
+          }
+        },(response)=>{
+          this.$Message.error('获取数据失败')
+        }).catch((error)=>{
+          this.$Message.error('获取数据失败')
+        });
 //        this.data6.splice(index, 1);
-      },
+      }
     }
   }
 </script>

@@ -27,7 +27,9 @@
         <Input v-model="formValidate.idCard" placeholder="请输入老人身份证号"></Input>
       </Form-item>
       <Form-item label="老人图片" prop="oldPhoto">
-        <Input v-model="formValidate.oldPhoto" placeholder="请选择老人图片"></Input>
+        <!--<Input v-model="formValidate.oldPhoto" placeholder="请选择老人图片"></Input>-->
+        <input type="file" v-on:change="picVal()"  name="file" class="file"  placeholder="请选择老人图片"/>
+        <!--<input type="submit" name="submit" value="上传" class="submit" />-->
       </Form-item>
       <Form-item label="紧急联系人" prop="oldEmContact">
         <Input v-model="formValidate.oldEmContact" placeholder="请输入老人紧急联系人"></Input>
@@ -45,6 +47,8 @@
   </Modal>
 </template>
 <script>
+  import axios from 'axios'
+
   export default {
     props:[ 'ModalType','conData'],
     data(){
@@ -52,6 +56,7 @@
         modal1:false,
         myModal:this.ModalType,//首先建立一个props的副本
         fromData:this.conData,
+        picVal:'',
         formValidate: {
           oldName: '',
           oldGender: '',
@@ -110,34 +115,56 @@
     computed:{
     },
     methods:{
-
       ok (data) {
-
-        if(data.name&&data.password&&data.type){
-//          this.$http.post(this.addUrl,data).then((json)=>{
-////            console.log(json.data);
-//            this.$Message.info('新增账号成功');
-//          },(json)=>{
-//            this.$Message.info('新增账号失败');
-//          })
-//        }else{
-//          this.$Message.warning('请将账号信息填写完整!');
-        }
-      },
-      cancel () {
-        this.$Message.info('取消新增账号');
-      },
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
+          console.log(data)
+          if(data.oldName&&data.oldGender&&data.oldPhone&&data.oldAge&&data.idCard&&data.oldEmContact&&data.oldEmPhone&&data.oldCommunityId){
+            data.oldCommunityId = data.oldCommunityId-0;
+            if(this.fromData){
+//              修改
+              const modifyUrl = this.HOST+'/oldMan/updateOldMan';
+              delete data.oldGenderName;
+              console.log(data);
+              axios.post(modifyUrl,data).then((json)=>{
+                if(json.data.success){
+                  this.$Message.success('修改老人信息成功');
+                  this.$router.go(0);
+                }else{
+                  this.$router.go(0);
+                  this.$Message.error('修改老人信息失败');
+                }
+              }).catch((error)=>{
+                this.$router.go(0);
+                this.$Message.error('修改失败');
+              })
+            }else{
+                console.log(data)
+              const addUrl = this.HOST+'/oldMan/insertOldMan';
+              axios.post(addUrl,data).then((json)=>{
+                if(json.data.success){
+                  this.$Message.success('新增老人信息成功');
+                  this.$router.go(0)
+                }else{
+                  this.$Message.error('新增老人信息失败');
+                }
+              }).catch((error)=>{
+                this.$Message.error('新增失败');
+              })
+            }
+          }else{
+            this.$Message.warning('请将必填信息填写完整!');
           }
-        })
+        },
+      cancel () {
+          if(this.fromData){
+            this.$Message.info('取消修改老人信息');
+
+          }else{
+            this.$Message.info('取消新增老人信息');
+
+          }
       },
-      handleReset (name) {
-        this.$refs[name].resetFields();
+      picVal(val){
+          console.log(val)
       }
     },
     computed:{

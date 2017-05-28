@@ -32,12 +32,23 @@
       <Form-item label="服务图片" prop="projectServicePicture">
         <Input v-model="formValidate.projectServicePicture" placeholder="请选择服务图片"></Input>
       </Form-item>
+      <Form-item label="项目类型" prop="projectTypeId">
+        <Select v-model="formValidate.projectTypeId" placeholder="请选择项目类型">
+          <Option value="1">生活照料</Option>
+          <Option value="2">医疗保健</Option>
+          <Option value="3">物业维修</Option>
+          <Option value="4">家政便民</Option>
+          <Option value="5">娱乐学习</Option>
+          <Option value="4">人文关怀</Option>
+        </Select>
+      </Form-item>
       <Form-item label="是否特色服务" prop="isFeatures">
          <Radio-group v-model="formValidate.isFeatures">
            <Radio label="1">是</Radio>
            <Radio label="0">否</Radio>
          </Radio-group>
        </Form-item>
+
       <Form-item label="备注" prop="remarks">
         <Input v-model="formValidate.remarks" placeholder="填写服务项目备注信息"></Input>
       </Form-item>
@@ -45,6 +56,7 @@
   </Modal>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     props:[ 'ModalType','conData'],
     data(){
@@ -63,7 +75,8 @@
           projectServiceTime:'',
           projectServicePicture:'',
           isFeatures:'',
-          remarks:''
+          remarks:'',
+          projectTypeId:''
         },
         ruleValidate: {
           projectName: [
@@ -80,6 +93,9 @@
           ],
           isFeatures: [
             { required: true, message: '请选择是否特色服务', trigger: 'blur' },
+          ],
+          projectTypeId:[
+            { required: true, message: '请选择项目类型', trigger: 'blur' }
           ]
         },
         addUrl:'/api/'
@@ -102,34 +118,53 @@
     computed:{
     },
     methods:{
-
       ok (data) {
-
-        if(data.name&&data.password&&data.type){
-//          this.$http.post(this.addUrl,data).then((json)=>{
-////            console.log(json.data);
-//            this.$Message.info('新增账号成功');
-//          },(json)=>{
-//            this.$Message.info('新增账号失败');
-//          })
-//        }else{
-//          this.$Message.warning('请将账号信息填写完整!');
+        console.log(data)
+        if(data.projectName&&data.projectContentDescrible&&data.projectPrice&&data.projectLimitedNumber&&data.isFeatures){
+          data.isFeatures = data.isFeatures-0;
+          if(this.fromData){
+//              修改
+            const modifyUrl = this.HOST+'/project/updateProject';
+            console.log(data);
+            delete data.isFeaturesName
+            axios.post(modifyUrl,data).then((json)=>{
+              if(json.data.success){
+                this.$Message.success('修改服务项目成功');
+                this.$router.go(0);
+              }else{
+//                this.$router.go(0);
+                this.$Message.error('修改服务项目失败');
+              }
+            }).catch((error)=>{
+              this.$router.go(0);
+              this.$Message.error('修改失败');
+            })
+          }else{
+            console.log(data)
+            const addUrl = this.HOST+'/project/insertProject';
+            axios.post(addUrl,data).then((json)=>{
+              if(json.data.success){
+                this.$Message.success('新增服务项目成功');
+                this.$router.go(0)
+              }else{
+                this.$Message.error('新增服务项目失败');
+              }
+            }).catch((error)=>{
+              this.$Message.error('新增失败');
+            })
+          }
+        }else{
+          this.$Message.warning('请将必填信息填写完整!');
         }
       },
       cancel () {
-        this.$Message.info('取消新增账号');
-      },
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
+        if(this.fromData){
+          this.$Message.info('取消修改服务项目信息');
+
+        }else{
+          this.$Message.info('取消新增服务项目信息');
+
+        }
       }
     },
     computed:{
