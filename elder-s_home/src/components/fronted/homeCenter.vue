@@ -68,6 +68,21 @@
   .ivu-col{
     transition: width .2s ease-in-out;
   }
+  .footer{
+    clear:both;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    height:60px;
+    /*padding-top:10px;*/
+    background-color: #b8bfc8;
+    text-align:center;
+    /*margin-bottom:20px;*/
+    z-index:100;
+  }
+  .footer p{
+    margin-top:10px  ;
+  }
 </style>
 <template>
   <div>

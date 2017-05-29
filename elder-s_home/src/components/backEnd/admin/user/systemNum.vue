@@ -181,12 +181,12 @@
         }).then((response) =>{
             console.log(response)
           if(response.data.success){
-            const dataMode = response.data.pageMode.dataList
+            const dataMode = response.data.pageMode.dataList;
                 for(let i =0;i<dataMode.length;i++){
                   dataMode[i].typeName =  dataMode[i].userUserType.typeName
                 }
-                this.data1 = dataMode
-            this.pageTotal = this.pageTotal = response.data.pageMode.totalRows
+                this.data1 = dataMode;
+            this.pageTotal = response.data.pageMode.totalRows
           }else{
               this.$Message.error('获取数据失败')
           }

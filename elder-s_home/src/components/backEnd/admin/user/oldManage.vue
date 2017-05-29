@@ -33,6 +33,21 @@
     float:right;
     padding: 10px 0;
   }
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+  .demo-spin-col{
+    height: 200px;
+    text-align: center;
+    position: relative;
+    font-size:30px;
+    /*border: 1px solid #eee;*/
+  }
 </style>
 <template>
   <div >
@@ -51,12 +66,14 @@
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
-        <Col class="demo-spin-col" v-if="spinshow">
-        <Spin fix>加载中...</Spin>
-        </Col>
-        <div v-else>
+        <row v-show="!spinshow">
+          <Col class="demo-spin-col" >
+          <Spin fix>数据加载中...</Spin>
+          </Col>
+        </row>
+        <div v-show="spinshow">
           <Table border :columns="columns4" :data="data1"></Table>
-          <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
+          <Page  class="page" :total='pageTotal' show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
       </div>
     </div>
@@ -74,10 +91,11 @@
   export default {
     data(){
       return {
-        spinshow:false,
+        spinshow:true,
         ModalType:false,
         userData:'',
-        pageSize:8,
+        pageTotal:0,
+        pageSize:7,
         columns4: [
           {
             type: 'index',
@@ -92,7 +110,7 @@
           },
           {
             title: '性别',
-            key: 'oldGender'
+            key: 'oldGenderName'
           },
           {
             title: '电话',
@@ -167,31 +185,6 @@
             name: '王小明',
             password: '123456',
             classify: '普通用户'
-          },
-          {
-            name: '张小刚',
-            password: '123456',
-            classify: '网站工作人员'
-          },
-          {
-            name: '李小红',
-            password: '123456',
-            classify: '超级管理员'
-          },
-          {
-            name: '周小伟',
-            age: 26,
-            address: '深圳市南山区深南大道'
-          },
-          {
-            name: '王小明',
-            age: 18,
-            address: '北京市朝阳区芍药居'
-          },
-          {
-            name: '张小刚',
-            age: 25,
-            address: '北京市海淀区西二旗'
           }
         ]
 
@@ -201,25 +194,41 @@
     created(){
       this.getUserData(1)
     },
+    watch:{
+      '$route': 'getUserData(1)'
+    },
     methods:{
       getUserData(current){
         console.log(current)
-        const getUserUrl = this.HOST+'/oldMan/queryAllOldManByPage/'+current+'/'+this.pageSize
-        axios.get(getUserUrl).then((response) =>{
-              this.spinShow = !this.spinShow
-              console.log(response)
-//        if(!response.data.success){
-//          data1 = response.data;
-//        }else{
-//          next(false)
-//        }
-      },(response)=>{
-              console.log(2)
-//        next(false)
+        const getUserUrl = this.HOST+'/oldMan/queryAllOldManByPage';
+        axios.post(getUserUrl,{
+          currentPage:current,
+          pageSize:this.pageSize
+        }).then((response) =>{
+          console.log(response)
+              this.spinShow = !this.spinShow;
+              if(response.data.success) {
+                const Mode = response.data.pageMode;
+                console.log(Mode)
+                for (let i = 0; i < Mode.dataList.length; i++) {
+
+                  if (Mode.dataList[i].oldGender) {
+                    Mode.dataList[i].oldGenderName = Mode.dataList[i].oldGender == 1 ? '男' : '女';
+                  } else {
+                    Mode.dataList[i].oldGenderName = ''
+                  }
+                }
+                  this.pageTotal = Mode.totalRows;
+                  this.data1 = Mode.dataList
+                }
+              else
+                {
+                  this.$Message.error('获取数据失败！')
+                }
+
       }).catch((error)=>{
-          console.log(3)
-//        next(false)
-      });
+          this.$Message.error('请重新获取数据！')
+        });
       },
       add(){
         this.ModalType=true;
@@ -230,10 +239,24 @@
       },
       modify (index) {
         this.ModalType=true;
-        this.userData = this.data1[index]
+        this.userData = this.data1[index];
       },
       remove (index) {
         console.log(index)
+        console.log(this.data1[index].oldId);
+        const delUrl = this.HOST+'/oldMan/deleteOldManByUserId/'+this.data1[index].oldId
+        console.log(delUrl)
+        axios.post(delUrl).then((response) =>{
+          if(response.data.success){
+            this.$router.go(0)
+          }else{
+            this.$Message.error('删除数据失败')
+          }
+        },(response)=>{
+          this.$Message.error('获取数据失败')
+        }).catch((error)=>{
+          this.$Message.error('获取数据失败')
+        });
 //        this.data6.splice(index, 1);
       }
 

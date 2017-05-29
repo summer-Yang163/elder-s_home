@@ -9,8 +9,8 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 Vue.config.productionTip = false
 Vue.use(iView);
-// Vue.prototype.HOST = 'http://127.0.0.1:8087/elder_home'
-Vue.prototype.HOST = 'http://192.168.199.239:8087/elder_home'
+Vue.prototype.HOST = 'http://127.0.0.1:8087/elder_home'
+// Vue.prototype.HOST = 'http://192.168.199.239:8087/elder_home'
 
 // Vue.use(axios);
 new Vue({
