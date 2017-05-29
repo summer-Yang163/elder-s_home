@@ -1,5 +1,8 @@
 package com.elder.domain;
 
+import com.elder.mapper.ProjectTypeMapper;
+import com.elder.util.bean.BeanUtil;
+
 public class Project {
     private Integer projectId;
 
@@ -27,7 +30,16 @@ public class Project {
 
     private Integer projectTypeId;
 
-    
+    private ProjectType projectProjectType;
+
+
+    public ProjectType getProjectProjectType() {
+        return projectProjectType;
+    }
+
+    public void setProjectProjectType(ProjectType projectProjectType) {
+        this.projectProjectType = projectProjectType;
+    }
 
     public Integer getProjectId() {
         return projectId;
@@ -131,5 +143,18 @@ public class Project {
 
     public void setProjectTypeId(Integer projectTypeId) {
         this.projectTypeId = projectTypeId;
+    }
+
+
+    public ProjectType loadProjectProjectType(){
+        if(projectProjectType==null){
+            if(projectTypeId==0){
+                projectProjectType=new ProjectType();
+            }else{
+                ProjectTypeMapper projectTypeMapper=(ProjectTypeMapper)BeanUtil.load("projectTypeMapper");
+                projectProjectType=projectTypeMapper.selectByPrimaryKey(projectTypeId);
+            }
+        }
+        return projectProjectType;
     }
 }

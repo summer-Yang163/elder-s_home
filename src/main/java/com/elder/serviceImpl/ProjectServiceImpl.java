@@ -20,7 +20,15 @@ public class ProjectServiceImpl extends BaseServiceImpl<Project> implements Proj
     @Override
     public List<Project> executeQueryAllByPage(int currentTotalCount, int pageSize) {
         List<Project> projectList = projectMapper.executeQueryAllByPage(IsHideEnums.NOHIDE.getIsHide(), currentTotalCount, pageSize);
+        for(Project project:projectList){
+            project.loadProjectProjectType();
+        }
         return projectList;
+    }
+
+    @Override
+    public List<Project> executeQueryAll() {
+        return null;
     }
 
     @Override

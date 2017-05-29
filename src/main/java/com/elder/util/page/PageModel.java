@@ -1,6 +1,8 @@
 package com.elder.util.page;
 
 
+import sun.jvm.hotspot.debugger.Page;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,8 @@ import java.util.List;
  */
 public class PageModel<T> {
     //用户输入的分页条件
-    private int currentPage = 1;//当前页
-    private int pageSize = 15;//每页最大条数
+    private int currentPage;//当前页
+    private int pageSize;//每页最大条数
 
     //用于实现分页的SQL条件，是根据用户输入条件计算而来的
     private int beginPage;
@@ -21,7 +23,26 @@ public class PageModel<T> {
     //根据计算总行数，计算出总的页数输出给页面
     private int totalPage;
     //存储数据
-    private List<T> dataList = new ArrayList<>();
+    private List<T> dataList;
+
+    //是否分页
+    private Boolean isPaging;
+
+    public PageModel() {
+        this.currentPage = 1;
+        this.pageSize = 15;
+        this.isPaging = true;
+        this.dataList = new ArrayList<>();
+    }
+
+
+    public Boolean getPaging() {
+        return isPaging;
+    }
+
+    public void setPaging(Boolean paging) {
+        isPaging = paging;
+    }
 
     public int getCurrentPage() {
         return currentPage;

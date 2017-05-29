@@ -26,15 +26,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
             finalPageModel.setPageSize(initialPageModel.getPageSize());
             finalPageModel.setTotalPage(initialPageModel.getTotalPage());
             int currentTotalCount = initialPageModel.currentTotalCount(initialPageModel.getCurrentPage());
-            List<T> tList = executeQueryAllByPage(currentTotalCount,initialPageModel.getPageSize());
+            List<T> tList = executeQueryAllByPage(currentTotalCount, initialPageModel.getPageSize());
             int totalRows = queryTotalRows();
             finalPageModel.setTotalRows(totalRows);
             finalPageModel.setDataList(tList);
+
         }
         return finalPageModel;
     }
 
-    public abstract List<T> executeQueryAllByPage(int currentTotalCount,int pageSize);
+    public abstract List<T> executeQueryAllByPage(int currentTotalCount, int pageSize);
+
+    public abstract List<T> executeQueryAll();
 
     public abstract int queryTotalRows();
 

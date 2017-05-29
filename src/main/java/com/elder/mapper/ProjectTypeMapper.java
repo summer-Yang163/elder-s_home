@@ -1,7 +1,11 @@
 package com.elder.mapper;
 
 import com.elder.domain.ProjectType;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ProjectTypeMapper {
     int deleteByPrimaryKey(Integer projectTypeId);
 
@@ -14,4 +18,6 @@ public interface ProjectTypeMapper {
     int updateByPrimaryKeySelective(ProjectType record);
 
     int updateByPrimaryKey(ProjectType record);
+
+    List<ProjectType> queryAllProjectType();
 }

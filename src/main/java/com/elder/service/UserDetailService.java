@@ -8,9 +8,6 @@ import com.elder.util.page.PageModel;
  */
 public interface UserDetailService extends BaseService<UserDetails> {
 
-    PageModel<UserDetails> queryAllByPage(PageModel<UserDetails> initialPageModel);
-
-
     int updateUserDetails(UserDetails userDetails);
 
     int deleteUserDetailsByUserDetailsId(int userDetailsId,int userId);

@@ -1,5 +1,6 @@
 package com.elder.domain;
 
+
 public class ProjectType {
     private Integer projectTypeId;
 

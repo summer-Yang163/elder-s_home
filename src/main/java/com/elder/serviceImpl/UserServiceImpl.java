@@ -104,6 +104,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
+    public List<User> executeQueryAll() {
+        return null;
+    }
+
+    @Override
     public int queryTotalRows() {
         int totalRows = userMapper.queryTotalRows(IsHideEnums.NOHIDE.getIsHide());
         return totalRows;

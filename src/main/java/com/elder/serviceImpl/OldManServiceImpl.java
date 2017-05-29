@@ -24,6 +24,11 @@ public class OldManServiceImpl extends BaseServiceImpl<OldMan> implements OldMan
     }
 
     @Override
+    public List<OldMan> executeQueryAll() {
+        return null;
+    }
+
+    @Override
     public int queryTotalRows() {
         int totalRows = oldManMapper.queryTotalRows(IsHideEnums.NOHIDE.getIsHide());
         return totalRows;

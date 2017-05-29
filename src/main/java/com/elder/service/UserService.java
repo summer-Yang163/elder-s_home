@@ -17,8 +17,6 @@ public interface UserService extends BaseService<User> {
 
     void userLogOut();
 
-    PageModel<User> queryAllByPage(PageModel<User> initialPageModel);
-
     int updateUserPower(User user);
 
     int deleteUserByUserId(int userId);
