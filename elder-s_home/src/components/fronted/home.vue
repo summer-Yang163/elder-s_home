@@ -57,7 +57,7 @@
   .news_tips {
     padding: 20px 0;
     overflow: auto;
-    margin-bottom:60px;
+    /*margin-bottom:60px;*/
   }
   .news_tips .news {
     float: left;
@@ -88,6 +88,7 @@
 <template>
   <div>
     <!--<Vhead></Vhead>-->
+    <TipModel ></TipModel>
     <Carousel class="main"></Carousel>
     <div class="main community_service">
       <div class="community">
@@ -148,9 +149,11 @@
   import Service from './home/sservice'
   import News from './home/snews'
   import Tips from './home/stips'
+  import TipModel from './common/tipModel'
+
 
   export default {
-    components: {Vhead, Carousel,DetailCard,VFooter,Service,News,Tips},
+    components: {Vhead, Carousel,DetailCard,VFooter,Service,News,Tips,TipModel},
     data () {
       return {
           community:{

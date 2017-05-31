@@ -41,7 +41,7 @@
                   <h3>{{service.name}}</h3>
                   <img :src="service.src" >
                   <p class="text"> {{service.describle}}</p>
-                  <p class="text">发布时间：{{service.price}}</p>
+                  <p class="text">服务价格：{{service.price}}</p>
                 </div>
               <!--</router-link>-->
             </li>
@@ -52,7 +52,31 @@
   </div>
 </template>
 <script>
-import src1 from '../../../assets/service/1.jpg'
+import src11 from '../../../assets/service/1.jpg'
+import src12 from '../../../assets/home/weishi.jpeg'
+import src13 from '../../../assets/home/lifa.jpg'
+import src14 from '../../../assets/home/service10.jpg'
+import src21 from '../../../assets/home/service.jpg'
+import src22 from '../../../assets/home/peihu.jpg'
+import src23 from '../../../assets/home/chiyao.jpg'
+import src24 from '../../../assets/home/xueya.jpg'
+import src31 from '../../../assets/home/dianshi.jpg'
+import src32 from '../../../assets/home/kaisuo.jpg'
+import src33 from '../../../assets/home/shuilongtou.jpg'
+import src34 from '../../../assets/home/kongtiao.jpg'
+import src41 from '../../../assets/home/maicai.jpg'
+import src42 from '../../../assets/home/daigou.jpg'
+import src43 from '../../../assets/home/baojie.jpg'
+import src44 from '../../../assets/home/xiyi.jpg'
+import src51 from '../../../assets/home/service8.jpg'
+import src52 from '../../../assets/home/service2.jpg'
+import src53 from '../../../assets/home/service4.jpg'
+import src54 from '../../../assets/home/service9.jpg'
+import src61 from '../../../assets/home/zixun.jpg'
+import src62 from '../../../assets/home/shudao.jpg'
+import src63 from '../../../assets/home/tianqi.jpg'
+import src64 from '../../../assets/home/jieri.jpg'
+
 import src2 from '../../../assets/service/doctor1.jpg'
 
   export default {
@@ -115,28 +139,28 @@ import src2 from '../../../assets/service/doctor1.jpg'
                 price:'10.00',
                 limitNumber:'50',
                 condition:'',
-                src:src1,
+                src:src11,
 
               }, { name:'助餐',
-              describle:'为老人提供基本午餐',
+              describle:'帮助老人吃饭',
               price:'10.00',
               limitNumber:'50',
               condition:'',
-              src:src1,
+              src:src12,
 
             }, { name:'理发',
-              describle:'为老人提供基本午餐',
+              describle:'为老人打理头发',
               price:'10.00',
               limitNumber:'50',
               condition:'',
-              src:src1,
+              src:src13,
 
             }, { name:'陪护',
-              describle:'为老人提供基本午餐',
-              price:'10.00',
+              describle:'陪伴老人',
+              price:'20.00',
               limitNumber:'50',
               condition:'',
-              src:src1,
+              src:src14,
             }]
         },{
           typeName:'医疗保健',
@@ -145,133 +169,133 @@ import src2 from '../../../assets/service/doctor1.jpg'
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
-          },{ name:'代买药品',
+            src:src21,
+          },{ name:'帮助老人康复',
             describle:'陪同老人去医院看病',
-            price:'10.00',
+            price:'30.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src22,
           },{ name:'提醒老人吃药',
             describle:'在具体时间点通知老人吃药',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src23,
           },{ name:'检查老人血压',
             describle:'定期检车老人血压状况',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src24,
           }]
         },{
           typeName:'物业维修',
-          serviceDetail:[{ name:'家电维修',
-            describle:'定期检车老人血压状况',
+          serviceDetail:[{ name:'电视维修',
+            describle:'为老人修理家里电视',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src1,
+            src:src31,
           },{ name:'开锁服务',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人开锁',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src1,
+            src:src32,
           },{ name:'水龙头修理',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人修理水龙头',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src1,
+            src:src33,
           },{ name:'空调修理',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人修理空调',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src1,
+            src:src34,
           }]
         },{
           typeName:'家政便民',
           serviceDetail:[{ name:'买菜烧饭',
-            describle:'定期检车老人血压状况',
+            describle:'帮助行动不便的老人买菜做饭',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src41,
           },{ name:'代购商品',
-            describle:'定期检车老人血压状况',
+            describle:'根据老人需求帮助老人购物',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src42,
           },{ name:'家庭保洁',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人清洁家里',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src43,
           },{ name:'洗衣洗被',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人洗衣洗被',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src44,
           }]
         },{
           typeName:'娱乐学习',
           serviceDetail:[{ name:'老人借书服务',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'社区图书馆允许老人借书，可以送书上门',
+            price:'2.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src51,
           },{ name:'老人课堂',
-            describle:'定期检车老人血压状况',
+            describle:'为老人多样的学习课堂',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src52,
           },{ name:'老人中心预约',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'提前预约老人中心，方便工作人员安排座位',
+            price:'0.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src53,
           },{ name:'老人交流',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'组织老人交流会',
+            price:'0.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src54,
           }]
         },{
           typeName:'人文关怀',
           serviceDetail:[{ name:'心理咨询',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'倾听老人心情，接受心理问题咨询',
+            price:'20.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src61,
           },{ name:'疏导长者情绪',
-            describle:'定期检车老人血压状况',
+            describle:'帮助老人恢复心情，安慰老人',
             price:'10.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src62,
           },{ name:'特殊天气提醒',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'特殊天气时提醒老人加衣、防滑等',
+            price:'1.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src63,
           },{ name:'节日祝贺',
-            describle:'定期检车老人血压状况',
-            price:'10.00',
+            describle:'在各种节日为老人送去节日关怀',
+            price:'0.00',
             limitNumber:'50',
             condition:'',
-            src:src2,
+            src:src64,
           }]
         }]
 

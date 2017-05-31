@@ -73,10 +73,10 @@ body {
         <!--<div class="layout-header">-->
         <!--</div>-->
         <router-view></router-view>
-        <div class="layout-copy">
-          2017-05 &copy; TalkingData
+        <!--<div class="layout-copy">-->
+          <!--2017-05 &copy; TalkingData-->
 
-        </div>
+        <!--</div>-->
       </i-col>
     </Row>
   </div>

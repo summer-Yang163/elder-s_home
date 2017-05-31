@@ -195,7 +195,7 @@
 //            remarks:2,
 //            }
         ],
-        pageSize:7,
+        pageSize:6,
         spinshow:true
       }
     },
@@ -223,6 +223,7 @@
               } else {
                 Mode.dataList[i].isFeaturesName = ''
               }
+              Mode.dataList[i].typeName = Mode.dataList[i].projectProjectType.typeName
             }
             this.pageTotal = Mode.totalRows;
             this.data1 = Mode.dataList
