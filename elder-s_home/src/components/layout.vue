@@ -1,9 +1,19 @@
 <style scoped>
+  .main{
+    min-height:100%;
+  }
+  .content{
+    min-height:100vh;
+    margin-bottom:-60px;
+    overflow: auto;
+  }
 </style>
 <template>
-  <div class="content">
+  <div class="main" >
+    <div class="content">
     <Vhead></Vhead>
     <router-view ></router-view>
+    </div>
     <VFooter></VFooter>
   </div>
 </template>

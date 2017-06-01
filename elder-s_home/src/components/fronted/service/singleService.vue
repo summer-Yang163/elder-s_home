@@ -12,7 +12,7 @@
   }
   .main .main_left{
     float:left;
-    width:60%;
+    width:40%;
     height:520px;
   }
   .main .main_left .bigSrc{
@@ -22,7 +22,7 @@
   }
   .main .main_left li{
     display:inline-block;
-    width:18%;
+    width:23%;
     height:100px;
     margin:10px 1%;
   }
@@ -43,7 +43,7 @@
   }
   .main .main_right{
     float:left;
-    width:40%;
+    width:60%;
     padding-left:10px;
   }
   .main_right ul{
@@ -52,18 +52,28 @@
   .main_right  .card{
     overflow: hidden;
   }
+  .main_right .title{
+    font-size: 16px;
+    color: #333;
+    max-height: 40px;
+    overflow: hidden;
+    line-height: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
   .main_right li{
     text-align: left;
     line-height:30px;
     margin-bottom: 5px;
   }
   .main_right li .li_left{
-    display:inline-block;
-    width:150px;
-    font-weight: bold;
+    /*display:inline-block;*/
+    /*width:150px;*/
+    /*font-weight: bold;*/
   }
   .main_right li .li_right{
-    display:inline-block;
+    /*display:inline-block;*/
   }
 
 </style>
@@ -88,20 +98,28 @@
       </div>
       <div class="main_right">
         <Card  class="card">
-          <div style="text-align:center">
-            <ul >
-              <li><span class="li_left">服务项目名称：</span><span class="li_right" >{{community.name}}</span></li>
-              <li><span class="li_left"> 服务内容描述：</span><span class="li_right"  >{{community.address}}</span></li>
-              <li><span class="li_left">服务价格：</span><span class="li_right"  >{{community.phone}}</span></li>
-              <li><span class="li_left">服务名额：</span><span  class="li_right" >{{community.employee}}</span></li>
-              <li><span class="li_left">服务适用条件：</span><span class="li_right"  >{{community.Reservation_phone}}</span></li>
-              <li><span class="li_left">服务促销价：</span><span class="li_right"  >{{community.House_price}}</span></li>
-              <li><span class="li_left">服务时间：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
-              <li><span class="li_left">选择老人：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
-              <li><span class="li_left">选择服务人员：</span><span class="li_right"  >{{community.Rent_price}}</span></li>
-              <li><span class="li_left">提交订单：</span><span class="li_right"  >{{community.introduction}}</span></li>
-            </ul>
+          <!--<div >-->
+            <div>{{community.name}}</div>
+          <div class="title">{{community.address}}</div>
+          <div>
+            <span>$</span>
+            <span>20</span>
           </div>
+            <!--<ul >-->
+              <!--<li><span class="li_left">-->
+                <!--&lt;!&ndash;服务项目名称：&ndash;&gt;-->
+<!--</span><span class="li_right" >{{community.name}}</span></li>-->
+              <!--<li><span class="li_left"> 服务内容描述：</span><span class="li_right"  >{{community.address}}</span></li>-->
+              <!--<li><span class="li_left">服务价格：</span><span class="li_right"  >{{community.phone}}</span></li>-->
+              <!--<li><span class="li_left">服务名额：</span><span  class="li_right" >{{community.employee}}</span></li>-->
+              <!--<li><span class="li_left">服务适用条件：</span><span class="li_right"  >{{community.Reservation_phone}}</span></li>-->
+              <!--<li><span class="li_left">服务促销价：</span><span class="li_right"  >{{community.House_price}}</span></li>-->
+              <!--<li><span class="li_left">服务时间：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
+              <!--<li><span class="li_left">选择老人：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
+              <!--<li><span class="li_left">选择服务人员：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
+              <!--<li><span class="li_left">提交订单：</span><span class="li_right"  >{{community.introduction}}</span></li>-->
+            <!--</ul>-->
+          <!--</div>-->
         </Card>
       </div>
     </div>
@@ -122,7 +140,7 @@
         bigSrc:src1,
         Text:'小区全景图',
         community:{
-          imgSrcs:[src1,src2,src3,src4,src5],
+          imgSrcs:[src1,src2,src3,src4],
           imgText:['小区全景图','小区住房一览','小区住房一览','小区路况图','小区户型图'],
           name:'生活照料',
           address:'陪护老人',

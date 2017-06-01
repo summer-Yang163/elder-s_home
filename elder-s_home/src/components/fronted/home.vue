@@ -63,6 +63,7 @@
     float: left;
     width: 50%;
     padding: 0 10px 0 10px;
+    margin-bottom:70px;
   }
   .news_tips .head{
     display:block;

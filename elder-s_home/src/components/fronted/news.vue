@@ -2,6 +2,7 @@
   .main {
     width: 80%;
     margin: 0 auto;
+    margin-bottom: 70px;
   }
   .ivu-menu-dark {
     /*opacity: 0.7;*/

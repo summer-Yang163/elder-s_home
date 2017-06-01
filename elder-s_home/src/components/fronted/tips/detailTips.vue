@@ -20,7 +20,7 @@
 </style>
 <template>
   <div>
-    <Vhead></Vhead>
+    <!--<Vhead></Vhead>-->
     <div class="main ">
       <Breadcrumb style="margin:10px 0;">
         <Breadcrumb-item href="/tips">
@@ -37,7 +37,7 @@
         </Card>
       </div>
     </div>
-    <VFooter></VFooter>
+    <!--<VFooter></VFooter>-->
   </div>
 
 </template>

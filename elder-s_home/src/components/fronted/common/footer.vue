@@ -1,6 +1,9 @@
+<style >
+
+</style>
 <style scoped>
   .footer{
-    clear:both;
+    /*clear:both;*/
     /*position:fixed;*/
     bottom:0;
     width:100%;
@@ -9,7 +12,7 @@
     background-color: #b8bfc8;
     text-align:center;
     /*margin-bottom:20px;*/
-    z-index:100;
+    /*z-index:100;*/
   }
   .footer p{
     margin-top:10px  ;

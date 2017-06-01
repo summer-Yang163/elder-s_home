@@ -1,14 +1,5 @@
 <style scoped>
-  .footer{
-    clear:both;
-    position:static;
-    width:100%;
-    height:60px;
-    background-color: #b8bfc8;
-    text-align:center;
-    padding-top:8px;
-    z-index:100;
-  }
+
 </style>
 <template>
   <div >

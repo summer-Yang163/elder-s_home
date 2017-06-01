@@ -3,6 +3,7 @@
     width: 80%;
     min-width:960px;
     margin: 0 auto;
+    margin-bottom: 70px;
   }
   .ivu-menu-dark {
     /*opacity: 0.7;*/
