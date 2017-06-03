@@ -32,18 +32,23 @@
         if(!value){
           callback(new Error('请输入用户名'));
         }else{
-        const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
-        axios.post(valiNameUrl).then((response) =>{
-            if(!response.data.success){
-              callback();
+            if(value.length>30){
+              callback(new Error('用户名长度不得大于30个字符'));
             }else{
-              callback(new Error('用户名不存在'));
+              const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+              axios.post(valiNameUrl).then((response) =>{
+                if(!response.data.success){
+                  callback();
+                }else{
+                  callback(new Error('用户名不存在'));
+                }
+              },(response)=>{
+                callback(new Error('用户名不存在'));
+              }).catch(function(error){
+                callback(new Error('用户名不存在'));
+              });
             }
-        },(response)=>{
-          callback(new Error('用户名不存在'));
-        }).catch(function(error){
-          callback(new Error('用户名不存在'));
-        });
+
         }
       };
         return {
@@ -57,7 +62,7 @@
           ],
           password: [
             {required: true, message: '请填写密码', trigger: 'blur'},
-            {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
+            {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'},{type: 'string', max: 30, message: '密码长度不能大于30位', trigger: 'blur'}
           ]
         },
         loginUrl:this.HOST+'/user/userLogin',

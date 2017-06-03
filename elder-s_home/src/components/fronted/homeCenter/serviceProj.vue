@@ -53,16 +53,13 @@
         <Option v-for="item in cityList" :value="item.value" :key="item">{{ item.label }}</Option>
       </Select>
       <!--<Button type="ghost" @click="modify=!Inf">修改</Button>-->
-
     </Breadcrumb>
-
     <div class="layout-content">
       <div class="layout-content-main">
         <Col class="demo-spin-col" v-if="spinshow">
         <Spin fix>数据加载中...</Spin>
         </Col>
         <div v-else>
-
           <Table border :columns="columns4" :data="data1"></Table>
           <Page  class="page" :total=data1.length show-total :page-size=pageSize @on-change="getUserData"></Page>
         </div>
@@ -95,10 +92,10 @@
         ],
         model1: 'weishenhe',
         columns4: [
-//          {
-//            title: '服务订单编号',
-//            key: 'serviceOrderId'
-//          },
+          {
+            title: '服务订单编号',
+            key: 'serviceOrderId'
+          },
           {
             title: '服务项目名称',
             key: 'projectName'
@@ -160,30 +157,143 @@
                   },
                   on: {
                     click: () => {
-                      this.modify(params.index)
+                      this.add(params.index);
+//                      this.modify(params.index)
                     }
                   }
                 },'添加评价')]
               )
             }
+          },{
+            title: '服务详情',
+            width:65,
+            key: 'Type_Name',
+            render: (h,params) => {
+              return h('div',[
+                h('span', {
+                  props: {
+                    type: 'edit'
+                  },
+                  on: {
+                    click: () => {
+                      this.modify(params.index)
+                    }
+                  }
+                },'详情')]
+              )
+            }
+          }
+        ],
+        data1:[
+          {
+            serviceOrderId: '',
+            projectName: '',
+            oldName: '',
+            serviceName:'',
+            userName:'',
+            serviceNum:'',
+            servicePrice:'',
+            beginTime:'',
+            endTime:'',
+            serviceAddress:'',
+            evaluationId:'',
+            payStatus:'',
+            orderStatus:'',
+            remarks:'',
           }
         ],
         data1: [
+//          {
+//            serviceOrderId: 'deh',
+//            projectName: 'dee',
+//            oldName: 'deee',
+//            serviceName:'1',
+//            userName:'11',
+//            serviceNum:'1',
+//            servicePrice:'2222',
+//            beginTime:'22',
+//            endTime:2,
+//            serviceAddress:'22',
+//            evaluationId:'22',
+//            payStatus:2,
+//            orderStatus:'22',
+//            remarks:2,
+//          },
           {
-            serviceOrderId: 'deh',
-            projectName: 'dee',
-            oldName: 'deee',
-            serviceName:'1',
-            userName:'11',
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
             serviceNum:'1',
-            servicePrice:'2222',
-            beginTime:'22',
-            endTime:2,
-            serviceAddress:'22',
-            evaluationId:'22',
+            servicePrice:'50',
+            beginTime:'2017/5/13 08:00:00',
+            endTime:'2017/5/13 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
             payStatus:2,
-            orderStatus:'22',
-            remarks:2,
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/13 08:00:00',
+            endTime:'2017/5/13 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:2,
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/13 08:00:00',
+            endTime:'2017/5/13 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:2,
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/13 08:00:00',
+            endTime:'2017/5/13 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:2,
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/13 08:00:00',
+            endTime:'2017/5/13 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:2,
+            orderStatus:'8',
+            remarks:'',
           }
         ],
         pageSize:4,

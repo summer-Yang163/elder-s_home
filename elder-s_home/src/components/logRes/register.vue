@@ -29,18 +29,23 @@ width:150px;
             if(!value){
               callback(new Error('用户名不能为空'));
             }else{
-              const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
-              axios.post(valiNameUrl).then((response) =>{
-                if(!response.data.success){
+              if(value.length>30){
+                callback(new Error('用户名长度不得大于30个字符'));
+              }else{
+                const valiNameUrl = this.HOST+'/user/validateUserName/'+value;
+                axios.post(valiNameUrl).then((response) =>{
+                  if(!response.data.success){
+                    callback(new Error('用户名已存在'));
+                  }else{
+                    callback();
+                  }
+                },(response)=>{
                   callback(new Error('用户名已存在'));
-                }else{
-                  callback();
-                }
-              },(response)=>{
-                callback(new Error('用户名已存在'));
-              }).catch(function(error){
-                callback(new Error('用户名已存在'));
-              });
+                }).catch(function(error){
+                  callback(new Error('用户名已存在'));
+                });
+              }
+
             }
           };
             return {
@@ -53,14 +58,13 @@ width:150px;
                 ruleValidate: {
                     name: [
                       {required: true,validator: validateName,  trigger: 'blur'}
-//                        { required: true, message: '用户名不能为空', trigger: 'blur' }
                     ],
                     phone:[
                         { required: true, message: '手机号码不能为空', trigger: 'blur' }
                     ],
                     password1: [
                         { required: true, message: '登陆密码不能为空', trigger: 'blur' },
-                      {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
+                      {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'},{type: 'string', max: 30, message: '密码长度不能大于30位', trigger: 'blur'}
                     ],
                     password2: [
                         { required: true, message: '请填写确认密码', trigger: 'blur' }

@@ -2,9 +2,10 @@
   .main {
     width: 80%;
     min-width:960px;
-    margin: 0 auto 80px;
-    position: relative;
-    overflow: hidden;
+    min-height:100vh;
+    margin: 0 auto 60px;
+    /*position: relative;*/
+    overflow: visible;;
   }
   .ivu-menu-dark {
     /*opacity: 0.7;*/
@@ -12,7 +13,7 @@
   }
   .main .main_left{
     float:left;
-    width:40%;
+    width:50%;
     height:520px;
   }
   .main .main_left .bigSrc{
@@ -43,14 +44,14 @@
   }
   .main .main_right{
     float:left;
-    width:60%;
+    width:50%;
     padding-left:10px;
   }
   .main_right ul{
     width:100%;
   }
   .main_right  .card{
-    overflow: hidden;
+    overflow: visible;
   }
   .main_right .title{
     font-size: 16px;
@@ -61,6 +62,33 @@
     margin-top: 8px;
     margin-bottom: 8px;
     font-weight: 700;
+  }
+  .main_right .price{
+     background-color: #faf5f8;
+  }
+  .main_right .real-price{
+    font-family: arial;
+    font-size: 48px;
+    margin-left: 20px;
+    display: inline-block;
+    position: relative;
+    color: #f43499;
+    line-height: 1.2;
+    margin-top: 13px;
+  }
+  .main_right .Original_price{
+    color: #666;
+    font-size: 14px;
+  }
+  .main_right .card_left{
+    display:inline-block;
+    width:150px;
+
+    /*font-weight: bold;*/
+  }
+  .main_right .card_li{
+    margin-bottom:10px;
+    overflow:visible;
   }
   .main_right li{
     text-align: left;
@@ -85,13 +113,14 @@
           <Icon type="ios-home-outline"></Icon> 服务概览
         </Breadcrumb-item>
         <Breadcrumb-item >
-          <span style="color:orange"><Icon type="pound"></Icon> {{name}}详情</span>
+          <span style="color:orange"><Icon type="pound"></Icon> {{ProjectData.projectName}}服务详情</span>
         </Breadcrumb-item>
       </Breadcrumb>
       <div class="main_left">
-        <img :src="bigSrc" class="bigSrc"> <div  class="text">{{Text}} </div>
+        <img :src="bigSrc" class="bigSrc">
+        <!--<div  class="text">{{Text}} </div>-->
         <ul>
-          <li @click="exchange(item,index)"  v-for="(item,index) in community.imgSrcs" :key="item.index">
+          <li @click="exchange(item,index)"  v-for="(item,index) in   ProjectData.projectServicePicture" :key="item.index">
             <img :src="item">
           </li>
         </ul>
@@ -99,65 +128,197 @@
       <div class="main_right">
         <Card  class="card">
           <!--<div >-->
-            <div>{{community.name}}</div>
-          <div class="title">{{community.address}}</div>
-          <div>
-            <span>$</span>
-            <span>20</span>
+            <div class="card_li">{{ProjectData.typeName}}</div>
+          <div class="title card_li">{{ProjectData.projectName}}</div>
+          <div class="price card_li">
+            <span  class="real-price" >
+              <span  style="font-size: 20px;">￥</span>
+              <span>{{ProjectData.projectSalePrice}}</span>
+            </span>
+            <span class="Original_price"style="text-decoration: line-through;">￥{{ProjectData.projectPrice}}</span>
           </div>
-            <!--<ul >-->
-              <!--<li><span class="li_left">-->
-                <!--&lt;!&ndash;服务项目名称：&ndash;&gt;-->
-<!--</span><span class="li_right" >{{community.name}}</span></li>-->
-              <!--<li><span class="li_left"> 服务内容描述：</span><span class="li_right"  >{{community.address}}</span></li>-->
-              <!--<li><span class="li_left">服务价格：</span><span class="li_right"  >{{community.phone}}</span></li>-->
-              <!--<li><span class="li_left">服务名额：</span><span  class="li_right" >{{community.employee}}</span></li>-->
-              <!--<li><span class="li_left">服务适用条件：</span><span class="li_right"  >{{community.Reservation_phone}}</span></li>-->
-              <!--<li><span class="li_left">服务促销价：</span><span class="li_right"  >{{community.House_price}}</span></li>-->
-              <!--<li><span class="li_left">服务时间：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
-              <!--<li><span class="li_left">选择老人：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
-              <!--<li><span class="li_left">选择服务人员：</span><span class="li_right"  >{{community.Rent_price}}</span></li>-->
-              <!--<li><span class="li_left">提交订单：</span><span class="li_right"  >{{community.introduction}}</span></li>-->
-            <!--</ul>-->
-          <!--</div>-->
+          <div class="card_li">
+            <span class="card_left">内容</span>
+            <span>{{ProjectData.projectContentDescrible}}</span>
+          </div>
+          <div class="card_li">
+            <span class="card_left">适用条件</span>
+            <span>{{ProjectData.projectServiceConditions}}</span>
+          </div>
+          <div class="card_li">
+            <span class="card_left">请选择服务人员</span>
+            <Select v-model="projOrder.serviceOrderId" style="width:200px"placeholder="请选择服务人员">
+              <Option v-for="item in serviceData" :value="item.value" :key="item">{{ item.label }}</Option>
+            </Select>
+          </div>
+          <div class="card_li">
+            <span class="card_left">请选择老人</span>
+            <Select v-model="projOrder.oldId" style="width:200px"placeholder="请选择老人">
+              <Option v-for="item in oldData" :value="item.value" :key="item">{{ item.label }}</Option>
+            </Select>
+          </div>
+          <div class="card_li ">
+            <span class="card_left">请选择服务时间</span>
+            <Date-picker type="datetimerange" format="yyyy-MM-dd HH:mm" placeholder="选择日期和时间（不含秒）" style="display:inline-block;width: 200px" v-model="projOrder.time"></Date-picker>
+          </div>
+
+          <div class="card_li">
+            <span class="card_left">选择支付方式</span>
+            <Select v-model="projOrder.payWays" style="width:200px"placeholder="请选择支付方式">
+              <Option v-for="item in payFunction" :value="item.value" :key="item">{{ item.label }}</Option>
+            </Select>
+          </div>
+          <div class="card_li">
+            <span class="card_left">备注信息</span>
+            <Input v-model=" projOrder.remarks" type="textarea" :rows="4" placeholder="请输入需要服务人员注意的信息"></Input>
+          </div>
+          <div class="card_li"style="text-align:center;">
+            <Button style="background-color: #f10180;border: 1px solid #f10180;color:white;" @click="handleSubmit(projOrder)">提交订单</Button>
+          </div>
         </Card>
       </div>
     </div>
+    <!--<Button @click="modal2 = true">自定义页头和页脚</Button>-->
+    <Modal v-model="modal2" width="360">
+      <p slot="header" style="color:#f60;text-align:center">
+        <!--<Icon type="information-circled"></Icon>-->
+        <span>请使用支付宝扫码支付</span>
+      </p>
+      <div style="text-align:center">
+       <img :src="srcPay" style="width:100%;height:100%;">
+      </div>
+      <div slot="footer">
+        <Button type="error" size="large" long  @click="pay()">支付完成</Button>
+      </div>
+    </Modal>
   </div>
-
 </template>
 <script>
-  import src1 from '../../../assets/community/1.jpg'
-  import src2 from '../../../assets/community/beiyuan1.jpg'
-  import src3 from '../../../assets/community/beiyuan2.jpg'
-  import src4 from '../../../assets/community/beiyuan3.jpg'
-  import src5 from '../../../assets/community/beiyuan4.jpg'
+  import src1 from '../../../assets/home/peihu.jpg'
+  import src2 from '../../../assets/home/service10.jpg'
+  import src3 from '../../../assets/home/service5.png'
+  import src4 from '../../../assets/home/home2.jpg'
+  import paySrc from '../../../assets/home/pay.png'
+
+  const localStorage = window.localStorage
+  import axios from 'axios' //引入axios
 
   export default {
     components: {},
     data () {
       return {
+        srcPay:paySrc,
         bigSrc:src1,
         Text:'小区全景图',
-        community:{
-          imgSrcs:[src1,src2,src3,src4],
-          imgText:['小区全景图','小区住房一览','小区住房一览','小区路况图','小区户型图'],
-          name:'生活照料',
-          address:'陪护老人',
-          phone:'50元/次',
-          employee:'里斯',
-          introduction:'北苑家园占地13.25公顷，紧邻荆州市商业繁华区，交通便利，周边学校、医院等公共服务设施齐备，且分布均匀，地理位置优越。北苑家园定位高端，项目规划、设计、施工、后期的服务与管理等各个方面不断完善和学习先进的理念，项目一经推出即受到广大消费者的厚爱与追捧。',
-          Reservation_phone:'12222222222',
-          House_price:'8000/m^2',
-          Rent_price:'1400/间'
-        }
+        ProjectData: {
+          projectName: '陪护',
+          typeName:'生活照料',
+          projectContentDescrible: '陪老人解闷',
+          projectPrice: '60',
+          projectLimitedNumber:'10',
+          projectServiceConditions:'无基本要求',
+          projectSalePrice:'50',
+          projectServiceTime:'2017年6月1日上午',
+          projectServicePicture:[src1,src2,src3,src4],
+          isFeatures:'否',
+          remarks:'逗老人开心',
+          projectTypeId:'1'
+        },
+        projOrder:{
+          serviceOrderId: '',
+          projectId: '',
+          oldName: '',
+          serviceName:'',
+          oldId:'',
+          serviceNum:'',
+          servicePrice:'',
+          beginTime:'',
+          endTime:'',
+          serviceAddress:'',
+          evaluationId:'',
+          payStatus:'',
+          orderStatus:'',
+          remarks:'',
+          payWays:'',
+          time:''
+        },
+        //服务项目id，服务人员id，老人id，支付方式，备注信息
+        oldData:[{
+          value: '1',
+          label: '曹植'
+        },
+          {
+            value: '2',
+            label: '小乔'
+          }],
+        serviceData:[
+          {
+            value: '1',
+            label: '史湘云'
+          },
+          {
+            value: '2',
+            label: '香菱'
+          },
+          {
+            value: '3',
+            label: '晴雯'
+          }
+//          ,
+//            {
+////            value:'史湘云',label:'1',
+//          servicePersonId:'',serviceName:'史湘云'
+//        },{
+////          value:'香菱',label:'2',
+//          servicePersonId:'',serviceName:'香菱'
+//        },{
+////          value:'香菱',label:'3',
+//          servicePersonId:'',serviceName:'香菱'
+//        }
+ ],
+        payFunction:[{
+          value: '1',
+          label: '线上支付'
+          },
+          {
+            value: '2',
+            label: '线下支付'
+          }],
+        modal2:false
       }
     },
     methods:{
       exchange:function(data,index){
         this.bigSrc = data;
         this.Text = this.community.imgText[index];
+      },
+      handleSubmit(data){
+        if(!localStorage.token){
+          this.$Message.warning('使用该功能前请先登录!');
+        }else{
+            console.log(data)
+            console.log(this.ProjectData.projectServiceTime)
+            if(data.serviceOrderId&&data.oldId&&data.payWays){
+              if(data.payWays == '1'){
+                //线上支付
+                this.modal2 = true
+                //支付完成后的提醒
+
+              }else{
+                //线下支付
+                console.log('线下支付')
+              }
+            }else{
+              this.$Message.warning('请将表单填写完整!');
+            }
+        }
+      },
+      pay(){
+        this.modal2 = false;
+        this.$Message.success('支付完成!');
+
       }
+
     },
     computed:{
       name:function(){

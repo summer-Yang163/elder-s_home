@@ -81,15 +81,15 @@
       return {
         cityList: [
           {
-            value: 'yiwancheng',
+            value: '1',
             label: '已过时提醒'
           },
           {
-            value: 'fuwuzhong',
+            value: '2',
             label: '未过时提醒'
           }
         ],
-        model1: 'fuwuzhong',
+        model1: '1',
         columns4: [
           {
             type: 'index',
@@ -143,42 +143,23 @@
               )
             }
           }
-//          {
-//            title: '删除',
-//            width: 70,
-//            key: 'action',
-//            render: (h,params) => {
-//              return h('div',[
-//                h('span', {
-//                  props: {
-//                    type: 'close-round'
-//                  },
-//                  on: {
-//                    click: () => {
-//                      this.remove(params.index)
-//                    }
-//                  }
-//                },'删除')
-//              ])
-//            }
-//          }
         ],
         data1: [
           {
-            serviceOrderId: 'deh',
-            projectName: 'dee',
-            oldName: 'deee',
-            serviceName:'1',
-            userName:'11',
+            serviceOrderId: '1',
+            projectName: '陪护',
+            oldName: '诸葛流云',
+            serviceName:'香菱',
+            userName:'王五',
             serviceNum:'1',
-            servicePrice:'2222',
-            beginTime:'22',
-            endTime:2,
-            serviceAddress:'22',
-            evaluationId:'22',
+            servicePrice:'50',
+            beginTime:'2017年5月13日08:00:00',
+            endTime:'2017年5月13日12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
             payStatus:2,
-            orderStatus:'22',
-            remarks:2,
+            orderStatus:'8',
+            remarks:'',
           }
         ],
         pageSize:4,
