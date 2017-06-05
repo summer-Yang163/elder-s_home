@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by jsf on 2017/5/23.
- */
+
 @Service
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 

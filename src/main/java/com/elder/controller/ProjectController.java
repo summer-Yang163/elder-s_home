@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jsf on 2017/5/27.
- */
+
 @Controller
 @RequestMapping("/project")
 public class ProjectController extends BaseController {

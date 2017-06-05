@@ -302,11 +302,13 @@
               if(data.payWays == '1'){
                 //线上支付
                 this.modal2 = true
+
                 //支付完成后的提醒
 
               }else{
                 //线下支付
-                console.log('线下支付')
+                this.$Message.success('请记得及时付款哦!');
+                this.$router.go(0)
               }
             }else{
               this.$Message.warning('请将表单填写完整!');
@@ -316,9 +318,8 @@
       pay(){
         this.modal2 = false;
         this.$Message.success('支付完成!');
-
+        this.$router.go(0)
       }
-
     },
     computed:{
       name:function(){

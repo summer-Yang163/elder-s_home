@@ -53,7 +53,9 @@
       <div class="content_left">
         <p><span>地址：</span>{{item.address}}</p>
         <p><span>简介：</span>{{item.introduction}}</p>
-        <p class="service"><router-link :to="item.serviceUrl"><span>相关服务:</span></router-link></p>
+        <p class="service"><router-link :to="item.serviceUrl">
+          <!--<span>相关服务:</span>-->
+        </router-link></p>
       </div>
       <div class="content_right">
         <img :src="item.src">

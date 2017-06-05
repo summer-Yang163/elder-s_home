@@ -13,9 +13,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * Created by jsf on 2017/5/22.
- */
+
 public class JsonPathArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String JSONBODYATTRIBUTE = "JSON_REQUEST_BODY";

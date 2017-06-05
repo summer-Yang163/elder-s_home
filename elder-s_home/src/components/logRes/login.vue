@@ -9,7 +9,7 @@
 <template>
   <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
     <Form-item prop="userName">
-      <Input   type="text" v-model="formInline.userName" placeholder="Username" >
+      <Input   type="text" v-model="formInline.userName" placeholder="Username">
       <Icon type="ios-person-outline" slot="prepend"></Icon>
       </Input>
     </Form-item>
@@ -48,7 +48,6 @@
                 callback(new Error('用户名不存在'));
               });
             }
-
         }
       };
         return {
@@ -69,33 +68,28 @@
       }
 
     },
-    computed:{
-//      this.$store.commit(types.TITLE, 'Login')
-    },
     methods: {
       handleSubmit(data) {
         if(data.userName&&data.password){
           axios.post(this.loginUrl,data).then((response) =>{
             if(response.data.success){
-                console.log(response.data)
               this.$Message.success('提交成功!');
-              this.$store.commit(types.LOGIN, data.userName)
+              this.$store.commit(types.LOGIN, data.userName);
               //判断权限:1 普通用户 2 社区服务人员 3 普通管理员 4 超级管理员
               switch(response.data.Type_Id){
                 case 1:
-                  this.$router.push({path:'/Home'})
+                  this.$router.push({path:'/Home'});
                       break;
                 case 2:
-                  this.$router.push({path:'/serviceWork'})
+                  this.$router.push({path:'/serviceWork'});
                       break;
                 case 3:
-                  this.$router.push({path:'/serviceWork'})
+                  this.$router.push({path:'/serviceWork'});
                       break;
                 case 4:
-                  this.$router.push({path:'/backEnd'})
+                  this.$router.push({path:'/backEnd'});
                       break;
               }
-
             }else{
               this.$Message.error('用户名或密码错误!');
             }
@@ -110,5 +104,4 @@
       }
     }
   }
-
 </script>

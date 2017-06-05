@@ -42,6 +42,7 @@
 </style>
 <template>
   <div style="margin-bottom:70px;">
+    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
     <Breadcrumb class="breadCrumb">
       <Breadcrumb-item href="/homeCenter">
         <Icon type="ios-home-outline"></Icon> 家人中心
@@ -74,11 +75,16 @@
   import axios from 'axios' //引入axios
   import * as types from '../../../store/types'
   const localStorage = window.localStorage
+  import AddModal from '../common/addEvaluate'
+
 
   export default{
+    components:{AddModal},
 
     data(){
       return {
+        ModalType:false,
+        userData:'',
         cityList: [
           {
             value: '1',
@@ -136,7 +142,7 @@
                   },
                   on: {
                     click: () => {
-                      this.modify(params.index)
+                      this.add(params.index)
                     }
                   }
                 },'添加评价')]
@@ -144,22 +150,38 @@
             }
           }
         ],
-        data1: [
+        data1:[],
+        data2: [
           {
-            serviceOrderId: '1',
-            projectName: '陪护',
-            oldName: '诸葛流云',
+            tipId:'1',
+            tipTime:'2017年5月13日',
+            tipContent:'提醒诸葛流云老人吃药',
             serviceName:'香菱',
-            userName:'王五',
-            serviceNum:'1',
-            servicePrice:'50',
-            beginTime:'2017年5月13日08:00:00',
-            endTime:'2017年5月13日12:00:00',
-            serviceAddress:'北苑家园1栋1单元302室',
-            evaluationId:'1',
-            payStatus:2,
-            orderStatus:'8',
-            remarks:'',
+            isComplete:'1',
+            remarks:'注意药品用量'
+          },
+          {
+            tipId:'1',
+            tipTime:'2017年5月11日',
+            tipContent:'天气升温，注意提醒老人避暑',
+            serviceName:'晴雯',
+            isComplete:'1',
+            remarks:'家里适当准备降温的水果'
+          },
+          {
+            tipId:'1',
+            tipTime:'2017年5月7日',
+            tipContent:'老人最近心情不好，希望家人注意老人情绪',
+            serviceName:'香菱',
+            isComplete:'1',
+            remarks:'如有需要可以请求社区服务'
+          },{
+            tipId:'1',
+            tipTime:'2017年5月3日',
+            tipContent:'诸葛流云老人生日，记得回家与老人一起过生日哦',
+            serviceName:'香菱',
+            isComplete:'1',
+            remarks:'祝长寿'
           }
         ],
         pageSize:4,
@@ -167,10 +189,17 @@
       }
     },
     created(){
-//      this.getUserData(1)
+      this.getUserData(1)
     },
 
     methods:{
+      add(){
+        this.ModalType=true;
+        this.userData =false
+      },
+      onResChange(val){
+        this.ModalType = val //外部改变ModalType的值
+      },
       handleAdd () {
         this.formDynamic.items.push({
           value: ''
@@ -179,34 +208,39 @@
       handleRemove (index) {
         this.formDynamic.items.splice(index, 1);
       },
+//      getUserData(current){
+//        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
+//        axios.post(getUserUrl,({
+//          currentPage:current,
+//          pageSize:this.pageSize
+//        })).then((response) =>{
+//          if(response.data.success){
+//            console.log(response.data)
+//            const Mode = response.data.pageMode
+//            this.pageTotal = Mode.totalRows
+//            this.data1 = Mode.dataList
+//            for(let i =0;i<Mode.dataList.length;i++){
+//              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+//              if(Mode.dataList[i].userDetatilsUser){
+//                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+//                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+//              }else{
+//                Mode.dataList[i].userName= ''
+//                Mode.dataList[i].password= ''
+//              }
+//            }
+//            this.spinshow = true
+//          }else{
+//            this.$Message.error('获取数据失败！')
+//          }
+//        }).catch((error)=>{
+//          this.$Message.error('请重新获取数据！')
+//        });
+//      },
       getUserData(current){
-        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
-        axios.post(getUserUrl,({
-          currentPage:current,
-          pageSize:this.pageSize
-        })).then((response) =>{
-          if(response.data.success){
-            console.log(response.data)
-            const Mode = response.data.pageMode
-            this.pageTotal = Mode.totalRows
-            this.data1 = Mode.dataList
-            for(let i =0;i<Mode.dataList.length;i++){
-              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
-              if(Mode.dataList[i].userDetatilsUser){
-                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
-                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
-              }else{
-                Mode.dataList[i].userName= ''
-                Mode.dataList[i].password= ''
-              }
-            }
-            this.spinshow = true
-          }else{
-            this.$Message.error('获取数据失败！')
-          }
-        }).catch((error)=>{
-          this.$Message.error('请重新获取数据！')
-        });
+        if(localStorage.token =='王五'){
+          this.data1  = this.data2
+        }
       }
     }
   }

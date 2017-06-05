@@ -88,15 +88,15 @@
           <Icon type="ios-navigate"></Icon>
           社区老人信息添加
         </template>
-        <Menu-item name="inquireOld">已有老人信息</Menu-item>
-        <Menu-item name="addOld">添加老人信息</Menu-item>
+        <Menu-item name="inquireOl">已有老人信息</Menu-item>
+        <Menu-item name="addOldDel">添加老人信息</Menu-item>
       </Submenu>
       <Submenu name="checkOldInf">
         <template slot="title">
           <Icon type="ios-navigate"></Icon>
           老人信息审核
         </template>
-        <Menu-item name="accountCheck">已审核账号</Menu-item>
+        <Menu-item name="checkList">已审核账号</Menu-item>
         <Menu-item name="accountCheck">待审核账号</Menu-item>
       </Submenu>
       <Submenu name="checkOrder">
@@ -104,7 +104,7 @@
           <Icon type="ios-navigate"></Icon>
           服务订单审核
         </template>
-        <Menu-item name="checkOrder">已审核订单</Menu-item>
+        <Menu-item name="orderList">已审核订单</Menu-item>
         <Menu-item name="checkOrder">待审核订单</Menu-item>
       </Submenu>
       <Submenu name="addNews">
@@ -112,7 +112,7 @@
           <Icon type="ios-navigate"></Icon>
           发布新闻
         </template>
-        <Menu-item name="addNews">新闻列表查看</Menu-item>
+        <Menu-item name="inquireNews">新闻列表查看</Menu-item>
         <Menu-item name="addNews">新增新闻</Menu-item>
       </Submenu>
       <Submenu name="addTips">
@@ -120,7 +120,7 @@
           <Icon type="ios-navigate"></Icon>
           发布养老贴士
         </template>
-        <Menu-item name="addTips">养老贴士查看</Menu-item>
+        <Menu-item name="inquireTips">养老贴士查看</Menu-item>
         <Menu-item name="addTips">新增养老贴士</Menu-item>
       </Submenu>
       <Submenu name="addProject">
@@ -128,7 +128,7 @@
           <Icon type="ios-navigate"></Icon>
           发布服务项目
         </template>
-        <Menu-item name="addProject">服务项目查看</Menu-item>
+        <Menu-item name="inquirePro">服务项目查看</Menu-item>
         <Menu-item name="addProject">新增服务项目</Menu-item>
       </Submenu>
     </div>

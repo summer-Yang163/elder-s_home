@@ -1,8 +1,6 @@
 package com.elder.enums;
 
-/**
- * Created by jsf on 2017/5/15.
- */
+
 public enum UserTypeEnums {
     ORDINARY(1,"普通用户"),COMMUNITYSERVICEPERSON(2,"社区服务人员"),ORDINARYMANAGER(3,"普通管理员"),SUPERMANAGER(4,"超级管理员");
     private int TypeId;

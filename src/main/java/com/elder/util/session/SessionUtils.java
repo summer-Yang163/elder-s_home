@@ -7,9 +7,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created by jsf on 2017/4/5.
- */
 public class SessionUtils {
 
     private static HttpServletRequest getRequest() {

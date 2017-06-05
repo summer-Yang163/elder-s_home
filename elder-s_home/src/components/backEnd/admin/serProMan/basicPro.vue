@@ -2,7 +2,6 @@
   .layout-breadcrumb {
     padding: 10px 15px 0;
   }
-
   .layout-content {
     min-height: 200px;
     margin: 15px;
@@ -10,7 +9,6 @@
     background: #fff;
     border-radius: 4px;
   }
-
   .layout-breadcrumb .addDelete{
     /*border-top:1px solid #c1c3c5;*/
     float:right;
@@ -44,7 +42,6 @@
     font-size:30px;
     /*border: 1px solid #eee;*/
   }
-
 </style>
 <template>
   <div >
@@ -202,8 +199,6 @@
     created(){
       this.getUserData(1)
     },
-    watch:{
-    },
     methods:{
       getUserData(current){
         console.log(current)
@@ -232,7 +227,6 @@
           {
             this.$Message.error('获取数据失败！')
           }
-
         }).catch((error)=>{
           this.$Message.error('请重新获取数据！')
         });
@@ -249,22 +243,16 @@
         this.userData = this.data1[index]
       },
       remove (index) {
-        console.log(index)
-        console.log(this.data1[index].projectId);
-        const delUrl = this.HOST+'/project/deleteProjectByProjectId/'+this.data1[index].projectId
-        console.log(delUrl)
+        const delUrl = this.HOST+'/project/deleteProjectByProjectId/'+this.data1[index].projectId;
         axios.post(delUrl).then((response) =>{
           if(response.data.success){
             this.$router.go(0)
           }else{
             this.$Message.error('删除数据失败')
           }
-        },(response)=>{
-          this.$Message.error('获取数据失败')
         }).catch((error)=>{
           this.$Message.error('获取数据失败')
         });
-//        this.data6.splice(index, 1);
       }
     }
   }

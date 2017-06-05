@@ -33,7 +33,7 @@
     <Breadcrumb style="float:left;line-height: 32px;">
       <Breadcrumb-item href="#">时光驿站社区服务工作系统</Breadcrumb-item>
       <Breadcrumb-item href="#">社区老人信息添加</Breadcrumb-item>
-      <Breadcrumb-item>已有老人信息</Breadcrumb-item>
+      <Breadcrumb-item>添加老人信息</Breadcrumb-item>
     </Breadcrumb>
     <div class="addDelete">
       <!--<Button style="margin-right:25px;"  @click=" add()">新增</Button>-->
@@ -62,9 +62,9 @@
           <Form-item label="身份证号" prop="idCard">
             <Input v-model="formValidate.idCard" placeholder="请输入老人身份证号"></Input>
           </Form-item>
-          <Form-item label="老人图片" prop="oldPhoto">
-            <Input v-model="formValidate.oldPhoto" placeholder="请选择老人图片"></Input>
-          </Form-item>
+          <!--<Form-item label="老人图片" prop="oldPhoto">-->
+            <!--<Input v-model="formValidate.oldPhoto" placeholder="请选择老人图片"></Input>-->
+          <!--</Form-item>-->
           <Form-item label="紧急联系人" prop="oldEmContact">
             <Input v-model="formValidate.oldEmContact" placeholder="请输入老人紧急联系人"></Input>
           </Form-item>
@@ -78,7 +78,7 @@
             <Input v-model="formValidate.remarks" placeholder="备注信息"></Input>
           </Form-item>
           <Form-item>
-            <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+            <Button type="primary" @click="ok(formValidate)">提交</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
           </Form-item>
         </Form>
@@ -154,47 +154,53 @@
         this.$refs[name].resetFields();
       },
       ok (data) {
-        if(data.userName&&data.password&&data.typeId){
-          data.typeId = data.typeId-0;
-          if(this.fromData){
-//              修改
-            const modifyUrl = this.HOST+'/user/updateUserPower';
-            delete data.userName;
-            console.log(data);
-            axios.post(modifyUrl,data).then((json)=>{
-              if(json.data.success){
-                this.$Message.success('修改账号成功');
-                data.typeName = data.userUserType.typeName
-                this.$router.go(0);
-              }else{
-                this.$router.go(0);
-                this.$Message.error('修改账号失败');
-              }
-            }).catch((error)=>{
-              this.$router.go(0);
-              this.$Message.error('修改失败');
-            })
-          }else{
-            const addUrl = this.HOST+'/user/insertUser';
-
+        console.log(data)
+        if(data.oldName&&data.oldGender&&data.oldPhone&&data.oldAge&&data.idCard&&data.oldEmContact&&data.oldEmPhone&&data.oldCommunityId){
+          data.oldCommunityId = data.oldCommunityId-0;
+//          if(this.fromData){
+////              修改
+//            const modifyUrl = this.HOST+'/oldMan/updateOldMan';
+//            delete data.oldGenderName;
+//            console.log(data);
+//            axios.post(modifyUrl,data).then((json)=>{
+//              if(json.data.success){
+//                this.$Message.success('修改老人信息成功');
+//                this.$router.go(0);
+//              }else{
+//                this.$router.go(0);
+//                this.$Message.error('修改老人信息失败');
+//              }
+//            }).catch((error)=>{
+//              this.$router.go(0);
+//              this.$Message.error('修改失败');
+//            })
+//          }else{
+            console.log(data)
+            const addUrl = this.HOST+'/oldMan/insertOldMan';
             axios.post(addUrl,data).then((json)=>{
               if(json.data.success){
-                this.$Message.success('新增账号成功');
+                this.$Message.success('新增老人信息成功');
                 this.$router.go(0)
               }else{
-                this.$Message.error('新增账号失败');
+                this.$Message.error('新增老人信息失败');
               }
             }).catch((error)=>{
               this.$Message.error('新增失败');
             })
-          }
+//          }
         }else{
           this.$Message.warning('请将必填信息填写完整!');
         }
       },
       cancel () {
-        this.$Message.info('取消新增账号');
-      }
+//        if(this.fromData){
+//          this.$Message.info('取消修改老人信息');
+//
+//        }else{
+          this.$Message.info('取消新增老人信息');
+
+//        }
+      },
     },
     computed:{
     }

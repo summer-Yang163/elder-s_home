@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by jsf on 2017/5/28.
- */
 @Service
 public class ProjectTypeServiceImpl extends BaseServiceImpl<ProjectType> implements ProjectTypeService {
     @Autowired

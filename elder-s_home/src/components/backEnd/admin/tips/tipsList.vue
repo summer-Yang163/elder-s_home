@@ -48,7 +48,7 @@
 </style>
 <template>
   <div >
-    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <!--<AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>-->
     <sysHead></sysHead>
     <div class="layout-breadcrumb" style="overflow: hidden;">
       <Breadcrumb style="float:left;line-height: 32px;">
@@ -81,11 +81,11 @@
 
 </template>
 <script>
-  import AddModal from './addTips'
+//  import AddModal from './addTips'
   import sysHead from '../../common/adminName'
   import axios from 'axios'
   export default {
-    components:{AddModal,sysHead},
+    components:{sysHead},
     data(){
       return {
         ModalType:false,

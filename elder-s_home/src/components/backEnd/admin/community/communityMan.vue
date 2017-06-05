@@ -70,6 +70,7 @@
 import AddModal from './addCommunity'
 import sysHead from '../../common/adminName'
 import axios from 'axios'
+import src1 from '../../../../assets/community/1.jpg'
 
 export default {
    components:{AddModal,sysHead},
@@ -97,16 +98,16 @@ export default {
           },
           {
             title: '负责员工',
-            key: 'servicePersonId'
+            key: 'servicePersonName'
           },
           {
             title: '社区图片',
             key: 'communityPhoto'
           },
-          {
-            title: '社区描述',
-            key: 'communityDescribe'
-          },
+//          {
+//            title: '社区描述',
+//            key: 'communityDescribe'
+//          },
           {
             title: '平均房价',
             key: 'communityHousePrice'
@@ -117,15 +118,34 @@ export default {
           },
           {
             title: '社区地址',
-            key: 'communityAddressId'
+            key: 'communityAddressName'
           },
+//          {
+//            title: '相关服务',
+//            key: 'communityServiceId'
+//          },
+//          {
+//            title: '详情',
+//            width: 70,
+//            key: 'Type_Name',
+//            render: (h,params) => {
+//              return h('div',[
+//                h('span', {
+//                  props: {
+//                    type: 'edit'
+//                  },
+//                  on: {
+//                    click: () => {
+//                      this.modify(params.index)
+//                    }
+//                  }
+//                },'详情')]
+//              )
+//            }
+//          },
           {
-            title: '相关服务',
-            key: 'communityServiceId'
-          },
-          {
-            title: '修改',
-            width: 70,
+            title: '详情修改',
+            width: 100,
             key: 'Type_Name',
             render: (h,params) => {
               return h('div',[
@@ -138,7 +158,7 @@ export default {
                       this.modify(params.index)
                     }
                   }
-                },'修改')]
+                },'详情修改')]
               )
             }
           },
@@ -162,37 +182,33 @@ export default {
             }
           }
         ],
+        formValidate: {
+          communityId: '',
+          communityName: '',
+          communityPhone: '',
+          servicePersonId:'',
+          communityPhoto:'',
+          communityDescribe:'',
+          communityHousePrice:'',
+          communityRentPrice:'',
+          communityAddressId:'',
+          communityServiceId:''
+        },
         data1: [
           {
-            name: '王小明',
-            password: '123456',
-            classify: '普通用户'
-          },
-          {
-            name: '张小刚',
-            password: '123456',
-            classify: '网站工作人员'
-          },
-          {
-            name: '李小红',
-            password: '123456',
-            classify: '超级管理员'
-          },
-          {
-            name: '周小伟',
-            age: 26,
-            address: '深圳市南山区深南大道'
-          },
-          {
-            name: '王小明',
-            age: 18,
-            address: '北京市朝阳区芍药居'
-          },
-          {
-            name: '张小刚',
-            age: 25,
-            address: '北京市海淀区西二旗'
-          }
+            communityId:'',
+            communityName:'北苑家园',
+            communityPhone:'0551--63831525',
+            communityAddressId:'1',
+            communityAddressName:'湖北省荆州市沙市区',
+            servicePersonId:'1',
+            servicePersonName:'里斯',
+            communityDescribe:'北苑家园占地13.25公顷，紧邻荆州市商业繁华区，交通便利，周边学校、医院等公共服务设施齐备，且分布均匀，地理位置优越。北苑家园定位高端，项目规划、设计、施工、后期的服务与管理等各个方面不断完善和学习先进的理念，项目一经推出即受到广大消费者的厚爱与追捧。',
+            communityHousePrice:'8000',
+            communityRentPrice:'1400',
+            communityPhoto:src1,
+            communityServiceId:'1,2,3,4,5,6,7,8,9,10'
+      }
         ]
       }
     },

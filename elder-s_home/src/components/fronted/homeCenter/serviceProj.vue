@@ -42,6 +42,8 @@
 </style>
 <template>
   <div style="margin-bottom:70px;">
+    <AddModal :ModalType="ModalType":conData ="userData" @changeMod ='onResChange'></AddModal>
+    <fyAddModal :fyType="fyType":conData ="UserData" @changeMod ='onResChangefy'></fyAddModal>
     <Breadcrumb class="breadCrumb">
       <Breadcrumb-item href="/homeCenter">
         <Icon type="ios-home-outline"></Icon> 家人中心
@@ -71,9 +73,10 @@
   import axios from 'axios' //引入axios
   import * as types from '../../../store/types'
   const localStorage = window.localStorage
-
+  import AddModal from '../common/addEvaluate'
+  import fyAddModal from './serviceDetail'
   export default{
-
+    components:{AddModal,fyAddModal},
     data(){
       return {
         cityList: [
@@ -88,9 +91,13 @@
           {
             value: 'fuwuzhong',
             label: '服务中订单'
+          },
+          {
+            value: 'yipingjia',
+            label: '已评价订单'
           }
         ],
-        model1: 'weishenhe',
+        model1: 'yiwancheng',
         columns4: [
           {
             title: '服务订单编号',
@@ -125,26 +132,26 @@
             title: '服务结束时间',
             key: 'endTime'
           },
-          {
-            title: '服务地点',
-            key: 'serviceAddress'
-          },
-          {
-            title: '用户评价单号',
-            key: 'evaluationId'
-          },
+//          {
+//            title: '服务地点',
+//            key: 'serviceAddress'
+//          },
+//          {
+//            title: '用户评价单号',
+//            key: 'evaluationId'
+//          },
           {
             title: '支付状态',
             key: 'payStatus'
           },
-          {
-            title: '订单状态',
-            key: 'orderStatus'
-          },
-          {
-            title: '备注',
-            key: 'remarks'
-          },
+//          {
+//            title: '订单状态',
+//            key: 'orderStatus'
+//          },
+//          {
+//            title: '备注',
+//            key: 'remarks'
+//          },
           {
             title: '添加评价',
             width:65,
@@ -158,7 +165,6 @@
                   on: {
                     click: () => {
                       this.add(params.index);
-//                      this.modify(params.index)
                     }
                   }
                 },'添加评价')]
@@ -184,25 +190,26 @@
             }
           }
         ],
-        data1:[
-          {
-            serviceOrderId: '',
-            projectName: '',
-            oldName: '',
-            serviceName:'',
-            userName:'',
-            serviceNum:'',
-            servicePrice:'',
-            beginTime:'',
-            endTime:'',
-            serviceAddress:'',
-            evaluationId:'',
-            payStatus:'',
-            orderStatus:'',
-            remarks:'',
-          }
-        ],
-        data1: [
+//        data1:[
+//          {
+//            serviceOrderId: '',
+//            projectName: '',
+//            oldName: '',
+//            serviceName:'',
+//            userName:'',
+//            serviceNum:'',
+//            servicePrice:'',
+//            beginTime:'',
+//            endTime:'',
+//            serviceAddress:'',
+//            evaluationId:'',
+//            payStatus:'',
+//            orderStatus:'',
+//            remarks:'',
+//          }
+//        ],
+        data1:[],
+        data2: [
 //          {
 //            serviceOrderId: 'deh',
 //            projectName: 'dee',
@@ -231,79 +238,98 @@
             endTime:'2017/5/13 12:00:00',
             serviceAddress:'北苑家园1栋1单元302室',
             evaluationId:'1',
-            payStatus:2,
+            payStatus:'已支付',
             orderStatus:'8',
             remarks:'',
           },  {
-            serviceOrderId: '1',
-            projectName: '陪护',
+            serviceOrderId: '2',
+            projectName: '送餐',
+            oldName: '诸葛流云',
+            serviceName:'王二',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/11 10:00:00',
+            endTime:'2017/5/11 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:'未支付',
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '3',
+            projectName: '理发',
+            oldName: '诸葛流云',
+            serviceName:'晴雯',
+            userName:'王五',
+            serviceNum:'1',
+            servicePrice:'50',
+            beginTime:'2017/5/10 08:00:00',
+            endTime:'2017/5/10 12:00:00',
+            serviceAddress:'北苑家园1栋1单元302室',
+            evaluationId:'1',
+            payStatus:'已支付',
+            orderStatus:'8',
+            remarks:'',
+          },  {
+            serviceOrderId: '4',
+            projectName: '提醒老人吃药',
             oldName: '诸葛流云',
             serviceName:'香菱',
             userName:'王五',
             serviceNum:'1',
             servicePrice:'50',
-            beginTime:'2017/5/13 08:00:00',
-            endTime:'2017/5/13 12:00:00',
+            beginTime:'2017/5/03 11:00:00',
+            endTime:'2017/5/03 12:00:00',
             serviceAddress:'北苑家园1栋1单元302室',
             evaluationId:'1',
-            payStatus:2,
+            payStatus:'已支付',
             orderStatus:'8',
             remarks:'',
           },  {
-            serviceOrderId: '1',
-            projectName: '陪护',
+            serviceOrderId: '5',
+            projectName: '帮助老人康复',
             oldName: '诸葛流云',
-            serviceName:'香菱',
+            serviceName:'晴雯',
             userName:'王五',
             serviceNum:'1',
             servicePrice:'50',
-            beginTime:'2017/5/13 08:00:00',
-            endTime:'2017/5/13 12:00:00',
+            beginTime:'2017/5/01 08:00:00',
+            endTime:'2017/5/01 12:00:00',
             serviceAddress:'北苑家园1栋1单元302室',
             evaluationId:'1',
-            payStatus:2,
+            payStatus:'已支付',
             orderStatus:'8',
             remarks:'',
-          },  {
-            serviceOrderId: '1',
-            projectName: '陪护',
+          },{
+            serviceOrderId: '6',
+            projectName: '电视维修',
             oldName: '诸葛流云',
-            serviceName:'香菱',
+            serviceName:'李四',
             userName:'王五',
             serviceNum:'1',
             servicePrice:'50',
-            beginTime:'2017/5/13 08:00:00',
-            endTime:'2017/5/13 12:00:00',
+            beginTime:'2017/4/23 08:00:00',
+            endTime:'2017/4/23 12:00:00',
             serviceAddress:'北苑家园1栋1单元302室',
             evaluationId:'1',
-            payStatus:2,
-            orderStatus:'8',
-            remarks:'',
-          },  {
-            serviceOrderId: '1',
-            projectName: '陪护',
-            oldName: '诸葛流云',
-            serviceName:'香菱',
-            userName:'王五',
-            serviceNum:'1',
-            servicePrice:'50',
-            beginTime:'2017/5/13 08:00:00',
-            endTime:'2017/5/13 12:00:00',
-            serviceAddress:'北苑家园1栋1单元302室',
-            evaluationId:'1',
-            payStatus:2,
+            payStatus:'已支付',
             orderStatus:'8',
             remarks:'',
           }
         ],
-        pageSize:4,
-        spinshow:false
+        pageSize:6,
+        spinshow:false,
+        fyType:false,
+        UserData:'',
+        ModalType:false,
+        userData:''
+
       }
     },
     created(){
-//      this.getUserData(1)
+      this.getUserData(1)
     },
-
     methods:{
       handleAdd () {
         this.formDynamic.items.push({
@@ -313,34 +339,56 @@
       handleRemove (index) {
         this.formDynamic.items.splice(index, 1);
       },
+//      getUserData(current){
+//        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
+//        axios.post(getUserUrl,({
+//          currentPage:current,
+//          pageSize:this.pageSize
+//        })).then((response) =>{
+//          if(response.data.success){
+//            console.log(response.data)
+//            const Mode = response.data.pageMode
+//            this.pageTotal = Mode.totalRows
+//            this.data1 = Mode.dataList
+//            for(let i =0;i<Mode.dataList.length;i++){
+//              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
+//              if(Mode.dataList[i].userDetatilsUser){
+//                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
+//                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
+//              }else{
+//                Mode.dataList[i].userName= ''
+//                Mode.dataList[i].password= ''
+//              }
+//            }
+//            this.spinshow = true
+//          }else{
+//            this.$Message.error('获取数据失败！')
+//          }
+//        }).catch((error)=>{
+//          this.$Message.error('请重新获取数据！')
+//        });
+
+//      },
+      add(){
+        this.ModalType=true;
+        this.userData =false
+      },
+      onResChange(val){
+        this.ModalType = val //外部改变ModalType的值
+      },
+      onResChangefy(val){
+        this.fyType = val //外部改变ModalType的值
+      },
+      modify (index) {
+          console.log(index)
+        this.fyType=true;
+        this.UserData = this.data1[index]
+//        console.log(this.fyType)
+      },
       getUserData(current){
-        const getUserUrl = this.HOST+'/userDetails/queryAllUserDetailsByPage'
-        axios.post(getUserUrl,({
-          currentPage:current,
-          pageSize:this.pageSize
-        })).then((response) =>{
-          if(response.data.success){
-            console.log(response.data)
-            const Mode = response.data.pageMode
-            this.pageTotal = Mode.totalRows
-            this.data1 = Mode.dataList
-            for(let i =0;i<Mode.dataList.length;i++){
-              Mode.dataList[i].userGenderName=Mode.dataList[i].userGender==1? '男':'女';
-              if(Mode.dataList[i].userDetatilsUser){
-                Mode.dataList[i].userName= Mode.dataList[i].userDetatilsUser.userName
-                Mode.dataList[i].password= Mode.dataList[i].userDetatilsUser.password
-              }else{
-                Mode.dataList[i].userName= ''
-                Mode.dataList[i].password= ''
-              }
-            }
-            this.spinshow = true
-          }else{
-            this.$Message.error('获取数据失败！')
-          }
-        }).catch((error)=>{
-          this.$Message.error('请重新获取数据！')
-        });
+        if(localStorage.token =='王五'){
+          this.data1  = this.data2
+        }
       }
     }
   }

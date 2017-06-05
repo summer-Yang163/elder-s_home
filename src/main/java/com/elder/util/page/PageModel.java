@@ -6,9 +6,6 @@ package com.elder.util.page;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jsf on 2017/5/23.
- */
 public class PageModel<T> {
     //用户输入的分页条件
     private int currentPage;//当前页

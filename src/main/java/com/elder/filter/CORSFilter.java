@@ -1,14 +1,9 @@
 package com.elder.filter;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by jsf on 2017/5/21.
- */
 public class CORSFilter implements Filter {
     public static final String ACCESS_CONTROL_ALLOW_ORIGIN_NAME = "Access-Control-Allow-Origin";
     public static final String DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_VALUE = "*";

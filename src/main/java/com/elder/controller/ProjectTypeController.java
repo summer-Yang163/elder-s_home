@@ -10,9 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by jsf on 2017/5/28.
- */
+
 @Controller
 @RequestMapping("/projectType")
 public class ProjectTypeController extends BaseController {

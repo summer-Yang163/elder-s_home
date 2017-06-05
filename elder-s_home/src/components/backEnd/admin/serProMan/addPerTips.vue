@@ -15,7 +15,7 @@
           <!--<Input v-model="userDetatilsUser.password" placeholder="请输入登陆密码"></Input>-->
         <!--</Form-item>-->
       <!--</Form>-->
-      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
         <Form-item label="用户名" prop="userName" >
           <Input v-model="formValidate.userName" placeholder="请输入用户名"></Input>
         </Form-item>

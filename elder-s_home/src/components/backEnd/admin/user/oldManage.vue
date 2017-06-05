@@ -95,7 +95,7 @@
         ModalType:false,
         userData:'',
         pageTotal:0,
-        pageSize:7,
+        pageSize:6,
         columns4: [
           {
             type: 'index',

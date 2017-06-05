@@ -32,7 +32,7 @@
     <Breadcrumb-item href="/homeCenter/personInf" >
       <span style="color:orange"><Icon type="pound"></Icon> 个人信息</span>
     </Breadcrumb-item>
-    <Button type="ghost" style="float:right;" @click="modifyWay()">修改</Button>
+    <Button type="ghost" style="float:right;" @click="modifyWay()" v-show="isModify">修改</Button>
   </Breadcrumb>
   <Card class='fromCard' v-show="!Inf">
     <Form :model="formLeft" label-position="left" :label-width="120">
@@ -82,8 +82,8 @@
         </Form-item>
         </Form>
       <Form-item>
-        <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
-        <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        <Button type="primary" @click="handleSubmit()">提交</Button>
+        <Button type="ghost" @click="handleReset()" style="margin-left: 8px">重置</Button>
       </Form-item>
     </Form>
   </Card>
@@ -160,8 +160,8 @@
           ]
         },
         ruleDynamic:{
-
         },
+        isModify:false,
 //        modify:'',
         formLeft: {
           trueName: '',
@@ -178,7 +178,7 @@
           gender: '1',
           genderName:'男',
           phone: '18788836331',
-          age: '23',
+          age: '25',
           email: '229707654@qq.com',
           address: '安徽省巴中县',
           oldName:'诸葛流云',
@@ -191,6 +191,7 @@
     created(){
         if(localStorage.token=='王五'){
             this.Inf = true;
+            this.isModify = true;
         }else{
             console.log(localStorage.token)
         }
@@ -256,13 +257,15 @@
         });
       },
       handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })
+        this.$Message.success('提交成功！')
+        this.Inf = !this.Inf;
+//        this.$refs[name].validate((valid) => {
+//          if (valid) {
+//            this.$Message.success('提交成功!');
+//          } else {
+//            this.$Message.error('表单验证失败!');
+//          }
+//        })
       },
       handleReset (name) {
         this.$refs[name].resetFields();

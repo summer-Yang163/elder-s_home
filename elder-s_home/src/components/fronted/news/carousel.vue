@@ -22,7 +22,7 @@
 
 </style>
 <template>
-  <Carousel    v-model="value2">
+  <Carousel autoplay    v-model="value2">
     <Carousel-item>
       <div class="demo-carousel">
         <img :src="imgSrc[0]">
@@ -47,9 +47,9 @@
 </template>
 <script>
   import src1 from '../../../assets/news/1.jpg'
-  import src2 from '../../../assets/news/1.jpg'
-  import src3 from '../../../assets/news/1.jpg'
-  import src4 from '../../../assets/news/1.jpg'
+  import src2 from '../../../assets/news/2.jpg'
+  import src3 from '../../../assets/news/3.jpg'
+  import src4 from '../../../assets/news/4.jpg'
 
   export default {
     data () {

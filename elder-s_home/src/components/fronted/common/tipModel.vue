@@ -12,7 +12,7 @@
 <template>
   <!--<Button @click="modal9 = true">距离顶部 20px</Button>-->
   <Modal
-    title="2017年5月28日提醒"
+    title="2017年6月5日提醒"
     v-model="modal9"
     :styles="{top: '100px'}" style="text-align: center;"width="300">
     <p style="font-size:15px;line-height:30px;">亲：今天是{{oldname}}<span style="font-size:20px;color:orangered">生日</span>哦，不要忘记回去陪他过生日哦</p>
@@ -30,13 +30,26 @@
   <!--</Modal>-->
 </template>
 <script>
+  const localStorage =window.localStorage
   export default {
     data () {
       return {
-        oldname:'曹植',
-        modal9: true,
+        oldname:'诸葛流云',
+        modal9: false,
         modal10: false,
       }
-    }
+    },
+    created:function() {
+      // 组件创建完后获取数据，
+      // 此时 data 已经被 observed 了
+      this.getUserData(1);
+    },
+    methods:{
+      getUserData(current){
+          if(localStorage.token =='王五'){
+            this.modal9  = true
+          }
+      }
+  }
   }
 </script>

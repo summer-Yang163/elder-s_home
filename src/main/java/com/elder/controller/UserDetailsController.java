@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jsf on 2017/5/24.
- */
 @Controller
 @RequestMapping("/userDetails")
 public class UserDetailsController extends BaseController {

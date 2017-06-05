@@ -6,9 +6,7 @@ import com.elder.util.string.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jsf on 2017/5/14.
- */
+
 public class BaseController {
    public Map<String,Object>  generateFailureMsg(Exception e,String defaultMsg){
        Map<String,Object> map=new HashMap<>();

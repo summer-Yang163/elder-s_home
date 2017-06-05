@@ -8,13 +8,8 @@ import com.elder.util.page.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by jsf on 2017/5/15.
- */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {

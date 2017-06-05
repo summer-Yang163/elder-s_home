@@ -1,8 +1,6 @@
 package com.elder.util.exception;
 
-/**
- * Created by jsf on 2017/5/14.
- */
+
 public class MessageException extends RuntimeException{
     public static final long serialVersionUID=1L ;
 

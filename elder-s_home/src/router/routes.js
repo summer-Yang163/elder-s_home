@@ -40,13 +40,22 @@ import PerTips from '@/components/backEnd/admin/serProMan/perTips'
 
 import ServiceWork from '@/components/backEnd/service/serviceWork'
 import SerAddNews from '@/components/backEnd/service/addNews/addNews'
-import SerAddOld from '@/components/backEnd/service/addOld/addOld'
-import SerInquOld from '@/components/backEnd/service/addOld/inquireOld'
+import serInquNew from '@/components/backEnd/service/addNews/inquireNews'
+import SerAddOld from '@/components/backEnd/service/addOld/addOldDel'
+import SerInquOld from '@/components/backEnd/service/addOld/inquireOl'
 
 import SerAddProject from '@/components/backEnd/service/addProject/addProject'
+import SerInquProject from '@/components/backEnd/service/addProject/inquirePro'
+
 import SerAddTips from '@/components/backEnd/service/addTips/addTips'
+import SerInquTips from '@/components/backEnd/service/addTips/inquireTips'
+
 import AccountCheck from '@/components/backEnd/service/checkOldInf/accountCheck'
+import CheckList from '@/components/backEnd/service/checkOldInf/checkList'
+
 import CheckOrder from '@/components/backEnd/service/checkOrder/checkOrder'
+import OrderList from '@/components/backEnd/service/checkOrder/orderList'
+
 import FeedBack from '@/components/backEnd/service/handlePro/feedBack'
 import PersonTips from '@/components/backEnd/service/handlePro/personTips'
 import ProcessProj from '@/components/backEnd/service/handlePro/processProj'
@@ -178,11 +187,11 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           component:AddNews
         },{
           path:'/backEnd/tipsList',
-          name:'news/tipsList',
+          name:'tips/tipsList',
           component:TipsList
         },{
           path:'/backEnd/addTips',
-          name:'news/addTips',
+          name:'tips/addTips',
           component:AddTips
         },{
           path:'/backEnd/basicPro',
@@ -234,13 +243,13 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           component:FeedBack
         },
         {
-          path:'/serviceWork/addOld',
-          name:'addOld/addOld',
+          path:'/serviceWork/addOldDel',
+          name:'addOld/addOldDel',
           component:SerAddOld
         },
         {
-          path:'/serviceWork/inquireOld',
-          name:'addOld/inquireOld',
+          path:'/serviceWork/inquireOl',
+          name:'addOld/inquireOl',
           component:SerInquOld
         },
         {
@@ -249,9 +258,21 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           component:SerAddProject
         },
         {
+          path:'/serviceWork/inquirePro',
+          name:'addProject/inquirePro',
+          component:SerInquProject
+        },
+
+        {
           path:'/serviceWork/addTips',
           name:'addTips/addTips',
           component:SerAddTips
+        },
+        {
+          path:'/serviceWork/inquireTips',
+          name:'addTips/inquireTips',
+          component:SerInquTips
+
         },
         {
           path:'/serviceWork/addNews',
@@ -259,13 +280,28 @@ import ServiceOld from '@/components/backEnd/service/handlePro/serviceOld'
           component:SerAddNews
         },
         {
+          path:'/serviceWork/inquireNews',
+          name:'addNews/inquireNews',
+          component:serInquNew
+        },
+        {
           path:'/serviceWork/checkOrder',
           name:'checkOrder/checkOrder',
           component:CheckOrder
         },{
+          path:'/serviceWork/orderList',
+          name:'checkOrder/orderList',
+          component:OrderList
+        },
+
+        {
           path:'/serviceWork/accountCheck',
           name:'checkOldInf/accountCheck',
           component:AccountCheck
+        },{
+          path:'/serviceWork/checkList',
+          name:'checkOldInf/checkList',
+          component:CheckList
         }]
     }
   ]

@@ -115,7 +115,7 @@
           },
           {
             title: '是否完成提醒',
-            key: 'isComplete'
+            key: 'isCompleteName'
           },
           {
             title: '用户评价单号',
@@ -164,9 +164,54 @@
             }
           }
         ],
-        data1: [],
+//        data1: [],
+        data1: [
+          {
+            userName:'王五',
+            tipId:'1',
+            tipTime:'2017年5月13日',
+            tipContent:'提醒诸葛流云老人吃药',
+            serviceName:'香菱',
+            isCompleteName:'已完成',
+            isComplete:'1',
+            remarks:'注意药品用量',
+            evaluationId:'20170513001'
+          },
+          {
+            userName:'王五',
+            tipId:'1',
+            tipTime:'2017年5月11日',
+            tipContent:'天气升温，注意提醒老人避暑',
+            serviceName:'晴雯',
+            isCompleteName:'已完成',
+            isComplete:'1',
+            remarks:'家里适当准备降温的水果',
+            evaluationId:'20170511001'
+          },
+          {
+            userName:'王五',
+            tipId:'1',
+            tipTime:'2017年5月7日',
+            tipContent:'老人最近心情不好，希望家人注意老人情绪',
+            serviceName:'香菱',
+            isComplete:'1',
+            isCompleteName:'已完成',
+            remarks:'如有需要可以请求社区服务',
+            evaluationId:'20170507001'
+          },{
+            userName:'王五',
+            tipId:'1',
+            tipTime:'2017年5月3日',
+            tipContent:'诸葛流云老人生日，记得回家与老人一起过生日哦',
+            serviceName:'香菱',
+            isComplete:'1',
+            isCompleteName:'已完成',
+            remarks:'祝长寿',
+            evaluationId:'20170503001'
+          }
+        ],
         pageSize:7,
-        pageTotal:0,
+        pageTotal:4,
         spinshow:true
       }
     },

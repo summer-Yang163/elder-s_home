@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by jsf on 2017/5/24.
- */
 @Service
 public class UserDetailServiceImpl extends BaseServiceImpl<UserDetails> implements UserDetailService {
     @Autowired

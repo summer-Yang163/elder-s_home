@@ -4,19 +4,68 @@
     min-height: 330px;
     height: auto;
   }
+  .layout-breadcrumb {
+    padding: 10px 15px 0;
+  }
+
+  .layout-content {
+    min-height: 200px;
+    margin: 15px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 4px;
+  }
+
+  .layout-breadcrumb .addDelete{
+    /*border-top:1px solid #c1c3c5;*/
+    float:right;
+    /*padding:10px;*/
+  }
+  .layout-content-main {
+    padding: 10px;
+  }
+  .layout-copy {
+    text-align: center;
+    padding: 10px 0 20px;
+    color: #9ea7b4;
+  }
+
+  .layout-content-main .page{
+    float:right;
+    padding: 10px 0;
+  }
 </style>
 <template>
-  <div type="text/plain" id="account--editor"></div>
+  <div>
+    <sysHead></sysHead>
+    <div class="layout-breadcrumb" style="overflow: hidden;">
+      <Breadcrumb style="float:left;line-height: 32px;">
+        <Breadcrumb-item href="#">时光驿站后台管理</Breadcrumb-item>
+        <Breadcrumb-item href="#">新闻管理</Breadcrumb-item>
+        <Breadcrumb-item>新增养老贴士</Breadcrumb-item>
+      </Breadcrumb>
+    </div>
+    <div class="layout-content">
+      <div class="layout-content-main">
+        <div type="text/plain" id="account--editor"></div>
+      </div>
+    </div>
+    <div class="layout-copy">
+      2017-05 &copy; TalkingData
+    </div>
+
+  </div>
 </template>
 <script>
   import WangEditor  from 'wangeditor'
+  import sysHead from '../../common/adminName'
   import axios from 'axios'
   export default {
-    components:{},
+    components:{sysHead},
     data(){
       return {
         dataInterface: {
-          editorUpImgUrl: 'http://xxxx'  // 编辑器插入的图片上传地址
+          editorUpImgUrl: 'http://upload-images.jianshu.io/upload_images/5900178-f4fa868feeff264e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2'  // 编辑器插入的图片上传地址
         },
         editor: '',  // 存放实例化的wangEditor对象，在多个方法中使用
       }
@@ -68,10 +117,8 @@
         this.editorContent = this.editor.$txt.html();  // 获取 html 格式
         // this.editor.$txt.text();  // 获取纯文本
         // this.editor.$txt.formatText();  // 获取格式化后的纯文本
-
       },
     }
-
   }
 </script>
 <!-- 增删改查-->

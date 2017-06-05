@@ -163,7 +163,8 @@
 //            }
 //          }
         ],
-        data1: [
+        data1:[],
+        data2: [
           {
             serviceOrderId: 'deh',
             projectName: 'dee',

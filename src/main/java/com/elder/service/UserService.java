@@ -5,9 +5,6 @@ import com.elder.util.page.PageModel;
 
 import java.util.List;
 
-/**
- * Created by jsf on 2017/5/15.
- */
 public interface UserService extends BaseService<User> {
     User validateUserName(String userName);
 

@@ -35,11 +35,13 @@
         <Card  class="card" >
           <ul >
             <li v-for="(service,index) in  item.serviceDetail" :key="index">
-              <!--<router-link :to="item.url" >-->
+              <!--<router-link to="1" class="">-->
 
                 <div class="content">
                   <h3>{{service.name}}</h3>
+                  <router-link to="1" >
                   <img :src="service.src" >
+                  </router-link>
                   <p class="text"> {{service.describle}}</p>
                   <p class="text">服务价格：{{service.price}}</p>
                 </div>

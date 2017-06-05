@@ -1,8 +1,5 @@
 package com.elder.enums;
 
-/**
- * Created by jsf on 2017/5/26.
- */
 public enum IsHideEnums {
     YESHIDE(1,"隐藏"), NOHIDE(2,"不隐藏");
     private int isHide;

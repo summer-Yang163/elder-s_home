@@ -1,8 +1,6 @@
 package com.elder.util.string;
 
-/**
- * Created by jsf on 2017/5/14.
- */
+
 public class StringUtil {
     /**
      * 判断字符串是否为空
