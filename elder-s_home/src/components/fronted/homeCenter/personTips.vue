@@ -96,7 +96,7 @@
           }
         ],
         model1: '1',
-        columns4: [
+        columns5: [
           {
             type: 'index',
             width: 60,
@@ -104,15 +104,31 @@
             title:'#',
             key:'tipId'
           },
+//          {
+//            title: '提醒时间',
+//            key: 'tipTime'
+//          },
+//          {
+//            title: '提醒内容',
+//            key: 'tipContent'
+//          },
           {
             title: '提醒时间',
-            key: 'tipTime'
-
+//            key: 'erl',
+            children:[
+            {
+              title: '提醒时间',
+              key: 'tipTime'
+            },
+            {
+              title: '提醒内容',
+              key: 'tipContent'
+            }]
           },
-          {
-            title: '提醒内容',
-            key: 'tipContent'
-          },
+//          {
+//            title: '提醒内容',
+//            key: 'erl'
+//          },
           {
             title: '提醒人',
             key: 'serviceName'
@@ -150,39 +166,82 @@
             }
           }
         ],
+        columns4:[
+          {
+            title: '测试',
+            children: [
+              {
+                title: '测试2',
+                children: [
+                  {
+                    title: '测试4',
+                    children: [
+                      {title: '测试5'},
+                      {
+                        title: '测试6',
+                        children: [
+                          {title: '测试7'}
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    title: '测试3'
+                  }
+                ]
+              },
+              {
+                title: '测试3'
+              }
+            ]
+          }
+        ],
         data1:[],
         data2: [
-          {
-            tipId:'1',
-            tipTime:'2017年5月13日',
-            tipContent:'提醒诸葛流云老人吃药',
-            serviceName:'香菱',
-            isComplete:'1',
-            remarks:'注意药品用量'
-          },
-          {
-            tipId:'1',
-            tipTime:'2017年5月11日',
-            tipContent:'天气升温，注意提醒老人避暑',
-            serviceName:'晴雯',
-            isComplete:'1',
-            remarks:'家里适当准备降温的水果'
-          },
-          {
-            tipId:'1',
-            tipTime:'2017年5月7日',
-            tipContent:'老人最近心情不好，希望家人注意老人情绪',
-            serviceName:'香菱',
-            isComplete:'1',
-            remarks:'如有需要可以请求社区服务'
-          },{
-            tipId:'1',
-            tipTime:'2017年5月3日',
-            tipContent:'诸葛流云老人生日，记得回家与老人一起过生日哦',
-            serviceName:'香菱',
-            isComplete:'1',
-            remarks:'祝长寿'
-          }
+
+//          {
+//            tipId:'1',
+////            tipTime:'2017年5月13日',
+////            tipContent:'提醒诸葛流云老人吃药',
+//            serviceName:'香菱',
+//            isComplete:'1',
+//            remarks:'注意药品用量'
+//          },
+//          {
+//            tipId:'1',
+//            erl: {
+//              tipTime:'2017年5月13日',
+//              tipContent:'提醒诸葛流云老人吃药'
+//            },
+////            tipTime:'2017年5月11日',
+////            tipContent:'天气升温，注意提醒老人避暑',
+//            serviceName:'晴雯',
+//            isComplete:'1',
+//            remarks:'家里适当准备降温的水果'
+//          },
+//          {
+//            tipId:'1',
+//            erl: {
+//              tipTime:'2017年5月13日',
+//              tipContent:'提醒诸葛流云老人吃药'
+//            },
+////            tipTime:'2017年5月7日',
+////            tipContent:'老人最近心情不好，希望家人注意老人情绪',
+//            serviceName:'香菱',
+//            isComplete:'1',
+//            remarks:'如有需要可以请求社区服务'
+//          },{
+//            tipId:'1',
+//            erl: {
+//              tipTime:'2017年5月13日',
+//              tipContent:'提醒诸葛流云老人吃药'
+//            },
+////            tipTime:'2017年5月3日',
+////            tipContent:'诸葛流云老人生日，记得回家与老人一起过生日哦',
+//            serviceName:'香菱',
+//            isComplete:'1',
+//            remarks:'祝长寿'
+//          }
         ],
         pageSize:4,
         spinshow:false
